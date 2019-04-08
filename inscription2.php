@@ -2,7 +2,7 @@
     require_once "header.php";
     require_once "footer.php";
 ?>
-<div style="background-color:#00A057">
+<div class="back">
     <div class="container">
         <h1> Inscription </h1>
         <div class="card-deck" style="margin-bottom:10px">
@@ -13,7 +13,7 @@
                     <p class="card-text"> J'ai un commerce et je veux donner mes invendus à FFW ! </p>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="btn btn-primary">S'inscrire</a>
+                    <a href="#" class="btn">S'inscrire</a>
                 </div>
             </div>
             <div class="card">
@@ -23,7 +23,7 @@
                     <p class="card-text"> Je souhaite faire un don à FFW et accéder alors aux services proposés ! </p>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="btn btn-primary">S'inscrire</a>
+                    <a href="#" class="btn">S'inscrire</a>
                 </div>
             </div>
             <div class="card">
@@ -33,7 +33,7 @@
                     <p class="card-text"> J'ai un commerce et je veux donner mes invendus à FFW ! </p>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="btn btn-primary">S'inscrire</a>
+                    <a href="#" class="btn">S'inscrire</a>
                 </div>
             </div>
             <div class="card">
@@ -43,7 +43,7 @@
                     <p class="card-text"> J'ai un commerce et je veux donner mes invendus à FFW ! </p>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="btn btn-primary">S'inscrire</a>
+                    <a href="#" class="btn">S'inscrire</a>
                 </div>
             </div>  
         

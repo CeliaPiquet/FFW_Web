@@ -2,8 +2,9 @@
     require_once "header.php";
     require_once "footer.php";
 ?>
-<div style="background-color:#00A057">
+<div class="back">
     <div class="container">
+        <h1> Inscription </h1>
         <form formclass="col-lg-6" method="post" action="inscription2.php">
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -70,7 +71,7 @@
                     </label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Etape suivante</button>
+            <button type="submit" class="btn">Etape suivante</button>
         </form>
     </div>
 </div>

@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="stylesheet.css">
         <title>Fight Food Waste</title>
     </head>
-    <body cz-shortcut-listen="true" style="background-color: #006336; padding-top:200px">
+    <body cz-shortcut-listen="true" style="background-color: #006336; padding-top:200px; padding-bottom: 100px">
         <nav class="navbar fixed-top navbar-light navbar-expand-sm" style="background-color: #EBEBEB">
             <a class="navbar-brand ml-auto" href="index.php">
                 <img src="img/logo1.png" width="100" height="100" class="d-inline-block align-top" alt="">
@@ -21,10 +21,10 @@
             <div class="collapse navbar-collapse d-flex flex-row-reverse bd-highlight" id="navbarMenu">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="inscription.php">Inscription</a>
+                        <a class="btn" href="inscription.php">Inscription</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="connection.php">Connexion</a>
+                        <a class="btn" href="connection.php">Connexion</a>
                     </li>
                 </ul>
             </div>

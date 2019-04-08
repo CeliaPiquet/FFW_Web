@@ -2,10 +2,10 @@
     require_once "header.php";
     require_once "footer.php";
 ?>
-<div style="background-color:#00A057">
+<div class="back">
     <div class="container">
         <form class="col-lg-6" method="post" action="index.php">
-            <legend>Connexion</legend>
+            <h1>Connexion</h1>
             <div class="form-group">
                 <label for="mail">Email : </label>
                 <input id="mail" type="email" class="form-control" placeholder="Adresse mail">
@@ -16,7 +16,7 @@
                 <input id="mdp" type="password" class="form-control" placeholder="Mot de passe">
             </div>
 
-            <button type="submit" class="btn btn-primary">Se connecter</button>
+            <button type="submit" class="btn ">Se connecter</button>
         </form>
     </div>
 </div>
