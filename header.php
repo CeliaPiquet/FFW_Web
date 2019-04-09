@@ -18,14 +18,27 @@
             <button class="navbar-toggler" type="button" datat-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse d-flex flex-row-reverse bd-highlight" id="navbarMenu">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="btn" href="inscription.php">Inscription</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn" href="connection.php">Connexion</a>
-                    </li>
-                </ul>
-            </div>
+            <?php if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){ ?>
+                <div class="collapse navbar-collapse d-flex flex-row-reverse bd-highlight" id="navbarMenu">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="btn" href="profil.php">Mon compte</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn" href="connection.php">Deconnexion</a>
+                        </li>
+                    </ul>
+                </div>
+            <?php } else { ?>
+                <div class="collapse navbar-collapse d-flex flex-row-reverse bd-highlight" id="navbarMenu">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="btn" href="inscription.php">Inscription</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn" href="connection.php">Connexion</a>
+                        </li>
+                    </ul>
+                </div>
+            <?php } ?>
         </nav>

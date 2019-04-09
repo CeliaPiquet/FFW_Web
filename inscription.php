@@ -9,25 +9,25 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="name">Nom</label>
-                    <input type="text" class="form-control" id="name" placeholder="Nom">
+                    <input required type="text" class="form-control" id="name" placeholder="Nom">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="firstname">Prénom</label>
-                    <input type="text" class="form-control" id="firstname" placeholder="Prénom">
+                    <input required type="text" class="form-control" id="firstname" placeholder="Prénom">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="mail">Adresse mail</label>
-                    <input type="email" class="form-control" id="mail" placeholder="exemple@messagerie.fr">
+                    <input required type="email" class="form-control" id="mail" placeholder="exemple@messagerie.fr">
                 </div>
                 <div class="form-group col-md">
                     <label for="mdp">Mot de passe</label>
-                    <input type="password" class="form-control" id="mdp" placeholder="Mot de passe (8 caractères, 1 majuscule, 1 minuscule, 1 chiffre)">
+                    <input required type="password" class="form-control" id="mdp" placeholder="Mot de passe (8 caractères, 1 majuscule, 1 minuscule, 1 chiffre)">
                 </div>
                 <div class="form-group col-md">
                     <label for="mdp2">Confirmation du mot de passe</label>
-                    <input type="password" class="form-control" id="mdp2" placeholder="Retapez votre mot de passe">
+                    <input required type="password" class="form-control" id="mdp2" placeholder="Retapez votre mot de passe">
                 </div>
             </div>
             <div class="form-group">
@@ -50,16 +50,16 @@
                 <div class="form-group col-md-4">
                     <label for="country">Pays</label>
                     <select id="country" class="form-control">
-                        <option selected>France</option>
-                        <option>Italie</option>
-                        <option>Portugal</option>
-                        <option>Irlande</option>
+                        <option value="france" selected>France</option>
+                        <option value="italie">Italie</option>
+                        <option value="portugal">Portugal</option>
+                        <option value="irlande">Irlande</option>
                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                    <input required class="form-check-input" type="checkbox" id="gridCheck">
                     <label class="form-check-label" for="gridCheck">
                         J'accepte les conditions générales de FFW
                     </label>
