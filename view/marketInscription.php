@@ -13,7 +13,7 @@
             </div>
             <div class="form-group col-md-4">
                 <label for="nb"> Nombre de locaux à enregistré</label>
-                <input required type="number" class="form-control" id="nb" min="1">
+                <input required type="number" class="form-control" id="nb"  min="1"> //ajouter onchange
             </div>
         </div>
         <div class="form-row">
