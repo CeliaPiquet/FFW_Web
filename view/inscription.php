@@ -1,6 +1,7 @@
 <?php
     require_once "header.php";
     require_once "footer.php";
+
 ?>
 <div class="back">
     <div class="container">
@@ -65,8 +66,8 @@
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">
+                    <input class="form-check-input" type="checkbox" id="gridCheck2">
+                    <label class="form-check-label" for="gridCheck2">
                         Je souhaite être informé(e) par mail des actualités et des évènements de FFW
                     </label>
                 </div>
