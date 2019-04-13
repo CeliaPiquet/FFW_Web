@@ -1,3 +1,11 @@
+<?php
+if(!isset($_SESSION)){
+    session_start();
+}
+else {
+    echo "not ok";
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,14 +23,17 @@
             <a class="navbar-brand mr-auto" href="homeView.php">
                 <img src="../public/img/logo1.png" width="150" height="150" class="d-inline-block align-top" alt="">
             </a>
-            <?php if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){ ?>
+            <?php if (isset($_SESSION['auth']) AND $_SESSION['auth']){ ?> <!-- Ajouté les droits-->
                 <div class="collapse navbar-collapse d-flex flex-row-reverse">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="btn" href="profil.php">Mon compte</a>
+                            <a class="btn" href="profil.php">Mon espace</a>
                         </li>
                         <li class="nav-item">
                             <a class="btn" href="connection.php">Deconnexion</a>
+                        </li>
+                        <li class="nav-item" id="stocks">
+                            <a class="btn" href="productStockList.php">Deconnexion</a>
                         </li>
                     </ul>
                 </div>

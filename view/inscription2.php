@@ -5,7 +5,7 @@
 <div class="back">
     <div class="container">
         <h1> Inscription </h1>
-        <form formclass="col-lg-6" method="post" action="inscription2.php">
+        <form formclass="col-lg-6" method="post" action="connection.php">
             <div class="card-deck" style="margin-bottom:10px">
                 <div class="card">
                     <img src="../public/img/store.png" class="card-img-top" alt="logo" height=200>

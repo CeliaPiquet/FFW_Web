@@ -6,7 +6,7 @@
 <div class="back">
     <div class="container">
         <h1> Inscription </h1>
-        <form formclass="col-lg-6" method="post" action="inscription2.php">
+        <form formclass="col-lg-6" method="post" action="signinFirstStep.php">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="name">Nom</label>
