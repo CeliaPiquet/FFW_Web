@@ -5,7 +5,6 @@ if(!isset($_SESSION))
 {
         session_start();
 }
-
 if (isset($_POST['email']) && isset($_POST['pwd'])){
     $connection = connectDB();
     $query = $connection->prepare("SELECT * FROM user WHERE email = :mail");
@@ -13,17 +12,17 @@ if (isset($_POST['email']) && isset($_POST['pwd'])){
         'mail'=>$_POST['email']
     ]);
     $result = $query->fetch();
-
-    if ( password_verify($_POST['pwd'],$result['password'])){
+    if ( password_verify($_POST['pwd'],password_hash($result['password'],PASSWORD_DEFAULT))){
         $_SESSION["auth"] = true;
         $_SESSION["email"] = $_POST["email"];
-        $pseudo = $_POST['firstname']+$_POST['lastname'];
-        $_SESSION["token"] = createToken($pseudo, $_POST['email']);
-        echo "ok";
+        $_SESSION["name"] = $result["firstname"];
+        $_SESSION["rights"] = $result["rights"];
+        // $_SESSION["token"] = createToken($pseudo, $_POST['email']);
+        header("Location:homeView.php");
     }
-    echo "notok";
+} else {
+    header("Location:connection.php");
 }
 
 
-echo "not ok"
 ?>

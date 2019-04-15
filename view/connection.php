@@ -8,12 +8,12 @@
             <h1>Connexion</h1>
             <div class="form-group">
                 <label for="email">Email : </label>
-                <input required id="email" type="email" class="form-control" placeholder="Adresse mail">
+                <input required id="email" type="email" name="email" class="form-control" placeholder="Adresse mail">
             </div>
 
             <div class="form-group">
                 <label for="pwd">Mot de passe : </label>
-                <input required id="pwd" type="password" class="form-control" placeholder="Mot de passe">
+                <input required id="pwd" type="password" name="pwd" class="form-control" placeholder="Mot de passe">
             </div>
 
             <button type="submit" class="btn ">Se connecter</button>

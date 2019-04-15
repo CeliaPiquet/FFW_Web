@@ -1,6 +1,14 @@
 var fullLocalArray = [];
 var fullRoomArray = [];
 
+function getRoomById($roomId){
+    for (var i=0; i<fullRoomArray.length; i++){
+        if (fullRoomArray[i]['r_id'] == $roomId){
+            return fullRoomArray[i];
+        }
+    }
+    return null;
+}
 
 function getFullLocals(){
     var request = new XMLHttpRequest();
@@ -26,11 +34,17 @@ function getRoomByLocal(){
     }
     if (idLocal){
         var request = new XMLHttpRequest();
-    
+        
         request.onreadystatechange = function(){
             if(request.readyState === 4 && request.status === 200){
                 fullRoomArray = JSON.parse(request.responseText);
+                for (var i=0; i<fullRoomArray.length; i++){
+                    if (fullRoomArray[i]['is_stockroom'] != "1"){
+                        fullRoomArray.splice(i,1);
+                    }
+                }
                 displayRooms(fullRoomArray);
+                getProductByRoom();
             }
         }
     
@@ -39,8 +53,10 @@ function getRoomByLocal(){
         request.send();
     }
     else {
+        document.getElementById("actionList").style.display = "none";
         fullRoomArray = [];
         displayRooms(fullRoomArray);
+        displayArray([]);
     }
 }
 
@@ -70,7 +86,7 @@ function displayLocals(array){
         localchoiceList.appendChild(option);
         
         var option = document.createElement('option');
-        option.innerHTML = 'Salle';
+        option.innerHTML = 'Toutes les salles';
         roomChoiceList.appendChild(option);
         
         localchoiceList.setAttribute("onchange","getRoomByLocal()");
@@ -86,13 +102,26 @@ function displayLocals(array){
 
 function getProductByRoom(){
     var room = document.getElementById("roomFilter").value;
-    for (var i=0; i<fullRoomArray.length; i++){
-        if (fullRoomArray[i]['name']==room){
-            var idRoom = fullRoomArray[i]['r_id'];
+    if (room == "Toutes les salles"){
+        document.getElementById("actionList").style.display = "none";
+        var roomIds = [];
+        for (var  i=0; i<fullRoomArray.length; i++){
+            if (! roomIds.includes(fullRoomArray[i]['r_id'])){
+                roomIds.push(fullRoomArray[i]['r_id']);
+            }
         }
+        getMultipleFullArray(roomIds);
     }
-    if (idRoom){
-        getFullArray(idRoom);
+    else {
+        document.getElementById("actionList").style.display = "";
+        for (var i=0; i<fullRoomArray.length; i++){
+            if (fullRoomArray[i]['name']==room){
+                var idRoom = fullRoomArray[i]['r_id'];
+            }
+        }
+        if (idRoom){
+            getFullArray(idRoom);
+        }
     }
 }
 
@@ -100,12 +129,11 @@ function displayRooms(array){
     var choiceList = document.getElementById("roomFilter");
     choiceList.innerHTML='';
     var option = document.createElement('option');
-    option.innerHTML = 'Salle';
+    option.innerHTML = 'Toutes les salles';
     choiceList.appendChild(option);
     for (var i=0; i<array.length; i++){
         var option = document.createElement('option');
         option.innerHTML = array[i].name;
         choiceList.appendChild(option);
-
     }
 }
