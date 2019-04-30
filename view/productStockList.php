@@ -2,11 +2,13 @@
     //inclure les header, footer et filtres de droits
     require_once "header.php";
     require_once "footer.php";
-    
+    if(!(isset($_SESSION)) || !(isset($_SESSION['rights'])) ){
+            header("Location:homeView.php");
+    }
     ?>
 <div class="back">
     <h1> Gestion des stocks </h1>
-    <div class="container" id="localisationFilter">
+    <div class="container localisationList" id="localisationFilter">
 
     </div>
     <div class="container" id="noResultLocals">
@@ -19,13 +21,13 @@
                     <h5> Actions : </h5>
                 </div>
                 <div class="col-md-3">
-                    <button class="btn" id="addNewProduct" onclick="">Ajouter un produit à une salle</button>
+                    <a class="btn" id="addNewProduct" onclick="modalDisplay('addModal')">Ajouter un produit à une salle</a>
                 </div>
                 <div class="col-md-3">
-                    <button class="btn" id="changeProductRoom" onclick="changeProductRoom()">Changer un produit de salle</button>
+                    <a class="btn" id="changeProductRoom" onclick="modalDisplay('changeRoomModal')">Changer un produit de salle</a>
                 </div>
                 <div class="col-md-3">
-                    <button class="btn" id="removeProduct" onclick="">Supprimer un produit de la salle</button>
+                    <a class="btn" id="removeProduct" onclick="modalDisplay('removeModal')">Supprimer un produit de la salle</a>
                 </div>
             </div>
             <div class="row" id="alertMessage"> </div>
@@ -61,6 +63,9 @@
 
             </div>
     </div>
+    
+   
+    <?php     require_once "modals.php"; ?>
     <script type="text/javascript" src="../public/js/localList.js" onload="getFullLocals()"> </script>
     <script type="text/javascript" src="../public/js/productList.js"> </script>
     <script type="text/javascript" src="../public/js/actionList.js"></script>

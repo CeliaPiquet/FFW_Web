@@ -1,5 +1,6 @@
 var fullLocalArray = [];
 var fullRoomArray = [];
+var selectedRoomIdForTransfer=[];
 
 function getRoomById($roomId){
     for (var i=0; i<fullRoomArray.length; i++){
@@ -12,11 +13,13 @@ function getRoomById($roomId){
 
 function getFullLocals(){
     var request = new XMLHttpRequest();
-
+    var containers = document.getElementsByClassName("localisationList");
     request.onreadystatechange = function(){
         if(request.readyState === 4 && request.status === 200){
             fullLocalArray = JSON.parse(request.responseText);
-            displayLocals(fullLocalArray);
+            for(var i=0; i<containers.length; i++){
+                displayLocals(fullLocalArray, containers[i]);
+            }
         }
     }
 
@@ -25,8 +28,12 @@ function getFullLocals(){
     request.send();
 }
 
-function getRoomByLocal(){    
-    var local = document.getElementById("localFilter").value;
+function getRoomByLocal(localListId){    
+    var local = document.getElementById(localListId).value;
+    var roomListId = "roomFilter";
+    if (localListId == "localChoice"){
+        roomListId = "roomChoice";
+    }
     for (var i=0; i<fullLocalArray.length; i++){
         if (fullLocalArray[i]['name']==local){
             var idLocal = fullLocalArray[i]['lo_id'];
@@ -34,17 +41,22 @@ function getRoomByLocal(){
     }
     if (idLocal){
         var request = new XMLHttpRequest();
-        
+        var i = 0;
         request.onreadystatechange = function(){
             if(request.readyState === 4 && request.status === 200){
                 fullRoomArray = JSON.parse(request.responseText);
-                for (var i=0; i<fullRoomArray.length; i++){
+                while (i<fullRoomArray.length){
                     if (fullRoomArray[i]['is_stockroom'] != "1"){
                         fullRoomArray.splice(i,1);
                     }
+                    else {
+                        i ++;
+                    }
                 }
-                displayRooms(fullRoomArray);
-                getProductByRoom();
+                displayRooms(fullRoomArray,roomListId);
+                if (localListId =="localFilter"){
+                    getProductByRoom();
+                }
             }
         }
     
@@ -55,13 +67,13 @@ function getRoomByLocal(){
     else {
         document.getElementById("actionList").style.display = "none";
         fullRoomArray = [];
-        displayRooms(fullRoomArray);
+        displayRooms(fullRoomArray,roomListId);
         displayArray([]);
     }
 }
 
-function displayLocals(array){
-    var container = document.getElementById("localisationFilter");
+function displayLocals(array, containerTarget){
+    var container = containerTarget;
     var noResult = document.getElementById("noResultLocals");
     container.innerHTML = '';
     noResult.innerHTML = '';
@@ -71,12 +83,6 @@ function displayLocals(array){
     else {
         var localchoiceList = document.createElement('select');
         var roomChoiceList = document.createElement('select');
-
-        localchoiceList.setAttribute("class","col-md-6");
-        localchoiceList.setAttribute("id","localFilter");
-        
-        roomChoiceList.setAttribute("class","col-md-6");
-        roomChoiceList.setAttribute("id","roomFilter");
         
         container.appendChild(localchoiceList);
         container.appendChild(roomChoiceList)
@@ -89,8 +95,23 @@ function displayLocals(array){
         option.innerHTML = 'Toutes les salles';
         roomChoiceList.appendChild(option);
         
-        localchoiceList.setAttribute("onchange","getRoomByLocal()");
-        roomChoiceList.setAttribute("onchange","getProductByRoom()");
+        localchoiceList.setAttribute("class","col-md-6");
+        roomChoiceList.setAttribute("class","col-md-6");
+
+        if (containerTarget.id == "localisationFilter"){
+            localchoiceList.setAttribute("onchange","getRoomByLocal('localFilter')");
+            roomChoiceList.setAttribute("onchange","getProductByRoom()");
+            
+            localchoiceList.setAttribute("id","localFilter");
+            roomChoiceList.setAttribute("id","roomFilter");
+        }
+
+        else {
+            localchoiceList.setAttribute("onchange","getRoomByLocal('localChoice')");
+            localchoiceList.setAttribute("id","localChoice");
+            roomChoiceList.setAttribute("id","roomChoice");
+        }
+
         for (var i=0; i<array.length; i++){
             var option = document.createElement('option');
             option.innerHTML = array[i].name;
@@ -101,8 +122,8 @@ function displayLocals(array){
 }
 
 function getProductByRoom(){
-    var room = document.getElementById("roomFilter").value;
-    if (room == "Toutes les salles"){
+    var idRoom = document.getElementById("roomFilter").value;
+    if (idRoom == "Toutes les salles"){
         document.getElementById("actionList").style.display = "none";
         var roomIds = [];
         for (var  i=0; i<fullRoomArray.length; i++){
@@ -110,29 +131,24 @@ function getProductByRoom(){
                 roomIds.push(fullRoomArray[i]['r_id']);
             }
         }
-        getMultipleFullArray(roomIds);
+        getMultipleFullArray(roomIds); //on veut afficher le contenu de toutes les rooms d'un local
     }
     else {
         document.getElementById("actionList").style.display = "";
-        for (var i=0; i<fullRoomArray.length; i++){
-            if (fullRoomArray[i]['name']==room){
-                var idRoom = fullRoomArray[i]['r_id'];
-            }
-        }
-        if (idRoom){
-            getFullArray(idRoom);
-        }
+        getFullArray(idRoom);
     }
 }
 
-function displayRooms(array){
-    var choiceList = document.getElementById("roomFilter");
+
+function displayRooms(array, roomListId){
+    var choiceList = document.getElementById(roomListId);
     choiceList.innerHTML='';
     var option = document.createElement('option');
     option.innerHTML = 'Toutes les salles';
     choiceList.appendChild(option);
     for (var i=0; i<array.length; i++){
         var option = document.createElement('option');
+        option.setAttribute("value",array[i].r_id);
         option.innerHTML = array[i].name;
         choiceList.appendChild(option);
     }

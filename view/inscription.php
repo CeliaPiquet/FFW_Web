@@ -10,47 +10,47 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="name">Nom</label>
-                    <input required type="text" class="form-control" id="name" placeholder="Nom">
+                    <input required type="text" class="form-control" id="name" placeholder="Nom" name="lastname">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="firstname">Prénom</label>
-                    <input required type="text" class="form-control" id="firstname" placeholder="Prénom">
+                    <input required type="text" class="form-control" id="firstname" placeholder="Prénom" name="firstname">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="mail">Adresse mail</label>
-                    <input required type="email" class="form-control" id="mail" placeholder="exemple@messagerie.fr">
+                    <input required type="email" class="form-control" id="mail" placeholder="exemple@messagerie.fr" name="mail">
                 </div>
                 <div class="form-group col-md">
-                    <label for="mdp">Mot de passe</label>
-                    <input required type="password" class="form-control" id="mdp" placeholder="Mot de passe (8 caractères, 1 majuscule, 1 minuscule, 1 chiffre)">
+                    <label for="pwd">Mot de passe</label>
+                    <input required type="password" class="form-control" id="pwd" placeholder="Mot de passe (8 caractères, 1 majuscule, 1 minuscule, 1 chiffre)" name="pwd">
                 </div>
                 <div class="form-group col-md">
-                    <label for="mdp2">Confirmation du mot de passe</label>
-                    <input required type="password" class="form-control" id="mdp2" placeholder="Retapez votre mot de passe">
+                    <label for="pwdConfirm">Confirmation du mot de passe</label>
+                    <input required type="password" class="form-control" id="pwdConfirm" placeholder="Retapez votre mot de passe" name="pwdConfirm">
                 </div>
             </div>
             <div class="form-group">
                 <label for="address">Addresse</label>
-                <input type="text" class="form-control" id="adress" placeholder="Numéro + nom de la rue">
+                <input type="text" class="form-control" id="adress" placeholder="Numéro + nom de la rue" name="adress">
             </div>
             <div class="form-group">
                 <label for="adress2">Complément</label>
-                <input type="text" class="form-control" id="address2" placeholder="Batiment, appartement, étage ...">
+                <input type="text" class="form-control" id="address2" placeholder="Batiment, appartement, étage ..." name="name">
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="city">Ville</label>
-                    <input type="text" class="form-control" id="city">
+                    <input type="text" class="form-control" id="city" name="city">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="zipcode">Code postal</label>
-                    <input type="text" class="form-control" id="zipcode">
+                    <input type="text" class="form-control" id="zipcode" name="zipcode">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="country">Pays</label>
-                    <select id="country" class="form-control">
+                    <select id="country" class="form-control" name="country">
                         <option value="france" selected>France</option>
                         <option value="italie">Italie</option>
                         <option value="portugal">Portugal</option>
@@ -60,14 +60,14 @@
             </div>
             <div class="form-group">
                 <div class="form-check">
-                    <input required class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">
+                    <input required class="form-check-input" type="checkbox" id="checkCG" name="checkCG">
+                    <label class="form-check-label" for="checkCG">
                         J'accepte les conditions générales de FFW
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck2">
-                    <label class="form-check-label" for="gridCheck2">
+                    <input class="form-check-input" type="checkbox" id="checkNews" name="checkNews">
+                    <label class="form-check-label" for="checkNews">
                         Je souhaite être informé(e) par mail des actualités et des évènements de FFW
                     </label>
                 </div>

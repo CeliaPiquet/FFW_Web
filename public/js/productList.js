@@ -1,6 +1,7 @@
 var fullArray=[];
 var rights = '';
 var filteredArray = [];
+var selectedProducts = [];
 
 function getFullArray(idRoom){
     var request = new XMLHttpRequest();
@@ -8,6 +9,9 @@ function getFullArray(idRoom){
     request.onreadystatechange = function(){
         if(request.readyState === 4 && request.status === 200){
             fullArray = JSON.parse(request.responseText);
+            displayArray(fullArray);
+        } else if (request.readyState === 4 && request.status === 204){
+            fullArray = [];
             displayArray(fullArray);
         }
     }
@@ -39,6 +43,7 @@ function getMultipleFullArray(roomIds){
     var url = "http://localhost:8080/FFW_API/api/products/getAll.php";
     request.open('GET',url);
     request.send();
+    return "ok";
 }
 
 function findArticleByFilter(){
@@ -80,7 +85,14 @@ function filterArray (filter){
     return filteredArray;
 }
 
+function sortByName(a,b){
+    var newA = a.name.toLowerCase();
+    var newB = b.name.toLowerCase();
+    return ((newA < newB) ? -1: ((newA > newB) ? 1 : 0));
+}
+
 function displayArray(productArray){
+    productArray.sort(sortByName); //permet de regrouper tous les produits d'un même article
     var container = document.getElementById("articleResultsContainer");
     var noResult = document.getElementById("emptyResultArticle");
     noResult.innerHTML = '';
@@ -114,40 +126,37 @@ function countQuantity(fullArray,nameToSearch){
     return counter;
 }
 
-function selectAllProductByArticle(articleName){
-    // si on clique sur un article alors les modifications s'applique aux enfants
-    // 2 cas possibles : soit l'article est déjà select et dans ce cas on enleve select a tous 
-    // soit l'article est pas select et on doit ajouter select a tous
+function getRealProductId(idHTML){
+    var productId = (idHTML.split("ProductLine"))[1];
+    return productId;
+}
 
-    var articleId = articleName + "ArticleLine";
-    var articleElement = document.getElementById(articleId);    //on récupère l'élément qui contient l'article
-    var isSelect = articleElement.classList.contains("select"); //on vérifie l'état actuel de l'article
-    
+function selectAllProductByArticle(articleName){
+
     var productClass = "productLine " + articleName;
     var productElements = document.getElementsByClassName(productClass);
+    var allSelected = isAllArticleSelected(articleName);
 
-    if (articleElement && productElements){
+    if (productElements){
         for (var i=0; i<productElements.length; i++){
-            if(isSelect){                                       // cas de l'article déjà activé
+            realId = getRealProductId(productElements[i].id);
+            if(allSelected){
                 productElements[i].classList.remove("select");
                 productElements[i].style.background = "";
+                var indexToRemove = selectedProducts.findIndex( o => o == realId);
+                selectedProducts.splice(indexToRemove,1);
             }
-            else {
+            else if (!(selectedProducts.includes(realId))){
                 productElements[i].classList.add("select");
                 productElements[i].style.background = "#42BD85";
+                selectedProducts.push(realId);
             }
         }
-        if(isSelect){                                       // cas de l'article déjà activé
-        articleElement.classList.remove("select");
-        articleElement.style.background = "";
     }
-    else {
-        articleElement.classList.add("select");
-        articleElement.style.background = "#42BD85";
-    }
+    isAllArticleSelected(articleName);
     buttonOnClick(articleName); 
 }
-}
+
 
 function createArticleDisplay(element){
     
@@ -206,41 +215,45 @@ function buttonOnClick(name){
     }
 }
 
-function selectProduct(productId,name){ //lorsqu'on clique sur un produit celui ci doit changer de statut ("select"/"")
-    var element = document.getElementById(productId);
-    if(element.classList.toggle("select")){
-        element.style.background = "#42BD85";
+function selectProduct(elementId, elementName){ //lorsqu'on clique sur un produit celui ci doit changer de statut ("select"/"")
+
+    strId = elementName + "ProductLine" + elementId;
+    
+    var elementHTML = document.getElementById(strId);
+    var indexToRemove = selectedProducts.findIndex( o => o == elementId);
+
+    // if(elementHTML.classList.toggle("select")){
+    if(indexToRemove == -1) {
+        elementHTML.style.background = "#42BD85";
+        selectedProducts.push(elementId);
     }
     else {
-        element.style.background = "";
-    }
-    isAllArticleSelected(name); //on vérifie si tous les produits d'un article sont sélectionné afin de changer ou non la classe de l'article
+        elementHTML.style.background = "";
+        selectedProducts.splice(indexToRemove, 1);
+    }    
+    isAllArticleSelected(elementName); //on vérifie si tous les produits d'un article sont sélectionné afin de changer ou non la classe de l'article
 }
 
 function isAllArticleSelected(name){
-    console.log("check");
     var element = document.getElementById(name + "ArticleLine");
-    var productsClass = "productLine " + name;
+    var productsClass = "productLine " + name; 
     var allSelected = true;
     var products = document.getElementsByClassName(productsClass);
     var isArticleSelected = element.classList.contains("select");
 
     for (var i=0; i<products.length; i++){
-        if(!products[i].classList.contains("select")){
-            console.log(products[i]);
+        if(!(selectedProducts.includes(getRealProductId(products[i].id)))){
             allSelected = false;
         }
     }
 
-    if(isArticleSelected && !allSelected){
-        element.classList.remove("select");
-        element.style.background = "";
-    }
-    else if(!isArticleSelected && allSelected){
-        element.classList.add("select");
+    if(allSelected){
         element.style.background = "#42BD85";
     }
-    
+    else {
+        //element.classList.add("select");
+        element.style.background = "";
+    }
     return allSelected;
 }
 
@@ -248,7 +261,8 @@ function createProductDisplay(element){
     var productLine = document.createElement('tr');
     strId = element.name + "ProductLine" + element.pr_id;
     productLine.setAttribute("id",strId);
-    productLine.setAttribute("onclick","selectProduct('"+strId+"','"+element.name+"')");
+    productLine.setAttribute("onclick","selectProduct('" + element.pr_id + "', '" + element.name + "')");
+    // productLine.setAttribute("onclick","selectProduct('"+strId+"','"+element.name+"')");
     productLine.setAttribute("class","productLine " + element.name);
     productLine.setAttribute("style","display:none");
 
