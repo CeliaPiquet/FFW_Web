@@ -12,7 +12,6 @@
            && !empty($_POST["pwdConfirm"])
            && !empty($_POST["checkCG"])
            ){
-
                 $error = false;
                 $listErrors = [];
 
@@ -31,34 +30,31 @@
                 if($_POST["pwd"] != $_POST["pwdConfirm"]){
                         $error = true;
                 }
+                if(!$error){
+                        //on appelle l'api
+                        $user = array(
+                                "lastname" => utf8_encode($_POST["lastname"]), 
+                                "firstname" => utf8_encode($_POST["firstname"]), 
+                                "email" => utf8_encode($_POST["mail"]), 
+                                "password" => utf8_encode($_POST["pwd"])
+                        ); 
+                        $user_string = json_encode($user);
+                        $curl = curl_init("http://localhost:8080/FFW_API/api/users/create.php");
+                        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+                        curl_setopt($curl, CURLOPT_POSTFIELDS, $user_string);                                                                   
+                        curl_setopt($curl, CURLOPT_HTTPHEADER, array(                                                                          
+                        'Content-Type: application/json',                                                                                
+                        'Content-Length: ' . strlen($user_string))                                                                       
+                        );                                                                                                                   
+                                                                                                                          
+                        $response = curl_exec($curl);
+                        curl_close($curl);
+                        header("Location:inscription2.php");
 
-                //on appelle l'api pour vérifier si un utilisateur avec le même mail existe déjà
-                $curl = curl_init();
-                $userMail = urlencode($_POST["mail"]);
-                $url = "http://localhost:8080/FFW_API/api/users/getOneByEmail.php?email=".$userMail;
-                curl_setopt($curl,CURLOPT_URL, $url);
-                $response = curl_exec($curl);
-                curl_close($curl)
-                if($response){ 
-                        $error = true;
-                }
-
-
-                if ($error){
-                        header("Location: connection.php");
                 }
                 else {
-                        $curl2 = curl_init();
-                        $pwd = urlencode($_POST["pwd"]);
-                        
+                        header("Location:inscription.php");
                 }
 
-
-
-
         }
-
-
-
-        header("Location:inscription2.php");
 ?>

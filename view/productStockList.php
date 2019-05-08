@@ -15,13 +15,13 @@
 
     </div>
     <div class="container">
-            <p> Choisissez un local afin de voir les stocks et une salle pour pouvoir modifier son contenu. </p> 
+            <p> Choisissez un local afin de voir les stocks et une salle pour pouvoir modifier son contenu. </p>   
             <div class="row" id="actionList" style="display: none">
                 <div class="col-md-3">
                     <h5> Actions : </h5>
                 </div>
                 <div class="col-md-3">
-                    <a class="btn" id="addNewProduct" onclick="modalDisplay('addModal')">Ajouter un produit à une salle</a>
+                    <a class="btn" id="addNewProduct" onclick="modalDisplay('addProduct')">Ajouter un produit à une salle</a>
                 </div>
                 <div class="col-md-3">
                     <a class="btn" id="changeProductRoom" onclick="modalDisplay('changeRoomModal')">Changer un produit de salle</a>

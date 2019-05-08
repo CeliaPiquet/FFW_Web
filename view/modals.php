@@ -45,7 +45,7 @@
 
 
 <!-- Modal to add product to room -->
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -58,7 +58,8 @@
             <div class="modal-body">
                     <div class="form-group">
                         <label for="articleId">Code barre du produit</label>
-                        <input required type="text" class="form-control" id="articleId" name="articleId">
+                        <input required type="text" class="form-control" id="articleId" name="articleId" onkeyup=checkArticle()>
+                        <p id="articleNamePlacement"></p>
                     </div>
                     <div class="form-group">
                         <label for="endDate"> Date de péremption </label>
@@ -67,13 +68,16 @@
                     <div class="form-group">
                         <label for="status"> Etat </label>
                         <select class="form-control form-control" id="status" name="status">
-                            <option>Bon état</option>
+                            <option>Bon Etat</option>
                             <option>Dégradé</option>
-                            <option>A jeter</option>
+                            <option>A Jeter</option>
                         </select>
                     </div>
             </div>
             <div class="modal-footer">
+                <div class="form-group">
+                    <input type="number" class="form-control" id="numberNewProduct" placeholder="nb" min="1" max="50" value="1"/>
+                </div>
                 <a class="btn" data-dismiss="modal">Annuler</a>
                 <button type="button" class="btn" onclick="addProduct()">Ajouter</button>
             </div>

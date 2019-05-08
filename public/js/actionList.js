@@ -1,8 +1,10 @@
+var isArticleExisting=false;
+
 //affichage de la modale en fonction de son idHTML
 function modalDisplay(modalId){
     var container = document.getElementById("alertMessage");
     container.innerHTML = '';
-    if (selectedProducts.length > 0 || modalId=="addModal"){
+    if (selectedProducts.length > 0 || modalId=="addProduct"){
         $('#'+ modalId).modal({
             backdrop:false
         })
@@ -14,7 +16,25 @@ function modalDisplay(modalId){
     }
 }
 
-
+function checkArticle(){
+    var nameArticlePlacement = document.getElementById("articleNamePlacement");
+    var idArticle = document.forms['addProductForm'].elements[0].value;
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function(){
+        if(request.readyState === 4 && request.status === 200){
+            isArticleExisting = true;
+            var article = JSON.parse(request.responseText);
+            nameArticlePlacement.innerHTML = article["name"];
+        }
+        else if(request.readyState === 4){
+            isArticleExisting = false;
+            nameArticlePlacement.innerHTML = "Aucun article correspondant";
+        }
+    }
+    var url = "http://localhost:8080/FFW_API/api/articles/getOne.php?a_id="+idArticle;
+    request.open('GET',url);
+    request.send();
+}
 
 //traitements
 function changeRoom(){
@@ -32,14 +52,27 @@ function changeRoom(){
 }
 
 function addProduct(){
+
     var form = document.forms["addProductForm"];
-    var newProduct = [];
-    var i = 0;
-    while (i<form.length-1){
-        newProduct.push(form.elements[i].value);
-        i++;
+    var nbProducts = form.elements[3].value;
+    if(isArticleExisting && nbProducts<100){
+        var newProduct = {
+            "limitDate" : form.elements[1].value ,
+            "state" : form.elements[2].value ,
+            "articleId" : form.elements[0].value,
+            "roomId" :  document.getElementById("roomFilter").value
+        };
+        var jsonProduct = JSON.stringify(newProduct);
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function(){
+            if(request.readyState === 4 && request.status === 200){
+                document.location.reload(true);
+            } 
+        }
+        var url = "http://localhost:8080/FFW_API/api/products/create.php?nb_products="+nbProducts;
+        request.open('POST',url);
+        request.send(jsonProduct);
     }
-    console.log(newProduct);
 }
 
 function removeProduct(){

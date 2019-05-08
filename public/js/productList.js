@@ -1,49 +1,59 @@
-var fullArray=[];
+var fullProductsArray=[];
 var rights = '';
 var filteredArray = [];
 var selectedProducts = [];
 
-function getFullArray(idRoom){
+function getfullProductsArray(idRoom, offset){
     var request = new XMLHttpRequest();
-
+    var productsArray = [];
     request.onreadystatechange = function(){
         if(request.readyState === 4 && request.status === 200){
-            fullArray = JSON.parse(request.responseText);
-            displayArray(fullArray);
-        } else if (request.readyState === 4 && request.status === 204){
-            fullArray = [];
-            displayArray(fullArray);
-        }
+            productsArray = JSON.parse(request.responseText);
+            fullProductsArray=fullProductsArray.concat(productsArray);
+            if(productsArray.length == 20){
+                getfullProductsArray(idRoom, offset+20)
+            }
+            else {
+                displayFullProductsArray();
+            }
+        } 
     }
-    var url = "http://localhost:8080/FFW_API/api/rooms/getProducts.php?room="+idRoom;
+    var url = "http://localhost:8080/FFW_API/api/rooms/getProducts.php?room="+idRoom+"&offset="+offset;
     request.open('GET',url);
     request.send();
 }
 
-function getMultipleFullArray(roomIds){
-    var request = new XMLHttpRequest();
-
-    request.onreadystatechange = function(){
-        if(request.readyState === 4 && request.status === 200){
-            fullArray = JSON.parse(request.responseText);
-            var tmp = fullArray.length;
-            var i=0;
-            while (i<tmp){
-                if (! roomIds.includes(fullArray[i]['room_r_id'])){
-                    fullArray.splice(i,1);
-                    tmp = fullArray.length;
-                }
-                else {
-                    i++;
-                }
-            }
-            displayArray(fullArray);
+function keepProductsWithRoomId(roomIds){
+    var i = 0;
+    while (i<fullProductsArray.length){
+        if (! roomIds.includes(fullProductsArray[i]['roomId'])){
+            fullProductsArray.splice(i,1);
+        }
+        else {
+            i++;
         }
     }
-    var url = "http://localhost:8080/FFW_API/api/products/getAll.php";
+}
+
+function getMultiplefullProductsArray(roomIds, offset){
+    var request = new XMLHttpRequest();
+    var productArray = [];
+    request.onreadystatechange = function(){
+        if(request.readyState === 4 && request.status === 200){
+            productArray = JSON.parse(request.responseText);
+            fullProductsArray = fullProductsArray.concat(productArray);
+            if (productArray.length == 20){
+                getMultiplefullProductsArray(roomIds, offset+20)
+            }
+            else {
+                keepProductsWithRoomId(roomIds);
+                displayFullProductsArray(fullProductsArray);
+            }
+        }
+    }
+    var url = "http://localhost:8080/FFW_API/api/products/getAll.php?offset="+offset;
     request.open('GET',url);
     request.send();
-    return "ok";
 }
 
 function findArticleByFilter(){
@@ -53,24 +63,25 @@ function findArticleByFilter(){
     if (codeFilter.length != 0 || nameFilter.length !=0 || categoryFilter.length != 0){
         var filter = new Array();
         filter = {
-            name : nameFilter,
-            category : categoryFilter,
-            article_a_id : codeFilter
+            articleName : nameFilter,
+            articleCategory : categoryFilter,
+            articleId : codeFilter
         }
         var filteredArray = filterArray(filter);
-        displayArray(filteredArray);
+        displayFullProductsArray(filteredArray);
     } else {
-        displayArray(fullArray);
+        displayFullProductsArray(fullProductsArray);
     }
 }
 
 function filterArray (filter){
+    var test, i, key, strToTest;
     filteredArray = [];
-    for (var i = 0; i < fullArray.length; i++){
-        var test = true;
-        for (var key in filter){
-            if (fullArray[i].hasOwnProperty(key)){
-                var strToTest = fullArray[i][key].toUpperCase();
+    for (i = 0; i < fullProductsArray.length; i++){
+        test = true;
+        for (key in filter){
+            if (fullProductsArray[i].hasOwnProperty(key)){
+                strToTest = fullProductsArray[i][key].toUpperCase();
                 if (! (strToTest.includes(filter[key].toUpperCase()) )){
                     test = false;
                 }
@@ -79,19 +90,19 @@ function filterArray (filter){
             }
         }
         if(test){
-            filteredArray.push(fullArray[i]);
+            filteredArray.push(fullProductsArray[i]);
         }
     }
     return filteredArray;
 }
 
 function sortByName(a,b){
-    var newA = a.name.toLowerCase();
-    var newB = b.name.toLowerCase();
+    var newA = a.articleName.toLowerCase();
+    var newB = b.articleName.toLowerCase();
     return ((newA < newB) ? -1: ((newA > newB) ? 1 : 0));
 }
 
-function displayArray(productArray){
+function displayFullProductsArray(productArray = fullProductsArray){ //par défaut on affiche le tableau entier
     productArray.sort(sortByName); //permet de regrouper tous les produits d'un même article
     var container = document.getElementById("articleResultsContainer");
     var noResult = document.getElementById("emptyResultArticle");
@@ -99,7 +110,7 @@ function displayArray(productArray){
     container.innerHTML = '';
 
     for(var i=0; i<productArray.length; i++){
-        strId = productArray[i].name + "ArticleLine";
+        strId = productArray[i].articleName + "ArticleLine";
         if(document.getElementById(strId)){  //si un l'article a déjà été ajouté on ajoute juste le produit
             var product = createProductDisplay(productArray[i]);
             container.appendChild(product);
@@ -116,10 +127,10 @@ function displayArray(productArray){
     }
 }
 
-function countQuantity(fullArray,nameToSearch){
+function countQuantity(fullProductsArray,nameToSearch){
     counter = 0;
-    for (var i =0; i<fullArray.length; i++) {
-        if (fullArray[i].name == nameToSearch){
+    for (var i =0; i<fullProductsArray.length; i++) {
+        if (fullProductsArray[i].articleName == nameToSearch){
             counter ++;
         }
     }
@@ -157,40 +168,38 @@ function selectAllProductByArticle(articleName){
     buttonOnClick(articleName); 
 }
 
-
-function createArticleDisplay(element){
-    
+function createArticleDisplay(element){ //checked
     var articleLine = document.createElement('tr');
-    strId = element.name + "ArticleLine";
+    strId = element.articleName + "ArticleLine";
     articleLine.setAttribute("id",strId);
     articleLine.setAttribute("class","articleLine font-weight-bold");
 
     var nameCell = document.createElement('td');
-    nameCell.setAttribute("onclick","selectAllProductByArticle('"+element.name+"')");
-    nameCell.innerHTML = element.name;
+    nameCell.setAttribute("onclick",'selectAllProductByArticle("'+element.articleName+'")');
+    nameCell.innerHTML = element.articleName;
     articleLine.appendChild(nameCell);
 
     var categoryCell = document.createElement('td');
-    categoryCell.setAttribute("onclick","selectAllProductByArticle('"+element.name+"')");
-    categoryCell.innerHTML = element.category;
+    categoryCell.setAttribute("onclick",'selectAllProductByArticle("'+element.articleName+'")');
+    categoryCell.innerHTML = element.articleCategory;
     articleLine.appendChild(categoryCell);
     
     var quantityCell = document.createElement('td');
-    quantityCell.setAttribute("onclick","selectAllProductByArticle('"+element.name+"')");
-    quantityCell.innerHTML = countQuantity(fullArray,element.name);
+    quantityCell.setAttribute("onclick",'selectAllProductByArticle("'+element.articleName+'")');
+    quantityCell.innerHTML = countQuantity(fullProductsArray,element.articleName);
     articleLine.appendChild(quantityCell);
 
     var codeCell = document.createElement('td');
-    codeCell.setAttribute("onclick","selectAllProductByArticle('"+element.name+"')");
-    codeCell.innerHTML = element.article_a_id;
+    codeCell.setAttribute("onclick",'selectAllProductByArticle("'+element.articleName+'")');
+    codeCell.innerHTML = element.articleId;
     articleLine.appendChild(codeCell);
 
     var buttonCell = document.createElement('td');
     var button = document.createElement('p');
     button.setAttribute("class","btn");
-    button.setAttribute("id","btn"+element.name);
+    button.setAttribute("id","btn"+element.articleName);
     button.innerHTML = "+";
-    button.setAttribute("onclick","buttonOnClick('"+element.name+"')");
+    button.setAttribute("onclick",'buttonOnClick("'+element.articleName+'")');
     buttonCell.appendChild(button);
     articleLine.appendChild(buttonCell);
 
@@ -198,11 +207,11 @@ function createArticleDisplay(element){
 
 }
 
-function buttonOnClick(name){
-    var button = document.getElementById("btn"+name)
-    for (var i=0; i<fullArray.length; i++){
-        if (fullArray[i].name == name){
-            strId = fullArray[i].name + "ProductLine" + fullArray[i].pr_id;
+function buttonOnClick(articleName){
+    var button = document.getElementById("btn"+articleName)
+    for (var i=0; i<fullProductsArray.length; i++){
+        if (fullProductsArray[i].articleName == articleName){
+            strId = fullProductsArray[i].articleName + "ProductLine" + fullProductsArray[i].prid;
             if (document.getElementById(strId).style.display == "none"){
                 document.getElementById(strId).style.display = "table-row";
                 button.innerHTML ="-";
@@ -234,9 +243,9 @@ function selectProduct(elementId, elementName){ //lorsqu'on clique sur un produi
     isAllArticleSelected(elementName); //on vérifie si tous les produits d'un article sont sélectionné afin de changer ou non la classe de l'article
 }
 
-function isAllArticleSelected(name){
-    var element = document.getElementById(name + "ArticleLine");
-    var productsClass = "productLine " + name; 
+function isAllArticleSelected(articleName){
+    var element = document.getElementById(articleName + "ArticleLine");
+    var productsClass = "productLine " + articleName; 
     var allSelected = true;
     var products = document.getElementsByClassName(productsClass);
     var isArticleSelected = element.classList.contains("select");
@@ -259,11 +268,11 @@ function isAllArticleSelected(name){
 
 function createProductDisplay(element){
     var productLine = document.createElement('tr');
-    strId = element.name + "ProductLine" + element.pr_id;
+    strId = element.articleName + "ProductLine" + element.prid;
     productLine.setAttribute("id",strId);
-    productLine.setAttribute("onclick","selectProduct('" + element.pr_id + "', '" + element.name + "')");
-    // productLine.setAttribute("onclick","selectProduct('"+strId+"','"+element.name+"')");
-    productLine.setAttribute("class","productLine " + element.name);
+    productLine.setAttribute("onclick",'selectProduct("' + element.prid + '", "' + element.articleName + '")');
+    // productLine.setAttribute("onclick","selectProduct('"+strId+"','"+element.articleName+"')");
+    productLine.setAttribute("class","productLine " + element.articleName);
     productLine.setAttribute("style","display:none");
 
     var firstCell = document.createElement('td');
@@ -271,7 +280,7 @@ function createProductDisplay(element){
     productLine.appendChild(firstCell);
 
     var dateCell = document.createElement('td');
-    dateCell.innerHTML = element.limit_date;
+    dateCell.innerHTML = element.limitDate;
     productLine.appendChild(dateCell);
     
     var thirdCell = document.createElement('td');
@@ -279,8 +288,7 @@ function createProductDisplay(element){
     productLine.appendChild(thirdCell);
     
     var roomCell = document.createElement('td');
-    roomCell.innerHTML = getRoomById(element.room_r_id).name;
+    roomCell.innerHTML = getRoomById(element.roomId).name;
     productLine.appendChild(roomCell);
-
     return productLine;
 }

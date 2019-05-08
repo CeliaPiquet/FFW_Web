@@ -1,10 +1,12 @@
 var fullLocalArray = [];
 var fullRoomArray = [];
 var selectedRoomIdForTransfer=[];
+var isLocalRequestComplete = false;
+var isRoomRequestComplete = false; 
 
 function getRoomById($roomId){
     for (var i=0; i<fullRoomArray.length; i++){
-        if (fullRoomArray[i]['r_id'] == $roomId){
+        if (fullRoomArray[i]['rid'] == $roomId){
             return fullRoomArray[i];
         }
     }
@@ -12,64 +14,95 @@ function getRoomById($roomId){
 }
 
 function getFullLocals(){
-    var request = new XMLHttpRequest();
     var containers = document.getElementsByClassName("localisationList");
+    fullLocalArray = [];
+    getPageOfLocals(0, containers);
+}
+        
+function getPageOfLocals(offset, containers) {
+    localArray = [];
+    var request = new XMLHttpRequest();
     request.onreadystatechange = function(){
         if(request.readyState === 4 && request.status === 200){
-            fullLocalArray = JSON.parse(request.responseText);
-            for(var i=0; i<containers.length; i++){
-                displayLocals(fullLocalArray, containers[i]);
+            localArray = JSON.parse(request.responseText);
+            fullLocalArray = fullLocalArray.concat(localArray);
+            if(localArray.length == 20){
+                getPageOfLocals(offset+20);
+            }
+            else {
+                var containers = document.getElementsByClassName("localisationList");
+                for(var i=0; i<containers.length; i++){
+                    displayLocals(fullLocalArray, containers[i]);
+                }
             }
         }
     }
 
-    var url = "http://localhost:8080/FFW_API/api/locals/getAll.php";
+    var url = "http://localhost:8080/FFW_API/api/locals/getAll.php?offset=" + offset + "&limit=20" ;
     request.open('GET',url);
     request.send();
 }
 
-function getRoomByLocal(localListId){    
+function getRoomByLocal(localListId){  
     var local = document.getElementById(localListId).value;
     var roomListId = "roomFilter";
+    fullRoomArray = [];
+    fullProductsArray = [];
     if (localListId == "localChoice"){
         roomListId = "roomChoice";
     }
     for (var i=0; i<fullLocalArray.length; i++){
         if (fullLocalArray[i]['name']==local){
-            var idLocal = fullLocalArray[i]['lo_id'];
+            var idLocal = fullLocalArray[i]['loid'];
         }
     }
     if (idLocal){
-        var request = new XMLHttpRequest();
-        var i = 0;
-        request.onreadystatechange = function(){
-            if(request.readyState === 4 && request.status === 200){
-                fullRoomArray = JSON.parse(request.responseText);
-                while (i<fullRoomArray.length){
-                    if (fullRoomArray[i]['is_stockroom'] != "1"){
-                        fullRoomArray.splice(i,1);
-                    }
-                    else {
-                        i ++;
-                    }
-                }
+        getPageOfRooms(idLocal, 0, roomListId, localListId);
+    }
+    else {
+        document.getElementById("actionList").style.display = "none";
+        fullRoomArray = [];
+        displayRooms(fullRoomArray,roomListId);
+        displayFullProductsArray();
+    }
+}
+
+function keepStockRoom(){
+    var i=0;
+        while (i<fullRoomArray.length){
+            if (fullRoomArray[i]['isStockroom'] != "1"){
+                fullRoomArray.splice(i,1);
+            }
+            else {
+                i ++;
+            }
+        }
+}
+
+function getPageOfRooms(idLocal, offset, roomListId, localListId){
+    var roomArray = [];
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function(){
+        if(request.readyState === 4 && request.status === 200){
+            roomArray = JSON.parse(request.responseText);
+            fullRoomArray = fullRoomArray.concat(roomArray);
+
+            if(roomArray.length == 20){ //il existe encore des rooms à rappeler
+                getPageOfRooms(idLocal, offset+20);
+            } 
+            
+            else { //si tout a été chargé on peut appeler les fonctions suivantes
+                keepStockRoom();
                 displayRooms(fullRoomArray,roomListId);
                 if (localListId =="localFilter"){
                     getProductByRoom();
                 }
             }
         }
-    
-        var url = "http://localhost:8080/FFW_API/api/locals/getRooms.php?local="+idLocal;
-        request.open('GET',url);
-        request.send();
     }
-    else {
-        document.getElementById("actionList").style.display = "none";
-        fullRoomArray = [];
-        displayRooms(fullRoomArray,roomListId);
-        displayArray([]);
-    }
+    var url = "http://localhost:8080/FFW_API/api/locals/getRooms.php?local=" + idLocal + "&offset=" + offset + "&limit=20";
+    request.open('GET',url);
+    request.send();
 }
 
 function displayLocals(array, containerTarget){
@@ -122,23 +155,24 @@ function displayLocals(array, containerTarget){
 }
 
 function getProductByRoom(){
+    fullProductsArray = [];
+    
     var idRoom = document.getElementById("roomFilter").value;
     if (idRoom == "Toutes les salles"){
         document.getElementById("actionList").style.display = "none";
         var roomIds = [];
         for (var  i=0; i<fullRoomArray.length; i++){
-            if (! roomIds.includes(fullRoomArray[i]['r_id'])){
-                roomIds.push(fullRoomArray[i]['r_id']);
+            if (! roomIds.includes(fullRoomArray[i]['rid'])){
+                roomIds.push(fullRoomArray[i]['rid']);
             }
         }
-        getMultipleFullArray(roomIds); //on veut afficher le contenu de toutes les rooms d'un local
+        getMultiplefullProductsArray(roomIds,0); //on veut afficher le contenu de toutes les rooms d'un local
     }
     else {
         document.getElementById("actionList").style.display = "";
-        getFullArray(idRoom);
+        getfullProductsArray(idRoom,0);
     }
 }
-
 
 function displayRooms(array, roomListId){
     var choiceList = document.getElementById(roomListId);
@@ -148,7 +182,7 @@ function displayRooms(array, roomListId){
     choiceList.appendChild(option);
     for (var i=0; i<array.length; i++){
         var option = document.createElement('option');
-        option.setAttribute("value",array[i].r_id);
+        option.setAttribute("value",array[i].rid);
         option.innerHTML = array[i].name;
         choiceList.appendChild(option);
     }
