@@ -5,7 +5,23 @@
     if(!(isset($_SESSION)) || !(isset($_SESSION['rights'])) ){
             header("Location:homeView.php");
     }
-    ?>
+    if(!empty($_GET['success']) && $_GET['success']==1){
+?>
+        <div class="alert alert-success alert-dismissible" role="alert" id="successAlert">
+            Succès !
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+<?php 
+    } else if(!empty($_GET['success']) && $_GET['success'] == 2) { ?>
+        <div class="alert alert-danger alert-dismissible" role="alert" id="successAlert">
+            Erreur !
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+<?php } ?>
 <div class="back">
     <h1> Gestion des stocks </h1>
     <div class="container localisationList" id="localisationFilter">
@@ -14,6 +30,7 @@
     <div class="container" id="noResultLocals">
 
     </div>
+    
     <div class="container">
             <p> Choisissez un local afin de voir les stocks et une salle pour pouvoir modifier son contenu. </p>   
             <div class="row" id="actionList" style="display: none">

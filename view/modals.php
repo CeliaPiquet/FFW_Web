@@ -16,7 +16,7 @@
             </div>
             <div class="modal-footer">
                 <a class="btn" data-dismiss="modal">Annuler</a>
-                <a class="btn" href="productStockList.php" onclick=changeRoom()>Valider</a>
+                <button type="button" class="btn" onclick="changeRoom()">Valider</button>
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
             </div>
             <div class="modal-footer">
                 <a class="btn" data-dismiss="modal">Annuler</a>
-                <a class="btn" href="productStockList.php" onclick=removeProduct()>Valider</a>
+                <button type="button" class="btn" onclick="removeProduct()">Valider</button>
             </div>
         </div>
     </div>

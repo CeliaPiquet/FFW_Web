@@ -4,7 +4,7 @@ var isArticleExisting=false;
 function modalDisplay(modalId){
     var container = document.getElementById("alertMessage");
     container.innerHTML = '';
-    if (selectedProducts.length > 0 || modalId=="addProduct"){
+    if (selectedProducts.length > 0 || modalId == "addProduct" || modalId == "successModal"){
         $('#'+ modalId).modal({
             backdrop:false
         })
@@ -38,12 +38,13 @@ function checkArticle(){
 
 //traitements
 function changeRoom(){
+    console.log("change room");
     var request = new XMLHttpRequest();
     var idRoom = document.getElementById("roomChoice").value;
 
     request.onreadystatechange = function(){
         if(request.readyState === 4 && request.status === 200){
-            document.location.reload(true);
+            document.location.href = document.location.href + "?success=1";
         }
     }
     var url = "http://localhost:8080/FFW_API/api/products/transferRoom.php?room_id="+idRoom;
@@ -66,7 +67,7 @@ function addProduct(){
         var request = new XMLHttpRequest();
         request.onreadystatechange = function(){
             if(request.readyState === 4 && request.status === 201){
-                document.location.reload(true);
+                document.location.href = document.location.href + "?success=1";
             } 
         }
         var url = "http://localhost:8080/FFW_API/api/products/create.php?nb_products="+nbProducts;
@@ -80,7 +81,7 @@ function removeProduct(){
 
     request.onreadystatechange = function(){
         if(request.readyState === 4 && request.status === 200){
-            document.location.reload(true);
+            document.location.href = document.location.href + "?success=1";
         }
     }
     var url = "http://localhost:8080/FFW_API/api/products/remove.php";

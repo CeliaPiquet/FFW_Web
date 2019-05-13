@@ -37,7 +37,7 @@
                                 "firstname" => utf8_encode($_POST["firstname"]), 
                                 "email" => utf8_encode($_POST["mail"]), 
                                 "password" => utf8_encode($_POST["pwd"])
-                        ); 
+                        );
                         $user_string = json_encode($user);
                         $curl = curl_init("http://localhost:8080/FFW_API/api/users/create.php");
                         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
@@ -45,11 +45,16 @@
                         curl_setopt($curl, CURLOPT_HTTPHEADER, array(                                                                          
                         'Content-Type: application/json',                                                                                
                         'Content-Length: ' . strlen($user_string))                                                                       
-                        );                                                                                                                   
-                                                                                                                          
+                        );                                                                                                                                                                                                                
                         $response = curl_exec($curl);
+                        var_dump(json_decode($response,true));
                         curl_close($curl);
-                        header("Location:inscription2.php");
+                        $_SESSION["auth"] = true;
+                        $_SESSION["email"] = $user["email"];
+                        $_SESSION["firstname"] = $user["firstname"];
+                        $_SESSION["rights"] = $response["rights"];
+                        var_dump($_SESSION);
+                        header("Location:chooseOption.php");
 
                 }
                 else {
