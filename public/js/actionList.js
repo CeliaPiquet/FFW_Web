@@ -1,5 +1,6 @@
 var isArticleExisting=false;
 
+alert("COUCOU");
 //affichage de la modale en fonction de son idHTML
 function modalDisplay(modalId){
     var container = document.getElementById("alertMessage");
@@ -47,7 +48,7 @@ function changeRoom(){
             document.location.href = document.location.href + "?success=1";
         }
     }
-    var url = "http://localhost:8080/FFW_API/api/products/transferRoom.php?room_id="+idRoom;
+    var url = "http://ffwapi.priv/api/products/transferRoom.php?room_id="+idRoom;
     request.open('PUT',url);
     request.send(JSON.stringify(selectedProducts));
 }
@@ -70,7 +71,7 @@ function addProduct(){
                 document.location.href = document.location.href + "?success=1";
             } 
         }
-        var url = "http://localhost:8080/FFW_API/api/products/create.php?nb_products="+nbProducts;
+        var url = "http://ffwapi.priv/api/products/create.php?nb_products="+nbProducts;
         request.open('POST',url);
         request.send(jsonProduct);
     }
@@ -84,7 +85,7 @@ function removeProduct(){
             document.location.href = document.location.href + "?success=1";
         }
     }
-    var url = "http://localhost:8080/FFW_API/api/products/remove.php";
+    var url = "http://ffwapi.priv/FFW_API/api/products/remove.php";
     request.open('PUT',url);
     request.send(JSON.stringify(selectedProducts));
 }

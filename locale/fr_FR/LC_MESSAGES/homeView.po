@@ -1,0 +1,129 @@
+# French translations for PACKAGE package.
+# Copyright (C) 2019 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# root <root@dester78-g551jw>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-16 00:02+0200\n"
+"PO-Revision-Date: 2019-05-16 08:38+0200\n"
+"Last-Translator: root <root@dester78-g551jw>\n"
+"Language-Team: French <traduc@traduc.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: homeView.php:24
+msgid "Who are we ?"
+msgstr "Qui sommes-nous ?"
+
+#: homeView.php:26
+msgid ""
+"Since 2013, Fight Food Waste is engaged against food wwastage. \n"
+"                Association is active in France and in other countries as "
+"Italy, Ireland and Portugal."
+msgstr ""
+"Depuis 2013, Fight Food Waste s'engage dans la lutte  \n"
+"                contre le gaspillage. L'association est présente en France \n"
+"                et dans d'autres pays comme l'Italie, l'Irlande et \n"
+"                le Portugal."
+
+#: homeView.php:30
+msgid "Our goal is to reduce food wastage which produces..."
+msgstr ""
+"Notre but est de réduire le gaspillage alimentaire qui \n"
+"                production alimentaire mondiale."
+
+#: homeView.php:36
+msgid "How does it work ?"
+msgstr "Comment cela fonctionne ?"
+
+#: homeView.php:40
+msgid ""
+" \n"
+"                Every day we collect unsold stock and unused foodstuffs "
+"among private and business donors \n"
+"                to redistribute them to the most needy : associations, "
+"homeless person, isolated people.\n"
+"                To help us scan with FFW scanner your food items and our "
+"volunteers will pick up them during their daily round.\n"
+"                To order your scanner subscribe on our website and command "
+"it on your account space."
+msgstr ""
+" \n"
+"                Chaque jour nous effectuons des collectes parmi les \n"
+"                commerçants et particuliers afin de récupérer les \n"
+"                invendus et les produits qui ne seront pas consommés \n"
+"                afin de les redistribuer aux plus nécessiteux : "
+"associations, \n"
+"                personnes sans domiciles fixes ou isolées notamment. \n"
+"                Pour cela il suffit à l'aide du boitier FFW* de scanner "
+"ses \n"
+"                aliments à donner et nos bénévoles viendront les récupérer \n"
+"                lors des tournées quotidiennes. Pour commander son boitier \n"
+"                il vous suffit de vous inscrire sur le site* et de la "
+"commander \n"
+"                via son espace 'Mon Compte'."
+
+#: homeView.php:45
+msgid ""
+"\n"
+"                *Scanners are free for subscribers who contribute at least "
+"10€ per year and for volunteers who offers their services."
+msgstr ""
+"\n"
+"*les boitiers sont gratuits pour les adhérents cotisant au moins 10€ par an\n"
+"                et pour les bénévoles proposant leur(s) service(s)"
+
+#: homeView.php:50
+msgid "Have fun by doing like us and pick up wasted food !"
+msgstr "Amusez-vous à faire comme nous et ramassez les déchets !"
+
+#: homeView.php:59
+msgid "How to participate ?"
+msgstr "Comment participer ?"
+
+#: homeView.php:63
+msgid ""
+"\n"
+"                To participate in that fight against the wastage with us "
+"it's easy ! \n"
+"                All you need to do is to subscribe on this website and "
+"choose the type of your contribution !"
+msgstr ""
+"\n"
+"                Pour participez à ce combat contre le gaspillage \n"
+"                avec nous c'est très simple ! \n"
+"                Il vous suffit de vous inscrire sur ce site et de choisir \n"
+"                la façon dont vous voulez et pouvez vous impliquer !"
+
+#: homeView.php:70
+msgid ""
+"4 choices to help us : \n"
+"                - you are merchants and you want us to pick up your unsold "
+"stocks\n"
+"                - you want to bring a financial contribution for the "
+"association and access to a large range of services\n"
+"                - you want to offer your services and become volunteer of "
+"the association\n"
+"                - you want to access to our public services and stay "
+"informed of our actions "
+msgstr ""
+"4 choix s'offrent à vous: <br>\n"
+"                - vous êtes commerçant et vous souhaitez que                "
+"l'on récolte vos invendus\n"
+"                - vous souhaitez contribuez financièrement à                 "
+"l'association et accéder ainsi à une série \n"
+"                de services spécfifiques \n"
+"                - vous souhaitez offrir vos services et "
+"devenir                 bénévole de l'association \n"
+"                - vous souhaitez accéder à nos services "
+"ouverts                au public et rester informer de nos actions"
+
+#: homeView.php:80
+msgid "What are services offered ?"
+msgstr "Quels sont les services proposés ?"

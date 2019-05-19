@@ -38,7 +38,7 @@ function getPageOfLocals(offset, containers) {
         }
     }
 
-    var url = "http://localhost:8080/FFW_API/api/locals/getAll.php?offset=" + offset + "&limit=20" ;
+    var url = "http://ffwapi.priv/api/locals/getAll.php?offset=" + offset + "&limit=20" ;
     request.open('GET',url);
     request.send();
 }
@@ -100,7 +100,7 @@ function getPageOfRooms(idLocal, offset, roomListId, localListId){
             }
         }
     }
-    var url = "http://localhost:8080/FFW_API/api/locals/getRooms.php?local=" + idLocal + "&offset=" + offset + "&limit=20";
+    var url = "http://ffwapi.priv/api/locals/getRooms.php?local=" + idLocal + "&offset=" + offset + "&limit=20";
     request.open('GET',url);
     request.send();
 }
@@ -111,6 +111,7 @@ function displayLocals(array, containerTarget){
     container.innerHTML = '';
     noResult.innerHTML = '';
     if (array.length == 0){
+        noResult.setAttribute("class","visible");
         noResult.innerHTML = "Vide, aucun local trouvé";
     }
     else {

@@ -18,7 +18,7 @@ function getfullProductsArray(idRoom, offset){
             }
         } 
     }
-    var url = "http://localhost:8080/FFW_API/api/rooms/getProducts.php?room="+idRoom+"&offset="+offset;
+    var url = "http://ffwapi.priv/api/rooms/getProducts.php?room="+idRoom+"&offset="+offset;
     request.open('GET',url);
     request.send();
 }
@@ -51,7 +51,7 @@ function getMultiplefullProductsArray(roomIds, offset){
             }
         }
     }
-    var url = "http://localhost:8080/FFW_API/api/products/getAll.php?offset="+offset;
+    var url = "http://ffwapi.priv/api/products/getAll.php?offset="+offset;
     request.open('GET',url);
     request.send();
 }
