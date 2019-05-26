@@ -3,6 +3,7 @@ require_once 'Request.php';
 require_once 'View.php';
 require_once 'Template.php';
 require_once 'models/User.php';
+require_once 'services/UserService.php';
 
 abstract class Controller {
 
@@ -89,7 +90,12 @@ abstract class Controller {
 
             $user->getRights();
 
-            $isAdmin=$user->getRights()=="admin"?true:false;
+            $isAdmin=UserService::isRightSet($user->getRights(),4);
+            var_dump($isAdmin);
+            var_dump($user->getRights());
+
+
+//            $isAdmin=$user->getRights()=="admin"?true:false;
 
             $isConnected=true;
         }

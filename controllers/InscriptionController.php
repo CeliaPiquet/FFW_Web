@@ -27,6 +27,7 @@ class InscriptionController extends Controller {
     // Ajoute un commentaire sur un billet
     public function controlForm() {
 
+
         $websiteRoot = Configuration::get("websiteRoot", "/");
         $arrUserAddress=$this->getRequest()->getArrParameters();
 
@@ -40,22 +41,29 @@ class InscriptionController extends Controller {
         $addressManager=AddressService::getInstance();
         $userManager=UserService::getInstance();
 
+        var_dump($address);
+
         $address=$addressManager->gMapGeolocate($address);
         $address=$addressManager->createOne($address);
+
+        var_dump($address);
 
         if(isset($address) && !empty($address)){
             $user->setAddressId($address->getAdId());
         }
 
+        var_dump($user);
+
         $user=$userManager->create($user);
 
+        var_dump($user);
         if(isset($user) && !empty($user)){
             session_start();
             $_SESSION['user']=serialize($user);
-            header("Location:$websiteRoot/inscription/accountChoice");
+//            header("Location:$websiteRoot/inscription/accountChoice");
         }
         else{
-            header("Location:$websiteRoot/home/noInscription");
+//            header("Location:$websiteRoot/home/noInscription");
         }
     }
 

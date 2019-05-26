@@ -22,9 +22,15 @@
                     <div class="collapse navbar-collapse d-flex flex-row-reverse">
                         <ul class="navbar-nav">
                             <?php if (isset($isAdmin) && $isAdmin==true){ ?>
+
+                                <li class="nav-item" id="adminUsers">
+                                    <a class="btn" href="<?=$websiteRoot?>/adminUsers">Manage users</a>
+                                </li>
+
                                 <li class="nav-item" id="stocks">
                                     <a class="btn" href="<?=$websiteRoot?>/stock">Stocks</a>
                                 </li>
+
                                 <li class="nav-item" id="locals">
                                     <a class="btn" href="<?=$websiteRoot?>/local">Locals</a>
                                 </li>

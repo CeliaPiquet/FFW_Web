@@ -65,7 +65,13 @@ class AccountController extends Controller
     }
 
     public function volunteer() {
+        $this->volunteerEmployee();
+    }
+    public function employee(){
+        $this->volunteerEmployee();
+    }
 
+    private function volunteerEmployee(){
         $skillManager=SkillService::getInstance();
 
         $skills=$skillManager->getAllByUser($this->user->getUid());
@@ -79,8 +85,6 @@ class AccountController extends Controller
 
         $this->loadTemplate(parent::getTemplateData(),$this->action);
     }
-
-
 //    public function addCompanies(){
 //
 //        session_start();

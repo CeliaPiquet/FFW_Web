@@ -1,6 +1,9 @@
 var containerCompanyForm=document.getElementById("containerCompanyForm");
 var companyAddressArr=[];
 
+if(companies==null){
+    companies=[];
+}
 
 window.onload=getAllCompaniesByUser;
 

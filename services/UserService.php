@@ -51,10 +51,12 @@ class UserService {
         $apiUrl = Configuration::get("ffwApiUrl", "/");
 
         $url = "$apiUrl/users";
+        $user->setRights(1);
         $jsonUser=json_encode($user);
 
-
         $response=$curl->curlPost($url,$jsonUser, array());
+
+        var_dump($response);
 
         if($response["httpCode"]>=400){
             return null;
@@ -68,6 +70,8 @@ class UserService {
         return null;
     }
 
-
+    static public  function isRightSet($byteRight, $pos) {
+        return ($byteRight & (1 << $pos)) != 0;
+    }
 
 }

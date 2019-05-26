@@ -3,12 +3,13 @@
 
 <div class="row">
     <div class="col-md-9 mx-auto">
-        <h1 class="text-center"> My planning </h1>
+        <h1 class="text-center"> My missions </h1>
 
 
     </div>
     <div class="col-md-3 mx-auto">
-        <h1 class="text-center"> My planning </h1>
+        <h1 class="text-center"> My skills </h1>
+
     </div>
 
     <div class="form-group col-md-3  mx-auto">
