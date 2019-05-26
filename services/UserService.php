@@ -27,10 +27,14 @@ class UserService {
             "password"=>$user->getPassword(),
         ];
 
+        $url = "$apiUrl/users/authentication";
 
-        $url = "$apiUrl/api/users/authentication.php";
+        $response=$curl->curlGet($url,$userGet);
 
-        $curlUser = json_decode($curl->curlGet($url,$userGet), true);
+        if($response["httpCode"]>=400){
+            return null;
+        }
+        $curlUser= json_decode($response["result"],true);
 
         if(isset($curlUser) && !empty($curlUser)){
             return new User($curlUser);
@@ -46,18 +50,24 @@ class UserService {
 
         $apiUrl = Configuration::get("ffwApiUrl", "/");
 
-        $url = "$apiUrl/api/users/create.php";
+        $url = "$apiUrl/users";
         $jsonUser=json_encode($user);
 
-        $curlUser= json_decode($curl->curlPost($url,$jsonUser, array()),true);
 
+        $response=$curl->curlPost($url,$jsonUser, array());
+
+        if($response["httpCode"]>=400){
+            return null;
+        }
+        $curlUser= json_decode($response["result"],true);
 
         if(isset($curlUser) && !empty($curlUser)){
             return new User($curlUser);
         }
 
         return null;
-
     }
+
+
 
 }

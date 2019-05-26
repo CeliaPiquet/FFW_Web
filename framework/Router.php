@@ -64,6 +64,6 @@ class Router {
     // Gère une erreur d'exécution (exception)
     private function handleError(Exception $exception) {
         $view = new View('error');
-        $view->generate(array('errorMsg' => $exception->getMessage()));
+        $view->generateV(array('errorMsg' => $exception->getMessage()));
     }
 }

@@ -16,14 +16,13 @@
     </button>
 </div>
 
-<div class="back">
-    <h1> <?php echo _('Stock Managements') ?> </h1>
-    <div class="container localisationList" id="localisationFilter">
+<h1> <?php echo _('Stock Managements') ?> </h1>
+<div class="container localisationList" id="localisationFilter">
 
-    </div>
-    <div class="container" id="noResultLocals">
+</div>
+<div class="container" id="noResultLocals">
 
-    </div>
+</div>
 <div class="container">
         <p> <?php echo _('Pick a local in order to see the stocks and a room to edit its content') ?> </p>
         <div class="row" id="actionList" style="display: none">
@@ -53,16 +52,16 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="text" class="form-control" onkeyup=findArticleByFilter() id="nameArticleInput" placeholder="<?php echo _("Article name");?>">
+                        <input type="text" class="form-control" onkeyup="findArticleByFilter()" id="nameArticleInput" placeholder="<?php echo _("Article name");?>">
                     </td>
                     <td>
-                        <input type="text" class="form-control" onkeyup=findArticleByFilter() id="categoryArticleInput" placeholder="<?php echo _("Category"); ?>">
+                        <input type="text" class="form-control" onkeyup="findArticleByFilter()" id="categoryArticleInput" placeholder="<?php echo _("Category"); ?>">
                     </td>
                     <td>
 
                     </td> <!-- ajouter croissant/decroissant -->
                     <td>
-                        <input type="number" class="form-control" onkeyup=findArticleByFilter() id="codeArticleInput" /> </td>   <!-- onkeyup peut etre bien pour des petites quantités de données-->
+                        <input type="number" class="form-control" onkeyup="findArticleByFilter()" id="codeArticleInput" /> </td>   <!-- onkeyup peut etre bien pour des petites quantités de données-->
                 </tr>
             </thead>
             <tbody id="articleResultsContainer">

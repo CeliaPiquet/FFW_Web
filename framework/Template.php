@@ -53,7 +53,7 @@ class Template extends View
         $this->controller=$controller;
     }
 
-    public function generate(array $arrView, array $templateData) {
+    public function generateT(array $arrView, array $templateData) {
 
         foreach ($arrView as $viewFile=>$data) {
 
@@ -70,6 +70,6 @@ class Template extends View
 
         $filledTemplate = array_merge($views,$templateData);
 
-        echo( $this->generateFile($this->getFile(),$filledTemplate));
+        echo( parent::generateFile($this->getFile(),$filledTemplate));
     }
 }

@@ -38,7 +38,7 @@ function getPageOfLocals(offset, containers) {
         }
     }
 
-    var url = "http://ffwapi.priv/api/locals/getAll.php?offset=" + offset + "&limit=20" ;
+    var url = "http://ffwapi.priv/locals?offset=" + offset + "&limit=20" ;
     request.open('GET',url);
     request.send();
 }
@@ -100,7 +100,7 @@ function getPageOfRooms(idLocal, offset, roomListId, localListId){
             }
         }
     }
-    var url = "http://ffwapi.priv/api/locals/getRooms.php?local=" + idLocal + "&offset=" + offset + "&limit=20";
+    var url = "http://ffwapi.priv/locals/"+idLocal+"/rooms?offset=" + offset + "&limit=20";
     request.open('GET',url);
     request.send();
 }

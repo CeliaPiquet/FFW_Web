@@ -21,6 +21,10 @@ class HomeController extends Controller {
 
         echo "NO CONNECTION !!";
 
+    }
+    public function noInscription() {
+
+
 
     }
 

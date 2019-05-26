@@ -4,7 +4,7 @@
 <div class="back">
     <div class="container">
         <h1> <?php echo _("Inscription"); ?> </h1>
-        <form formclass="col-lg-6" method="post" action="<?=$websiteRoot?>/inscription/controlForm">
+        <form formclass="col-lg-6" method="post"  id="addressForm" action="<?=$websiteRoot?>/inscription/controlForm">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="lastname"><?php echo _("Last name"); ?></label>
@@ -30,21 +30,37 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="streetAddress"><?php echo _("Address"); ?></label>
-                <input type="text" class="form-control" id="streetAddress" placeholder="<?php echo _("House number and street name"); ?>" name="streetAddress">
+                <label for="autocomplete"><?php echo _("Address"); ?></label>
+                <input type="text" class="form-control" id="autocomplete" name="autocomplete" placeholder="<?php echo _("Enter your address..."); ?>" >
             </div>
+            <div class="form-row">
+                <div class="col-md-2">
+                    <label for="streetAddress"><?php echo _("House number"); ?></label>
+                    <input type="text" class="form-control" id="street_number" placeholder="<?php echo _("House number and street name"); ?>" name="houseNumber" disabled>
+                </div>
+                <div class="col-md-10">
+                    <label for="streetAddress"><?php echo _("Street address"); ?></label>
+                    <input type="text" class="form-control" id="route" placeholder="<?php echo _("House number and street name"); ?>" name="streetAddress" disabled>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="complement"><?php echo _("Complement"); ?></label>
+                <input type="text" class="form-control" id="complement" placeholder="<?php echo _("Complement "); ?>" name="complement" disabled>
+            </div>
+
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="cityName"><?php echo _("City") ;?></label>
-                    <input type="text" class="form-control" id="cityName" name="cityName">
+                    <input type="text" class="form-control" id="locality" name="cityName" disabled>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="cityCode"><?php echo _("Zip code"); ?></label>
-                    <input type="text" class="form-control" id="cityCode" name="cityCode">
+                    <input type="text" class="form-control" id="postal_code" name="cityCode" disabled>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="country"><?php echo _("Country"); ?></label>
-                    <select id="country" class="form-control" name="country">
+                    <select id="country" class="form-control" name="country" disabled>
                         <option value="france" selected><?php echo _("France") ?></option>
                         <option value="italy"> <?php echo _("Italy") ?></option>
                         <option value="portugal"><?php echo _("Portugal") ; ?></option>

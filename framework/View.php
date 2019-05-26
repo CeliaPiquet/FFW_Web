@@ -73,24 +73,17 @@ class View {
 
 
     // Génère et affiche la vue
-    public function generate($data) {
+    public function generateV($data) {
 
         // Génération de la partie spécifique de la vue
 
-        $content = $this->generateFile($this->file, $data);
-
-
-        $template=new Template($this->getController());
-
-        $websiteRoot = Configuration::get("websiteRoot", "/");
-        // Génération du gabarit commun utilisant la partie spécifique
-
-        $view = $this->generateFile($template->getFile(),
-            array('title' => $this->titre, 'content' => $content, 'websiteRoot'=>$websiteRoot));
+        $data['websiteRoot']=Configuration::get("websiteRoot", "/");
+        $view = $this->generateFile($this->file, $data);
 
         // Renvoi de la vue générée au navigateur
         echo $view;
     }
+
 
 
     // Génère un file vue et renvoie le résultat produit

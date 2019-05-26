@@ -12,11 +12,7 @@ abstract class Controller {
     // Requête entrante
     protected $request;
 
-    protected $arrViews;
-
-
-
-
+//    protected $arrViews;
 
     /**
      * Controller constructor.
@@ -81,7 +77,9 @@ abstract class Controller {
 
     public function getTemplateData(){
 
-        session_start();
+        if(!isset($_SESSION) || empty($_SESSION)){
+            session_start();
+        }
 
         $isConnected=false;
         $isAdmin=false;
@@ -108,7 +106,7 @@ abstract class Controller {
         lcfirst($controller);
         // Instanciation et génération de la vue
         $view = new View($view, $controller);
-        $view->generate($viewData);
+        $view->generateV($viewData);
     }
 
     protected function loadTemplate($templateData = array()) {
@@ -118,7 +116,7 @@ abstract class Controller {
         lcfirst($controller);
         // Instanciation et génération de la vue
         $template = new Template($controller);
-        $template->generate($this->arrViews,$templateData);
+        $template->generateT($this->arrViews,$templateData);
     }
 
 

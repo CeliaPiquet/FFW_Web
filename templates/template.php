@@ -7,11 +7,12 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="../../public/css/stylesheet.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
         <title>Fight Food Waste</title>
     </head>
     <body>
 
-        <header cz-shortcut-listen="true" style="background-color: #006336; padding-top:200px; padding-bottom: 100px">
+        <header cz-shortcut-listen="true" style="padding-top:200px;">
             <nav class="navbar fixed-top navbar-light navbar-expand-sm" style="background-color: #EBEBEB">
                 <a class="navbar-brand mr-auto" href="http://ffw.priv/">
                     <img src="../../public/img/logo1.png" width="150" height="150" class="d-inline-block align-top" alt="">
@@ -24,9 +25,12 @@
                                 <li class="nav-item" id="stocks">
                                     <a class="btn" href="<?=$websiteRoot?>/stock">Stocks</a>
                                 </li>
+                                <li class="nav-item" id="locals">
+                                    <a class="btn" href="<?=$websiteRoot?>/local">Locals</a>
+                                </li>
                             <?php } ?>
                             <li class="nav-item">
-                                <a class="btn" href="<?=$websiteRoot?>/profil">Mon espace</a>
+                                <a class="btn" href="<?=$websiteRoot?>/account">Mon espace</a>
                             </li>
                             <li class="nav-item">
                                 <a class="btn" href="<?=$websiteRoot?>/connection/logout">Deconnexion</a>
@@ -48,7 +52,9 @@
             </nav>
         </header>
 
-        <div id="content">
+
+        <div class="back" id="content">
+            <?php if(isset($navbar)){echo $navbar;} ?>
             <?php if(isset($content)){echo $content;} ?>
         </div>
 

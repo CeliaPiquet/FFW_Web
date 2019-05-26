@@ -19,11 +19,11 @@ class User implements JsonSerializable {
     public function __construct(array $fields) {
 
         $this->uid = isset($fields['uid']) ? $fields['uid'] : NULL;
-        $this->email = $fields['email'];
+        $this->email = isset($fields['email'])?$fields['email'] : NULL;
         $this->tel = isset($fields['tel']) ? $fields['tel'] : NULL;
-        $this->password = $fields['password'];
-        $this->firstname = $fields['firstname'];
-        $this->lastname = $fields['lastname'];
+        $this->password = isset( $fields['password'] ) ? $fields['password'] : NULL;
+        $this->firstname = isset($fields['firstname']) ? $fields['firstname'] : NULL;
+        $this->lastname = isset($fields['lastname'])  ? $fields['lastname'] : NULL;
         $this->status = isset($fields['status']) ? $fields['status'] : NULL;
         $this->rights = isset($fields['rights']) ? $fields['rights'] : NULL;
         $this->lastSubscription = isset($fields['lastSubcription']) ? $fields['lastSubcription'] : NULL;
@@ -36,7 +36,7 @@ class User implements JsonSerializable {
     /**
      * @return mixed|null
      */
-    public function getUid(): ?mixed
+    public function getUid()
     {
         return $this->uid;
     }
@@ -44,7 +44,7 @@ class User implements JsonSerializable {
     /**
      * @param mixed|null $uid
      */
-    public function setUid(?mixed $uid): void
+    public function setUid( $uid): void
     {
         $this->uid = $uid;
     }
@@ -68,7 +68,7 @@ class User implements JsonSerializable {
     /**
      * @return mixed|null
      */
-    public function getTel(): ?mixed
+    public function getTel()
     {
         return $this->tel;
     }
@@ -76,7 +76,7 @@ class User implements JsonSerializable {
     /**
      * @param mixed|null $tel
      */
-    public function setTel(?mixed $tel): void
+    public function setTel( $tel): void
     {
         $this->tel = $tel;
     }
@@ -132,7 +132,7 @@ class User implements JsonSerializable {
     /**
      * @return mixed|null
      */
-    public function getStatus(): ?mixed
+    public function getStatus()
     {
         return $this->status;
     }
@@ -140,7 +140,7 @@ class User implements JsonSerializable {
     /**
      * @param mixed|null $status
      */
-    public function setStatus(?mixed $status): void
+    public function setStatus( $status): void
     {
         $this->status = $status;
     }
@@ -156,7 +156,7 @@ class User implements JsonSerializable {
     /**
      * @param mixed|null $rights
      */
-    public function setRights(?mixed $rights): void
+    public function setRights( $rights): void
     {
         $this->rights = $rights;
     }
@@ -164,7 +164,7 @@ class User implements JsonSerializable {
     /**
      * @return mixed|null
      */
-    public function getLastSubscription(): ?mixed
+    public function getLastSubscription()
     {
         return $this->lastSubscription;
     }
@@ -172,7 +172,7 @@ class User implements JsonSerializable {
     /**
      * @param mixed|null $lastSubscription
      */
-    public function setLastSubscription(?mixed $lastSubscription): void
+    public function setLastSubscription( $lastSubscription): void
     {
         $this->lastSubscription = $lastSubscription;
     }
@@ -180,7 +180,7 @@ class User implements JsonSerializable {
     /**
      * @return mixed|null
      */
-    public function getEndSubscription(): ?mixed
+    public function getEndSubscription()
     {
         return $this->endSubscription;
     }
@@ -188,7 +188,7 @@ class User implements JsonSerializable {
     /**
      * @param mixed|null $endSubscription
      */
-    public function setEndSubscription(?mixed $endSubscription): void
+    public function setEndSubscription( $endSubscription): void
     {
         $this->endSubscription = $endSubscription;
     }
@@ -196,7 +196,7 @@ class User implements JsonSerializable {
     /**
      * @return mixed|null
      */
-    public function getLastEdit(): ?mixed
+    public function getLastEdit()
     {
         return $this->lastEdit;
     }
@@ -204,7 +204,7 @@ class User implements JsonSerializable {
     /**
      * @param mixed|null $lastEdit
      */
-    public function setLastEdit(?mixed $lastEdit): void
+    public function setLastEdit( $lastEdit): void
     {
         $this->lastEdit = $lastEdit;
     }
@@ -212,7 +212,7 @@ class User implements JsonSerializable {
     /**
      * @return mixed|null
      */
-    public function getCompanyName(): ?mixed
+    public function getCompanyName()
     {
         return $this->companyName;
     }
@@ -220,7 +220,7 @@ class User implements JsonSerializable {
     /**
      * @param mixed|null $companyName
      */
-    public function setCompanyName(?mixed $companyName): void
+    public function setCompanyName( $companyName): void
     {
         $this->companyName = $companyName;
     }
@@ -228,7 +228,7 @@ class User implements JsonSerializable {
     /**
      * @return mixed|null
      */
-    public function getAddressId(): ?mixed
+    public function getAddressId()
     {
         return $this->addressId;
     }

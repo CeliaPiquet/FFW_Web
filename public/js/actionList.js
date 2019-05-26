@@ -1,6 +1,5 @@
 var isArticleExisting=false;
 
-alert("COUCOU");
 //affichage de la modale en fonction de son idHTML
 function modalDisplay(modalId){
     var container = document.getElementById("alertMessage");
@@ -32,7 +31,7 @@ function checkArticle(){
             nameArticlePlacement.innerHTML = "Aucun article correspondant";
         }
     }
-    var url = "http://localhost:8080/FFW_API/api/articles/getOne.php?a_id="+idArticle;
+    var url = "http://ffwapi.priv/api/articles/getOne.php?a_id="+idArticle;
     request.open('GET',url);
     request.send();
 }
