@@ -1,5 +1,6 @@
 <?php
 require_once "models/Skill.php";
+require_once "models/CompleteSkill.php";
 require_once "models/User.php";
 require_once "framework/CurlManager.php";
 
@@ -87,7 +88,7 @@ class SkillService {
         return null;
     }
 
-    public function getAllByUser($userId):?array {
+    public function getAllByUser($userId,$skStatus=null):?array {
 
         $curl=CurlManager::getManager();
 
@@ -103,19 +104,21 @@ class SkillService {
                     $curlSkills = json_decode($response["result"],true);
                 }
                 else{
-                    array_merge($curlSkills, json_decode($response["result"],true));
+                    $curlSkills=array_merge($curlSkills, json_decode($response["result"],true));
                 }
             }
-
             $offset=sizeof($curlSkills);
             $url="$apiUrl/users/$userId/skills?offset=$offset&limit=20";
             $response= $curl->curlGet($url,array());
         }
+        $filteredSkills=[];
         if(isset($curlSkills) && !empty($curlSkills)){
             foreach($curlSkills as $key=>$skill){
-                $curlSkills[$key] =new Skill($skill);
+                if((isset($skStatus)&&$skill['skStatus']==$skStatus)||!isset($skStatus)){
+                    $filteredSkills[]=new Skill($skill);
+                }
             }
-            return $curlSkills;
+            return $filteredSkills;
         }
 
         return null;
@@ -141,5 +144,45 @@ class SkillService {
         return $response['result'];
 
     }
+
+    public function getAll($skStatus=null):?array {
+
+
+        $curl=CurlManager::getManager();
+
+        $apiUrl = Configuration::get("ffwApiUrl", "/");
+
+        $response=["httpCode"=>0,"result"=>[]];
+        $curlSkills=array();
+        $offset=0;
+        while($response["httpCode"]<400){
+
+
+            if($response["result"]){
+                var_dump($response["result"]);
+                $curlSkills=array_merge($curlSkills, json_decode($response["result"],true));
+            }
+
+            $offset=sizeof($curlSkills);
+            $url="$apiUrl/skills?offset=$offset&limit=20";
+            $response= $curl->curlGet($url,array());
+            echo $offset;
+
+        }
+
+//        var_dump($curlSkills);
+        $filteredSkills=[];
+        if(isset($curlSkills) && !empty($curlSkills)){
+            foreach($curlSkills as $key=>$skill){
+                if((isset($skStatus)&&$skill['skStatus']==$skStatus)||!isset($skStatus)){
+                    $filteredSkills[]=new Skill($skill);
+                }
+            }
+            return $filteredSkills;
+        }
+
+        return null;
+    }
+
 
 }

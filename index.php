@@ -4,8 +4,6 @@
     require_once "framework/Router.php";
 
 
-
-
     //require_once "./views/homeView.php";
 //    header("Location: views/homeView.php");
 

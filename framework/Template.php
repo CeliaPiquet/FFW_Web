@@ -64,9 +64,10 @@ class Template extends View
         }
         $views=$this->getViews();
 
-        $websiteRoot = Configuration::get("websiteRoot", "/");
 
-        $views['websiteRoot']=$websiteRoot;
+        $views['websiteRoot']=Configuration::get("websiteRoot", "/");
+        $views['ffwApiUrl']=Configuration::get("ffwApiUrl", "/");
+
 
         $filledTemplate = array_merge($views,$templateData);
 

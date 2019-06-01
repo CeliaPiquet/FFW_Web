@@ -26,6 +26,7 @@ class CurlManager
             CURLOPT_TIMEOUT => 4
         );
 
+        var_dump($defaults);
         $ch = curl_init();
         curl_setopt_array($ch, ( $options + $defaults ));
         if( ! $result = curl_exec($ch))

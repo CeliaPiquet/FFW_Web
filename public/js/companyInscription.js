@@ -79,11 +79,9 @@ function getCompanyAddressForm(containerCompanyForm,nbCompanyAddressFormToAdd){
             addEmptyCompanyAddrForm(companyAddressForm, containerCompanyForm,nbCompanyAddressFormToAdd)
         }
     };
-    var url = "http://ffw.priv/account/getCompanyAddressForm";
+    var url = ffwApiUrl+"/account/getCompanyAddressForm";
     request.open('GET', url, false);
     request.send();
-
-
 }
 
 function getSirenList(siren) {
@@ -96,7 +94,7 @@ function getSirenList(siren) {
             changeFilledCompanyAddrForm();
         }
     };
-    var url = "http://ffw.priv/company/listBySiren/" + siren;
+    var url = ffwApiUrl+"/company/listBySiren/" + siren;
     request.open('GET', url,false);
     request.send();
 
@@ -208,7 +206,7 @@ function updateCompanyAPI(company){
         }
     };
 
-    var url = "http://ffw.priv/company/updateOne";
+    var url = ffwApiUrl+"/company/updateOne";
     request.open('PUT', url);
     request.send(JSON.stringify(company));
 
@@ -232,7 +230,7 @@ function createCompanyAPI(company){
     };
 
     console.log(JSON.stringify(company));
-    var url = "http://ffw.priv/company/createOne";
+    var url = ffwApiUrl+"/company/createOne";
     request.open('POST', url);
     request.send(JSON.stringify(company));
 

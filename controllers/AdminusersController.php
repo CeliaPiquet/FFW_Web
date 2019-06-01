@@ -7,7 +7,7 @@ require_once 'services/SkillService.php';
 require_once 'services/AddressService.php';
 require_once 'models/Company.php';
 require_once 'models/User.php';
-require_once 'models/Skill.php';
+require_once 'models/CompleteSkill.php';
 require_once 'models/Address.php';
 
 class AdminusersController extends Controller
@@ -23,24 +23,38 @@ class AdminusersController extends Controller
 
     public function index() {
 
-//        $usersManager = UserService::getInstance();
+        $skillsManager = SkillService::getInstance();
+
+        $arrSkills=$skillsManager->getAll("enabled");
+
+        $arrRights=array(
+            0=>"Deleted",
+            1=>"Just created",
+            2=>"Volunteer",
+            3=>"Adherent",
+            4=>"Company",
+            5=>"Stock, collect and vehicles admin ",
+            6=>"Subscription admin",
+            7=>"Events and articles admin",
+            8=>"Volunteers and employees admin"
+        );
+        $arrSkillsStatus=array(
+            "deleted",
+            "refused",
+            "activated",
+            "pending activate",
+            "pending delete"
+        );
+
+        var_dump($arrSkills);
+
+        $this->addView($this->action,array("arrSkills"=>$arrSkills,"arrRights"=>$arrRights, "arrSkillsStatus"=>$arrSkillsStatus));
+        $this->addView('script',array());
 
 
-
-
-        //List with mail
-        //List skills
-        //
-
-//        $addressManager=AddressService::getInstance();
-//        $address=$addressManager->getOneById($this->user->getAddressId());
-//
-        $this->addView($this->action,array());
-//        $this->addView('script',array("gMapApiKey"=>Configuration::get("gMapApiKey")));
-//
-//
         $this->loadTemplate(parent::getTemplateData(),$this->action);
 
     }
+
 
 }

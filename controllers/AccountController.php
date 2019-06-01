@@ -28,8 +28,12 @@ class AccountController extends Controller
         $addressManager=AddressService::getInstance();
         $address=$addressManager->getOneById($this->user->getAddressId());
 
+
+
         $this->addView($this->action,array('user'=>$this->user,'address'=>$address));
         $this->addView('script',array("gMapApiKey"=>Configuration::get("gMapApiKey")));
+
+//        var_dump($this->user);
 
 
         $this->loadTemplate(parent::getTemplateData(),$this->action);
@@ -74,16 +78,20 @@ class AccountController extends Controller
     private function volunteerEmployee(){
         $skillManager=SkillService::getInstance();
 
-        $skills=$skillManager->getAllByUser($this->user->getUid());
 
-        var_dump($skills);
-        $skills=array_values($skills);
+        var_dump($this->user);
+        $arrSkills=$skillManager->getAll("enabled");
+        $arrUserSkills=$skillManager->getAllByUser($this->user->getUid(),"activated");
 
+        var_dump($arrUserSkills);
 
-        $this->addView($this->action,array('skills'=>json_encode($skills),'skillsCount'=>sizeof($skills),"userId"=>$this->user->getUid()));
+        $lightUser=array("uid"=>$this->user->getUid(),"email"=>$this->user->getEmail());
+
+        $this->addView($this->action,array('userSkills'=>json_encode($arrUserSkills),'arrSkills'=>$arrSkills,"user"=>json_encode($lightUser)));
         $this->addView('script',array());
+        $this->addView('head',array());
 
-        $this->loadTemplate(parent::getTemplateData(),$this->action);
+        $this->loadTemplate(parent::getTemplateData(),'volunteerEmployee');
     }
 //    public function addCompanies(){
 //

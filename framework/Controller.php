@@ -90,7 +90,7 @@ abstract class Controller {
 
             $user->getRights();
 
-            $isAdmin=UserService::isRightSet($user->getRights(),4);
+            $isAdmin=UserService::isRightSet($user->getRights(),5);
             var_dump($isAdmin);
             var_dump($user->getRights());
 

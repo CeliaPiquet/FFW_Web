@@ -1,5 +1,6 @@
 <?php $this->setName("script");?>
 
-<script type="text/javascript" src="../public/js/localList.js" onload="getFullLocals()"> </script>
-<script type="text/javascript" src="../public/js/productList.js"> </script>
-<script type="text/javascript" src="../public/js/actionList.js"></script>
+<script type="text/javascript" src="../public/js/adminLocals.js" > </script>
+<script type="text/javascript" src="<?=$websiteRoot?>/public/js/addressAutocomplete.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<?=$gMapApiKey?>&libraries=places&callback=initAutocomplete" async defer></script>
+

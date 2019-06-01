@@ -13,7 +13,7 @@ class Address implements JsonSerializable {
 
     public function __construct(array $fields) {
         $this->adid = isset($fields['adid']) ? $fields['adid'] : NULL;
-        $this->houseNumber = $fields['houseNumber'];
+        $this->houseNumber = isset($fields['houseNumber']) ? $fields['houseNumber'] : NULL;
         $this->streetAddress = isset($fields['streetAddress'])?$fields['streetAddress']:NULL;
         $this->complement = isset($fields['complement'])?$fields['complement']:NULL;
         $this->cityName = isset($fields['cityName'])?$fields['cityName']:NULL;

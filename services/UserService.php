@@ -16,12 +16,13 @@ class UserService {
         return self::$instance;
     }
 
-    public function authentification(User $user):?User {
+    public function authentication(User $user):?User {
 
         $curl=CurlManager::getManager();
 
         $apiUrl = Configuration::get("ffwApiUrl", "/");
 
+        var_dump($user);
         $userGet=[
             "email"=>$user->getEmail(),
             "password"=>$user->getPassword(),
@@ -51,9 +52,10 @@ class UserService {
         $apiUrl = Configuration::get("ffwApiUrl", "/");
 
         $url = "$apiUrl/users";
-        $user->setRights(1);
+        $user->setRights(2);
         $jsonUser=json_encode($user);
 
+        var_dump($jsonUser);
         $response=$curl->curlPost($url,$jsonUser, array());
 
         var_dump($response);

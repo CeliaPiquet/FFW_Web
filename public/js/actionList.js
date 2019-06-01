@@ -31,7 +31,7 @@ function checkArticle(){
             nameArticlePlacement.innerHTML = "Aucun article correspondant";
         }
     }
-    var url = "http://ffwapi.priv/api/articles/getOne.php?a_id="+idArticle;
+    var url = ffwApiUrl+"/api/articles/getOne.php?a_id="+idArticle;
     request.open('GET',url);
     request.send();
 }
@@ -47,7 +47,7 @@ function changeRoom(){
             document.location.href = document.location.href + "?success=1";
         }
     }
-    var url = "http://ffwapi.priv/api/products/transferRoom.php?room_id="+idRoom;
+    var url = apiUrl+"/api/products/transferRoom.php?room_id="+idRoom;
     request.open('PUT',url);
     request.send(JSON.stringify(selectedProducts));
 }
@@ -70,7 +70,7 @@ function addProduct(){
                 document.location.href = document.location.href + "?success=1";
             } 
         }
-        var url = "http://ffwapi.priv/api/products/create.php?nb_products="+nbProducts;
+        var url = ffwApiUrl+"/api/products/create.php?nb_products="+nbProducts;
         request.open('POST',url);
         request.send(jsonProduct);
     }
@@ -84,7 +84,7 @@ function removeProduct(){
             document.location.href = document.location.href + "?success=1";
         }
     }
-    var url = "http://ffwapi.priv/FFW_API/api/products/remove.php";
+    var url = ffwApiUrl+"/FFW_API/api/products/remove.php";
     request.open('PUT',url);
     request.send(JSON.stringify(selectedProducts));
 }
