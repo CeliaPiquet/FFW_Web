@@ -18,6 +18,23 @@ function fillElementAttributesFromObject(attribute, selector, element, object){
     }
 }
 
+function existObjInObjByKeyValue(searchedKey,searchedValue,object,deep=0){
+
+    for(let key in object){
+
+        if(object[searchedKey] != undefined && object[searchedKey]==searchedValue ){
+            return true;
+        }
+        else if(object[key]!=null && object[key]!=undefined && typeof object[key] === 'object'){
+            deep++;
+            if(existObjInObjByKeyValue(searchedKey,value,object[key]),deep){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 function modalDisplay(modalId){
 
     if(document.getElementById(modalId)){
@@ -25,6 +42,12 @@ function modalDisplay(modalId){
             backdrop:false
         })
     }
+}
+
+function collapseDisplay(element){
+
+    console.log(element);
+    $(element).collapse('toggle');
 }
 
 
@@ -35,8 +58,51 @@ function ucFirst(string){
 
 function getFirstParent(element,attribute,value){
 
-    while(element[attribute]!=value && element.tagName!="body"){
+    while(element[attribute]!=value && element.tagName!="BODY"){
         element=element.parentElement;
     }
     return element;
+}
+
+
+function loadExternalDOMElement(arrFuncDom){
+
+    for(let i=0 ; i<arrFuncDom.length ; i++){
+
+        getDOMApi(arrFuncDom[i].url,arrFuncDom[i].func);
+
+    }
+}
+
+function cvtObjectKey(cvtObj,objToCvt){
+
+
+    for(let cvtKey in cvtObj){
+        for(let objKey in objToCvt){
+
+            if(cvtObj[cvtKey]==objKey){
+                objToCvt[cvtKey]=objToCvt[objKey];
+                delete objToCvt[objKey];
+            }
+        }
+    }
+    return objToCvt;
+}
+
+function getDOMApi(url,func){
+
+    let request=new XMLHttpRequest();
+
+    request.onreadystatechange=function(){
+
+        if(request.readyState==4){
+            if(request.status==200){
+                func(request.responseText);
+            }
+        }
+    };
+
+    request.open("GET",url);
+    request.send();
+
 }

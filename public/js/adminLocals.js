@@ -1,6 +1,54 @@
 var userFindFlag=false;
-var arrLocals;
+var arrLocals=[];
+var arrToUpdate=[];
 var body;
+
+var emptyLocalsRow={
+    "localRow":document.createElement('tr'),
+    "collapsedAddressRow":document.createElement('tr'),
+    "collapsedRoomRow":document.createElement('tr')
+};
+var emptyRoomRow;
+var confirmButton=new DOMParser().parseFromString('<td>\n' +
+    '    <button class="btn" id="confirmButton"><i  class="far fa-check-circle h1 mx-auto my-auto"></i></button>\n' +
+    '</td>',"text/html").getElementById("confirmButton");
+
+
+// document.getElementById("addLocal").addEventListener("click",addRow,false);
+
+loadExternalDOMElement([
+    {url:websiteRoot+"/local/collapsedAddressRow",func:getCollapsedAddressRow},
+    {url:websiteRoot+"/local/collapsedRoomRow",func:getCollapsedRoomRow},
+    {url:websiteRoot+"/local/localRow",func:getEmptyLocalRow},
+    {url:websiteRoot+"/local/roomRow",func:getEmptyRoomRow}
+]);
+
+function getEmptyLocalRow(domText){
+    emptyLocalsRow.localRow.class="align-items-center";
+    emptyLocalsRow.localRow.id="localRow";
+    emptyLocalsRow.localRow.innerHTML = domText;
+}
+
+function getCollapsedAddressRow(domText){
+    emptyLocalsRow.collapsedAddressRow.class="align-items-center";
+    emptyLocalsRow.collapsedAddressRow.id="collapsedAddressRow";
+    emptyLocalsRow.collapsedAddressRow.innerHTML =domText;
+}
+
+function getCollapsedRoomRow(domText){
+    emptyLocalsRow.collapsedRoomRow.class="align-items-center";
+    emptyLocalsRow.collapsedRoomRow.id="collapsedRoomRow";
+    emptyLocalsRow.collapsedRoomRow.innerHTML =domText;
+}
+
+
+function getEmptyRoomRow(domText){
+    emptyRoomRow=document.createElement('tr');
+    emptyRoomRow.class="align-items-center";
+    emptyRoomRow.id="roomRow";
+    emptyRoomRow.innerHTML =domText;
+}
+
 
 
 function findLocalsByFilter(){
@@ -37,7 +85,7 @@ function searchLocalsAPI(offset=0, limit=20, searchLocalsAPI){
                 }
                 else{
                     arrLocals=apiLocals;
-                    createLocalRow();
+                    updateLocalRows();
                 }
 
             }
@@ -53,16 +101,121 @@ function searchLocalsAPI(offset=0, limit=20, searchLocalsAPI){
         }
     }
     url+=query;
+    console.log(url);
     request.open("GET",url);
     request.send(JSON.stringify(body),false);
 
 }
 
 
-function createLocalRow() {
+function btnEventToUpdate(event){
+    element=event.target;
+    setObjToUpdate(element);
+
+}
+function inputEventToUpdate(event){
+    element=event.target;
+    setObjToUpdate(element);
+}
+
+
+function setObjToUpdate(element){
+
+    arrKey=['rid','aid','loid'];
+    if(element.parentObject[element.id]!=element.value){
+
+        for(let i= 0; i<arrKey.length;i++){
+            if(element.parentObject[arrKey[i]] != undefined){
+                if(!existObjInObjByKeyValue(arrKey[i],element.parentObject[arrKey[i]],arrToUpdate)){
+                    if(arrKey[i]=='rid'){
+                        arrToUpdate.push(convertRoomObjectToAPI(element.parentObject));
+                    }
+                    else if(arrKey[i]=='aid'){
+                        arrToUpdate.push(convertAddressObjectToAPI(element.parentObject));
+                    }
+                    else{
+                        arrToUpdate.push(element.parentObject);
+
+                    }
+                }
+            }
+        }
+    }
+    console.log(arrToUpdate);
+}
+
+function prepareUpdatableElement(parentObject,element){
+
+    toUpdateElements=element.querySelectorAll(".to-update");
+
+    for(let i=0; i<toUpdateElements.length ;i++){
+
+        toUpdateElements[i].parentObject=parentObject;
+
+        if(toUpdateElements[i].tagName=='BUTTON'){
+            console.log(toUpdateElements[i]);
+            toUpdateElements[i].addEventListener('click',btnEventToUpdate, false);
+        }
+        else{
+            toUpdateElements[i].addEventListener('keyup',inputEventToUpdate, false);
+        }
+
+    }
+}
+// function updateLocalRows() {
+//
+//     console.log(arrLocals);
+//
+//     let localRowsContainer = document.getElementById("localRowsContainer");
+//
+//     localRowsContainer.innerHTML = "";
+//
+//     for (let i = 0; i < arrLocals.length; i++) {
+//
+//         newLocalRow = emptyLocalsRow.localRow.cloneNode(true);
+//         newCollapsedAddressRow = emptyLocalsRow.collapsedAddressRow.cloneNode(true);
+//         newCollapsedRoomRow = emptyLocalsRow.collapsedRoomRow.cloneNode(true);
+//
+//         let roomRowsContainer = newCollapsedRoomRow.querySelector("#roomsContainer");
+//
+//         if(arrLocals[i].rooms){
+//             for(let j = 0 ; j<arrLocals[i].rooms.length ; j++){
+//                 newRoomRow = emptyRoomRow.cloneNode(true);
+//                 convertRoomObjectToDOM(arrLocals[i].rooms[j]);
+//                 fillElementAttributesFromObject("innerHTML", "#", newRoomRow, arrLocals[i].rooms[j]);
+//                 fillElementAttributesFromObject("value", "#", newRoomRow, arrLocals[i].rooms[j]);
+//                 if(arrLocals[i].rooms[j].rid==null){
+//                     newConfirmButton=confirmButton.cloneNode(true);
+//                     newRoomRow.querySelector("#confirmButtonContainer").append(newConfirmButton);
+//                 }
+//                 roomRowsContainer.append(newRoomRow);
+//             }
+//         }
+//
+//         if(arrLocals[i].loid==null){
+//             newConfirmButton=confirmButton.cloneNode(true);
+//             newLocalRow.querySelector("#confirmButtonContainer").append(newConfirmButton);
+//         }
+//         roomRowsContainer.append(newLocalRow);
+//
+//         convertAddressObjectToDOM(arrLocals[i].address);
+//         fillElementAttributesFromObject("value", "#", newCollapsedAddressRow, arrLocals[i].address);
+//
+//         convertLocalObject(arrLocals[i]);
+//         fillElementAttributesFromObject("value", "#", newLocalRow, arrLocals[i]);
+//         fillElementAttributesFromObject("innerHTML", "#", newLocalRow, arrLocals[i]);
+//
+//         localRowsContainer.append(newLocalRow);
+//         localRowsContainer.append(newCollapsedAddressRow);
+//         localRowsContainer.append(newCollapsedRoomRow);
+//     }
+// }
+
+
+
+function updateLocalRows() {
 
     console.log(arrLocals);
-    convertLocalObject(arrLocals);
 
     let localRowsContainer = document.getElementById("localRowsContainer");
 
@@ -70,42 +223,228 @@ function createLocalRow() {
 
     for (let i = 0; i < arrLocals.length; i++) {
 
-        newLocalRow = emptyLocalsRow.localRow.cloneNode(true);
-        newCollapsedAddressRow = emptyLocalsRow.collapsedAddressRow.cloneNode(true);
-        newCollapsedRoomRow = emptyLocalsRow.collapsedRoomRow.cloneNode(true);
-
-        fillElementAttributesFromObject("innerHTML", "#", newCollapsedAddressRow, arrLocals[i]);
-
-        let roomRowsContainer = newCollapsedRoomRow.querySelector("#roomsContainer");
-
-        for(let j = 0 ; j<arrLocals[i].rooms.length ; j++){
-            newRoomRow = emptyRoomRow.cloneNode(true);
-            fillElementAttributesFromObject("innerHTML", "#", newRoomRow, arrLocals[i].rooms[j]);
-            fillElementAttributesFromObject("value", "#", newRoomRow, arrLocals[i].rooms[j]);
-            roomRowsContainer.append(newRoomRow);
-        }
-
-        localRowsContainer.append(newLocalRow);
-        localRowsContainer.append(newCollapsedAddressRow);
-        localRowsContainer.append(newCollapsedRoomRow);
+        createLocalRow(localRowsContainer,arrLocals[i]);
     }
 }
 
-function convertLocalObject(localsArr){
 
-    for(let i = 0 ; i<localsArr.length ; i++){
+function createLocalRow(container,local){
 
-        let rooms = localsArr[i].rooms;
-        for(let j=0 ; j < localsArr[i].rooms.length ; j++){
+    newLocalRow = emptyLocalsRow.localRow.cloneNode(true);
+    newCollapsedAddressRow = emptyLocalsRow.collapsedAddressRow.cloneNode(true);
+    newCollapsedRoomRow = emptyLocalsRow.collapsedRoomRow.cloneNode(true);
+    let roomRowsContainer = newCollapsedRoomRow.querySelector("#roomsContainer");
 
+    prepareUpdatableElement(local,newLocalRow);
+    prepareUpdatableElement(local.address,newCollapsedAddressRow);
+    if(local.loid==null){
+        newConfirmButton=confirmButton.cloneNode(true);
+        newLocalRow.querySelector("#confirmButtonContainer").append(newConfirmButton);
+        newConfirmButton.addEventListener('click',confirmRow,false);
+    }
+    else{
+        newLocalRow.querySelector("#addRoom").addEventListener('click',addRoom,false);
+    }
+    newLocalRow.querySelector("#collapseBtnAddress").addEventListener('click',collapseElement,false);
+    newLocalRow.querySelector("#collapseBtnRoom").addEventListener('click',collapseElement,false);
 
+    if(local.rooms){
+        for(let i = 0 ; i<local.rooms.length ; i++){
+            createRoomRow(roomRowsContainer,local.rooms[i])
         }
+    }
 
+    convertAddressObjectToDOM(local.address);
+    fillElementAttributesFromObject("value", "#", newCollapsedAddressRow, local.address);
 
+    convertLocalObject(local);
+    fillElementAttributesFromObject("value", "#", newLocalRow, local);
+    fillElementAttributesFromObject("innerHTML", "#", newLocalRow, local);
+
+    container.append(newLocalRow);
+    container.append(newCollapsedAddressRow);
+    container.append(newCollapsedRoomRow);
+
+    newLocalRow.local=local;
+    newLocalRow.rooms=local.rooms;
+    newLocalRow.roomRowsContainer=roomRowsContainer;
+    newLocalRow.collapseAddress=newCollapsedAddressRow.querySelector("#collapseAddress");
+    newLocalRow.collapseRoomRow=newCollapsedRoomRow.querySelector("#collapseRooms");
+}
+
+function collapseElement(event){
+
+    element=event.target;
+    parent=getFirstParent(element,"id","localRow");
+
+    if(element.id=="collapseBtnAddress"){
+        collapseDisplay(parent.collapseAddress);
+    }
+    else if(element.id=="collapseBtnRoom"){
+        collapseDisplay(parent.collapseRoomRow);
     }
 }
 
-function convertAddressObject(addressObj){
+function createRoomRow(container,room){
+
+    newRoomRow = emptyRoomRow.cloneNode(true);
+
+    prepareUpdatableElement(room,newRoomRow);
+    convertRoomObjectToDOM(room);
+    fillElementAttributesFromObject("innerHTML", "#", newRoomRow, room);
+    convertRoomObjectToAPI(room);
+    fillElementAttributesFromObject("value", "#", newRoomRow, room);
+
+    if(room.rid==null){
+        newConfirmButton=confirmButton.cloneNode(true);
+        newRoomRow.querySelector("#confirmButtonContainer").append(newConfirmButton);
+        newConfirmButton.addEventListener('click',confirmRow,false);
+        newRoomRow.room=room;
+    }
+
+    container.append(newRoomRow);
+}
+
+function confirmRow(event){
+
+    element=event.target;
+    let tmpElement;
+    console.log(element);
+    if((tmpElement=getFirstParent(element,"id","localRow"))==document.getElementsByTagName('body')[0]){
+
+        if((tmpElement=getFirstParent(element,"id","roomRow"))!=document.getElementsByTagName('body')[0]){
+
+        }
+    }
+    console.log(tmpElement);
+}
+
+//
+// function skillsToAPI(url,element,method){
+//
+//     let request=new XMLHttpRequest();
+//
+//     let url=ffwApiUrl+"/skills/";
+//
+//     request.onreadystatechange=function(){
+//
+//         if(request.readyState==4){
+//             console.log(skills.length);
+//             console.log(counter);
+//             if(method=="POST" && request.status==200){
+//                 arrSkills[counter]=JSON.parse(request.responseText);
+//             }
+//             counter++;
+//             if(counter==skills.length){
+//                 changeSelectSkills();
+//                 return counter;
+//             }
+//             skillsToAPI(skills,counter,skillsToAPI);
+//         }
+//     };
+//
+//     if(skills[counter].skid!=null){
+//         url=url+skills[counter].skid;
+//         method="PUT";
+//     }
+//     else{
+//         method="POST";
+//     }
+//     request.open(method,url);
+//
+//     request.send(JSON.stringify(skills[counter]));
+//
+//
+// }
+function addLocal(){
+
+    let localRowsContainer = document.getElementById("localRowsContainer");
+
+    for(let i=0;i<arrLocals.length;i++){
+        if(arrLocals[i].loid==null){
+            return null;
+        }
+    }
+
+    let newLocal=getEmptyLocal();
+    newLocal.address=getEmptyAddress();
+    arrLocals.push(newLocal);
+    createLocalRow(localRowsContainer,newLocal);
+    console.log(arrLocals);
+}
+
+function addRoom(event){
+
+    let element=event.target;
+
+    element=getFirstParent(element,"id","localRow");
+    for(let i=0;i<element.rooms.length;i++){
+        if(element.rooms[i].rid==null){
+            return null;
+        };
+    }
+    let newRoom=getEmptyRoom();
+
+    console.log(element.rooms);
+    element.rooms.push(newRoom);
+    createRoomRow(element.roomRowsContainer,newRoom);
+}
+
+function convertLocalObject(local){
+
+    let quantity=0;
+    if(local.rooms){
+        for(let i=0 ; i<local.rooms.length;i++){
+            if(local.rooms[i]){
+                console.log(local.rooms[i].totalQuantity);
+                quantity+= parseInt(local.rooms[i].totalQuantity);
+            }
+        }
+    }
+
+    console.log(quantity);
+    local["totalQuantity"]=""+quantity+"";
+}
+function convertRoomObjectToDOM(room){
+
+    let cvtArr=[
+        "isUnavailable",
+        "isStockroom"
+    ];
+
+    for(let i=0;i<cvtArr.length;i++){
+
+        if(room[cvtArr[i]]==1){
+            room[cvtArr[i]]="YES";
+        }
+        else{
+            room[cvtArr[i]]="NO";
+        }
+    }
+    room["totalQuantity"]=room.products&&room.products.length>0?room.products.length:"0";
+
+}
+
+function convertRoomObjectToAPI(room){
+    let cvtArr=[
+        "isUnavailable",
+        "isStockroom"
+    ];
+
+    for(let i=0;i<cvtArr.length;i++){
+
+        if(room[cvtArr[i]]=="YES"){
+            room[cvtArr[i]]=1;
+        }
+        else{
+            room[cvtArr[i]]=0;
+        }
+    }
+    delete room["totalQuantity"];
+}
+
+
+function convertAddressObjectToDOM(addressObj){
 
     convertObject={
         street_number: "houseNumber",
@@ -115,18 +454,51 @@ function convertAddressObject(addressObj){
         country: "country"
     }
 
-    for(let addKey in addressObj){
+    cvtObjectKey(convertObject,addressObj);
 
-        for(let cvtKey in convertObject){
+}
 
-            if(cvtKey==addKey){
-                addressObj.delte()
-            }
+function convertAddressObjectToAPI(addressObj){
 
-        }
+    convertObject={
+        houseNumber: "street_number",
+        streetAddress: "route",
+        cityName: "locality",
+        cityCode: "postal_code",
+        country: "country"
     }
 
+    cvtObjectKey(convertObject,addressObj);
 
+}
+
+function getEmptyLocal(){
+    return {loid: null,
+        name: null,
+        adid: null,
+        rooms: [],
+        address: null};
+}
+
+function getEmptyAddress(){
+    return{adid: null,
+        houseNumber: null,
+        streetAddress: null,
+        complement: null,
+        cityName: null,
+        cityCode: null,
+        country: null,
+        latitude: null,
+        longitude:null};
+}
+
+function getEmptyRoom(){
+    return {rid: null,
+        name: null,
+        isUnavailable: null,
+        isStockroom: null,
+        loid: null,
+        products:null};
 }
 // }
 //
@@ -134,7 +506,7 @@ function convertAddressObject(addressObj){
 //
 //     let element=event.target;
 //
-//     while(element.id!="userRow" && element.tagName!="body"){
+//     while(element.id!=userRow" && element.tagName!="body"){
 //         element=element.parentElement;
 //     }
 //     let user=element.user;
@@ -301,117 +673,3 @@ function changeQuantityOrder(){
 //
 // }
 
-
-
-var emptyLocalsRow={
-    "localRow":document.createElement('tr'),
-    "collapsedAddressRow":document.createElement('tr'),
-    "collapsedRoomRow":document.createElement('tr')
-};
-
-
-emptyLocalsRow.localRow.class="align-items-center";
-emptyLocalsRow.localRow.id="collapsedRoomRow";
-emptyLocalsRow.localRow.innerHTML =
-    '<td>\n' +
-    '    <input type="text" class="form-control"  id="nameInput" >\n' +
-    '</td>\n' +
-    '<td>\n' +
-    '    <input type="text" class="form-control" id="cityNameInput" >\n' +
-    '</td>\n' +
-    '<td>\n' +
-    '    <button class="btn col-md-2 mx-auto" type="button" data-toggle="collapse" data-target="#collapseAddress" aria-expanded="false" aria-controls="collapseAddress">Address</button>\n' +
-    '</td>\n' +
-    '<td>\n' +
-    '    <button class="btn col-md-2 mx-auto" type="button" data-toggle="collapse" data-target="#collapseRooms" aria-expanded="false" aria-controls="collapseExample">Rooms</button>\n' +
-    '</td>\n' +
-    '<td>\n' +
-    '    <div class="alert alert-dark">Total quantity : <span id="totalQuantity"></span></div>\n' +
-    '</td>\n';
-
-emptyLocalsRow.collapsedAddressRow.class="align-items-center";
-emptyLocalsRow.collapsedAddressRow.id="collapsedAddressRow";
-emptyLocalsRow.collapsedAddressRow.innerHTML =
-    '<td colspan="5">\n' +
-    '    <div class="collapse my-auto" id="collapseAddress">\n' +
-    '        <div class="col-md-12 mx-auto py-3 visible" id="addressForm">\n' +
-    '            <div class="form-group row col-md-11 mx-auto">\n' +
-    '                <label for="autocomplete">Address</label>\n' +
-    '                <input type="text" class="form-control" name="autocomplete" " >\n' +
-    '            </div>\n' +
-    '            <div class="form-group row col-md-11 mx-auto">\n' +
-    '                <div class="col-md-3 mx-auto">\n' +
-    '                    <label for="street_number">Numéro</label>\n' +
-    '                    <input type="text" class="form-control mx-auto" id="street_number" name="houseNumber" placeholder="Numéro" required disabled>\n' +
-    '                </div>\n' +
-    '                <div class="col-md-9 mx-auto">\n' +
-    '                    <label for="route" >Addresse</label>\n' +
-    '                    <input type="text" class="form-control mx-auto" id="route" name="streetAddress" placeholder="Adresse" required disabled>\n' +
-    '                </div>\n' +
-    '            </div>\n' +
-    '            <div class="form-group row col-md-11 mx-auto">\n' +
-    '                <div class="form-group col-md-7">\n' +
-    '                    <label for="complement">Complement</label>\n' +
-    '                    <input type="text" id="complement" class="form-control mx-auto" name="complement" placeholder="Complement" required>\n' +
-    '                </div>\n' +
-    '            </div>\n' +
-    '            <div class="form-group row col-md-11  mx-auto">\n' +
-    '                <div class="form-group col-md-4">\n' +
-    '                    <label for="locality" >Ville</label>\n' +
-    '                    <input type="text" class="form-control mx-auto" id="locality" name="cityName" required disabled>\n' +
-    '                </div>\n' +
-    '                <div class="form-group col-md-3">\n' +
-    '                    <label for="postal_code" >Code postal</label>\n' +
-    '                    <input type="text" class="form-control mx-auto" name="cityCode" id="postal_code" required disabled>\n' +
-    '                </div>\n' +
-    '                <div class="form-group col-md-3 ">\n' +
-    '                    <label for="country">Pays</label>\n' +
-    '                    <select id="country" name="country" class="form-control mx-auto" required disabled>\n' +
-    '                        <option value="france" selected>France</option>\n' +
-    '                        <option value="italie">Italie</option>\n' +
-    '                        <option value="portugal">Portugal</option>\n' +
-    '                        <option value="irlande">Irlande</option>\n' +
-    '                    </select>\n' +
-    '                </div>\n' +
-    '            </div>\n' +
-    '        </div>\n' +
-    '    </div>\n' +
-    '</td>\n';
-
-emptyLocalsRow.collapsedRoomRow.class="align-items-center";
-emptyLocalsRow.collapsedRoomRow.id="collapsedRoomRow";
-emptyLocalsRow.collapsedRoomRow.innerHTML =
-    '<td colspan="5">\n' +
-    '    <div class="collapse my-auto" id="collapseRooms">\n' +
-    '        <table class="table table-striped table-hover " id="roomsTable">\n' +
-    '            <thead>\n' +
-    '            <tr>\n' +
-    '                <th> Name </th>\n' +
-    '                <th> Avalability </th>\n' +
-    '                <th> Is stockroom </th>\n' +
-    '                <th> Total quantity </th>\n' +
-    '            </tr>\n' +
-    '            </thead>\n' +
-    '            <tbody id="roomsContainer">\n' +
-    '            \n' +
-    '            </tbody>\n' +
-    '        </table>\n' +
-    '    </div>\n' +
-    '</td>';
-
-var emptyRoomRow=document.createElement('tr');
-emptyRoomRow.class="align-items-center";
-emptyRoomRow.id="roomRow";
-emptyRoomRow.innerHTML =
-    '<td>\n' +
-    '    <input type="text" class="form-control"  id="name" placeholder="Name">\n' +
-    '</td>\n' +
-    '<td>\n' +
-    '    <button type="button" class="list-group-item list-group-item-action text-center"  id="isUnavailable">Yes</button>\n' +
-    '</td>\n' +
-    '<td>\n' +
-    '    <button type="button" class="list-group-item list-group-item-action text-center"  id="isStockroom">Yes</button>\n' +
-    '</td>\n' +
-    '<td>\n' +
-    '    <div class="alert alert-dark">Total quantity : <span id="totalQuantity"></span></div>\n' +
-    '</td>';

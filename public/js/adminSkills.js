@@ -25,11 +25,7 @@ function openSkillsModal(){
     modalDisplay('skillsModal');
 }
 
-function prepareSkillModal(){
 
-    let modal=document.getElementById("skillsModal");
-
-}
 
 function changeSelectSkills(){
 

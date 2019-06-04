@@ -27,6 +27,7 @@ emptyUserRow.innerHTML ='<td id="userMail">\n' +
     '</td>\n' +
     '\n';
 
+
 var emptyCompanyRow=document.createElement('tr');
 emptyCompanyRow.class="align-items-center";
 emptyCompanyRow.id="companyRow";
