@@ -48,7 +48,7 @@ class AddressService {
         $apiUrl = Configuration::get("ffwApiUrl", "/");
 
 
-        $url = "$apiUrl/addresses/".$address->getAdid();
+        $url = "$apiUrl/addresses";
         $jsonAddress=json_encode($address);
 
         $response=$curl->curlPut($url,$jsonAddress, array());

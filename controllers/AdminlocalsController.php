@@ -6,7 +6,7 @@ require_once 'services/LocalService.php';
 require_once 'services/AddressService.php';
 
 
-class LocalController extends Controller
+class AdminlocalsController extends Controller
 {
 
     public function __construct(){
@@ -46,8 +46,8 @@ class LocalController extends Controller
 //
 //        $arrLocals=$localManager->getAllLocal();
 //
-//        foreach ($arrLocals as $key => $local){
-//            $address=$addressManager->getOneById($local->getAdid());
+//        foreach ($arrLocals as $key => $adminlocals){
+//            $address=$addressManager->getOneById($adminlocals->getAdid());
 //            $arrLocals[$key]->setAddress($address);
 //        }
 //        $this->addView($this->getAction(),array("arrLocals"=>$arrLocals));

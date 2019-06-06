@@ -27,16 +27,16 @@ function initAutocomplete(){
 function fillInAddress() {
 
     element=this.input;
-    console.log(element);
+    console.log(componentForm);
     // Get the place details from the autocomplete object.
     var place = this.getPlace();
 
+    element=getFirstParent(element,"#","addressForm");
     for (var component in componentForm) {
-        document.getElementById(component).value = '';
-        document.getElementById(component).disabled = false;
-    }
-    while(element.id!="addressForm"&&element!=undefined){
-        element=element.parentNode;
+        console.log(componentForm[component]);
+        element.querySelector("#"+component).value = '';
+        element.querySelector("#"+component).disabled=false;
+        console.log(element.querySelector("#"+component));
     }
 
     // Get each component of the address from the place details,

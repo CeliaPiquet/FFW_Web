@@ -24,7 +24,7 @@
 
 </div>
 <div class="container">
-        <p> <?php echo _('Pick a local in order to see the stocks and a room to edit its content') ?> </p>
+        <p> <?php echo _('Pick a adminlocals in order to see the stocks and a room to edit its content') ?> </p>
         <div class="row" id="actionList" style="display: none">
             <div class="col-md-3">
                 <h5><?php echo _('Actions:') ?> </h5>

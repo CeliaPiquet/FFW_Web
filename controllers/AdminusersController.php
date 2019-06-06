@@ -46,7 +46,6 @@ class AdminusersController extends Controller
             "pending delete"
         );
 
-        var_dump($arrSkills);
 
         $this->addView($this->action,array("arrSkills"=>$arrSkills,"arrRights"=>$arrRights, "arrSkillsStatus"=>$arrSkillsStatus));
         $this->addView('script',array());

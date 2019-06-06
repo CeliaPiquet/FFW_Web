@@ -94,7 +94,7 @@ function changeSkillsList(status){
             let skillRowStatus=newSkillRow.querySelector("#skStatus");
             let skillName=newSkillRow.querySelector("#name");
 
-            fillElementAttributesFromObject("value","#",newSkillRow,arrSkills[i]);
+            matchDOMAndObject("value","#",newSkillRow,arrSkills[i]);
             if(arrSkills[i].skStatus=="enabled"){
                 skillRowStatus.innerHTML="Disable";
                 skillRowStatus.value="disabled";

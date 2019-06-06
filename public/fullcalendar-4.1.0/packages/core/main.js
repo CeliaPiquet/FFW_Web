@@ -539,7 +539,7 @@ Docs & License: https://fullcalendar.io/
     function firstWeekOffset(year, dow, doy) {
         // first-week day -- which january is always in the first week (4 for iso, 1 for other)
         var fwd = 7 + dow - doy;
-        // first-week day local weekday -- which local weekday is fwd
+        // first-week day adminlocals weekday -- which adminlocals weekday is fwd
         var fwdlw = (7 + arrayToUtcDate([year, 0, fwd]).getUTCDay() - dow) % 7;
         return -fwdlw + fwd - 1;
     }
@@ -4859,7 +4859,7 @@ Docs & License: https://fullcalendar.io/
             }
             else {
                 // if we can't compute the current date val for a timezone,
-                // better to give the current local date vals than UTC
+                // better to give the current adminlocals date vals than UTC
                 return arrayToUtcDate(dateToLocalArray(new Date()));
             }
         };

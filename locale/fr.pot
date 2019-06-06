@@ -342,7 +342,7 @@ msgid "House number and street name"
 msgstr ""
 
 #: ../view/productStockList.php:35
-msgid "Pick a local in order to see the stocks and a room to edit its content"
+msgid "Pick a adminlocals in order to see the stocks and a room to edit its content"
 msgstr ""
 
 #: ../view/productStockList.php:38

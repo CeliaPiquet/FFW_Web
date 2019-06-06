@@ -1,5 +1,5 @@
 var userFindFlag=false;
-var arrLocals;
+var arrUsers;
 var body;
 
 var emptyUserRow=document.createElement('tr');
@@ -87,7 +87,7 @@ function searchUserAPI(offset=0,limit=20,searchUserAPI){
                     return apiUsers;
                 }
                 else{
-                    arrLocals=apiUsers;
+                    arrUsers=apiUsers;
                     createUserRow();
                 }
 
@@ -115,44 +115,45 @@ function searchUserAPI(offset=0,limit=20,searchUserAPI){
 
 function createUserRow(){
 
-    console.log(arrLocals);
+    console.log(arrUsers);
     let rightsSelect=document.getElementById("rightsSelect");
 
     let userRowContainer=document.getElementById("userRowsContainer");
 
     userRowContainer.innerHTML="";
 
-    for(let i=0 ; i< arrLocals.length ; i++){
+    for(let i=0 ; i< arrUsers.length ; i++){
 
-        newLocalRow=emptyUserRow.cloneNode(true);
-        newLocalRow.user=arrLocals[i];
-        arrLocals[i].rights=!arrLocals[i].rights?2:arrLocals[i].rights;
+        newUserRow=emptyUserRow.cloneNode(true);
+        newUserRow.user=arrUsers[i];
+        arrUsers[i].rights=!arrUsers[i].rights?2:arrUsers[i].rights;
 
 
-        newLocalRow.querySelector("td[id='userMail']").innerHTML=arrLocals[i].email;
-        newLocalRow.querySelector("td[id='userLastname']").innerHTML=arrLocals[i].lastname;
-        newLocalRow.querySelector("td[id='userFirstname']").innerHTML=arrLocals[i].firstname;
-        if(arrLocals[i].address){
-            newLocalRow.querySelector("td[id='userCity']").innerHTML=arrLocals[i].address.cityName;
+        newUserRow.querySelector("td[id='userMail']").innerHTML=arrUsers[i].email;
+        newUserRow.querySelector("td[id='userLastname']").innerHTML=arrUsers[i].lastname;
+        newUserRow.querySelector("td[id='userFirstname']").innerHTML=arrUsers[i].firstname;
+        if(arrUsers[i].address){
+            newUserRow.querySelector("td[id='userCity']").innerHTML=arrUsers[i].address.cityName;
         }
 
-        let selectSkills=newLocalRow.querySelector("select[id='userSkills']");
-        let selectSkillsStatus=newLocalRow.querySelector("select[id='userSkillsStatus']");
-        let selectRights=newLocalRow.querySelector("select[id='userRights']");
-        newLocalRow.querySelector("a[id='accountEdit']").addEventListener("click",editUser,false);
+        let selectSkills=newUserRow.querySelector("select[id='userSkills']");
+        let selectSkillsStatus=newUserRow.querySelector("select[id='userSkillsStatus']");
+        let selectRights=newUserRow.querySelector("select[id='userRights']");
+        newUserRow.querySelector("a[id='accountEdit']").addEventListener("click",editUser,false);
 
-        if(arrLocals[i].skills){
+        if(arrUsers[i].skills){
             let statusMap=new Map();
-            for(let j=0; j<arrLocals[i].skills.length; j++){
-                statusMap.set(arrLocals[i].skills[j].status,true);
+            for(let j=0; j<arrUsers[i].skills.length; j++){
+                statusMap.set(arrUsers[i].skills[j].status,true);
                 let option=document.createElement("option");
-                if(arrLocals[i].skills[j].skid==body.skill){
+                if(arrUsers[i].skills[j].skid==body.skill){
                     option.selected=true;
                 }
-                option.innerHTML=arrLocals[i].skills[j].name;
-                option.value=arrLocals[i].skills[j].skid;
+                option.innerHTML=arrUsers[i].skills[j].name;
+                option.value=arrUsers[i].skills[j].skid;
                 selectSkills.append(option);
             }
+            console.log(statusMap);
             for(let key of statusMap.keys()){
                 let option=document.createElement("option");
                 if(key===body.status){
@@ -166,9 +167,9 @@ function createUserRow(){
 
        for(let j=0;j<rightsSelect.options.length;j++){
 
-            if((arrLocals[i].rights & (1<<rightsSelect.options[j].value))!=0){
+            if((arrUsers[i].rights & (1<<rightsSelect.options[j].value))!=0){
                 let option=document.createElement("option");
-                if(arrLocals[i].rights===body.skill){
+                if(arrUsers[i].rights===body.skill){
                     option.selected=true;
                 }
                 option.innerHTML=rightsSelect.options[j].innerHTML;
@@ -176,7 +177,7 @@ function createUserRow(){
                 selectRights.append(option);
             }
         }
-        userRowContainer.append(newLocalRow);
+        userRowContainer.append(newUserRow);
 
     }
 }
@@ -199,7 +200,7 @@ function editUser(event){
 
     tmpUser.rights=parseInt(tmpUser.rights,10);
 
-    fillElementAttributesFromObject("value","#",modal,tmpUser);
+    matchDOMAndObject("value","#",modal,tmpUser);
 
     console.log(tmpUser.rights);
     for(let i=0;i<rightsList.childNodes.length;i++){
@@ -214,6 +215,8 @@ function editUser(event){
     }
     updateUserSkillSelect(tmpUser.skills);
     updateCompaniesTable(tmpUser.companies);
+
+    console.log("TOTO");
 
     modalDisplay('userModal');
 }
@@ -284,7 +287,7 @@ function updateCompaniesTable(companies){
         for(let i=0 ; i<companies.length ; i++){
             console.log(companies[i]);
             clonedCompany=newEmptyCompany.cloneNode(true);
-            fillElementAttributesFromObject("innerHTML","#",clonedCompany,companies[i]);
+            matchDOMAndObject("innerHTML","#",clonedCompany,companies[i]);
             companiesTable.append(clonedCompany);
         }
     }

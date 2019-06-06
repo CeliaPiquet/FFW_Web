@@ -1,6 +1,5 @@
 var userFindFlag=false;
 var arrLocals=[];
-var arrToUpdate=[];
 var body;
 
 var emptyLocalsRow={
@@ -17,10 +16,10 @@ var confirmButton=new DOMParser().parseFromString('<td>\n' +
 // document.getElementById("addLocal").addEventListener("click",addRow,false);
 
 loadExternalDOMElement([
-    {url:websiteRoot+"/local/collapsedAddressRow",func:getCollapsedAddressRow},
-    {url:websiteRoot+"/local/collapsedRoomRow",func:getCollapsedRoomRow},
-    {url:websiteRoot+"/local/localRow",func:getEmptyLocalRow},
-    {url:websiteRoot+"/local/roomRow",func:getEmptyRoomRow}
+    {url:websiteRoot+"/adminlocals/collapsedAddressRow",func:getCollapsedAddressRow},
+    {url:websiteRoot+"/adminlocals/collapsedRoomRow",func:getCollapsedRoomRow},
+    {url:websiteRoot+"/adminlocals/localRow",func:getEmptyLocalRow},
+    {url:websiteRoot+"/adminlocals/roomRow",func:getEmptyRoomRow}
 ]);
 
 function getEmptyLocalRow(domText){
@@ -50,6 +49,40 @@ function getEmptyRoomRow(domText){
 }
 
 
+function changeQuantityOrder(){
+
+    let arrowOrder=document.getElementById("arrowOrder");
+
+    console.log(arrLocals);
+
+    if(arrowOrder.classList.contains("fa-arrow-up")){
+        arrowOrder.classList.remove("fa-arrow-up");
+        arrowOrder.classList.add("fa-arrow-down");
+        orderLocalsByQuantity(1);
+    }
+    else{
+        arrowOrder.classList.remove("fa-arrow-down");
+        arrowOrder.classList.add("fa-arrow-up");
+        orderLocalsByQuantity(-1);
+    }
+    updateLocalRows();
+}
+
+function orderLocalsByQuantity(order){
+
+
+    arrLocals.sort(function(a,b){
+        if(a.totalQuantity>b.totalQuantity){
+            return 1*order;
+        }
+        else if(a.totalQuantity<b.totalQuantity){
+            return -1*order;
+        }
+        return 0;
+    });
+
+
+}
 
 function findLocalsByFilter(){
 
@@ -74,7 +107,6 @@ function searchLocalsAPI(offset=0, limit=20, searchLocalsAPI){
 
         if(request.readyState==4){
             if(request.status==200){
-                console.log(request.responseText);
                 let apiLocals=JSON.parse(request.responseText);
 
                 if(apiLocals.length==limit){
@@ -101,7 +133,6 @@ function searchLocalsAPI(offset=0, limit=20, searchLocalsAPI){
         }
     }
     url+=query;
-    console.log(url);
     request.open("GET",url);
     request.send(JSON.stringify(body),false);
 
@@ -110,39 +141,53 @@ function searchLocalsAPI(offset=0, limit=20, searchLocalsAPI){
 
 function btnEventToUpdate(event){
     element=event.target;
-    setObjToUpdate(element);
 
+    if(element.func!= undefined && element.func==changeBoolBtnState){
+        element.func();
+    }
+
+    prepareUpdateAPI(element);
 }
+
+
 function inputEventToUpdate(event){
     element=event.target;
-    setObjToUpdate(element);
+    prepareUpdateAPI(element);
 }
 
 
-function setObjToUpdate(element){
+function prepareUpdateAPI(element){
 
-    arrKey=['rid','aid','loid'];
+    let arrKey=['rid','adid','loid'];
+
+    let url=null;
+
     if(element.parentObject[element.id]!=element.value){
 
         for(let i= 0; i<arrKey.length;i++){
-            if(element.parentObject[arrKey[i]] != undefined){
-                if(!existObjInObjByKeyValue(arrKey[i],element.parentObject[arrKey[i]],arrToUpdate)){
-                    if(arrKey[i]=='rid'){
-                        arrToUpdate.push(convertRoomObjectToAPI(element.parentObject));
-                    }
-                    else if(arrKey[i]=='aid'){
-                        arrToUpdate.push(convertAddressObjectToAPI(element.parentObject));
-                    }
-                    else{
-                        arrToUpdate.push(element.parentObject);
 
-                    }
+            if(element.parentObject[arrKey[i]] != undefined){
+
+
+                element.parentObject[element.id]=element.value;
+                if(arrKey[i]=='rid'){
+                    exchangeToAPI(ffwApiUrl+"/rooms",element.parentObject,"PUT");
+                }
+                else if(arrKey[i]=='adid'){
+
+                    element.parentObject=convertAddressObjectToDOM(element.parentObject);
+                    let parentDOM=getFirstParent(element,"id","collapseAddress");
+                    element.parentObject=matchDOMAndObject("value","#",parentDOM,element.parentObject,true);
+                    exchangeToAPI(ffwApiUrl+"/addresses",convertAddressObjectToAPI(element.parentObject),"PUT",true);
+                }
+                else if(arrKey[i]=='loid' && element.parentObject["rid"]== undefined){
+                    exchangeToAPI(ffwApiUrl+"/locals",element.parentObject,"PUT");
                 }
             }
         }
     }
-    console.log(arrToUpdate);
 }
+
 
 function prepareUpdatableElement(parentObject,element){
 
@@ -153,69 +198,16 @@ function prepareUpdatableElement(parentObject,element){
         toUpdateElements[i].parentObject=parentObject;
 
         if(toUpdateElements[i].tagName=='BUTTON'){
-            console.log(toUpdateElements[i]);
             toUpdateElements[i].addEventListener('click',btnEventToUpdate, false);
         }
         else{
-            toUpdateElements[i].addEventListener('keyup',inputEventToUpdate, false);
+            toUpdateElements[i].addEventListener('focusout',inputEventToUpdate, false);
         }
 
     }
 }
-// function updateLocalRows() {
-//
-//     console.log(arrLocals);
-//
-//     let localRowsContainer = document.getElementById("localRowsContainer");
-//
-//     localRowsContainer.innerHTML = "";
-//
-//     for (let i = 0; i < arrLocals.length; i++) {
-//
-//         newLocalRow = emptyLocalsRow.localRow.cloneNode(true);
-//         newCollapsedAddressRow = emptyLocalsRow.collapsedAddressRow.cloneNode(true);
-//         newCollapsedRoomRow = emptyLocalsRow.collapsedRoomRow.cloneNode(true);
-//
-//         let roomRowsContainer = newCollapsedRoomRow.querySelector("#roomsContainer");
-//
-//         if(arrLocals[i].rooms){
-//             for(let j = 0 ; j<arrLocals[i].rooms.length ; j++){
-//                 newRoomRow = emptyRoomRow.cloneNode(true);
-//                 convertRoomObjectToDOM(arrLocals[i].rooms[j]);
-//                 fillElementAttributesFromObject("innerHTML", "#", newRoomRow, arrLocals[i].rooms[j]);
-//                 fillElementAttributesFromObject("value", "#", newRoomRow, arrLocals[i].rooms[j]);
-//                 if(arrLocals[i].rooms[j].rid==null){
-//                     newConfirmButton=confirmButton.cloneNode(true);
-//                     newRoomRow.querySelector("#confirmButtonContainer").append(newConfirmButton);
-//                 }
-//                 roomRowsContainer.append(newRoomRow);
-//             }
-//         }
-//
-//         if(arrLocals[i].loid==null){
-//             newConfirmButton=confirmButton.cloneNode(true);
-//             newLocalRow.querySelector("#confirmButtonContainer").append(newConfirmButton);
-//         }
-//         roomRowsContainer.append(newLocalRow);
-//
-//         convertAddressObjectToDOM(arrLocals[i].address);
-//         fillElementAttributesFromObject("value", "#", newCollapsedAddressRow, arrLocals[i].address);
-//
-//         convertLocalObject(arrLocals[i]);
-//         fillElementAttributesFromObject("value", "#", newLocalRow, arrLocals[i]);
-//         fillElementAttributesFromObject("innerHTML", "#", newLocalRow, arrLocals[i]);
-//
-//         localRowsContainer.append(newLocalRow);
-//         localRowsContainer.append(newCollapsedAddressRow);
-//         localRowsContainer.append(newCollapsedRoomRow);
-//     }
-// }
-
-
 
 function updateLocalRows() {
-
-    console.log(arrLocals);
 
     let localRowsContainer = document.getElementById("localRowsContainer");
 
@@ -223,9 +215,12 @@ function updateLocalRows() {
 
     for (let i = 0; i < arrLocals.length; i++) {
 
+        console.log(arrLocals[i]);
         createLocalRow(localRowsContainer,arrLocals[i]);
     }
 }
+
+
 
 
 function createLocalRow(container,local){
@@ -255,11 +250,13 @@ function createLocalRow(container,local){
     }
 
     convertAddressObjectToDOM(local.address);
-    fillElementAttributesFromObject("value", "#", newCollapsedAddressRow, local.address);
+
+    matchDOMAndObject("value", "#", newCollapsedAddressRow, local.address);
 
     convertLocalObject(local);
-    fillElementAttributesFromObject("value", "#", newLocalRow, local);
-    fillElementAttributesFromObject("innerHTML", "#", newLocalRow, local);
+
+    matchDOMAndObject("value", "#", newLocalRow, local,false,1);
+    matchDOMAndObject("innerHTML", "#", newLocalRow, local,false,1)
 
     container.append(newLocalRow);
     container.append(newCollapsedAddressRow);
@@ -270,6 +267,8 @@ function createLocalRow(container,local){
     newLocalRow.roomRowsContainer=roomRowsContainer;
     newLocalRow.collapseAddress=newCollapsedAddressRow.querySelector("#collapseAddress");
     newLocalRow.collapseRoomRow=newCollapsedRoomRow.querySelector("#collapseRooms");
+
+    initAutocomplete();
 }
 
 function collapseElement(event){
@@ -285,15 +284,24 @@ function collapseElement(event){
     }
 }
 
+function changeBoolBtnState(){
+
+    this.value=this.value==="1"?"0":"1";
+    this.innerHTML=this.innerHTML==="YES"?"NO":"YES";
+}
+
 function createRoomRow(container,room){
 
     newRoomRow = emptyRoomRow.cloneNode(true);
 
     prepareUpdatableElement(room,newRoomRow);
     convertRoomObjectToDOM(room);
-    fillElementAttributesFromObject("innerHTML", "#", newRoomRow, room);
+    matchDOMAndObject("innerHTML", "#", newRoomRow, room);
     convertRoomObjectToAPI(room);
-    fillElementAttributesFromObject("value", "#", newRoomRow, room);
+    matchDOMAndObject("value", "#", newRoomRow, room);
+
+    newRoomRow.querySelector("#isUnavailable").func=changeBoolBtnState;
+    newRoomRow.querySelector("#isStockroom").func=changeBoolBtnState;
 
     if(room.rid==null){
         newConfirmButton=confirmButton.cloneNode(true);
@@ -310,52 +318,42 @@ function confirmRow(event){
     element=event.target;
     let tmpElement;
     console.log(element);
-    if((tmpElement=getFirstParent(element,"id","localRow"))==document.getElementsByTagName('body')[0]){
+    if((tmpElement=getFirstParent(element,"id","localRow")).tagName=="BODY"){
+        if((tmpElement=getFirstParent(element,"id","roomRow")).tagName!="BODY"){
 
-        if((tmpElement=getFirstParent(element,"id","roomRow"))!=document.getElementsByTagName('body')[0]){
-
+            args={
+                domParent:tmpElement,
+            };
+            exchangeToAPI(ffwApiUrl+"/rooms",matchDOMAndObject("value","#",tmpElement,tmpElement.room,true),"POST",removeConfirmButton,args);
         }
     }
-    console.log(tmpElement);
+    else{
+
+        tmpElement.local.address=convertAddressObjectToDOM(tmpElement.local.address);
+        tmpElement.local.address=matchDOMAndObject("value","#",tmpElement.collapseAddress,tmpElement.local.address,true);
+        args={
+            url:ffwApiUrl+"/locals",
+            local:matchDOMAndObject("value","#",tmpElement,tmpElement.local,true),
+            method:"POST",
+            domParent:tmpElement
+        };
+        exchangeToAPI(ffwApiUrl+"/addresses",convertAddressObjectToAPI(tmpElement.local.address),"POST",createLocalToAPI,args);
+    }
 }
 
-//
-// function skillsToAPI(url,element,method){
-//
-//     let request=new XMLHttpRequest();
-//
-//     let url=ffwApiUrl+"/skills/";
-//
-//     request.onreadystatechange=function(){
-//
-//         if(request.readyState==4){
-//             console.log(skills.length);
-//             console.log(counter);
-//             if(method=="POST" && request.status==200){
-//                 arrSkills[counter]=JSON.parse(request.responseText);
-//             }
-//             counter++;
-//             if(counter==skills.length){
-//                 changeSelectSkills();
-//                 return counter;
-//             }
-//             skillsToAPI(skills,counter,skillsToAPI);
-//         }
-//     };
-//
-//     if(skills[counter].skid!=null){
-//         url=url+skills[counter].skid;
-//         method="PUT";
-//     }
-//     else{
-//         method="POST";
-//     }
-//     request.open(method,url);
-//
-//     request.send(JSON.stringify(skills[counter]));
-//
-//
-// }
+function createLocalToAPI(args,address){
+    console.log(args.local);
+    args.local.adid=address.adid;
+
+    exchangeToAPI(args.url,args.local,args.method,removeConfirmButton,{domParent:args.domParent});
+}
+
+function removeConfirmButton(args){
+
+    args.domParent.querySelector("#confirmButtonContainer").innerHTML="";
+
+}
+
 function addLocal(){
 
     let localRowsContainer = document.getElementById("localRowsContainer");
@@ -370,7 +368,6 @@ function addLocal(){
     newLocal.address=getEmptyAddress();
     arrLocals.push(newLocal);
     createLocalRow(localRowsContainer,newLocal);
-    console.log(arrLocals);
 }
 
 function addRoom(event){
@@ -384,7 +381,7 @@ function addRoom(event){
         };
     }
     let newRoom=getEmptyRoom();
-
+    newRoom.loid=element.local.loid;
     console.log(element.rooms);
     element.rooms.push(newRoom);
     createRoomRow(element.roomRowsContainer,newRoom);
@@ -392,11 +389,12 @@ function addRoom(event){
 
 function convertLocalObject(local){
 
+    console.log("QUANTITY FIRST");
     let quantity=0;
     if(local.rooms){
         for(let i=0 ; i<local.rooms.length;i++){
             if(local.rooms[i]){
-                console.log(local.rooms[i].totalQuantity);
+                console.log(local.rooms[i]);
                 quantity+= parseInt(local.rooms[i].totalQuantity);
             }
         }
@@ -404,6 +402,9 @@ function convertLocalObject(local){
 
     console.log(quantity);
     local["totalQuantity"]=""+quantity+"";
+    console.log("QUANTITY FIRST");
+
+    return local;
 }
 function convertRoomObjectToDOM(room){
 
@@ -414,7 +415,7 @@ function convertRoomObjectToDOM(room){
 
     for(let i=0;i<cvtArr.length;i++){
 
-        if(room[cvtArr[i]]==1){
+        if(room[cvtArr[i]]==="1"){
             room[cvtArr[i]]="YES";
         }
         else{
@@ -423,6 +424,7 @@ function convertRoomObjectToDOM(room){
     }
     room["totalQuantity"]=room.products&&room.products.length>0?room.products.length:"0";
 
+    return room;
 }
 
 function convertRoomObjectToAPI(room){
@@ -433,14 +435,15 @@ function convertRoomObjectToAPI(room){
 
     for(let i=0;i<cvtArr.length;i++){
 
-        if(room[cvtArr[i]]=="YES"){
-            room[cvtArr[i]]=1;
+        if(room[cvtArr[i]]==="YES"){
+            room[cvtArr[i]]="1";
         }
         else{
-            room[cvtArr[i]]=0;
+            room[cvtArr[i]]="0";
         }
     }
-    delete room["totalQuantity"];
+
+    return room;
 }
 
 
@@ -451,11 +454,11 @@ function convertAddressObjectToDOM(addressObj){
         route: "streetAddress",
         locality: "cityName",
         postal_code: "cityCode",
-        country: "country"
     }
 
     cvtObjectKey(convertObject,addressObj);
-
+    addressObj.autocomplete="";
+    return addressObj;
 }
 
 function convertAddressObjectToAPI(addressObj){
@@ -465,11 +468,10 @@ function convertAddressObjectToAPI(addressObj){
         streetAddress: "route",
         cityName: "locality",
         cityCode: "postal_code",
-        country: "country"
     }
-
     cvtObjectKey(convertObject,addressObj);
 
+    return addressObj;
 }
 
 function getEmptyLocal(){
@@ -500,176 +502,3 @@ function getEmptyRoom(){
         loid: null,
         products:null};
 }
-// }
-//
-// function editUser(event){
-//
-//     let element=event.target;
-//
-//     while(element.id!=userRow" && element.tagName!="body"){
-//         element=element.parentElement;
-//     }
-//     let user=element.user;
-//     let tmpUser=JSON.parse(JSON.stringify(user));
-//     let modal=document.getElementById("userModal");
-//     let rightsList=document.getElementById("userRightsList");
-//
-//
-//     modal.user=user;
-//     modal.tmpUser=tmpUser;
-//
-//     tmpUser.rights=parseInt(tmpUser.rights,10);
-//
-//     fillElementAttributesFromObject("value","#",modal,tmpUser);
-//
-//     console.log(tmpUser.rights);
-//     for(let i=0;i<rightsList.childNodes.length;i++){
-//         if(rightsList.childNodes[i].classList){
-//             rightsList.childNodes[i].classList.remove("active");
-//             if((tmpUser.rights & (1<<rightsList.childNodes[i].id))!=0){
-//                 rightsList.childNodes[i].classList.add("active");
-//             }
-//         }
-//
-//         rightsList.childNodes[i].addEventListener("click",updateRightsList,false);
-//     }
-//     updateUserSkillSelect(tmpUser.skills);
-//     updateCompaniesTable(tmpUser.companies);
-//
-//     modalDisplay('userModal');
-// }
-
-
-// function updateSelectedStatus(){
-//
-//     tmpUser=document.getElementById("userModal").tmpUser;
-//     let skillsSelectEditable=document.getElementById("skillsSelectEditable");
-//     let skillsStatusSelectEditable=document.getElementById("skillsStatusSelectEditable");
-//
-//     let status;
-//
-//     for(let i=0 ; i<tmpUser.skills.length;i++){
-//         if(skillsSelectEditable.options[skillsSelectEditable.selectedIndex].value===tmpUser.skills[i].skid){
-//             status=tmpUser.skills[i].status;
-//         }
-//     }
-//     for(let i=0 ;i < skillsStatusSelectEditable.options.length ; i++){
-//         if(skillsStatusSelectEditable.options[i].value===status){
-//             skillsStatusSelectEditable.options[i].selected=true;
-//         }
-//     }
-// }
-
-function changeQuantityOrder(){
-
-
-}
-
-
-// function updateCompaniesTable(companies){
-//
-//     let companiesTable=document.getElementById("companiesTable");
-//     let newEmptyCompany=emptyLocalRow;
-//
-//     companiesTable.innerHTML="";
-//
-//     if(companies&&companies.length>0){
-//
-//         for(let i=0 ; i<companies.length ; i++){
-//             console.log(companies[i]);
-//             clonedCompany=newEmptyCompany.cloneNode(true);
-//             fillElementAttributesFromObject("innerHTML","#",clonedCompany,companies[i]);
-//             companiesTable.append(clonedCompany);
-//         }
-//     }
-// }
-
-// function updateUserSkillSelect(skills){
-//
-//     let skillsSelectEditable=document.getElementById("skillsSelectEditable");
-//     let skillsStatusSelectEditable=document.getElementById("skillsStatusSelectEditable");
-//
-//     skillsSelectEditable.addEventListener("change",updateSelectedStatus,false);
-//     skillsStatusSelectEditable.addEventListener("change",updateUserSkillStatus,false);
-//
-//     skillsSelectEditable.innerHTML="";
-//
-//     if(skills&&skills.length>0){
-//         for(let i=0;i<skills.length;i++){
-//             let option=document.createElement("option");
-//             if(i===0){
-//                 option.selected=true;
-//             }
-//             option.innerHTML=skills[i].name;
-//             option.value=skills[i].skid;
-//             skillsSelectEditable.append(option);
-//         }
-//         for(let i=0;i<skillsStatusSelectEditable.options.length; i++){
-//             if(skillsStatusSelectEditable.options[i].value===skills[0].status){
-//                 skillsStatusSelectEditable.options[i].selected=true;
-//             }
-//         }
-//     }
-//
-// }
-//
-//
-// function updateUser(){
-//
-//     let tmpUser=document.getElementById("userModal").tmpUser;
-//
-//     let userBody=JSON.parse(JSON.stringify(tmpUser));
-//     delete userBody.companies;
-//     delete userBody.address;
-//     delete userBody.skills;
-//
-//     console.log(userBody);
-//
-//     if(tmpUser.skills){
-//         updateUsersSkillAPI(tmpUser.uid,tmpUser.skills,0,updateUsersSkillAPI);
-//     }
-//
-//     updateUserAPI(userBody);
-//
-// }
-// function updateUsersSkillAPI(uid, skillBody, count, updateSkillAPI){
-//
-//     let request=new XMLHttpRequest();
-//
-//     request.onreadystatechange=function(){
-//
-//         if(request.readyState==4&&request.status==200){
-//             console.log(request.responseText);
-//             count++;
-//             if(count<skillBody.length){
-//                 updateSkillAPI(skillBody,count,updateSkillAPI)
-//             }
-//         }
-//     };
-//
-//     let url=ffwApiUrl+"/users/"+uid+"/skills";
-//     request.open("PUT",url);
-//     request.send(JSON.stringify(body[count]));
-//
-// }
-//
-// function updateUserAPI(userBody){
-//
-//     let request=new XMLHttpRequest();
-//
-//     request.onreadystatechange=function(){
-//
-//         if(request.readyState==4&&request.status==200){
-//             console.log(request.responseText);
-//             findLocalsByFilter();
-//         }
-//     };
-//
-//     console.log(ffwApiUrl+"/users/"+userBody.uid);
-//     let url=ffwApiUrl+"/users/"+userBody.uid;
-//     console.log(JSON.stringify(userBody));
-//     request.open("PUT",url);
-//     request.send(JSON.stringify(userBody));
-//
-// }
-

@@ -1,38 +1,82 @@
 
 //Fonction parcourant les enfants d'un noeud du DOM pour y affecter des valeurs présentes dans un objet.
 //Les enfants du noeud sont sélectionnés en combinant un selecteur CSS avec une des clés de l'objet passé en paramètre de la fonction
-function fillElementAttributesFromObject(attribute, selector, element, object){
+function matchDOMAndObject(attribute, selector, element, object,order=false,limit=null,deepness=0){
 
+    if(limit!=null && deepness==limit){
+        return object;
+    }
     for(let key in object){
 
-        if(object[key]!=null && typeof object[key] === 'object'){
-            fillElementAttributesFromObject(attribute,selector,element,object[key]);
-        }
-        if(isNaN(key)){
+        if(order==true){
+            let childElement = element.querySelector(selector + key);
+            if(childElement!=null){
 
-            let childElement=element.querySelector(selector+key);
-            if(childElement && object[key]!=null &&  object[key]!=""){
-                childElement[attribute]=object[key];
+                if(childElement.tagName=="SELECT" && childElement.selectedIndex>=0){
+                    object[key]=childElement.options[childElement.selectedIndex][attribute];
+                }
+                else{
+                    object[key]=childElement[attribute];
+                }
+            }
+        }
+        if(order==false) {
+            if (object[key] != null && typeof object[key] === 'object') {
+                deepness++;
+                matchDOMAndObject(attribute, selector, element, object[key], order,limit,deepness);
+            }
+            if (isNaN(key)) {
+
+                let childElement = element.querySelector(selector + key);
+
+                if (childElement && object[key] !== null && object[key] != "") {
+
+                    if(childElement.tagName=="SELECT" ){
+                        for(let selectKey in childElement.options){
+
+                            if(childElement.options[selectKey].value== object[key].toLowerCase()){
+                                childElement.options[selectKey].selected=true;
+                            }
+                        }
+                    }
+                    else{
+                        childElement[attribute] = object[key];
+                    }
+                }
             }
         }
     }
+    return object;
 }
 
-function existObjInObjByKeyValue(searchedKey,searchedValue,object,deep=0){
+function copyObjectProperty(srcObj,dstObj){
+
+    for(let key in srcObj){
+
+        if(typeof srcObj[key] == 'object'){
+            copyObjectProperty(srcObj[key],dstObj[key]);
+        }
+        else{
+            dstObj[key]=srcObj[key];
+        }
+    }
+
+}
+
+function existObjInObjByKeyValue(searchedKey,searchedValue,object){
 
     for(let key in object){
 
         if(object[searchedKey] != undefined && object[searchedKey]==searchedValue ){
-            return true;
+            return key;
         }
         else if(object[key]!=null && object[key]!=undefined && typeof object[key] === 'object'){
-            deep++;
-            if(existObjInObjByKeyValue(searchedKey,value,object[key]),deep){
-                return true;
+            if(existObjInObjByKeyValue(searchedKey,searchedValue,object[key])){
+                return key;
             }
         }
     }
-    return false;
+    return null;
 }
 
 function modalDisplay(modalId){
@@ -53,9 +97,11 @@ function collapseDisplay(element){
 
 
 function ucFirst(string){
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    if(string){
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+    return "";
 }
-
 function getFirstParent(element,attribute,value){
 
     while(element[attribute]!=value && element.tagName!="BODY"){
@@ -104,5 +150,73 @@ function getDOMApi(url,func){
 
     request.open("GET",url);
     request.send();
+
+}
+
+function exchangeToAPI(url, element, method, func=null, args=null){
+
+
+    request = new XMLHttpRequest();
+
+    request.onreadystatechange=function(){
+
+        if(request.readyState==4){
+            if(request.status==200 || request.status==201) {
+                newElement = JSON.parse(request.responseText);
+
+                if(Array.isArray(newElement)){
+                    if(Array.isArray(element)){
+                        element.concat(newElement);
+                    }
+                    if(args.offset&&args.limit) {
+                        if (newElement.length != args.limit && func) {
+                            func(args,element);
+                        }
+                        else{
+                            args.offset+=newElement.length
+                            exchangeToAPI(url, element, method, func, args)
+                        }
+                    }
+                }
+                else{
+                    if(Array.isArray(element)){
+                        element.push(newElement);
+                    }
+                    else if(element instanceof  Map && args.id ){
+                        element.set(args.id,newElement);
+                    }
+                    else{
+                        copyObjectProperty(newElement,element);
+                    }
+
+                    if(func&&args){
+                        func(args,element);
+                    }
+                }
+            }
+        }
+    }
+
+    if(args){
+        if(args.id){
+            url+="/"+args.id;
+        }
+        if(args.subTarget){
+            url+="/"+args.subTarget;
+        }
+        if(args.offset&&args.limit){
+            url+="?offset="+args.offset+"&limit="+args.limit;
+        }
+    }
+    console.log(url);
+
+    request.open(method,url);
+    if(method!='GET'){
+        request.send(JSON.stringify(element));
+    }
+    else{
+        request.send();
+
+    }
 
 }

@@ -112,7 +112,7 @@ function displayLocals(array, containerTarget){
     noResult.innerHTML = '';
     if (array.length == 0){
         noResult.setAttribute("class","visible");
-        noResult.innerHTML = "Vide, aucun local trouvé";
+        noResult.innerHTML = "Vide, aucun adminlocals trouvé";
     }
     else {
         var localchoiceList = document.createElement('select');
@@ -167,7 +167,7 @@ function getProductByRoom(){
                 roomIds.push(fullRoomArray[i]['rid']);
             }
         }
-        getMultiplefullProductsArray(roomIds,0); //on veut afficher le contenu de toutes les rooms d'un local
+        getMultiplefullProductsArray(roomIds,0); //on veut afficher le contenu de toutes les rooms d'un adminlocals
     }
     else {
         document.getElementById("actionList").style.display = "";
