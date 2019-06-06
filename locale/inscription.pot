@@ -1,0 +1,82 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-16 14:05+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../view/inscription.php:13
+msgid "Last name"
+msgstr ""
+
+#: ../view/inscription.php:27
+msgid "Password (8 characters, 1 capital, 1 lower, 1 digit)"
+msgstr ""
+
+#: ../view/inscription.php:31
+msgid "Rewrite your password"
+msgstr ""
+
+#: ../view/inscription.php:35
+msgid "Address"
+msgstr ""
+
+#: ../view/inscription.php:39
+msgid "Complement"
+msgstr ""
+
+#: ../view/inscription.php:40
+msgid "Building, flat, floor ..."
+msgstr ""
+
+#: ../view/inscription.php:44
+msgid "City"
+msgstr ""
+
+#: ../view/inscription.php:48
+msgid "Zip code"
+msgstr ""
+
+#: ../view/inscription.php:52
+msgid "Country"
+msgstr ""
+
+#: ../view/inscription.php:54
+msgid "France"
+msgstr ""
+
+#: ../view/inscription.php:55
+msgid "Italy"
+msgstr ""
+
+#: ../view/inscription.php:56
+msgid "Portugal"
+msgstr ""
+
+#: ../view/inscription.php:57
+msgid "Ireland"
+msgstr ""
+
+#: ../view/inscription.php:65
+msgid "Agree FFW general conditions"
+msgstr ""
+
+#: ../view/inscription.php:71
+msgid "I want to receive by mail actuality and event information from FFW"
+msgstr ""
+
+#: ../view/inscription.php:75
+msgid "Next step"
+msgstr ""

@@ -1,0 +1,91 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-15 23:44+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: homeView.php:24
+msgid "Who are we ?"
+msgstr ""
+
+#: homeView.php:26
+msgid ""
+"Since2013, Fight Food Waste is engaged against food wwastage. \n"
+"                Association is active in France and in other countries as "
+"Italy, Ireland and Portugal."
+msgstr ""
+
+#: homeView.php:30
+msgid "Our goal is to reduce food wastage which produces..."
+msgstr ""
+
+#: homeView.php:36
+msgid "How does it work ?"
+msgstr ""
+
+#: homeView.php:40
+msgid ""
+" \n"
+"                Every day we collect unsold stock and unused foodstuffs "
+"among private and business donors \n"
+"                to redistribute them to the most needy : associations, "
+"homeless person, isolated people.\n"
+"                To help us scan with FFW scanner your food items and our "
+"volunteers will pick up them during their daily round.\n"
+"                To order your scanner subscribe on our website and command "
+"it on your account space."
+msgstr ""
+
+#: homeView.php:45
+msgid ""
+"\n"
+"                *Scanners are free for subscribers who contribute at least "
+"10€ per year and for volunteers who offers their services."
+msgstr ""
+
+#: homeView.php:50
+msgid "Have fun by doing like us and pick up wasted food !"
+msgstr ""
+
+#: homeView.php:59
+msgid "How to participate ?"
+msgstr ""
+
+#: homeView.php:63
+msgid ""
+"\n"
+"                To participate in that fight against the wastage with us "
+"it's easy ! \n"
+"                All you need to do is to subscribe on this website and "
+"choose the type of your contribution !"
+msgstr ""
+
+#: homeView.php:70
+msgid ""
+"4 choices to help us : \n"
+"                - you are merchants and you want us to pick up your unsold "
+"stocks\n"
+"                - you want to bring a financial contribution for the "
+"association and access to a large range of services\n"
+"                - you want to offer your services and become volunteer of "
+"the association\n"
+"                - you want to access to our public services and stay "
+"informed of our actions "
+msgstr ""
+
+#: homeView.php:80
+msgid "What are services offered ?"
+msgstr ""

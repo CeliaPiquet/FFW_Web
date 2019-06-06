@@ -38,7 +38,7 @@ function getPageOfLocals(offset, containers) {
         }
     }
 
-    var url = "http://localhost:8080/FFW_API/api/locals/getAll.php?offset=" + offset + "&limit=20" ;
+    var url = "http://ffwapi.priv/locals?offset=" + offset + "&limit=20" ;
     request.open('GET',url);
     request.send();
 }
@@ -100,7 +100,7 @@ function getPageOfRooms(idLocal, offset, roomListId, localListId){
             }
         }
     }
-    var url = "http://localhost:8080/FFW_API/api/locals/getRooms.php?local=" + idLocal + "&offset=" + offset + "&limit=20";
+    var url = "http://ffwapi.priv/locals/"+idLocal+"/rooms?offset=" + offset + "&limit=20";
     request.open('GET',url);
     request.send();
 }
@@ -111,7 +111,8 @@ function displayLocals(array, containerTarget){
     container.innerHTML = '';
     noResult.innerHTML = '';
     if (array.length == 0){
-        noResult.innerHTML = "Vide, aucun local trouvé";
+        noResult.setAttribute("class","visible");
+        noResult.innerHTML = "Vide, aucun adminlocals trouvé";
     }
     else {
         var localchoiceList = document.createElement('select');
@@ -166,7 +167,7 @@ function getProductByRoom(){
                 roomIds.push(fullRoomArray[i]['rid']);
             }
         }
-        getMultiplefullProductsArray(roomIds,0); //on veut afficher le contenu de toutes les rooms d'un local
+        getMultiplefullProductsArray(roomIds,0); //on veut afficher le contenu de toutes les rooms d'un adminlocals
     }
     else {
         document.getElementById("actionList").style.display = "";

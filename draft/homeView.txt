@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-15 19:20+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: homeView.php:18
+msgid "Qui sommes nous ?"
+msgstr "Who are we ?"
+
+#: homeView.php:20
+msgid ""
+"Depuis 2013, Fight Food Waste s'engage dans la lutte  \n"
+"                contre le gaspillage. L'association est présente en France \n"
+"                et dans d'autres pays comme l'Italie, l'Irlande et \n"
+"                le Portugal."
+msgstr ""
+
+#: homeView.php:26
+msgid ""
+"Notre but est de réduire le gaspillage alimentaire qui \n"
+"                production alimentaire mondiale."
+msgstr ""
+
+#: homeView.php:33
+msgid "Comment cela fonctionne ?"
+msgstr ""
+
+#: homeView.php:37
+msgid ""
+" \n"
+"                Chaque jour nous effectuons des collectes parmi les \n"
+"                commerçants et particuliers afin de récupérer les \n"
+"                invendus et les produits qui ne seront pas consommés \n"
+"                afin de les redistribuer aux plus nécessiteux : "
+"associations, \n"
+"                personnes sans domiciles fixes ou isolées notamment. \n"
+"                Pour cela il suffit à l'aide du boitier FFW* de scanner "
+"ses \n"
+"                aliments à donner et nos bénévoles viendront les récupérer \n"
+"                lors des tournées quotidiennes. Pour commander son boitier \n"
+"                il vous suffit de vous inscrire sur le site* et de la "
+"commander \n"
+"                via son espace 'Mon Compte'."
+msgstr ""
+
+#: homeView.php:48
+msgid ""
+"*les boitiers sont gratuits pour les adhérents cotisant au moins 10€ par an\n"
+"                et pour les bénévoles proposant leur(s) service(s)"
+msgstr ""
+
+#: homeView.php:53
+msgid "Amusez-vous à faire comme nous et ramassez les déchets !"
+msgstr ""
+
+#: homeView.php:62
+msgid "Comment participer ?"
+msgstr ""
+
+#: homeView.php:66
+msgid ""
+"\n"
+"                Pour participez à ce combat contre le gaspillage .'<br/>'.\n"
+"                avec nous c'est très simple ! .'<br/>'.\n"
+"                Il vous suffit de vous inscrire sur ce site et de "
+"choisir .'<br/>'.\n"
+"                la façon dont vous voulez et pouvez vous impliquer !"
+msgstr ""
+
+#: homeView.php:75
+msgid ""
+"4 choix s'offrent à vous: <br>\n"
+"                - vous êtes commerçant et vous souhaitez que <br>\n"
+"                l'on récolte vos invendus\n"
+"                - vous souhaitez contribuez financièrement à <br>\n"
+"                l'association et accéder ainsi à une série <br>\n"
+"                de services spécfifiques <br>\n"
+"                - vous souhaitez offrir vos services et devenir <br>\n"
+"                bénévole de l'association <br>\n"
+"                - vous souhaitez accéder à nos services ouverts <br>\n"
+"                au public et rester informer de nos actions"
+msgstr ""
+
+#: homeView.php:91
+msgid "Quels sont les services proposés ?"
+msgstr ""
