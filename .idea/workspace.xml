@@ -2,33 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eb56acdc-918e-4591-99b7-1c388d33cdbc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/controllers/AdminlocalsController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/adminBaskets.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/adminbaskets/collapsedAddressRow.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/adminbaskets/index.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/adminbaskets/productRow.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/adminlocals/localRow.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/adminlocals/script.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/AdminusersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/AdminusersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/LocalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/AdminbasketsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locale/fr.pot" beforeDir="false" afterPath="$PROJECT_DIR$/locale/fr.pot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fullcalendar-4.1.0/packages/core/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/fullcalendar-4.1.0/packages/core/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/addressAutocomplete.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/addressAutocomplete.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/adminLocals.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/adminLocals.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/adminSkills.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/adminSkills.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/adminUsers.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/adminUsers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/localList.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/localList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/adminBaskets.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/adminBaskets.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/AddressService.php" beforeDir="false" afterPath="$PROJECT_DIR$/services/AddressService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/adminusers/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/adminusers/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/local/collapsedAddressRow.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/adminlocals/collapsedAddressRow.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/local/collapsedRoomRow.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/adminlocals/collapsedRoomRow.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/local/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/adminlocals/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/local/localRow.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/adminbaskets/localRow.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/local/roomRow.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/adminlocals/roomRow.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/local/script.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/adminbaskets/script.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/adminbaskets/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/adminbaskets/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/stock/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/stock/index.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/adminBaskets.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="620">
-              <caret line="51" column="14" selection-start-line="51" selection-start-column="14" selection-end-line="51" selection-end-column="14" />
+            <state relative-caret-position="600">
+              <caret line="191" column="26" selection-start-line="191" selection-start-column="26" selection-end-line="191" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -51,9 +28,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/template.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1020">
-              <caret line="81" column="48" lean-forward="true" selection-start-line="81" selection-start-column="48" selection-end-line="81" selection-end-column="48" />
-              <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
+            <state relative-caret-position="-133">
+              <caret line="30" column="69" lean-forward="true" selection-start-line="30" selection-start-column="69" selection-end-line="30" selection-end-column="69" />
             </state>
           </provider>
         </entry>
@@ -61,8 +37,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/utils.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="632">
-              <caret line="155" column="22" selection-start-line="155" selection-start-column="9" selection-end-line="155" selection-end-column="22" />
+            <state relative-caret-position="-508">
+              <caret line="155" column="9" selection-start-line="155" selection-start-column="9" selection-end-line="155" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/adminLocals.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-10">
+              <caret line="193" selection-start-line="193" selection-end-line="193" />
             </state>
           </provider>
         </entry>
@@ -70,12 +55,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/adminbaskets/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="536">
-              <caret line="146" column="37" lean-forward="true" selection-start-line="146" selection-start-column="37" selection-end-line="146" selection-end-column="37" />
-              <folding>
-                <element signature="e#2290#2297#1#HTML" expanded="true" />
-                <element signature="e#4961#4968#1#HTML" expanded="true" />
-              </folding>
+            <state relative-caret-position="371">
+              <caret line="135" column="75" lean-forward="true" selection-start-line="135" selection-start-column="75" selection-end-line="135" selection-end-column="75" />
             </state>
           </provider>
         </entry>
@@ -101,8 +82,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/stock/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="120" lean-forward="true" selection-start-line="120" selection-end-line="120" />
+            <state relative-caret-position="527">
+              <caret line="146" column="36" selection-start-line="146" selection-start-column="36" selection-end-line="146" selection-end-column="65" />
             </state>
           </provider>
         </entry>
@@ -127,8 +108,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>country</find>
-      <find>confirm</find>
       <find>getEmptyLocal</find>
       <find>confirmButton</find>
       <find>room</find>
@@ -152,11 +131,13 @@
       <find>productRow</find>
       <find>localRow</find>
       <find>convertLocalObject</find>
-      <find>sort</find>
       <find>basketMap</find>
       <find>product²</find>
       <find>totalQuantity</find>
       <find>sortProductByFilter</find>
+      <find>exchangeToAPI</find>
+      <find>find</find>
+      <find>sort</find>
     </findStrings>
     <replaceStrings>
       <replace>email</replace>
@@ -181,7 +162,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/views/account/script.php" />
         <option value="$PROJECT_DIR$/public/jquery/jquery-3.4.1.js" />
         <option value="$PROJECT_DIR$/views/account/head.php" />
         <option value="$PROJECT_DIR$/views/account/volunteer.php" />
@@ -226,10 +206,11 @@
         <option value="$PROJECT_DIR$/views/adminbaskets/collapsedAddressRow.php" />
         <option value="$PROJECT_DIR$/views/adminbaskets/localRow.php" />
         <option value="$PROJECT_DIR$/public/js/adminLocals.js" />
-        <option value="$PROJECT_DIR$/public/js/utils.js" />
-        <option value="$PROJECT_DIR$/templates/template.php" />
         <option value="$PROJECT_DIR$/controllers/AdminbasketsController.php" />
         <option value="$PROJECT_DIR$/views/adminbaskets/productRow.php" />
+        <option value="$PROJECT_DIR$/public/js/utils.js" />
+        <option value="$PROJECT_DIR$/templates/template.php" />
+        <option value="$PROJECT_DIR$/views/stock/index.php" />
         <option value="$PROJECT_DIR$/views/adminbaskets/index.php" />
         <option value="$PROJECT_DIR$/public/js/adminBaskets.js" />
       </list>
@@ -402,17 +383,18 @@
       <workItem from="1559589378840" duration="21052000" />
       <workItem from="1559634442550" duration="34013000" />
       <workItem from="1559749017652" duration="30964000" />
+      <workItem from="1559824748266" duration="8108000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="481678000" />
+    <option name="totallyTimeSpent" value="489786000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14925373" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15085287" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -714,38 +696,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/adminbaskets/localRow.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="90" lean-forward="true" selection-start-line="10" selection-start-column="90" selection-end-line="10" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/stock/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="120" lean-forward="true" selection-start-line="120" selection-end-line="120" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/AdminbasketsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="78" selection-start-line="21" selection-start-column="78" selection-end-line="21" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/web-forms.rnc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/utils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="632">
-          <caret line="155" column="22" selection-start-line="155" selection-start-column="9" selection-end-line="155" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -756,36 +710,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/template.php">
+    <entry file="file://$PROJECT_DIR$/views/adminbaskets/localRow.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="81" column="48" lean-forward="true" selection-start-line="81" selection-start-column="48" selection-end-line="81" selection-end-column="48" />
-          <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
+        <state relative-caret-position="150">
+          <caret line="10" column="90" lean-forward="true" selection-start-line="10" selection-start-column="90" selection-end-line="10" selection-end-column="90" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/adminbaskets/index.php">
+    <entry file="file://$PROJECT_DIR$/controllers/AdminbasketsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
-          <caret line="146" column="37" lean-forward="true" selection-start-line="146" selection-start-column="37" selection-end-line="146" selection-end-column="37" />
-          <folding>
-            <element signature="e#2290#2297#1#HTML" expanded="true" />
-            <element signature="e#4961#4968#1#HTML" expanded="true" />
-          </folding>
+        <state relative-caret-position="315">
+          <caret line="21" column="78" selection-start-line="21" selection-start-column="78" selection-end-line="21" selection-end-column="78" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/adminLocals.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="78" column="28" lean-forward="true" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="28" />
+        <state relative-caret-position="-10">
+          <caret line="193" selection-start-line="193" selection-end-line="193" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/utils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-508">
+          <caret line="155" column="9" selection-start-line="155" selection-start-column="9" selection-end-line="155" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/stock/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="146" column="36" selection-start-line="146" selection-start-column="36" selection-end-line="146" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/adminbaskets/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="135" column="75" lean-forward="true" selection-start-line="135" selection-start-column="75" selection-end-line="135" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/template.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-133">
+          <caret line="30" column="69" lean-forward="true" selection-start-line="30" selection-start-column="69" selection-end-line="30" selection-end-column="69" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/adminBaskets.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="620">
-          <caret line="51" column="14" selection-start-line="51" selection-start-column="14" selection-end-line="51" selection-end-column="14" />
+        <state relative-caret-position="600">
+          <caret line="191" column="26" selection-start-line="191" selection-start-column="26" selection-end-line="191" selection-end-column="26" />
         </state>
       </provider>
     </entry>

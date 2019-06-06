@@ -166,15 +166,21 @@ function exchangeToAPI(url, element, method, func=null, args=null){
 
                 if(Array.isArray(newElement)){
                     if(Array.isArray(element)){
-                        element.concat(newElement);
+                        element=element.concat(newElement);
                     }
-                    if(args.offset&&args.limit) {
-                        if (newElement.length != args.limit && func) {
-                            func(args,element);
-                        }
-                        else{
-                            args.offset+=newElement.length
-                            exchangeToAPI(url, element, method, func, args)
+
+                    if(args.query){
+
+                        if(args.query.offset!==null && args.query.limit!==null ) {
+
+                            if (newElement.length != args.query.limit && func) {
+
+                                func(args,element);
+                            }
+                            else{
+                                args.query.offset+=newElement.length
+                                exchangeToAPI(url, element, method, func, args)
+                            }
                         }
                     }
                 }
@@ -197,17 +203,7 @@ function exchangeToAPI(url, element, method, func=null, args=null){
         }
     }
 
-    if(args){
-        if(args.id){
-            url+="/"+args.id;
-        }
-        if(args.subTarget){
-            url+="/"+args.subTarget;
-        }
-        if(args.offset&&args.limit){
-            url+="?offset="+args.offset+"&limit="+args.limit;
-        }
-    }
+    url=generateUrl(url,args.id,args.subTarget,args.query);
     console.log(url);
 
     request.open(method,url);
@@ -219,4 +215,28 @@ function exchangeToAPI(url, element, method, func=null, args=null){
 
     }
 
+}
+
+function generateUrl(url,id=null,subTarget=null,query=null){
+
+
+    let i=0;
+    if(id){
+        url+="/"+id;
+    }
+    if(subTarget){
+        url+="/"+subTarget;
+    }
+    if(query)
+        i=0;
+        url+="?";
+
+        for(let key in query){
+            i++;
+            url+=key+"="+query[key];
+                if(i!=Object.keys(query).length){
+                url+="&";
+            }
+        }
+    return url;
 }

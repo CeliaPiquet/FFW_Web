@@ -134,6 +134,7 @@
                                     </td>
                                     <td>
                                         <select id="state"  name="sortProductInput" onchange="sortProductByFilter()">
+                                            <option></option>
                                             <?php
                                                 foreach($arrProductConditions as $productCondition){
                                                     echo "<option value='".$productCondition."'>".ucfirst($productCondition)."</option>";

@@ -145,6 +145,7 @@
                         <label for="status"> <?php echo _('State') ?> </label>
                         <select class="form-control form-control" id="status" name="status">
                             <option><?php echo _('Good shape') ?></option>
+                            <option><?php echo _('Good shape') ?></option>
                             <option><?php echo _('Damaged') ?></option>
                             <option><?php echo _('Unconsumable') ?></option>
                         </select>

@@ -131,99 +131,93 @@ function findLocalsByFilter(){
     body.name=document.getElementById("nameInput").value;
     body.cityName= document.getElementById("cityNameInput").value;
 
-    searchLocalsAPI(0,20,searchLocalsAPI);
-}
-
-
-function searchLocalsAPI(offset=0, limit=20, searchLocalsAPI){
-
-    let request=new XMLHttpRequest();
-
-    if(offset===0){
-        arrUser=null;
-    }
-
-    request.onreadystatechange=function(){
-
-        if(request.readyState==4){
-            if(request.status==200){
-                let apiLocals=JSON.parse(request.responseText);
-
-                if(apiLocals.length==limit){
-                    apiLocals.concat(searchLocalsAPI(offset,limit,searchLocalsAPI));
-                }
-                else if(offset>0){
-                    return apiLocals;
-                }
-                else{
-                    arrLocals=apiLocals;
-                    updateLocalRows();
-                }
-
-            }
+    args={
+        query:{
+            offset:0,
+            limit:20,
+            completeData:true
         }
     };
 
-    let url=ffwApiUrl+"/locals?";
-    let query="offset="+offset+"&limit="+limit+"&completeData";
+    url=ffwApiUrl+"/locals?";
 
-    for(let key in body){
-        if(body[key]){
-            query=query+"&"+key+"="+body[key];
-        }
-    }
-    url+=query;
-    request.open("GET",url);
-    request.send(JSON.stringify(body),false);
+    exchangeToAPI(ffwApiUrl+"/locals",arrLocals,"GET",updateLocalRows,args);
 
+
+    // searchLocalsAPI(0,20,searchLocalsAPI);
 }
+
 
 function sortProductByFilter(){
 
-    arrProducts=document.getElementById("createBasketModal").products;
+    let arrProducts=document.getElementById("createBasketModal").products;
+    let basketMap=document.getElementById("createBasketModal").baskets;
 
-    arrFilters=document.getElementsByName("sortProductInput");
+    let arrFilters=document.getElementsByName("sortProductInput");
 
     mapFilteredProducts=new Map();
 
     for(let i = 0 ; i < arrFilters.length ; i++){
-        for(let j = 0 ; j < arrProducts.length ; j++){
 
-            let stringVal=null;
-            let inputVal;
+        for(k=0;k<2;k++){
 
-            if(arrFilters[i].tagName=="SELECT"){
-                inputVal=arrFilters[i].options[arrFilters[i].selectedIndex].value;
-            }
-            else{
-                inputVal=arrFilters[i].value;
-            }
+            let start= k === 0 ? 0:arrProducts.length-1;
+            let limit= k === 0 ? arrProducts.length-1:0-1;
+            let step= k === 0 ? 1:-1;
 
-            if(arrProducts[j][arrFilters[i].id]!=null){
-                stringVal=arrProducts[j][arrFilters[i].id].toString();
-            }
-            if (stringVal && inputVal &&  stringVal.includes(inputVal) && !arrProducts[i].basketId){
-                mapFilteredProducts.set(arrProducts[j].prid, arrProducts[j]);
+            for(let j = start ; j !== limit ; j+=step){
+
+                console.log(j);
+                let stringVal=null;
+                let inputVal;
+
+                if(arrFilters[i].tagName=="SELECT"){
+                    inputVal=arrFilters[i].options[arrFilters[i].selectedIndex].value;
+                    // console.log(inputVal);
+                }
+                else{
+                    inputVal=arrFilters[i].value;
+                }
+
+                if(arrProducts[j][arrFilters[i].id]!=null){
+                    stringVal=arrProducts[j][arrFilters[i].id].toString();
+                }
+
+                if (stringVal!=null && inputVal!="" &&  stringVal.includes(inputVal) && (arrProducts[j].basketId===null || basketMap.get(arrProducts[j].basketId).status=="canceled")){
+                    console.log(stringVal);
+                    console.log(inputVal);
+                    mapFilteredProducts.set(arrProducts[j].prid, arrProducts[j]);
+                }
+                else if(inputVal!="" && stringVal!=inputVal ) {
+                    break;
+                    mapFilteredProducts.delete(arrProducts[j].prid);
+                }
             }
         }
+
     }
 
-    for(let i = 0 ; i < arrProducts.length ; i++){
-        if(!arrProducts[i].basketId){
-            mapFilteredProducts.set(arrProducts[i].prid,arrProducts[i]);
-        }
-    }
+    console.log(mapFilteredProducts)
 
-    updateProductRows(Array.from(mapFilteredProducts));
+    if(mapFilteredProducts.size===0){
+        // console.log(arrProducts)
+        updateProductRows(arrProducts);
+    }
+    else{
+        // console.log(Array.from(mapFilteredProducts))
+        updateProductRows(Array.from(mapFilteredProducts));
+    }
 }
 
 
 
-function updateLocalRows() {
+function updateLocalRows(args,element) {
 
+    arrLocals=element;
     let localRowsContainer = document.getElementById("localRowsContainer");
 
     localRowsContainer.innerHTML = "";
+    console.log(arrLocals);
 
     for (let i = 0; i < arrLocals.length; i++) {
 
@@ -251,7 +245,6 @@ function  updateProductRows(arrProducts){
         productRowsContainer.append(newProductRow);
     }
 }
-
 
 
 function createLocalRow(container,local){
@@ -299,7 +292,6 @@ function mergeAllProductsInLocal(rooms){
     }
 
     return arrProducts;
-
 }
 
 
