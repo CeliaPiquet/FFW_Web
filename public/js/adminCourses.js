@@ -3,46 +3,50 @@ var arrBaskets = [];
 var basketsInCourse = [];
 var basketsNotInCourse = [];
 var arrCourses= [];
-
+var emptyBasketRow;
+var emptyCourseRow;
 var selectedCourse;
 
 var body;
 
-var emptyCourseRow=document.createElement('tr');
-emptyCourseRow.class="align-items-center";
-emptyCourseRow.id="courseRow";
-emptyCourseRow.innerHTML =
-    '<td id="name">\n' +
-    '</td>\n' +
-    '<td id="description">\n' +
-    '</td>\n' +
-    '<td>\n' +
-    '    <select type="text" class="form-control" id="courseState"><option></option></select>\n' +
-    '</td>\n' +
-    '<td id="createTime">\n' +
-    '</td>\n' +
-    '<td id="serviceTime">\n' +
-    '</td>\n' +
-    '<td id="vehicleId">\n' +
-    '</td>\n' +
-    '\n';
+
+function getEmptyBasketRow(domText){
+    emptyBasketRow=document.createElement('tr');
+    emptyBasketRow.class="align-items-center ";
+    emptyBasketRow.scope="row";
+    emptyBasketRow.id="basketRow";
+    emptyBasketRow.innerHTML =domText;
+}
+
+function getEmptyCourseRow(domText) {
+
+    emptyCourseRow = document.createElement('tr');
+    emptyCourseRow.class = "align-items-center";
+    emptyCourseRow.id = "courseRow";
+    emptyCourseRow.innerHTML =domText;
+}
+
+
+loadExternalDOMElement([
+    {url:websiteRoot+"/adminCourses/basketRow",func:getEmptyBasketRow},
+    {url:websiteRoot+"/adminCourses/courseRow",func:getEmptyCourseRow}
+]);
 
 
 
-var emptyBasketRow=document.createElement('tr');
-emptyBasketRow.class="align-items-center ";
-emptyBasketRow.scope="row";
-emptyBasketRow.id="basketRow";
-emptyBasketRow.innerHTML =
-    '<td id="entityName">\n'+
-    '</td>\n' +
-    '<td id="createTime">\n'+
-    '</td>\n';
+courseArgs= {
+    query: {
+        offset: 0,
+        limit: 20,
+        status: "VALIDATED"
+    }
+}
+
+exchangeToAPI(ffwApiUrl + "/courses", arrCourses, "GET", createCourseRow, courseArgs);
 
 
 
-
-searchCourseAPI(0,20,searchCourseAPI);
+// searchCourseAPI(0,20,searchCourseAPI);
 
 //
 // function findusersByFilter(){
@@ -69,63 +73,63 @@ searchCourseAPI(0,20,searchCourseAPI);
 //
 //     searchUserAPI(0,20,searchUserAPI);
 // }
+//
+// function searchCourseAPI(offset=0,limit=20,searchCourseAPI){
+//
+//
+//     // temporary
+//         body=new Object();
+//
+//
+//     let request=new XMLHttpRequest();
+//
+//     if(offset===0){
+//         arrUser=null;
+//     }
+//
+//     request.onreadystatechange=function(){
+//
+//         if(request.readyState==4){
+//             if(request.status==200){
+//                 console.log(request.responseText);
+//                 let apiCourses=JSON.parse(request.responseText);
+//
+//                 if(apiCourses.length==limit){
+//                     apiCourses.concat(searchCourseAPI(offset,limit,searchCourseAPI));
+//                 }
+//                 else if(offset>0){
+//                     return apiCourses;
+//                 }
+//                 else{
+//                     arrCourses=apiCourses;
+//                     createCourseRow();
+//                 }
+//
+//             }
+//         }
+//     };
+//
+//     let url=ffwApiUrl+"/courses?";
+//     let query="offset="+offset+"&limit="+limit;
+//
+//
+//     for(let key in body){
+//         if(body[key]){
+//             query=query+"&"+key+"="+body[key];
+//         }
+//     }
+//     url+=query;
+//     console.log(query);
+//     request.open("GET",url);
+//     console.log(JSON.stringify(body));
+//     request.send(JSON.stringify(body),false);
+//
+// }
 
-function searchCourseAPI(offset=0,limit=20,searchCourseAPI){
 
+function createCourseRow(args, element){
 
-    // temporary
-        body=new Object();
-
-
-    let request=new XMLHttpRequest();
-
-    if(offset===0){
-        arrUser=null;
-    }
-
-    request.onreadystatechange=function(){
-
-        if(request.readyState==4){
-            if(request.status==200){
-                console.log(request.responseText);
-                let apiCourses=JSON.parse(request.responseText);
-
-                if(apiCourses.length==limit){
-                    apiCourses.concat(searchCourseAPI(offset,limit,searchCourseAPI));
-                }
-                else if(offset>0){
-                    return apiCourses;
-                }
-                else{
-                    arrCourses=apiCourses;
-                    createCourseRow();
-                }
-
-            }
-        }
-    };
-
-    let url=ffwApiUrl+"/courses?";
-    let query="offset="+offset+"&limit="+limit;
-
-
-    for(let key in body){
-        if(body[key]){
-            query=query+"&"+key+"="+body[key];
-        }
-    }
-    url+=query;
-    console.log(query);
-    request.open("GET",url);
-    console.log(JSON.stringify(body));
-    request.send(JSON.stringify(body),false);
-
-}
-
-
-function createCourseRow(){
-
-    console.log(arrCourses);
+    arrCourses=element;
     let courseRowContainer=document.getElementById("coursesRowsContainer");
 
     courseRowContainer.innerHTML="";
@@ -140,7 +144,7 @@ function createCourseRow(){
         // }
 
 
-        fillElementAttributesFromObject('innerHTML', '#', newCourseRow, arrCourses[i]);
+        matchDOMAndObject('innerHTML', '#', newCourseRow, arrCourses[i]);
 
         //
         // newLocalRow.querySelector("td[id='courseName']").innerHTML=arrCourses[i].name;
@@ -221,7 +225,7 @@ function createCourseRow(){
 //
 //     tmpUser.rights=parseInt(tmpUser.rights,10);
 //
-//     fillElementAttributesFromObject("value","#",modal,tmpUser);
+//     matchDOMAndObject("value","#",modal,tmpUser);
 //
 //     console.log(tmpUser.rights);
 //     for(let i=0;i<rightsList.childNodes.length;i++){
@@ -265,73 +269,35 @@ function createCourseRow(){
 
 function openNewCourseModal(){
 
-    arrSkills=null;
-
-    getBasketsAPI(0,20,"VALIDATED",getBasketsAPI);
+    arrBaskets=[];
 
     console.log(arrBaskets);
 
+    let url = ffwApiUrl + "/baskets/status";
+
+    args={
+        query:{
+            offset:0,
+            limit:20,
+            status:"VALIDATED"
+        }
+    };
+    exchangeToAPI(url, arrBaskets, "GET", changeBasketsList, args );
     modalDisplay('courseModal');
 }
 
 
-function getBasketsAPI(offset=0,limit=20,bStatus,getBasketsAPI) {
-
-    let request = new XMLHttpRequest();
-
-    if (offset === 0) {
-        arrBaskets = null;
-    }
-
-    request.onreadystatechange = function () {
-
-        if (request.readyState == 4) {
-            if (request.status == 200) {
-                let apiBaskets = JSON.parse(request.responseText);
-
-                if (apiBaskets.length == limit) {
-                    apiBaskets.concat(getBasketsAPI(offset, limit, bStatus, getBasketsAPI));
-                } else if (offset > 0) {
-                    return apiBaskets;
-                } else {
-                    arrBaskets = apiBaskets;
-                    // for (var i = 0; i < arrBaskets.length; i++) {
-                    // }
-
-                        changeBasketsList("VALIDATED");
-
-                }
-            }
-        }
-        ;
-
-        let url = ffwApiUrl + "/baskets/status?";
-        let query = "offset=" + offset + "&limit=" + limit + "&status=" + bStatus;
-
-        // eventuellement + role et + startdate
-
-        for (let key in body) {
-            if (body[key]) {
-                query = query + "&" + key + "=" + body[key];
-            }
-        }
-        url += query;
-        request.open("GET", url);
-        request.send();
-    }
-}
+function changeBasketsList(args, element){
 
 
 
-function changeBasketsList(status){
-
-
-
-    let basketsTable=document.getElementById("basketsTable");
+    let basketsTable=document.getElementById("basketRowsContainer");
 
     basketsTable.innerHTML="";
 
-    console.log(arrBaskets);
+    console.log(element);
+
+    arrBaskets = element;
 
     for(let i=0 ; i<arrBaskets.length ; i++){
 
@@ -343,7 +309,7 @@ function changeBasketsList(status){
             // let skillRowStatus=newBasketRow.querySelector("#skStatus");
             // let basketRowEntityName=newBasketRow.querySelector("#entityName");
 
-            fillElementAttributesFromObject("innerHTML","#",newBasketRow,arrBaskets[i]);
+            matchDOMAndObject("innerHTML","#",newBasketRow,arrBaskets[i]);
 
             let addBasketButton=document.createElement("button");
 
@@ -352,7 +318,7 @@ function changeBasketsList(status){
                 addBasketButton.addEventListener(addBasketButton, "onClick", withdrawBasketFromCourse(arrBaskets[i]));
             } else {
                 addBasketButton.innerHTML = "Ajouter";
-                addBasketButton.onclick.addEventListener(addBasketButton, "onClick", addBasketToCourse(arrBaskets[i]));
+                addBasketButton.addEventListener(addBasketButton, "onClick", addBasketToCourse(arrBaskets[i]));
             }
 
             newBasketRow.append(addBasketButton);

@@ -17,7 +17,7 @@
             <th> <?php echo _("description"); ?> </th>
             <th> <?php echo _("route state"); ?> </th>
             <th> <?php echo _("create date"); ?>  </th>
-            <th> <?php echo _("course date") ;?> </th>
+            <th> <?php echo _("admincourses date") ;?> </th>
             <th> <?php echo _("vehicle") ;?> </th>
 
         </tr>
@@ -61,6 +61,9 @@
                                             <th> <?php echo _("contact"); ?></th>
                                             <th> <?php echo _("createDate"); ?> </th>
                                         </thead>
+                                        <tbody id="basketRowsContainer">
+
+                                        </tbody>
                                     </table>
                                 </div
                             </div>

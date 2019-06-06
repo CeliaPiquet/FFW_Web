@@ -6,7 +6,7 @@ require_once 'framework/Controller.php';
 require_once 'services/AddressService.php';
 
 
-class CourseController extends Controller
+class AdmincoursesController extends Controller
 {
 
     public function __construct(){
@@ -17,10 +17,10 @@ class CourseController extends Controller
 
         $this->addView($this->action, []);
 
+        $this->addView('script');
+
 
         $this->loadTemplate(parent::getTemplateData(),$this->action);
-
-
 
         $routeState=array(
             "deleted",
@@ -29,6 +29,14 @@ class CourseController extends Controller
             "finished"
         );
 
+    }
+
+    public function basketRow(){
+        $this->loadView([],$this->action);
+    }
+
+    public function courseRow(){
+        $this->loadView([],$this->action);
     }
 
 }

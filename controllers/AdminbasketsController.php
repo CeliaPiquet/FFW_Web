@@ -23,10 +23,7 @@ class AdminbasketsController extends Controller
 
         $this->addView('script',array("gMapApiKey"=>Configuration::get("gMapApiKey")));
 
-
         $this->loadTemplate(parent::getTemplateData(),$this->action);
-
-
     }
 
     public function collapsedAddressRow(){
