@@ -43,6 +43,8 @@ emptyCompanyRow.innerHTML =
 function findusersByFilter(){
 
     body=new Object();
+
+
     let skillsSelect=document.getElementById("skillsSelect");
     let skillsStatusSelect=document.getElementById("skillsStatusSelect");
     let rightsSelect=document.getElementById("rightsSelect");

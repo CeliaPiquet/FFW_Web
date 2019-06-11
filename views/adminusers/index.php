@@ -54,7 +54,7 @@
                     }
                     ?>
                 </select>
-            </td>
+            </td>User
             <td>
                 <select type="text" class="form-control" onchange="findusersByFilter()" id="rightsSelect">
                     <option selected></option>

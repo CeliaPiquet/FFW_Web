@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eb56acdc-918e-4591-99b7-1c388d33cdbc" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/public/js/adminCreateBaskets.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/views/adminbaskets/collapsedProductRow.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -23,6 +24,16 @@
       <change beforePath="$PROJECT_DIR$/views/adminbaskets/productRow.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/adminbaskets/productRow.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/adminbaskets/script.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/adminbaskets/script.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/adminlocals/collapsedRoomRow.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/adminlocals/collapsedRoomRow.php" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/controllers/CourseController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/courses.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/course/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/course/script.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/adminUsers.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/adminUsers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/adminusers/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/adminusers/index.php" afterDir="false" />
+>>>>>>> routes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,46 +44,86 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/public/js/companyInscription.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-38">
               <caret line="96" column="9" selection-start-line="96" selection-start-column="9" selection-end-line="96" selection-end-column="9" />
+=======
+        <entry file="file://$PROJECT_DIR$/controllers/CourseController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
+>>>>>>> routes
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/myCalendar.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="900">
               <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/course/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="231">
+              <caret line="58" column="108" selection-start-line="58" selection-start-column="108" selection-end-line="58" selection-end-column="108" />
+              <folding>
+                <element signature="e#1323#1330#1#HTML" expanded="true" />
+              </folding>
+>>>>>>> routes
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/fullcalendar-4.1.0/demos/time-zones.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
               <caret line="15" selection-start-line="15" selection-end-line="83" />
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/js/courses.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="295" column="24" lean-forward="true" selection-start-line="295" selection-start-column="24" selection-end-line="295" selection-end-column="24" />
+>>>>>>> routes
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/controllers/AccountController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="620">
               <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
+=======
+        <entry file="file://$PROJECT_DIR$/views/adminusers/script.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+>>>>>>> routes
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/services/SkillService.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="758">
               <caret line="118" column="45" lean-forward="true" selection-start-line="118" selection-start-column="45" selection-end-line="118" selection-end-column="45" />
+=======
+        <entry file="file://$PROJECT_DIR$/public/js/adminUsers.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="344">
+              <caret line="145" column="36" lean-forward="true" selection-start-line="145" selection-start-column="36" selection-end-line="145" selection-end-column="36" />
+>>>>>>> routes
             </state>
           </provider>
         </entry>
@@ -80,35 +131,70 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/Skill.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="752">
               <caret line="55" column="5" lean-forward="true" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
+=======
+            <state relative-caret-position="225">
+              <caret line="15" lean-forward="true" selection-start-line="2" selection-end-line="15" />
+>>>>>>> routes
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/templates/template.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
               <caret line="20" column="112" selection-start-line="20" selection-start-column="112" selection-end-line="20" selection-end-column="112" />
+=======
+        <entry file="file://$PROJECT_DIR$/public/js/utils.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+>>>>>>> routes
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/views/account/head.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
               <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+=======
+        <entry file="file://$PROJECT_DIR$/views/course/script.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="85" selection-start-line="1" selection-start-column="85" selection-end-line="1" selection-end-column="85" />
+>>>>>>> routes
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/views/account/volunteer.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="617">
               <caret line="60" column="22" lean-forward="true" selection-start-line="60" selection-start-column="22" selection-end-line="60" selection-end-column="22" />
+=======
+        <entry file="file://$PROJECT_DIR$/controllers/AdminusersController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="600">
+              <caret line="40" column="31" lean-forward="true" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/adminusers/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="840">
+              <caret line="56" column="21" selection-start-line="56" selection-start-column="21" selection-end-line="56" selection-end-column="21" />
+>>>>>>> routes
             </state>
           </provider>
         </entry>
@@ -124,6 +210,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+<<<<<<< HEAD
       <find>local</find>
       <find>check</find>
       <find>modal.</find>
@@ -154,6 +241,38 @@
       <find>createBasketRow</find>
       <find>dateClick</find>
       <find>getCompanyAddressForm</find>
+=======
+      <find>POST</find>
+      <find>a</find>
+      <find>indexOf</find>
+      <find>i</find>
+      <find>j</find>
+      <find>updateCompanies</find>
+      <find>pow</find>
+      <find>http://ffwapi.priv/addresses</find>
+      <find>curl</find>
+      <find>modal</find>
+      <find>fill</find>
+      <find>classList</find>
+      <find>skillStatus</find>
+      <find>while</find>
+      <find>openSkillsModal</find>
+      <find>openSkills</find>
+      <find>clone</find>
+      <find>queryS</find>
+      <find>empty</find>
+      <find>emptyUserRow</find>
+      <find>collaps</find>
+      <find>http://ffwapi.priv</find>
+      <find>skillsSele</find>
+      <find>companiesMap.set(company.siret,true);</find>
+      <find>&quot;http://ffwapi.priv</find>
+      <find>&quot;http://ffw.priv</find>
+      <find>util</find>
+      <find>service</find>
+      <find>skill</find>
+      <find>changeBasketsList</find>
+>>>>>>> routes
     </findStrings>
     <replaceStrings>
       <replace>email</replace>
@@ -164,9 +283,13 @@
       <replace>apiUrl+&quot;</replace>
       <replace>emptyLocalRow</replace>
       <replace>ffwApiUrl+&quot;</replace>
+<<<<<<< HEAD
       <replace>emptyProductRow</replace>
       <replace>emptyLocalRo</replace>
       <replace>basket</replace>
+=======
+      <replace>arrCourses</replace>
+>>>>>>> routes
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/views</dir>
@@ -179,29 +302,58 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/models/CompleteSkill.php" />
         <option value="$PROJECT_DIR$/public/js/actionList.js" />
         <option value="$PROJECT_DIR$/config/dev.ini" />
         <option value="$PROJECT_DIR$/controllers/ConnectionController.php" />
+=======
+        <option value="$PROJECT_DIR$/views/inscription/accountChoice.php" />
+        <option value="$PROJECT_DIR$/controllers/SirenController.php" />
+        <option value="$PROJECT_DIR$/public/js/actionList.js" />
+>>>>>>> routes
         <option value="$PROJECT_DIR$/framework/Template.php" />
-        <option value="$PROJECT_DIR$/framework/Controller.php" />
+        <option value="$PROJECT_DIR$/views/inscription/companyAddr" />
+        <option value="$PROJECT_DIR$/framework/View.php" />
+        <option value="$PROJECT_DIR$/views/inscription/company.php" />
+        <option value="$PROJECT_DIR$/views/inscription/companyAddressForm.php" />
+        <option value="$PROJECT_DIR$/views/account/navbar.php" />
         <option value="$PROJECT_DIR$/controllers/HomeController.php" />
-        <option value="$PROJECT_DIR$/controllers/LocalController.php" />
-        <option value="$PROJECT_DIR$/views/local/collapsedRoomRow.php" />
+        <option value="$PROJECT_DIR$/models/User.php" />
+        <option value="$PROJECT_DIR$/public/js/localList.js" />
+        <option value="$PROJECT_DIR$/public/js/productList.js" />
+        <option value="$PROJECT_DIR$/views/stock/index.php" />
+        <option value="$PROJECT_DIR$/models/Local.php" />
         <option value="$PROJECT_DIR$/views/local/localRow.php" />
-        <option value="$PROJECT_DIR$/views/local/roomRow.php" />
-        <option value="$PROJECT_DIR$/public/js/adminSkills.js" />
-        <option value="$PROJECT_DIR$/views/local/collapsedAddressRow.php" />
-        <option value="$PROJECT_DIR$/services/AddressService.php" />
-        <option value="$PROJECT_DIR$/public/js/addressAutocomplete.js" />
+        <option value="$PROJECT_DIR$/services/LocalService.php" />
+        <option value="$PROJECT_DIR$/public/js/localHandler.js" />
         <option value="$PROJECT_DIR$/views/local/index.php" />
-        <option value="$PROJECT_DIR$/views/local/script.php" />
-        <option value="$PROJECT_DIR$/controllers/AdminBasketsController.php" />
-        <option value="$PROJECT_DIR$/views/adminlocals/collapsedAddressRow.php" />
-        <option value="$PROJECT_DIR$/views/adminlocals/index.php" />
-        <option value="$PROJECT_DIR$/public/js/adminUsers.js" />
+        <option value="$PROJECT_DIR$/models/Company.php" />
+        <option value="$PROJECT_DIR$/views/inscription/index.php" />
+        <option value="$PROJECT_DIR$/views/account/companyAddressForm.php" />
+        <option value="$PROJECT_DIR$/services/CompanyService.php" />
+        <option value="$PROJECT_DIR$/framework/GoogleMap.php" />
+        <option value="$PROJECT_DIR$/views/account/company.php" />
+        <option value="$PROJECT_DIR$/public/js/addressAutocomplete.js" />
+        <option value="$PROJECT_DIR$/views/inscription/script.php" />
+        <option value="$PROJECT_DIR$/services/AddressService.php" />
+        <option value="$PROJECT_DIR$/controllers/CompanyController.php" />
+        <option value="$PROJECT_DIR$/models/Skill.php" />
+        <option value="$PROJECT_DIR$/services/SkillService.php" />
+        <option value="$PROJECT_DIR$/views/account/script.php" />
+        <option value="$PROJECT_DIR$/controllers/InscriptionController.php" />
+        <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/services/UserService.php" />
+        <option value="$PROJECT_DIR$/public/js/companyInscription.js" />
+        <option value="$PROJECT_DIR$/controllers/AccountController.php" />
+        <option value="$PROJECT_DIR$/views/account/volunteer.php" />
+        <option value="$PROJECT_DIR$/templates/template.php" />
+        <option value="$PROJECT_DIR$/framework/Controller.php" />
+        <option value="$PROJECT_DIR$/controllers/AdminUsersController.php" />
+        <option value="$PROJECT_DIR$/views/adminUsers/index.php" />
         <option value="$PROJECT_DIR$/controllers/AdminusersController.php" />
         <option value="$PROJECT_DIR$/views/adminusers/index.php" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/views/adminbaskets/collapsedAddressRow.php" />
         <option value="$PROJECT_DIR$/views/adminbaskets/localRow.php" />
         <option value="$PROJECT_DIR$/views/stock/index.php" />
@@ -230,14 +382,21 @@
         <option value="$PROJECT_DIR$/views/account/head.php" />
         <option value="$PROJECT_DIR$/views/account/volunteer.php" />
         <option value="$PROJECT_DIR$/public/js/myCalendar.js" />
+=======
+        <option value="$PROJECT_DIR$/controllers/CourseController.php" />
+        <option value="$PROJECT_DIR$/views/course/script.php" />
+        <option value="$PROJECT_DIR$/public/js/adminUsers.js" />
+        <option value="$PROJECT_DIR$/public/js/courses.js" />
+        <option value="$PROJECT_DIR$/views/course/index.php" />
+>>>>>>> routes
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="825" />
+    <option name="y" value="25" />
+    <option name="width" value="775" />
+    <option name="height" value="875" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -276,6 +435,7 @@
               <item name="ffw.priv" type="b2602c69:ProjectViewProjectNode" />
               <item name="FFW_WEB" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name="fullcalendar-4.1.0" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -368,6 +528,9 @@
               <item name="FFW_WEB" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
               <item name="jquery" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+>>>>>>> routes
             </path>
             <path>
               <item name="ffw.priv" type="b2602c69:ProjectViewProjectNode" />
@@ -395,7 +558,37 @@
               <item name="ffw.priv" type="b2602c69:ProjectViewProjectNode" />
               <item name="FFW_WEB" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="adminbaskets" type="462c0819:PsiDirectoryNode" />
+              <item name="adminusers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ffw.priv" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FFW_WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="connection" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ffw.priv" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FFW_WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="course" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ffw.priv" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FFW_WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ffw.priv" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FFW_WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="inscription" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ffw.priv" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FFW_WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="local" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ffw.priv" type="b2602c69:ProjectViewProjectNode" />
@@ -426,10 +619,11 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../FFW_API" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
-    <property name="settings.editor.selected.configurable" value="preferences.editor" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -440,11 +634,19 @@
       <recent name="$PROJECT_DIR$/framework" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+<<<<<<< HEAD
       <recent name="C:\Apache24\www\FFW_WEB\views\adminbaskets" />
       <recent name="C:\Apache24\www\FFW_WEB\controllers" />
       <recent name="C:\Apache24\www\FFW_WEB\public\bootstrap-4.1.3" />
       <recent name="$PROJECT_DIR$/models" />
       <recent name="$PROJECT_DIR$/services" />
+=======
+      <recent name="$PROJECT_DIR$/views/adminUsers" />
+      <recent name="$PROJECT_DIR$/controllers" />
+      <recent name="$PROJECT_DIR$/services" />
+      <recent name="$PROJECT_DIR$/models" />
+      <recent name="$PROJECT_DIR$/views" />
+>>>>>>> routes
     </key>
   </component>
   <component name="RunDashboard">
@@ -482,6 +684,7 @@
       <workItem from="1558623642353" duration="25101000" />
       <workItem from="1558804832386" duration="35444000" />
       <workItem from="1558877352042" duration="6123000" />
+<<<<<<< HEAD
       <workItem from="1558911104279" duration="75646000" />
       <workItem from="1559121651186" duration="608000" />
       <workItem from="1559144632674" duration="135000" />
@@ -492,10 +695,18 @@
       <workItem from="1559634442550" duration="34013000" />
       <workItem from="1559749017652" duration="30964000" />
       <workItem from="1559824748266" duration="91312000" />
+=======
+      <workItem from="1558888985360" duration="7051000" />
+      <workItem from="1558950250601" duration="1226000" />
+      <workItem from="1558969178862" duration="647000" />
+      <workItem from="1559393586993" duration="8038000" />
+      <workItem from="1559404047230" duration="21462000" />
+>>>>>>> routes
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="572990000" />
   </component>
   <component name="ToolWindowManager">
@@ -504,9 +715,19 @@
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49945828" visible="true" weight="0.15085287" />
       <window_info id="Structure" order="1" sideWeight="0.5005417" side_tool="true" weight="0.15085287" />
+=======
+    <option name="totallyTimeSpent" value="294759000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="51" y="25" width="1549" height="875" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15169661" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+>>>>>>> routes
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.17828418" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -522,6 +743,27 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24946696" />
       <window_info anchor="right" id="Database" order="3" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15169661" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.17828418" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32937366" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32937366" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24958494" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -530,15 +772,22 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
+<<<<<<< HEAD
           <url>file://$PROJECT_DIR$/public/js/utils.js</url>
           <line>259</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="3" />
+=======
+          <url>file://$PROJECT_DIR$/public/js/companyInscription.js</url>
+          <line>38</line>
+          <option name="timeStamp" value="2" />
+>>>>>>> routes
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/services/AddressService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
@@ -693,11 +942,140 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+=======
+    <entry file="file://$PROJECT_DIR$/public/css/stylesheet.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="28" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/framework/Controller.php">
+    <entry file="file://$PROJECT_DIR$/models/Company.php">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="19" column="24" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="24" />
+          <caret line="21" column="23" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="23" />
+          <caret line="22" column="22" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/local/localCard.php" />
+    <entry file="file:///etc/php/7.2/apache2/php.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2782">
+          <caret line="894" column="14" selection-start-line="894" selection-start-column="10" selection-end-line="894" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/account/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1828">
+          <caret line="15" column="25" lean-forward="true" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/account/navbar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="32" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/LocalService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/CompleteSkill.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="559">
+          <caret line="45" column="32" lean-forward="true" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/inscription/script.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/account/companyAddressForm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="829">
+          <caret line="66" column="6" lean-forward="true" selection-end-line="66" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="5" lean-forward="true" selection-start-column="5" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/CompanyController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="59" column="26" lean-forward="true" selection-start-line="59" selection-start-column="26" selection-end-line="59" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/Template.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="559">
+          <caret line="59" column="59" lean-forward="true" selection-start-line="59" selection-start-column="59" selection-end-line="59" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/dev.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="784">
+          <caret line="209" column="31" selection-start-line="209" selection-start-column="31" selection-end-line="209" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/account/company.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/account/script.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/CompanyService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="870">
+          <caret line="58" column="4" selection-start-line="58" selection-start-column="4" selection-end-line="91" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/InscriptionController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/Skill.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+>>>>>>> routes
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="448">
           <caret line="82" column="9" lean-forward="true" selection-start-line="82" selection-start-column="9" selection-end-line="82" selection-end-column="9" />
         </state>
@@ -707,11 +1085,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
           <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
+=======
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1916">
+          <caret line="26" column="76" lean-forward="true" selection-start-line="26" selection-start-column="76" selection-end-line="26" selection-end-column="76" />
+>>>>>>> routes
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/adminlocals/localRow.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="240">
           <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
         </state>
@@ -745,11 +1135,44 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="555">
           <caret line="221" column="78" selection-start-line="221" selection-start-column="64" selection-end-line="221" selection-end-column="78" />
+=======
+        <state relative-caret-position="1260">
+          <caret line="84" selection-start-line="84" selection-end-line="84" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/adminlocals/index.php">
+    <entry file="file://$PROJECT_DIR$/services/AddressService.php">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="42" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/companyInscription.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/stock/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="5" selection-start-line="25" selection-end-line="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/SkillService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1620">
+          <caret line="108" column="13" selection-start-line="108" selection-start-column="13" selection-end-line="108" selection-end-column="13" />
+>>>>>>> routes
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="435">
           <caret line="29" column="37" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="37" />
         </state>
@@ -882,6 +1305,136 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/account/volunteer.php">
+=======
+        <state relative-caret-position="1515">
+          <caret line="101" selection-start-line="101" selection-end-line="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/UserService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="58" column="59" selection-start-line="58" selection-start-column="59" selection-end-line="58" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/Address.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="96" column="7" selection-start-line="96" selection-start-column="7" selection-end-line="96" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/local/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1950">
+          <caret line="130" lean-forward="true" selection-end-line="130" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/LocalController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/template.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1005">
+          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/account/volunteer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/View.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1575">
+          <caret line="105" column="14" lean-forward="true" selection-start-line="105" selection-start-column="14" selection-end-line="105" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/AdminusersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="40" column="31" lean-forward="true" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/adminusers/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="56" column="21" selection-start-line="56" selection-start-column="21" selection-end-line="56" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/CourseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/utils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/adminSkills.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" lean-forward="true" selection-start-line="2" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/course/script.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="85" selection-start-line="1" selection-start-column="85" selection-end-line="1" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/adminusers/script.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/adminUsers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="145" column="36" lean-forward="true" selection-start-line="145" selection-start-column="36" selection-end-line="145" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/course/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="58" column="108" selection-start-line="58" selection-start-column="108" selection-end-line="58" selection-end-column="108" />
+          <folding>
+            <element signature="e#1323#1330#1#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/courses.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="295" column="24" lean-forward="true" selection-start-line="295" selection-start-column="24" selection-end-line="295" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/utils.js">
+>>>>>>> routes
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="617">
           <caret line="60" column="22" lean-forward="true" selection-start-line="60" selection-start-column="22" selection-end-line="60" selection-end-column="22" />
