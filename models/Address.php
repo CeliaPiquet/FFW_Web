@@ -11,7 +11,7 @@ class Address implements JsonSerializable {
     private $latitude;
     private $longitude;
 
-    public function __construct(array $fields) {
+    public function __construct(array $fields=null) {
         $this->adid = isset($fields['adid']) ? $fields['adid'] : NULL;
         $this->houseNumber = isset($fields['houseNumber']) ? $fields['houseNumber'] : NULL;
         $this->streetAddress = isset($fields['streetAddress'])?$fields['streetAddress']:NULL;

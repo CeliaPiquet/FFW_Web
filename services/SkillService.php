@@ -97,20 +97,21 @@ class SkillService {
         $response=["httpCode"=>0,"result"=>[]];
         $curlSkills=array();
         $offset=0;
-        while($response["httpCode"]<400){
+        $limit=20;
+        $response["result"]=null;
+        do{
 
-            if($response["result"]){
-                if($offset==0){
-                    $curlSkills = json_decode($response["result"],true);
-                }
-                else{
-                    $curlSkills=array_merge($curlSkills, json_decode($response["result"],true));
-                }
-            }
             $offset=sizeof($curlSkills);
-            $url="$apiUrl/users/$userId/skills?offset=$offset&limit=20";
+            $url="$apiUrl/users/$userId/skills?offset=$offset&limit=$limit";
+
             $response= $curl->curlGet($url,array());
-        }
+
+            if($response["result"]) {
+                $curlSkills = array_merge($curlSkills, json_decode($response["result"], true));
+            }
+        }while(count($curlSkills)==$limit);
+
+
         $filteredSkills=[];
         if(isset($curlSkills) && !empty($curlSkills)){
             foreach($curlSkills as $key=>$skill){
@@ -159,7 +160,6 @@ class SkillService {
 
 
             if($response["result"]){
-                var_dump($response["result"]);
                 $curlSkills=array_merge($curlSkills, json_decode($response["result"],true));
             }
 
@@ -170,7 +170,6 @@ class SkillService {
 
         }
 
-//        var_dump($curlSkills);
         $filteredSkills=[];
         if(isset($curlSkills) && !empty($curlSkills)){
             foreach($curlSkills as $key=>$skill){
@@ -178,6 +177,7 @@ class SkillService {
                     $filteredSkills[]=new Skill($skill);
                 }
             }
+
             return $filteredSkills;
         }
 

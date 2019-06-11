@@ -26,10 +26,8 @@ function matchDOMAndObject(attribute, selector, element, object,order=false,limi
                 matchDOMAndObject(attribute, selector, element, object[key], order,limit,deepness);
             }
             if (isNaN(key)) {
-
                 let childElement = element.querySelector(selector + key);
-
-                if (childElement && object[key] !== null && object[key] != "") {
+                if (childElement && object[key] !== null && object[key] !== "") {
 
                     if(childElement.tagName=="SELECT" ){
                         for(let selectKey in childElement.options){
@@ -40,7 +38,7 @@ function matchDOMAndObject(attribute, selector, element, object,order=false,limi
                         }
                     }
                     else{
-                        childElement[attribute] = object[key];
+                        childElement[attribute]=object[key];
                     }
                 }
             }
@@ -161,26 +159,25 @@ function exchangeToAPI(url, element, method, func=null, args=null){
     request.onreadystatechange=function(){
 
         if(request.readyState==4){
+            if(args){
+                args.status = request.status;
+            }
             if(request.status==200 || request.status==201) {
                 newElement = JSON.parse(request.responseText);
 
                 if(Array.isArray(newElement)){
                     if(Array.isArray(element)){
+                        console.log(element);
+                        console.log(newElement);
                         element=element.concat(newElement);
                     }
 
                     if(args.query){
 
-                        if(args.query.offset!==null && args.query.limit!==null ) {
+                        if(args.query.offset!==null && args.query.limit!==null && newElement.length == args.query.limit) {
 
-                            if (newElement.length != args.query.limit && func) {
-
-                                func(args,element);
-                            }
-                            else{
-                                args.query.offset+=newElement.length
-                                exchangeToAPI(url, element, method, func, args)
-                            }
+                            args.query.offset+=newElement.length
+                            exchangeToAPI(url, element, method, func, args)
                         }
                     }
                 }
@@ -194,19 +191,24 @@ function exchangeToAPI(url, element, method, func=null, args=null){
                     else{
                         copyObjectProperty(newElement,element);
                     }
-
-                    if(func&&args){
-                        func(args,element);
-                    }
                 }
             }
+            if (func) {
+                func( element ,args);
+            }
+
         }
     }
 
-    url=generateUrl(url,args.id,args.subTarget,args.query);
-    console.log(url);
+    if(args!=null){
+        newUrl=generateUrl(url,args.id,args.subTarget,args.query);
+    }
+    else{
+        newUrl=url;
+    }
+    console.log(newUrl);
 
-    request.open(method,url);
+    request.open(method,newUrl);
     if(method!='GET'){
         request.send(JSON.stringify(element));
     }
@@ -217,7 +219,7 @@ function exchangeToAPI(url, element, method, func=null, args=null){
 
 }
 
-function generateUrl(url,id=null,subTarget=null,query=null){
+function generateUrl(url,id=null,subTarget=null,queries=null){
 
 
     let i=0;
@@ -227,16 +229,39 @@ function generateUrl(url,id=null,subTarget=null,query=null){
     if(subTarget){
         url+="/"+subTarget;
     }
-    if(query)
+
+    for(let key in queries){
+        if(queries[key]===null||queries[key]===""){
+            delete(queries[key]);
+        }
+    }
+
+    if(queries)
         i=0;
         url+="?";
 
-        for(let key in query){
+        for(let key in queries){
             i++;
-            url+=key+"="+query[key];
-                if(i!=Object.keys(query).length){
+            url+=key+"="+queries[key];
+
+                if(i!=Object.keys(queries).length){
                 url+="&";
             }
         }
     return url;
+}
+
+function sortByOrder(a,b){
+
+    console.log(sortByOrder);
+    console.log(sortByOrder.sortKey);
+    console.log(sortByOrder.order);
+
+    if(a[sortByOrder.sortKey]>b[sortByOrder.sortKey]){
+        return 1*sortByOrder.order;
+    }
+    else if(a[sortByOrder.sortKey]<b[sortByOrder.sortKey]){
+        return -1*sortByOrder.order;
+    }
+    return 0;
 }

@@ -28,7 +28,9 @@ class AccountController extends Controller
         $addressManager=AddressService::getInstance();
         $address=$addressManager->getOneById($this->user->getAddressId());
 
-
+        if(!$address){
+            $address=new Address();
+        }
 
         $this->addView($this->action,array('user'=>$this->user,'address'=>$address));
         $this->addView('script',array("gMapApiKey"=>Configuration::get("gMapApiKey")));
@@ -62,9 +64,9 @@ class AccountController extends Controller
         $this->loadTemplate(parent::getTemplateData(),$this->action);
     }
 
-    public function getCompanyAddressForm(){
+    public function companyAddressForm(){
 
-        $this->loadView(null,'companyAddressForm');
+        $this->loadView(null,$this->action);
 
     }
 
@@ -79,11 +81,9 @@ class AccountController extends Controller
         $skillManager=SkillService::getInstance();
 
 
-        var_dump($this->user);
         $arrSkills=$skillManager->getAll("enabled");
-        $arrUserSkills=$skillManager->getAllByUser($this->user->getUid(),"activated");
+        $arrUserSkills=$skillManager->getAllByUser($this->user->getUid(),"enabled");
 
-        var_dump($arrUserSkills);
 
         $lightUser=array("uid"=>$this->user->getUid(),"email"=>$this->user->getEmail());
 

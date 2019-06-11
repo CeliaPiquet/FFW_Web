@@ -11,6 +11,6 @@
     <input type="text" class="form-control"  id="state" readonly>
 </td>
 <td>
-    <input type="checkbox" class="form-control"  name="checkProduct" >
+    <input type="checkbox" class="form-control"  name="checkProduct"  >
 </td>
 

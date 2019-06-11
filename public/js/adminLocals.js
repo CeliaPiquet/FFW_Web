@@ -70,16 +70,7 @@ function changeQuantityOrder(){
 
 function orderLocalsByQuantity(order){
 
-
-    arrLocals.sort(function(a,b){
-        if(a.totalQuantity>b.totalQuantity){
-            return 1*order;
-        }
-        else if(a.totalQuantity<b.totalQuantity){
-            return -1*order;
-        }
-        return 0;
-    });
+    arrLocals.sort(sortByOrder);
 
 
 }
@@ -341,7 +332,7 @@ function confirmRow(event){
     }
 }
 
-function createLocalToAPI(args,address){
+function createLocalToAPI(address,args){
     console.log(args.local);
     args.local.adid=address.adid;
 

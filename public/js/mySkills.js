@@ -1,4 +1,5 @@
 
+var skillBody;
 var emptyUserSkill=(function(emptyUserSkill){
 
     parser=new DOMParser();
@@ -28,8 +29,11 @@ var removeButtonSkill=(function(removeButtonSkill) {
 if(userSkills==null){
     userSkills=[];
 }
+
+
 updateMySkillsDisplay();
 disableSkillOptions();
+
 
 
 function disableSkillOptions(){
@@ -59,8 +63,8 @@ function addSkill(){
 
     if(selectElement.selectedIndex!=0) {
         let title="Add : "+selectElement.options[selectElement.selectedIndex].innerHTML;
-        let skid=skillBody.skid=selectElement.options[selectElement.selectedIndex].value;
-        let name=skillBody.name=selectElement.options[selectElement.selectedIndex].innerHTML;
+        let skid=selectElement.options[selectElement.selectedIndex].value;
+        let name=selectElement.options[selectElement.selectedIndex].innerHTML;
         prepareSkillModal("pending activate", title,skid,name);
     }
 

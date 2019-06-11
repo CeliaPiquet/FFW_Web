@@ -1,343 +1,251 @@
-var arrLocals=[];
-var body;
-var emptyLocalRow;
-var emptyCollapsedAddressRow;
-var emptyProductRow;
 
-function openLocalModal(){
-
-    modalDisplay('selectLocalModal');
-
-}
+var arrBaskets=[];
+var emptyBasketRow;
+var emptyCollapsedProductRow;
 
 
 loadExternalDOMElement([
-    {url:websiteRoot+"/adminBaskets/collapsedAddressRow",func:getCollapsedAddressRow},
-    {url:websiteRoot+"/adminBaskets/localRow",func:getEmptyLocalRow},
+    {url:websiteRoot+"/adminBaskets/basketRow",func:getEmptyBasketRow},
+    {url:websiteRoot+"/adminBaskets/collapsedProductRow",func:getCollapsedProductRow},
     {url:websiteRoot+"/adminBaskets/productRow",func:getEmptyProductRow}
 ]);
 
-function getEmptyLocalRow(domText){
-    emptyLocalRow=document.createElement('tr');
-    emptyLocalRow.class="align-items-center";
-    emptyLocalRow.id="localRow";
-    emptyLocalRow.innerHTML = domText;
-}
 
 
-function getEmptyProductRow(domText){
-    emptyProductRow=document.createElement('tr');
-    emptyProductRow.class="align-items-center";
-    emptyProductRow.id="productRow";
-    emptyProductRow.innerHTML = domText;
-}
+function findBasketsByFilter(){
 
-function getCollapsedAddressRow(domText){
-    emptyCollapsedAddressRow=document.createElement('tr')
-    emptyCollapsedAddressRow.class="align-items-center";
-    emptyCollapsedAddressRow.id="collapsedAddressRow";
-    emptyCollapsedAddressRow.innerHTML =domText;
-}
-
-
-function openBasketModal(event){
-
-    let element=event.target;
-
-    let local=getFirstParent(element,"id","localRow").local;
-    let modal=document.getElementById("createBasketModal");
-    modal.products=[];
-    modal.products=local.products;
-    modal.baskets=local.baskets;
-    let args={id:local.baskets.keys().next().value};
-
-    exchangeToAPI(ffwApiUrl+"/baskets",local.baskets,"GET",getAllBasketByID,args);
-
-    modalDisplay("createBasketModal");
-}
-
-
-function checkAllProduct(){
-
-
-    arrCheckProduct=document.getElementsByName("checkProduct");
-    checkAllVal=document.getElementById("checkProductInput").checked;
-
-
-    console.log(checkAllVal);
-    for(let i =  0 ; i<arrCheckProduct.length ; i++){
-        arrCheckProduct[i].checked=checkAllVal;
-    }
-}
-
-function getAllBasketByID(args,element){
-
-    let key=element.keys();
-    args.id=null;
-    do{
-
-        keyVal=key.next().value;
-        if(element.get(keyVal)==null){
-            if(keyVal){
-                args.id=keyVal;
-                break;
-            }
-        }
-    }while(keyVal);
-
-    if(args.id){
-        exchangeToAPI(ffwApiUrl+"/baskets",element,"GET",getAllBasketByID,args);
+    arrBaskets=[];
+    let filterObject={
+        basketStatusSelect:null,
+        basketRoleSelect:null,
+        createDateInput:null
     }
 
+    matchDOMAndObject("value","#",document.getElementById("basketsTableHeader"),filterObject,true);
 
-}
-function changeQuantityOrder(){
-
-    let arrowOrder=document.getElementById("arrowOrder");
-
-
-    if(arrowOrder.classList.contains("fa-arrow-up")){
-        arrowOrder.classList.remove("fa-arrow-up");
-        arrowOrder.classList.add("fa-arrow-down");
-        orderLocalsByQuantity(1);
-    }
-    else{
-        arrowOrder.classList.remove("fa-arrow-down");
-        arrowOrder.classList.add("fa-arrow-up");
-        orderLocalsByQuantity(-1);
-    }
-    updateLocalRows();
-}
-
-function orderLocalsByQuantity(order){
-
-
-    arrLocals.sort(function(a,b){
-        if(a.totalQuantity>b.totalQuantity){
-            return 1*order;
-        }
-        else if(a.totalQuantity<b.totalQuantity){
-            return -1*order;
-        }
-        return 0;
-    });
-}
-
-function findLocalsByFilter(){
-
-    body=new Object();
-
-
-    body.name=document.getElementById("nameInput").value;
-    body.cityName= document.getElementById("cityNameInput").value;
+    console.log(filterObject);
 
     args={
         query:{
             offset:0,
             limit:20,
-            completeData:true
+            status:filterObject.basketStatusSelect,
+            role:filterObject.basketRoleSelect,
         }
     };
 
-    url=ffwApiUrl+"/locals?";
-
-    exchangeToAPI(ffwApiUrl+"/locals",arrLocals,"GET",updateLocalRows,args);
-
-
-    // searchLocalsAPI(0,20,searchLocalsAPI);
-}
-
-
-function sortProductByFilter(){
-
-    let arrProducts=document.getElementById("createBasketModal").products;
-    let basketMap=document.getElementById("createBasketModal").baskets;
-
-    let arrFilters=document.getElementsByName("sortProductInput");
-
-    mapFilteredProducts=new Map();
-
-    for(let i = 0 ; i < arrFilters.length ; i++){
-
-        for(k=0;k<2;k++){
-
-            let start= k === 0 ? 0:arrProducts.length-1;
-            let limit= k === 0 ? arrProducts.length-1:0-1;
-            let step= k === 0 ? 1:-1;
-
-            for(let j = start ; j !== limit ; j+=step){
-
-                console.log(j);
-                let stringVal=null;
-                let inputVal;
-
-                if(arrFilters[i].tagName=="SELECT"){
-                    inputVal=arrFilters[i].options[arrFilters[i].selectedIndex].value;
-                    // console.log(inputVal);
-                }
-                else{
-                    inputVal=arrFilters[i].value;
-                }
-
-                if(arrProducts[j][arrFilters[i].id]!=null){
-                    stringVal=arrProducts[j][arrFilters[i].id].toString();
-                }
-
-                if (stringVal!=null && inputVal!="" &&  stringVal.includes(inputVal) && (arrProducts[j].basketId===null || basketMap.get(arrProducts[j].basketId).status=="canceled")){
-                    console.log(stringVal);
-                    console.log(inputVal);
-                    mapFilteredProducts.set(arrProducts[j].prid, arrProducts[j]);
-                }
-                else if(inputVal!="" && stringVal!=inputVal ) {
-                    break;
-                    mapFilteredProducts.delete(arrProducts[j].prid);
-                }
-            }
-        }
-
-    }
-
-    console.log(mapFilteredProducts)
-
-    if(mapFilteredProducts.size===0){
-        // console.log(arrProducts)
-        updateProductRows(arrProducts);
-    }
-    else{
-        // console.log(Array.from(mapFilteredProducts))
-        updateProductRows(Array.from(mapFilteredProducts));
-    }
-}
-
-
-
-function updateLocalRows(args,element) {
-
-    arrLocals=element;
-    let localRowsContainer = document.getElementById("localRowsContainer");
-
-    localRowsContainer.innerHTML = "";
-    console.log(arrLocals);
-
-    for (let i = 0; i < arrLocals.length; i++) {
-
-        createLocalRow(localRowsContainer,arrLocals[i]);
-    }
-}
-
-function  updateProductRows(arrProducts){
-
-    let productRowsContainer = document.getElementById("productRowsContainer");
-
-    productRowsContainer.innerHTML = "";
-
-    for (let i = 0; i < arrProducts.length; i++) {
-
-        newProductRow=emptyProductRow.cloneNode(true);
-        if(arrProducts["checkProduct"]==undefined){
-            arrProducts["checkProduct"]=false;
-        }
-
-        matchDOMAndObject("value","#",newProductRow, arrProducts[i]);
-        matchDOMAndObject("checked","name",newProductRow, arrProducts[i].checkProduct);
-
-        newProductRow.product=arrProducts[i];
-        productRowsContainer.append(newProductRow);
-    }
-}
-
-
-function createLocalRow(container,local){
-
-    newLocalRow=emptyLocalRow.cloneNode(true);
-    newCollapsedAddressRow = emptyCollapsedAddressRow.cloneNode(true);
-
-    newLocalRow.querySelector("#collapseBtnAddress").addEventListener('click',collapseElement,false);
-
-    local.products=mergeAllProductsInLocal(local.rooms);
-    local["totalQuantity"]=local.products&&local.products.length>0?local.products.length:"0";
-
-    local.baskets=new Map();
-    for(let i = 0 ; i <local.products.length ; i++){
-        local.baskets.set(local.products[i].basketId,null);
-    }
-
-    newLocalRow.querySelector("#displayCreateBasketModal").addEventListener('click',openBasketModal,false);
-
-    convertAddressObjectToDOM(local.address);
-
-    matchDOMAndObject("value", "#", newCollapsedAddressRow, local.address);
-
-    matchDOMAndObject("value", "#", newLocalRow, local,false,1);
-    matchDOMAndObject("innerHTML", "#", newLocalRow, local,false,1)
-
-    container.append(newLocalRow);
-    container.append(newCollapsedAddressRow);
-
-    newLocalRow.local=local;
-    newLocalRow.collapseAddress=newCollapsedAddressRow.querySelector("#collapseAddress");
+    exchangeToAPI(ffwApiUrl+"/baskets",arrBaskets,"GET",updateBasketRows,args);
 
 }
 
-function mergeAllProductsInLocal(rooms){
-
-    let arrProducts=[];
-
-    for(let i =0 ; i< rooms.length; i++){
-
-        for(let j =0 ; j<rooms[i].products.length ; j++){
-
-            arrProducts.push(rooms[i].products[j]);
-        }
-    }
-
-    return arrProducts;
-}
-
-
-function collapseElement(event){
+function collapseProductElement(event){
 
     element=event.target;
-    parent=getFirstParent(element,"id","localRow");
+    parent=getFirstParent(element,"id","basketRow");
 
-    if(element.id=="collapseBtnAddress"){
-        collapseDisplay(parent.collapseAddress);
-    }
-    else if(element.id=="collapseBtnRoom"){
-        collapseDisplay(parent.collapseRoomRow);
+    console.log(element);
+    if(element.id=="collapseBtnProduct"){
+        collapseDisplay(parent.collapseProductRow);
     }
 }
 
+function updateBasketRows(element) {
 
+    arrBaskets=element;
 
-function addLocal(){
+    let basketRowsContainer = document.getElementById("basketRowsContainer");
+    let createTime=document.getElementById("createDateInput").value;
+    let filteredArrBasket=[];
 
-    let localRowsContainer = document.getElementById("localRowsContainer");
+    basketRowsContainer.innerHTML = "";
 
-    for(let i=0;i<arrLocals.length;i++){
-        if(arrLocals[i].loid==null){
-            return null;
+    if(arrBaskets){
+
+        console.log(arrBaskets);
+
+        for(let i =0 ; i<arrBaskets.length; i++){
+
+            if((createTime && arrBaskets[i].createTime===createTime)||!createTime){
+                console.log(arrBaskets[i])
+                filteredArrBasket.push(arrBaskets[i]);
+            }
+        }
+        console.log(arrBaskets);
+        arrBaskets=filteredArrBasket;
+        console.log(arrBaskets)
+        for (let i = 0; i < arrBaskets.length; i++) {
+            createBasketRow(basketRowsContainer,arrBaskets[i]);
         }
     }
 
-    let newLocal=getEmptyLocal();
-    newLocal.address=getEmptyAddress();
-    arrLocals.push(newLocal);
-    createLocalRow(localRowsContainer,newLocal);
 }
+function changeBasketQuantityOrder(){
 
+    let arrowOrder=document.getElementById("arrowBasketOrder");
+    sortByOrder.sortKey="totalQuantity";
 
-function convertAddressObjectToDOM(addressObj){
+    if(arrowOrder.classList.contains("fa-arrow-up")){
+        arrowOrder.classList.remove("fa-arrow-up");
+        arrowOrder.classList.add("fa-arrow-down");
+        sortByOrder.order=1;
+    }
+    else{
+        arrowOrder.classList.remove("fa-arrow-down");
+        arrowOrder.classList.add("fa-arrow-up");
+        sortByOrder.order=-1;
 
-    convertObject={
-        street_number: "houseNumber",
-        route: "streetAddress",
-        locality: "cityName",
-        postal_code: "cityCode",
     }
 
-    cvtObjectKey(convertObject,addressObj);
-    addressObj.autocomplete="";
-    return addressObj;
+    arrBaskets.sort(sortByOrder);
+    updateBasketRows(arrBaskets);
 }
 
+
+function createBasketRow(container,basket,oldRow){
+
+    newBasketRow=emptyBasketRow.cloneNode(true);
+
+    newBasketRow.querySelector("#collapseBtnProduct").addEventListener('click',collapseProductElement,false);
+
+
+    // newBasketRow.querySelector("#collapseBtnAddress").addEventListener('click',collapseAddressElement,false)
+
+    basket["totalQuantity"]=basket.products&&basket.products.length>0?basket.products.length:"0";
+
+
+    matchDOMAndObject("value", "#", newBasketRow, basket,false,1);
+    matchDOMAndObject("innerHTML", "#", newBasketRow, basket,false,1)
+
+    container.append(newBasketRow);
+
+    collapsedProductsRow= createCollapsedProductsRow(container,basket.products,newBasketRow);
+
+    if(oldRow){
+        container.replaceChild(newBasketRow,oldRow);
+    }
+
+    newBasketRow.collapseProductRow=collapsedProductsRow.querySelector("#collapseProducts");
+    newBasketRow.basket=basket;
+
+}
+
+function createCollapsedProductsRow(container,products,basketRow){
+
+    newCollapsedProductRow = emptyCollapsedProductRow.cloneNode(true);
+
+    container.append(newCollapsedProductRow);
+
+    updateProductRows(products,newCollapsedProductRow);
+
+    let productsTable=newCollapsedProductRow.querySelector("#productsTable");
+
+    productsTable.products=products;
+    productsTable.basketRow=basketRow;
+
+    return newCollapsedProductRow;
+}
+
+function removeProduct(element){
+
+    let productTable=getFirstParent(element,"id","productsTable");
+    let basketRow=productTable.basketRow;
+    let basket=basketRow.basket;
+    let collapsedProducts=getFirstParent(basketRow.collapseProductRow,"id","collapsedProductRow");
+    let productsToRemove=[];
+    let productsToSave=[];
+
+    for(let i=0 ; i<productTable.products.length; i++){
+        if(productTable.products[i].checkProduct){
+            productTable.products[i].basketId=null;
+            productsToRemove.push(productTable.products[i])
+        }
+        else{
+            productsToSave.push(productTable.products[i]);
+        }
+    }
+
+    let nodeListToRemove=collapsedProducts.querySelectorAll("input:checked");
+    for (let i=0; i<nodeListToRemove.length; i++){
+        let nodeToRemove=getFirstParent(nodeListToRemove[i],"id","productRow");
+        if(nodeToRemove.id=="productRow"){
+            nodeToRemove.remove();
+        }
+    }
+
+    basket.products=productsToSave;
+
+    basket["totalQuantity"]=basket.products&&basket.products.length>0?basket.products.length:"0";
+
+    matchDOMAndObject("value", "#", basketRow, basket,false,1);
+    matchDOMAndObject("innerHTML", "#", basketRow, basket,false,1);
+
+    args={
+        products:productsToRemove
+    };
+
+    updateProductAPI(null,args);
+}
+
+
+
+function validateBasket(element){
+
+    let basket=getFirstParent(element,"id","basketRow").basket;
+
+    basket.status="validated";
+
+    exchangeToAPI(ffwApiUrl+"/baskets",basket,"PUT",changeArrBaskets);
+
+    updateBasketRows(arrBaskets);
+
+}
+
+
+function cancelBasket(element){
+
+    let basket=getFirstParent(element,"id","basketRow").basket;
+
+    basket.status="canceled";
+
+    exchangeToAPI(ffwApiUrl+"/baskets",basket,"PUT",changeArrBaskets);
+
+    updateBasketRows(arrBaskets);
+
+}
+
+function changeArrBaskets(element){
+
+    console.log(element);
+
+    for (let i=0 ; i< arrBaskets.length ; i++){
+        arrBaskets[i];
+        console.log(arrBaskets[i]);
+        console.log(element);
+        console.log(arrBaskets[i].bid==element.bid.toString());
+        console.log(arrBaskets[i].status!==element.status);
+
+        if(arrBaskets[i].bid==element.bid.toString()  ){
+            console.log("TOUTOU")
+            arrBaskets.splice(i,1);
+        }
+    }
+
+    updateBasketRows(arrBaskets);
+}
+
+
+
+function getEmptyBasketRow(domText){
+    emptyBasketRow=document.createElement('tr');
+    emptyBasketRow.class="align-items-center";
+    emptyBasketRow.id="basketRow";
+    emptyBasketRow.innerHTML = domText;
+}
+
+function getCollapsedProductRow(domText){
+    emptyCollapsedProductRow=document.createElement('tr');
+    emptyCollapsedProductRow.class="align-items-center";
+    emptyCollapsedProductRow.id="collapsedProductRow";
+    emptyCollapsedProductRow.innerHTML = domText;
+
+}

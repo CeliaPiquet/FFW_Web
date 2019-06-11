@@ -1,19 +1,5 @@
 <?php $this->setName('content') ?>
 
-<script>
-
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            plugins: [ 'dayGrid' ]
-        });
-
-        calendar.render();
-    });
-
-</script>
-
 <div class="row">
     <div class="col-md-8 mx-auto">
         <h1 class="text-center"> My calendar </h1>
@@ -83,7 +69,11 @@
 </div>
 
 <?php if(isset($userSkills)){echo "<script type='text/javascript'>var userSkills=" .$userSkills. "; var user=".$user.";</script>";}?>
+
 <script src='<?=$websiteRoot?>/public/fullcalendar-4.1.0/packages/core/main.js'></script>
 <script src='<?=$websiteRoot?>/public/fullcalendar-4.1.0/packages/daygrid/main.js'></script>
-<script src='<?=$websiteRoot?>/public/jquery/jquery-3.4.1.js'></script>
+<script src='<?=$websiteRoot?>/public/fullcalendar-4.1.0/packages/timegrid/main.js'></script>
+<script src='<?=$websiteRoot?>/public/fullcalendar-4.1.0/packages/list/main.js'></script>
+<script src='<?=$websiteRoot?>/public/fullcalendar-4.1.0/packages/interaction/main.js'></script>
 <script src='<?=$websiteRoot?>/public/js/mySkills.js'></script>
+<script type="text/javascript" src="<?=$websiteRoot?>/public/js/myCalendar.js"></script>

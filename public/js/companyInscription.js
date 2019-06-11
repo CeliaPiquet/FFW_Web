@@ -1,11 +1,24 @@
 var containerCompanyForm=document.getElementById("containerCompanyForm");
 var companyAddressArr=[];
+var emptyCompanyAddrForm;
 
 if(companies==null){
     companies=[];
 }
 
+
+loadExternalDOMElement([
+    {url:websiteRoot+"/account/companyAddressForm",func:getEmptyCompanyAddressForm}
+]);
+
 window.onload=getAllCompaniesByUser;
+
+
+function getEmptyCompanyAddressForm(domText){
+
+    let parser=new DOMParser();
+    emptyCompanyAddrForm=parser.parseFromString(domText,"text/html").getElementById("addressForm");
+}
 
 function searchBySiren(){
 
@@ -23,10 +36,6 @@ function searchBySiren(){
 function getAllCompaniesByUser(){
 
 
-    console.log(arrAutocomplete);
-    console.log(companies);
-
-
     changeFilledCompanyAddrForm();
 
 }
@@ -41,7 +50,7 @@ function changeCompanyList(nbCompany){
     companyAddressArr=containerCompanyForm.childNodes;
 
     if(companyAddressArr.length<nbCompany){
-        companyAddressForm=getCompanyAddressForm(containerCompanyForm,nbCompany-companyAddressArr.length);
+        companyAddressForm=addEmptyCompanyAddrForm(containerCompanyForm,nbCompany-companyAddressArr.length);
     }
     else{
         for(var i=companyAddressArr.length-1;companyAddressArr.length>nbCompany;i--){
@@ -53,7 +62,7 @@ function changeCompanyList(nbCompany){
 
 }
 
-function addEmptyCompanyAddrForm(emptyCompanyAddrForm,containerCompanyForm,nbCompanyAddressFormToAdd){
+function addEmptyCompanyAddrForm(containerCompanyForm,nbCompanyAddressFormToAdd){
 
     for(var i = 0; i < nbCompanyAddressFormToAdd; i++){
         var element=emptyCompanyAddrForm.cloneNode(true);
@@ -66,22 +75,6 @@ function addEmptyCompanyAddrForm(emptyCompanyAddrForm,containerCompanyForm,nbCom
         containerCompanyForm.appendChild(element);
         initAutocomplete();
     }
-}
-
-function getCompanyAddressForm(containerCompanyForm,nbCompanyAddressFormToAdd){
-
-    var request = new XMLHttpRequest();
-    console.log("sent");
-    request.onreadystatechange = function () {
-        if (request.readyState === 4 && request.status === 200) {
-            var parser =new  DOMParser();
-            var companyAddressForm=parser.parseFromString(request.responseText,"text/html").getElementById("addressForm");
-            addEmptyCompanyAddrForm(companyAddressForm, containerCompanyForm,nbCompanyAddressFormToAdd)
-        }
-    };
-    var url = ffwApiUrl+"/account/getCompanyAddressForm";
-    request.open('GET', url, false);
-    request.send();
 }
 
 function getSirenList(siren) {
