@@ -25,17 +25,17 @@ class AdminlocalsController extends Controller
     }
 
     public function collapsedAddressRow(){
-        $this->loadView([],$this->action);
+        $this->loadView($this->action);
     }
 
     public function localRow(){
-        $this->loadView([],$this->action);
+        $this->loadView($this->action);
     }
     public function roomRow(){
-        $this->loadView([],$this->action);
+        $this->loadView($this->action);
     }
     public function collapsedRoomRow(){
-        $this->loadView([],$this->action);
+        $this->loadView($this->action);
     }
 
 //    public function index(){

@@ -1,13 +1,56 @@
-var userFindFlag=false;
-var arrBaskets = [];
-var basketsInCourse = [];
-var basketsNotInCourse = [];
-var arrCourses= [];
+var arrCourses;
 var emptyBasketRow;
 var emptyCourseRow;
-var selectedCourse;
+var emptyCollapsedAddressRow;
 
-var body;
+
+
+loadExternalDOMElement([
+    {url:websiteRoot+"/adminCourses/basketRow",func:getEmptyBasketRow},
+    {url:websiteRoot+"/adminCourses/courseRow",func:getEmptyCourseRow},
+    {url:websiteRoot+"/adminCourses/collapsedAddressRow",func:getCollapsedAddressRow}
+]);
+
+
+
+function findCourseByFilter(){
+
+    arrCourses=[];
+    let filterObject={
+        nameInput:null,
+        routeStateSelect:null,
+        createDateInput:null,
+        courseDateInput:null,
+        vehicleSelect:null
+    };
+
+
+    matchDOMAndObject("value","#",document.getElementById("coursesTableHeader"),filterObject,true);
+
+    console.log(filterObject);
+
+    args={
+        query:{
+            offset:0,
+            limit:20,
+            name:filterObject.nameInput,
+            routeState:filterObject.vehicleSelect,
+            vehicleId:filterObject.vehicleSelect,
+            createTime:filterObject.createDateInput,
+            serviceTime : filterObject.courseDateInput
+        }
+    };
+
+    exchangeToAPI(ffwApiUrl+"/courses",arrCourses,"GET",updateCourseRows,args);
+
+}
+
+function updateCourseRows(element){
+
+    console.log(element);
+}
+
+
 
 
 function getEmptyBasketRow(domText){
@@ -26,25 +69,11 @@ function getEmptyCourseRow(domText) {
     emptyCourseRow.innerHTML =domText;
 }
 
-
-loadExternalDOMElement([
-    {url:websiteRoot+"/adminCourses/basketRow",func:getEmptyBasketRow},
-    {url:websiteRoot+"/adminCourses/courseRow",func:getEmptyCourseRow}
-]);
-
-
-
-courseArgs= {
-    query: {
-        offset: 0,
-        limit: 20,
-        status: "VALIDATED"
-    }
+function getCollapsedAddressRow(domText){
+    emptyCollapsedAddressRow.class="align-items-center";
+    emptyCollapsedAddressRow.id="collapsedAddressRow";
+    emptyCollapsedAddressRow.innerHTML =domText;
 }
-
-exchangeToAPI(ffwApiUrl + "/courses", arrCourses, "GET", createCourseRow, courseArgs);
-
-
 
 // searchCourseAPI(0,20,searchCourseAPI);
 
@@ -354,25 +383,4 @@ function withdrawBasketFromCourse(basket) {
 
 function addBasketToCourse(basket) {
     basketsInCourse.push(basket);
-}
-
-
-function updateUserAPI(userBody){
-
-    let request=new XMLHttpRequest();
-
-    request.onreadystatechange=function(){
-
-        if(request.readyState==4&&request.status==200){
-            console.log(request.responseText);
-            findusersByFilter();
-        }
-    };
-
-    console.log(ffwApiUrl+"/users/"+userBody.uid);
-    let url=ffwApiUrl+"/users/"+userBody.uid;
-    console.log(JSON.stringify(userBody));
-    request.open("PUT",url);
-    request.send(JSON.stringify(userBody));
-
 }

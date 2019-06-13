@@ -33,26 +33,27 @@ function changeSelectSkills(){
 
     skillsSelects.innerHTML="";
 
-    console.log(arrSkills);
+    if(arrSkills){
+        for(let j=0; j<arrSkills.length+1; j++){
 
-    for(let j=0; j<arrSkills.length+1; j++){
+            if(j==0 || (arrSkills[j] && arrSkills[j].skStatus=="enabled")){
 
-        if(j==0 || arrSkills[j].skStatus=="enabled"){
+                let option=document.createElement("option");
 
-            let option=document.createElement("option");
+                if(j==0){
+                    option.selected=true;
+                }
+                else if(arrSkills[j].skStatus=="enabled"){
 
-            if(j==0){
-                option.selected=true;
+                    option.innerHTML=arrSkills[j-1].name;
+                    option.value=arrSkills[j-1].skid;
+                }
+
+                skillsSelects.append(option);
             }
-            else if(arrSkills[j].skStatus=="enabled"){
-
-                option.innerHTML=arrSkills[j-1].name;
-                option.value=arrSkills[j-1].skid;
-            }
-
-            skillsSelects.append(option);
         }
     }
+
 }
 
 function showEnabledSkills(){

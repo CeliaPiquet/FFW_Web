@@ -11,17 +11,50 @@
     </div>
 
     <table class="table table-striped table-hover " id="coursesTable">
-        <thead>
+        <thead id="coursesTableHeader">
         <tr>
-            <th> <?php echo _("name"); ?></th>
-            <th> <?php echo _("description"); ?> </th>
-            <th> <?php echo _("route state"); ?> </th>
-            <th> <?php echo _("create date"); ?>  </th>
-            <th> <?php echo _("admincourses date") ;?> </th>
-            <th> <?php echo _("vehicle") ;?> </th>
-
+            <th> <?php echo _("Name"); ?></th>
+            <th> <?php echo _("Description"); ?> </th>
+            <th> <?php echo _("Route state"); ?> </th>
+            <th> <?php echo _("Create date"); ?>  </th>
+            <th> <?php echo _("Course date") ;?> </th>
+            <th> <?php echo _("Vehicle") ;?> </th>
+        </tr>
+        <tr >
+            <td>
+                <input type="text" class="list-group-item list-group-item-action" onkeyup="findCourseByFilter();" id="nameInput">
+            </td>
+            <td scope=""1>
+            </td>
+            <td>
+                <select type="text" class="form-control" onchange="findCourseByFilter()" id="routeStateSelect">
+                    <option selected></option>
+                    <?php
+                        foreach($arrRouteState as $routeState){
+                            echo "<option value='".$routeState."'>".ucfirst($routeState)."</option>";
+                        }
+                    ?>
+                </select>
+            </td>
+            <td>
+                <input type="date" class="form-control" onkeyup="findCourseByFilter()" id="createDateInput">
+            </td>
+            <td>
+                <input type="date" class="list-group-item list-group-item-action text-center" onkeyup="findCourseByFilter();" id="courseDateInput">
+            </td>
+            <td>
+                <select type="text" class="form-control" onchange="findCourseByFilter()" id="vehicleSelect">
+                    <option selected></option>
+                    <?php
+                    foreach($arrVehicles as $vehicle){
+                        echo "<option value='".$vehicle->getVid()."'>".ucfirst($vehicle->getDescription())."</option>";
+                    }
+                    ?>
+                </select>
+            </td>
         </tr>
         </thead>
+
         <tbody id="coursesRowsContainer"></tbody>
     </table>
 </div>

@@ -66,7 +66,7 @@ class AccountController extends Controller
 
     public function companyAddressForm(){
 
-        $this->loadView(null,$this->action);
+        $this->loadView($this->action);
 
     }
 

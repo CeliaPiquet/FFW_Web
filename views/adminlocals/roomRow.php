@@ -1,5 +1,5 @@
 <td>
-        <input type="text" class="form-control to-update"  id="name" placeholder="Name">
+        <input type="text" class="form-control to-update"  id="name" object="room" placeholder="Name">
 </td>
 <td>
         <button type="button" class="list-group-item list-group-item-action text-center to-update"  id="isUnavailable">Yes</button>

@@ -225,7 +225,6 @@ function changeArrBaskets(element){
         console.log(arrBaskets[i].status!==element.status);
 
         if(arrBaskets[i].bid==element.bid.toString()  ){
-            console.log("TOUTOU")
             arrBaskets.splice(i,1);
         }
     }

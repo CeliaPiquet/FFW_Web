@@ -105,7 +105,7 @@ abstract class Controller {
     }
 
     // Génère la vue associée au contrôleur courant
-    protected function loadView($viewData = array(), $view) {
+    protected function loadView($view,$viewData = array()) {
         // Détermination du nom du fichier vue à partir du nom du contrôleur actuel
         $controllerClass = get_class($this);
         $controller = str_replace("Controller", "", $controllerClass);

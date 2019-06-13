@@ -1,8 +1,8 @@
 <td>
-    <input type="text" class="form-control"  id="articleCategory" readonly>
+    <input type="text" class="form-control"  id="name" object="ingredient" readonly>
 </td>
 <td>
-    <input type="text" class="form-control"  id="articleName" readonly>
+    <input type="text" class="form-control"  id="name" object="article" readonly>
 </td>
 <td>
     <input type="text" class="form-control"  id="limitDate" readonly>

@@ -239,7 +239,7 @@
                                         <thead>
                                         <tr scope="row" >
                                             <th scope="col"> <?php echo _("Name"); ?></th>
-                                            <th scope="col"> <?php echo _("Status"); ?> </th>
+                                            <th scope="col"> <?php echo _("Change status"); ?> </th>
                                         </tr>
                                         </thead>
                                         <tbody id="skillsTable"></tbody>

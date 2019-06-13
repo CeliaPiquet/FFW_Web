@@ -1,7 +1,7 @@
 
 //Fonction parcourant les enfants d'un noeud du DOM pour y affecter des valeurs présentes dans un objet.
 //Les enfants du noeud sont sélectionnés en combinant un selecteur CSS avec une des clés de l'objet passé en paramètre de la fonction
-function matchDOMAndObject(attribute, selector, element, object,order=false,limit=null,deepness=0){
+function matchDOMAndObject(attribute, selector, element, object,order=false,limit=null,deepness=0,objectName=null){
 
     if(limit!=null && deepness==limit){
         return object;
@@ -23,10 +23,18 @@ function matchDOMAndObject(attribute, selector, element, object,order=false,limi
         if(order==false) {
             if (object[key] != null && typeof object[key] === 'object') {
                 deepness++;
-                matchDOMAndObject(attribute, selector, element, object[key], order,limit,deepness);
+                matchDOMAndObject(attribute, selector, element, object[key], order,limit,deepness,key);
             }
             if (isNaN(key)) {
-                let childElement = element.querySelector(selector + key);
+                let childElement=null;
+
+                if(objectName){
+                    childElement = element.querySelector(selector+key +"[object='"+objectName+"']");
+                }
+                if(!childElement){
+                    childElement = element.querySelector(selector + key);
+                }
+
                 if (childElement && object[key] !== null && object[key] !== "") {
 
                     if(childElement.tagName=="SELECT" ){
@@ -60,22 +68,22 @@ function copyObjectProperty(srcObj,dstObj){
     }
 
 }
-
-function existObjInObjByKeyValue(searchedKey,searchedValue,object){
-
-    for(let key in object){
-
-        if(object[searchedKey] != undefined && object[searchedKey]==searchedValue ){
-            return key;
-        }
-        else if(object[key]!=null && object[key]!=undefined && typeof object[key] === 'object'){
-            if(existObjInObjByKeyValue(searchedKey,searchedValue,object[key])){
-                return key;
-            }
-        }
-    }
-    return null;
-}
+//
+// function existObjInObjByKeyValue(searchedKey,searchedValue,object){
+//
+//     for(let key in object){
+//
+//         if(object[searchedKey] != undefined && object[searchedKey]==searchedValue ){
+//             return key;
+//         }
+//         else if(object[key]!=null && object[key]!=undefined && typeof object[key] === 'object'){
+//             if(existObjInObjByKeyValue(searchedKey,searchedValue,object[key])){
+//                 return key;
+//             }
+//         }
+//     }
+//     return null;
+// }
 
 function modalDisplay(modalId){
 
@@ -167,8 +175,6 @@ function exchangeToAPI(url, element, method, func=null, args=null){
 
                 if(Array.isArray(newElement)){
                     if(Array.isArray(element)){
-                        console.log(element);
-                        console.log(newElement);
                         element=element.concat(newElement);
                     }
 

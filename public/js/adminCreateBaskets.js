@@ -23,7 +23,10 @@ function openBasketModal(event){
 
     productsTable.products=local.products;
 
-    let args={id:local.baskets.keys().next().value,products:productsTable.product};
+    let args={
+        id:local.baskets.keys().next().value,
+        products:productsTable.products
+    };
 
     exchangeToAPI(ffwApiUrl+"/baskets",local.baskets,"GET",getAllBasketByID,args);
 
@@ -35,6 +38,7 @@ function  updateProductRows(arrProducts,parent){
     let productRowsContainer = parent.querySelector("#productRowsContainer");
     productRowsContainer.innerHTML = "";
 
+    console.log(arrProducts);
     if(arrProducts){
         for (let i = 0; i < arrProducts.length; i++) {
 
@@ -80,6 +84,7 @@ function getAllBasketByID(element,args){
 
     let key=element.keys();
     args.id=null;
+    console.log(args);
     do{
 
         keyVal=key.next().value;
@@ -98,6 +103,7 @@ function getAllBasketByID(element,args){
         console.log( args.products);
         console.log(element);
         let modal=document.getElementById("createBasketModal");
+        console.log(args);
         modal.querySelector("#productsTable").products= args.products.filter(filterProduct,element);
     }
 }
@@ -107,7 +113,7 @@ function filterProduct(product){
 
     let basket=this.get(product.basketId);
     basket = basket && basket.value ? basket.value : null;
-
+    console.log(product);
     if(product.basketId===null  || (basket && basket.status ==="canceled")){
         return true;
     }
@@ -322,15 +328,20 @@ function mergeAllProductsInLocal(rooms){
 
     let arrProducts=[];
 
-    for(let i =0 ; i< rooms.length; i++){
+    if(rooms){
+        for(let i =0 ; i< rooms.length; i++){
 
-        for(let j =0 ; j<rooms[i].products.length ; j++){
+            if(rooms[i].products){
+                for(let j =0 ; j<rooms[i].products.length ; j++){
 
-            arrProducts.push(rooms[i].products[j]);
+                    arrProducts.push(rooms[i].products[j]);
+                }
+            }
         }
     }
-
     return arrProducts;
+
+
 }
 
 

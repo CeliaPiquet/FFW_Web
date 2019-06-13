@@ -120,7 +120,7 @@
                             <table class="table table-striped table-hover " id="productsTable">
                                 <thead>
                                 <tr>
-                                    <th> <?php echo _("Category"); ?></th>
+                                    <th> <?php echo _("Ingredient"); ?></th>
                                     <th> <?php echo _("Name"); ?> </th>
                                     <th> <?php echo _("Limit date"); ?> </th>
                                     <th> <?php echo _("Condition"); ?> </th>
@@ -128,7 +128,7 @@
                                 </tr>
                                 <tr >
                                     <td>
-                                        <input type="text" class="form-control" onkeyup="sortProductByFilter(this)" name="sortProductInput" id="articleCategory" placeholder="<?php echo _("Category");?>">
+                                        <input type="text" class="form-control" onkeyup="sortProductByFilter(this)" name="sortProductInput" id="ingredientName" placeholder="<?php echo _("Category");?>">
                                     </td>
                                     <td>
                                         <input type="text" class="form-control" onkeyup="sortProductByFilter(this)" name="sortProductInput" id="articleName" placeholder="<?php echo _("Name"); ?>">

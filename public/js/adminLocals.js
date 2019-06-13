@@ -239,6 +239,9 @@ function createLocalRow(container,local){
             createRoomRow(roomRowsContainer,local.rooms[i])
         }
     }
+    else{
+        local.rooms=[];
+    }
 
     convertAddressObjectToDOM(local.address);
 
@@ -287,9 +290,9 @@ function createRoomRow(container,room){
 
     prepareUpdatableElement(room,newRoomRow);
     convertRoomObjectToDOM(room);
-    matchDOMAndObject("innerHTML", "#", newRoomRow, room);
+    matchDOMAndObject("innerHTML", "#", newRoomRow, room,false,1);
     convertRoomObjectToAPI(room);
-    matchDOMAndObject("value", "#", newRoomRow, room);
+    matchDOMAndObject("value", "#", newRoomRow, room,false,1);
 
     newRoomRow.querySelector("#isUnavailable").func=changeBoolBtnState;
     newRoomRow.querySelector("#isStockroom").func=changeBoolBtnState;
@@ -312,8 +315,10 @@ function confirmRow(event){
     if((tmpElement=getFirstParent(element,"id","localRow")).tagName=="BODY"){
         if((tmpElement=getFirstParent(element,"id","roomRow")).tagName!="BODY"){
 
+            console.log(tmpElement);
+
             args={
-                domParent:tmpElement,
+                domParent:tmpElement
             };
             exchangeToAPI(ffwApiUrl+"/rooms",matchDOMAndObject("value","#",tmpElement,tmpElement.room,true),"POST",removeConfirmButton,args);
         }
@@ -322,6 +327,7 @@ function confirmRow(event){
 
         tmpElement.local.address=convertAddressObjectToDOM(tmpElement.local.address);
         tmpElement.local.address=matchDOMAndObject("value","#",tmpElement.collapseAddress,tmpElement.local.address,true);
+        console.log(tmpElement);
         args={
             url:ffwApiUrl+"/locals",
             local:matchDOMAndObject("value","#",tmpElement,tmpElement.local,true),
@@ -339,7 +345,7 @@ function createLocalToAPI(address,args){
     exchangeToAPI(args.url,args.local,args.method,removeConfirmButton,{domParent:args.domParent});
 }
 
-function removeConfirmButton(args){
+function removeConfirmButton(element=null,args){
 
     args.domParent.querySelector("#confirmButtonContainer").innerHTML="";
 

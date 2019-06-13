@@ -10,4 +10,4 @@
 <td id="serviceTime">
     </td>
 <td id="vehicleId">
-    </td>
+</td>
