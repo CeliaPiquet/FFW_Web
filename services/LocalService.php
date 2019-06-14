@@ -75,30 +75,30 @@ class LocalService {
     }
 
 
-    public function create(Local $user):?Local {
-
-        $curl=CurlManager::getManager();
-
-        $apiUrl = Configuration::get("ffwApiUrl", "/");
-
-        $url = "$apiUrl/api/users/create.php";
-
-        $jsonLocal=json_encode($user);
-
-        $response=$curl->curlPost($url,$jsonLocal, array());
-
-        if($response["httpCode"]>=400){
-            return null;
-        }
-        $curlLocal= json_decode($response["result"],true);
-
-
-        if(isset($curlLocal) && !empty($curlLocal)){
-            return new Local($curlLocal);
-        }
-
-        return null;
-
-    }
+//    public function create(Local $user):?Local {
+//
+//        $curl=CurlManager::getManager();
+//
+//        $apiUrl = Configuration::get("ffwApiUrl", "/");
+//
+//        $url = "$apiUrl/api/users/create.php";
+//
+//        $jsonLocal=json_encode($user);
+//
+//        $response=$curl->curlPost($url,$jsonLocal, array());
+//
+//        if($response["httpCode"]>=400){
+//            return null;
+//        }
+//        $curlLocal= json_decode($response["result"],true);
+//
+//
+//        if(isset($curlLocal) && !empty($curlLocal)){
+//            return new Local($curlLocal);
+//        }
+//
+//        return null;
+//
+//    }
 
 }

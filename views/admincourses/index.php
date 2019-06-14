@@ -71,18 +71,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="col-md-12">
-<!---->
-<!--                        <div class="container">-->
-<!--                            <div class="row">-->
-<!--                                <div class="col-md-12 ">-->
-<!--                                    <table class=" table table-striped table-hover table-responsive-md" id="basketsAffectedToCourseTable">-->
-<!--                                    </table>-->
-<!--                                </div-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-                    </div>
 
                     <div class="col-md-12">
 
@@ -90,9 +78,35 @@
                             <div class="row">
                                 <div class="col-md-12 ">
                                     <table class=" table table-striped table-hover table-responsive-md" id="basketsTable">
-                                        <thead>
-                                            <th> <?php echo _("contact"); ?></th>
-                                            <th> <?php echo _("createDate"); ?> </th>
+                                        <thead id="basketsTableHeader">
+                                        <tr>
+                                            <th> <?php echo _("Role"); ?> </th>
+                                            <th> <?php echo _("City"); ?> </th>
+                                            <th> <?php echo _("Create date"); ?> </th>
+                                            <th> <?php echo _("Order by quantity"); ?> </th>
+                                        </tr>
+                                        <tr >
+                                            <td>
+                                                <select type="text" class="form-control" onchange="findBasketsByFilter()" id="basketRoleSelect">
+                                                    <option selected></option>
+                                                    <?php
+                                                    foreach($arrBasketRole as $basketRole){
+                                                        echo "<option value='".$basketRole."'>".ucfirst($basketRole)."</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="list-group-item list-group-item-action text-center" onkeyup="findBasketsByFilter();" id="cityNameInput">
+                                            </td>
+                                            <td>
+                                                <input type="date" class="list-group-item list-group-item-action text-center" onkeyup="findBasketsByFilter();" id="createDateInput">
+                                            </td>
+                                            <td>
+                                                <button type="button" class="list-group-item list-group-item-action text-center" onclick="changeBasketQuantityOrder();" id="quantityOrderBtn"><i id="arrowBasketOrder" class="fas fa-arrow-up"></i></button>
+                                            </td>
+                                        </tr>
+
                                         </thead>
                                         <tbody id="basketRowsContainer">
 

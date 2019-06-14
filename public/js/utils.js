@@ -9,7 +9,9 @@ function matchDOMAndObject(attribute, selector, element, object,order=false,limi
     for(let key in object){
 
         if(order==true){
-            let childElement = element.querySelector(selector + key);
+
+            let childElement=getElementBySelectorAndObject(element,selector,key,objectName);
+
             if(childElement!=null){
 
                 if(childElement.tagName=="SELECT" && childElement.selectedIndex>=0){
@@ -26,21 +28,14 @@ function matchDOMAndObject(attribute, selector, element, object,order=false,limi
                 matchDOMAndObject(attribute, selector, element, object[key], order,limit,deepness,key);
             }
             if (isNaN(key)) {
-                let childElement=null;
 
-                if(objectName){
-                    childElement = element.querySelector(selector+key +"[object='"+objectName+"']");
-                }
-                if(!childElement){
-                    childElement = element.querySelector(selector + key);
-                }
+                let childElement=getElementBySelectorAndObject(element,selector,key,objectName);
 
                 if (childElement && object[key] !== null && object[key] !== "") {
 
                     if(childElement.tagName=="SELECT" ){
                         for(let selectKey in childElement.options){
-
-                            if(childElement.options[selectKey].value== object[key].toLowerCase()){
+                            if(childElement.options[selectKey].value== object[key].toLowerCase() ||(childElement.options[selectKey].innerHTML && childElement.options[selectKey].innerHTML.toLowerCase()== object[key].toLowerCase())){
                                 childElement.options[selectKey].selected=true;
                             }
                         }
@@ -66,6 +61,21 @@ function copyObjectProperty(srcObj,dstObj){
             dstObj[key]=srcObj[key];
         }
     }
+
+}
+
+function getElementBySelectorAndObject(element,selector,objectKey,objectName=null){
+
+    let domElement=null;
+
+    if(objectName){
+        domElement = element.querySelector(selector+objectKey +"[object='"+objectName+"']");
+    }
+    if(!domElement){
+        domElement = element.querySelector(selector + objectKey);
+    }
+
+    return domElement;
 
 }
 //
@@ -258,10 +268,6 @@ function generateUrl(url,id=null,subTarget=null,queries=null){
 }
 
 function sortByOrder(a,b){
-
-    console.log(sortByOrder);
-    console.log(sortByOrder.sortKey);
-    console.log(sortByOrder.order);
 
     if(a[sortByOrder.sortKey]>b[sortByOrder.sortKey]){
         return 1*sortByOrder.order;

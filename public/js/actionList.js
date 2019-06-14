@@ -31,23 +31,27 @@ function checkArticle(){
             nameArticlePlacement.innerHTML = "Aucun article correspondant";
         }
     }
-    var url = ffwApiUrl+"/api/articles/getOne.php?a_id="+idArticle;
+    var url = ffwApiUrl+"/articles/"+idArticle;
     request.open('GET',url);
     request.send();
 }
 
 //traitements
 function changeRoom(){
-    console.log("change room");
+
+    console.log(selectedProducts);
+
     var request = new XMLHttpRequest();
     var idRoom = document.getElementById("roomChoice").value;
+
 
     request.onreadystatechange = function(){
         if(request.readyState === 4 && request.status === 200){
             document.location.href = document.location.href + "?success=1";
         }
     }
-    var url = apiUrl+"/api/products/transferRoom.php?room_id="+idRoom;
+
+    var url = ffwApiUrl+"/products?roomId="+idRoom;
     request.open('PUT',url);
     request.send(JSON.stringify(selectedProducts));
 }
@@ -67,10 +71,10 @@ function addProduct(){
         var request = new XMLHttpRequest();
         request.onreadystatechange = function(){
             if(request.readyState === 4 && request.status === 201){
-                document.location.href = document.location.href + "?success=1";
+                // document.location.href = document.location.href + "?success=1";
             } 
         }
-        var url = ffwApiUrl+"/api/products/create.php?nb_products="+nbProducts;
+        var url = ffwApiUrl+"/products?nbProducts="+nbProducts;
         request.open('POST',url);
         request.send(jsonProduct);
     }
@@ -81,10 +85,10 @@ function removeProduct(){
 
     request.onreadystatechange = function(){
         if(request.readyState === 4 && request.status === 200){
-            document.location.href = document.location.href + "?success=1";
+            // document.location.href = document.location.href + "?success=1";
         }
     }
-    var url = ffwApiUrl+"/FFW_API/api/products/remove.php";
+    var url = ffwApiUrl+"/products?roomId=";
     request.open('PUT',url);
     request.send(JSON.stringify(selectedProducts));
 }

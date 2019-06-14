@@ -19,7 +19,6 @@ function getfullProductsArray(idRoom, offset){
         } 
     }
     var url = "http://ffwapi.priv/rooms/"+idRoom+"/products?offset="+offset;
-    console.log(url);
     request.open('GET',url);
     request.send();
 }
@@ -98,30 +97,43 @@ function filterArray (filter){
 }
 
 function sortByName(a,b){
-    var newA = a.articleName.toLowerCase();
-    var newB = b.articleName.toLowerCase();
+
+
+    if(!a.article || !b.article){
+        return false;
+    }
+    var newA = a.article.name.toLowerCase();
+    var newB = b.article.name.toLowerCase();
     return ((newA < newB) ? -1: ((newA > newB) ? 1 : 0));
 }
 
 function displayFullProductsArray(productArray = fullProductsArray){ //par défaut on affiche le tableau entier
+
     productArray.sort(sortByName); //permet de regrouper tous les produits d'un même article
+
     var container = document.getElementById("articleResultsContainer");
     var noResult = document.getElementById("emptyResultArticle");
     noResult.innerHTML = '';
     container.innerHTML = '';
 
     for(var i=0; i<productArray.length; i++){
-        strId = productArray[i].articleName + "ArticleLine";
-        if(document.getElementById(strId)){  //si un l'article a déjà été ajouté on ajoute juste le produit
-            var product = createProductDisplay(productArray[i]);
-            container.appendChild(product);
+        if(productArray[i].article){
+
+            console.log(productArray);
+
+            strId = productArray[i].article.name + "ArticleLine";
+            if(document.getElementById(strId)){  //si un l'article a déjà été ajouté on ajoute juste le produit
+                var product = createProductDisplay(productArray[i]);
+                container.appendChild(product);
+            }
+            else { //sinon on crée la div de l'article + le produit
+                var article = createArticleDisplay(productArray[i]);
+                container.appendChild(article);
+                var product = createProductDisplay(productArray[i]);
+                container.appendChild(product);
+            }
         }
-        else { //sinon on crée la div de l'article + le produit
-            var article = createArticleDisplay(productArray[i]);
-            container.appendChild(article);
-            var product = createProductDisplay(productArray[i]);
-            container.appendChild(product);
-        }
+
     }
     if (productArray.length === 0){
         noResult.innerHTML = "Vide";
@@ -131,7 +143,7 @@ function displayFullProductsArray(productArray = fullProductsArray){ //par défa
 function countQuantity(fullProductsArray,nameToSearch){
     counter = 0;
     for (var i =0; i<fullProductsArray.length; i++) {
-        if (fullProductsArray[i].articleName == nameToSearch){
+        if (fullProductsArray[i].article && fullProductsArray[i].article.name == nameToSearch){
             counter ++;
         }
     }
@@ -166,41 +178,41 @@ function selectAllProductByArticle(articleName){
         }
     }
     isAllArticleSelected(articleName);
-    buttonOnClick(articleName); 
+    buttonOnClick(articleName);
 }
 
 function createArticleDisplay(element){ //checked
     var articleLine = document.createElement('tr');
-    strId = element.articleName + "ArticleLine";
+    strId = element.article.name + "ArticleLine";
     articleLine.setAttribute("id",strId);
     articleLine.setAttribute("class","articleLine font-weight-bold");
 
     var nameCell = document.createElement('td');
-    nameCell.setAttribute("onclick",'selectAllProductByArticle("'+element.articleName+'")');
-    nameCell.innerHTML = element.articleName;
+    nameCell.setAttribute("onclick",'selectAllProductByArticle("'+element.article.name+'")');
+    nameCell.innerHTML = element.article.name;
     articleLine.appendChild(nameCell);
 
     var categoryCell = document.createElement('td');
-    categoryCell.setAttribute("onclick",'selectAllProductByArticle("'+element.articleName+'")');
-    categoryCell.innerHTML = element.articleCategory;
+    categoryCell.setAttribute("onclick",'selectAllProductByArticle("'+element.article.name+'")');
+    categoryCell.innerHTML = element.article && element.article.ingredient ? element.article.ingredient.name : null;
     articleLine.appendChild(categoryCell);
-    
+
     var quantityCell = document.createElement('td');
-    quantityCell.setAttribute("onclick",'selectAllProductByArticle("'+element.articleName+'")');
-    quantityCell.innerHTML = countQuantity(fullProductsArray,element.articleName);
+    quantityCell.setAttribute("onclick",'selectAllProductByArticle("'+element.article.name+'")');
+    quantityCell.innerHTML = countQuantity(fullProductsArray,element.article.name);
     articleLine.appendChild(quantityCell);
 
     var codeCell = document.createElement('td');
-    codeCell.setAttribute("onclick",'selectAllProductByArticle("'+element.articleName+'")');
-    codeCell.innerHTML = element.articleId;
+    codeCell.setAttribute("onclick",'selectAllProductByArticle("'+element.article.name+'")');
+    codeCell.innerHTML = element.article.aid;
     articleLine.appendChild(codeCell);
 
     var buttonCell = document.createElement('td');
     var button = document.createElement('p');
     button.setAttribute("class","btn");
-    button.setAttribute("id","btn"+element.articleName);
+    button.setAttribute("id","btn"+element.article.name);
     button.innerHTML = "+";
-    button.setAttribute("onclick",'buttonOnClick("'+element.articleName+'")');
+    button.setAttribute("onclick",'buttonOnClick("'+element.article.name+'")');
     buttonCell.appendChild(button);
     articleLine.appendChild(buttonCell);
 
@@ -210,9 +222,10 @@ function createArticleDisplay(element){ //checked
 
 function buttonOnClick(articleName){
     var button = document.getElementById("btn"+articleName)
+
     for (var i=0; i<fullProductsArray.length; i++){
-        if (fullProductsArray[i].articleName == articleName){
-            strId = fullProductsArray[i].articleName + "ProductLine" + fullProductsArray[i].prid;
+        if (fullProductsArray[i].article && fullProductsArray[i].article.name == articleName){
+            strId = fullProductsArray[i].article.name + "ProductLine" + fullProductsArray[i].prid;
             if (document.getElementById(strId).style.display == "none"){
                 document.getElementById(strId).style.display = "table-row";
                 button.innerHTML ="-";
@@ -228,7 +241,7 @@ function buttonOnClick(articleName){
 function selectProduct(elementId, elementName){ //lorsqu'on clique sur un produit celui ci doit changer de statut ("select"/"")
 
     strId = elementName + "ProductLine" + elementId;
-    
+
     var elementHTML = document.getElementById(strId);
     var indexToRemove = selectedProducts.findIndex( o => o == elementId);
 
@@ -240,13 +253,13 @@ function selectProduct(elementId, elementName){ //lorsqu'on clique sur un produi
     else {
         elementHTML.style.background = "";
         selectedProducts.splice(indexToRemove, 1);
-    }    
+    }
     isAllArticleSelected(elementName); //on vérifie si tous les produits d'un article sont sélectionné afin de changer ou non la classe de l'article
 }
 
 function isAllArticleSelected(articleName){
     var element = document.getElementById(articleName + "ArticleLine");
-    var productsClass = "productLine " + articleName; 
+    var productsClass = "productLine " + articleName;
     var allSelected = true;
     var products = document.getElementsByClassName(productsClass);
     var isArticleSelected = element.classList.contains("select");
@@ -269,11 +282,11 @@ function isAllArticleSelected(articleName){
 
 function createProductDisplay(element){
     var productLine = document.createElement('tr');
-    strId = element.articleName + "ProductLine" + element.prid;
+    strId = element.article.name + "ProductLine" + element.prid;
     productLine.setAttribute("id",strId);
-    productLine.setAttribute("onclick",'selectProduct("' + element.prid + '", "' + element.articleName + '")');
+    productLine.setAttribute("onclick",'selectProduct("' + element.prid + '", "' + element.article.name + '")');
     // productLine.setAttribute("onclick","selectProduct('"+strId+"','"+element.articleName+"')");
-    productLine.setAttribute("class","productLine " + element.articleName);
+    productLine.setAttribute("class","productLine " + element.article.name);
     productLine.setAttribute("style","display:none");
 
     var firstCell = document.createElement('td');

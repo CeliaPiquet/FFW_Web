@@ -18,6 +18,10 @@ class AdmincoursesController extends Controller
             "in progress",
             "finished"
         );
+        $this->arrBasketRole=array(
+            "import",
+            "export"
+        );
     }
 
     public function index(){
@@ -25,8 +29,7 @@ class AdmincoursesController extends Controller
         $vehiclesManager=VehicleService::getInstance();
         $arrVehicles=$vehiclesManager->getAll();
 
-//        var_dump($arrVehicles);
-        $this->addView($this->action, ["arrRouteState"=>$this->arrRouteState,"arrVehicles"=>$arrVehicles]);
+        $this->addView($this->action, ["arrRouteState"=>$this->arrRouteState,"arrVehicles"=>$arrVehicles,"arrBasketRole"=>$this->arrBasketRole]);
 
         $this->loadTemplate(parent::getTemplateData(),$this->action);
 
@@ -37,7 +40,9 @@ class AdmincoursesController extends Controller
     }
 
     public function courseRow(){
-        $this->loadView($this->action);
+        $arrVehicles=VehicleService::getInstance()->getAll();
+
+        $this->loadView($this->action, ["arrRouteState"=>$this->arrRouteState,"arrVehicles"=>$arrVehicles]);
     }
 
     public function collapsedAddressRow(){

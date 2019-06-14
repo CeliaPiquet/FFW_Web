@@ -6,8 +6,7 @@
                 <th> <?php echo _("Name"); ?></th>
                 <th> <?php echo _("Is available"); ?> </th>
                 <th> <?php echo _("Is stockroom"); ?> </th>
-                <th> <?php echo _("Condition"); ?> </th>
-                <th> <?php echo _("Check product"); ?> </th>
+                <th> <?php echo _("Total quantity"); ?> </th>
             </tr>
             </thead>
             <tbody id="roomsContainer">
