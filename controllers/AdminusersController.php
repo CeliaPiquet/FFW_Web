@@ -55,5 +55,13 @@ class AdminusersController extends Controller
 
     }
 
+    public function companyRow(){
+        $this->loadView($this->action);
+    }
+
+    public function userRow(){
+        $this->loadView($this->action);
+    }
+
 
 }

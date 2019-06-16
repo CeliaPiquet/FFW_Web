@@ -15,8 +15,8 @@ class Router {
 
             $controller = $this->createController($request);
             $action = $this->createAction($request);
-
-
+            $id=$request->existParameter('id')?$request->getParameterByName("id"):null;
+            $controller->setId($id);
             $controller->executeAction($action);
 
         }

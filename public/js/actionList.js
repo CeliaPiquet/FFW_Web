@@ -47,7 +47,7 @@ function changeRoom(){
 
     request.onreadystatechange = function(){
         if(request.readyState === 4 && request.status === 200){
-            document.location.href = document.location.href + "?success=1";
+            document.location.href =websiteRoot+"/stock/index/1";
         }
     }
 
@@ -71,7 +71,7 @@ function addProduct(){
         var request = new XMLHttpRequest();
         request.onreadystatechange = function(){
             if(request.readyState === 4 && request.status === 201){
-                // document.location.href = document.location.href + "?success=1";
+                document.location.href = websiteRoot+"/stock/index/1";
             } 
         }
         var url = ffwApiUrl+"/products?nbProducts="+nbProducts;
@@ -85,7 +85,7 @@ function removeProduct(){
 
     request.onreadystatechange = function(){
         if(request.readyState === 4 && request.status === 200){
-            // document.location.href = document.location.href + "?success=1";
+            document.location.href = websiteRoot+"/stock/index/1";
         }
     }
     var url = ffwApiUrl+"/products?roomId=";

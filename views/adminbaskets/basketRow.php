@@ -25,10 +25,10 @@
     <button class="btn col-md-2 mx-auto" id="collapseBtnProduct" type="button" >Products</button>
 </td>
 <td>
-    <button class="btn col-md-2 mx-auto" id="collapseBtnProduct" type="button" onclick="validateBasket(this)" >Validate</button>
+    <button class="btn col-md-2 mx-auto" id="validateBtn" type="button" onclick="validateBasket(this)" >Validate</button>
 </td>
 <td>
-    <button class="btn col-md-2 mx-auto" id="collapseBtnProduct" type="button" onclick="cancelBasket(this)" >Cancel</button>
+    <button class="btn col-md-2 mx-auto" id="cancelBtn" type="button" onclick="cancelBasket(this)" >Cancel</button>
 </td>
 <td>
     <div class="alert alert-dark">Total quantity : <span id="totalQuantity"></span></div>

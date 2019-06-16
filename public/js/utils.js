@@ -120,7 +120,8 @@ function ucFirst(string){
 }
 function getFirstParent(element,attribute,value){
 
-    while(element[attribute]!=value && element.tagName!="BODY"){
+    while(!element[attribute].includes(value) && element.tagName!="BODY"){
+        console.log(element[attribute]);
         element=element.parentElement;
     }
     return element;

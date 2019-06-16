@@ -2,45 +2,13 @@ var userFindFlag=false;
 var arrUsers;
 var body;
 
-var emptyUserRow=document.createElement('tr');
-emptyUserRow.class="align-items-center";
-emptyUserRow.id="userRow";
-emptyUserRow.innerHTML ='<td id="userMail">\n' +
-    '</td>\n' +
-    '<td id="userLastname">\n' +
-    '</td>\n' +
-    '<td id="userFirstname">\n' +
-    '</td>\n' +
-    '<td id="userCity">\n' +
-    '</td>\n' +
-    '<td>\n' +
-    '    <select type="text" class="form-control" id="userSkills"><option></option></select>\n' +
-    '</td>\n' +
-    '<td>\n' +
-    '    <select type="text" class="form-control" id="userSkillsStatus"><option></option></select>\n' +
-    '</td>\n' +
-    '<td>\n' +
-    '    <select type="text" class="form-control" id="userRights"><option></option></select>\n' +
-    '</td>\n' +
-    '<td>\n' +
-    '    <a id="accountEdit" class="btn" ><i class="fas fa-pen h5 mx-auto my-auto"></i></a>'+
-    '</td>\n' +
-    '\n';
 
+loadExternalDOMElement([
+    {url:websiteRoot+"/adminUsers/userRow",func:getEmptyUserRow},
+    {url:websiteRoot+"/adminUsers/companyRow",func:getEmptyCompanyRow}
+]);
 
-var emptyCompanyRow=document.createElement('tr');
-emptyCompanyRow.class="align-items-center";
-emptyCompanyRow.id="companyRow";
-emptyCompanyRow.innerHTML =
-    '<td id="name">\n' +
-    '</td>\n' +
-    '<td id="siret">\n' +
-    '</td>\n' +
-    '<td id="tel">\n' +
-    '</td>\n';
-
-
-function findusersByFilter(){
+function findUsersByFilter(){
 
     body=new Object();
 
@@ -372,7 +340,7 @@ function updateUserAPI(userBody){
 
         if(request.readyState==4&&request.status==200){
             console.log(request.responseText);
-            findusersByFilter();
+            findUsersByFilter();
         }
     };
 
@@ -383,3 +351,18 @@ function updateUserAPI(userBody){
     request.send(JSON.stringify(userBody));
 
 }
+
+function getEmptyUserRow(domText){
+    emptyUserRow=document.createElement('tr');
+    emptyUserRow.class="align-items-center";
+    emptyUserRow.id="userRow";
+    emptyUserRow.innerHTML = domText;
+}
+
+function getEmptyCompanyRow(domText){
+    emptyCompanyRow=document.createElement('tr');
+    emptyCompanyRow.class="align-items-center";
+    emptyCompanyRow.id="userRow";
+    emptyCompanyRow.innerHTML = domText;
+}
+

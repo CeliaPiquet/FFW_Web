@@ -27,11 +27,11 @@ function initAutocomplete(){
 function fillInAddress() {
 
     element=this.input;
-    console.log(componentForm);
+
     // Get the place details from the autocomplete object.
     var place = this.getPlace();
 
-    element=getFirstParent(element,"#","addressForm");
+    element=getFirstParent(element,"id","addressForm");
     for (var component in componentForm) {
         console.log(componentForm[component]);
         element.querySelector("#"+component).value = '';

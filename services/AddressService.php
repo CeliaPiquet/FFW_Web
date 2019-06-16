@@ -26,8 +26,12 @@ class AddressService {
 
         $url = "$apiUrl/addresses";
         $jsonAddress=json_encode($address);
+
+        var_dump($jsonAddress);
+
         $response=$curl->curlPost($url,$jsonAddress, array());
 
+        var_dump($response);
         if($response["httpCode"]>=400){
             return null;
         }

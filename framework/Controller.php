@@ -9,6 +9,7 @@ abstract class Controller {
 
     // Action à réaliser
     protected $action;
+    protected $id;
 
     // Requête entrante
     protected $request;
@@ -37,6 +38,24 @@ abstract class Controller {
     {
         $this->action = $action;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+
 
     /**
      * @return mixed
@@ -91,9 +110,6 @@ abstract class Controller {
             $user->getRights();
 
             $isAdmin=UserService::isRightSet($user->getRights(),5);
-            var_dump($isAdmin);
-            var_dump($user->getRights());
-
 
 //            $isAdmin=$user->getRights()=="admin"?true:false;
 

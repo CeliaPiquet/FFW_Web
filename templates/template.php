@@ -7,7 +7,7 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="<?=$websiteRoot?>/public/bootstrap-4.1.3/css/bootstrap.min.css">
+<!--        <link rel="stylesheet" href="--><?//=$websiteRoot?><!--/public/bootstrap-4.1.3/css/bootstrap.min.css">-->
         <link rel="stylesheet" href="../../public/css/stylesheet.css">
         <?php  if(isset($head)){echo $head;}?>
         <title>Fight Food Waste</title>
@@ -79,7 +79,7 @@
             </nav>
         </header>
 
-
+        <?php if(isset($alert)){echo $alert;}?>
         <div class="back" id="content">
             <?php if(isset($navbar)){echo $navbar;} ?>
             <?php if(isset($content)){echo $content;} ?>

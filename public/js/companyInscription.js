@@ -11,13 +11,15 @@ loadExternalDOMElement([
     {url:websiteRoot+"/account/companyAddressForm",func:getEmptyCompanyAddressForm}
 ]);
 
-window.onload=getAllCompaniesByUser;
 
 
 function getEmptyCompanyAddressForm(domText){
 
     let parser=new DOMParser();
     emptyCompanyAddrForm=parser.parseFromString(domText,"text/html").getElementById("addressForm");
+    console.log(emptyCompanyAddrForm);
+    getAllCompaniesByUser();
+
 }
 
 function searchBySiren(){
@@ -87,7 +89,7 @@ function getSirenList(siren) {
             changeFilledCompanyAddrForm();
         }
     };
-    var url = ffwApiUrl+"/company/listBySiren/" + siren;
+    var url = websiteRoot+"/company/listBySiren/" + siren;
     request.open('GET', url,false);
     request.send();
 
@@ -96,7 +98,7 @@ function getSirenList(siren) {
 
 function changeFilledCompanyAddrForm(){
 
-
+    console.log(companies);
     if(companies.length==0){
         return false;
     }
@@ -164,7 +166,7 @@ function removeCompany(event){
 function updateCompany(event){
 
     var element=event.target;
-
+    console.log(element);
 
     while(element.id!="addressForm"&&element!=undefined){
         element=element.parentNode;
@@ -199,7 +201,7 @@ function updateCompanyAPI(company){
         }
     };
 
-    var url = ffwApiUrl+"/company/updateOne";
+    var url = websiteRoot+"/company/updateOne";
     request.open('PUT', url);
     request.send(JSON.stringify(company));
 
@@ -223,7 +225,7 @@ function createCompanyAPI(company){
     };
 
     console.log(JSON.stringify(company));
-    var url = ffwApiUrl+"/company/createOne";
+    var url = websiteRoot+"/company/createOne";
     request.open('POST', url);
     request.send(JSON.stringify(company));
 

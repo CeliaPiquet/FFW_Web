@@ -11,6 +11,6 @@
     <div class="alert alert-dark">Total quantity : <span id="totalQuantity"></span></div>
 </td>
 <td>
-    <button class="btn  mx-auto" id="collapseBtnProduct" id="createTime" object="basket" type="button" ><?php echo _("Affect destination");?></button>
+    <button class="btn  mx-auto" id="collapseBasketDestRow" onclick="collapseBasketDestRow(this);"  object="basket" type="button" ><?php echo _("Affect destination");?></button>
 </td>
 

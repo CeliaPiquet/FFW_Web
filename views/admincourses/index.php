@@ -61,67 +61,64 @@
 
 
 <div class="modal fade" id="courseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
 
-                    <div class="col-md-12">
+                <div class="col-md-12">
 
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12 ">
-                                    <table class=" table table-striped table-hover table-responsive-md" id="basketsTable">
-                                        <thead id="basketsTableHeader">
-                                        <tr>
-                                            <th> <?php echo _("Role"); ?> </th>
-                                            <th> <?php echo _("City"); ?> </th>
-                                            <th> <?php echo _("Create date"); ?> </th>
-                                            <th> <?php echo _("Order by quantity"); ?> </th>
-                                        </tr>
-                                        <tr >
-                                            <td>
-                                                <select type="text" class="form-control" onchange="findBasketsByFilter()" id="basketRoleSelect">
-                                                    <option selected></option>
-                                                    <?php
-                                                    foreach($arrBasketRole as $basketRole){
-                                                        echo "<option value='".$basketRole."'>".ucfirst($basketRole)."</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <input type="text" class="list-group-item list-group-item-action text-center" onkeyup="findBasketsByFilter();" id="cityNameInput">
-                                            </td>
-                                            <td>
-                                                <input type="date" class="list-group-item list-group-item-action text-center" onkeyup="findBasketsByFilter();" id="createDateInput">
-                                            </td>
-                                            <td>
-                                                <button type="button" class="list-group-item list-group-item-action text-center" onclick="changeBasketQuantityOrder();" id="quantityOrderBtn"><i id="arrowBasketOrder" class="fas fa-arrow-up"></i></button>
-                                            </td>
-                                        </tr>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <table class=" table table-striped table-hover table-responsive-md" id="basketsTable">
+                                    <thead id="basketsTableHeader">
+                                    <tr>
+                                        <th> <?php echo _("Role"); ?> </th>
+                                        <th> <?php echo _("City"); ?> </th>
+                                        <th> <?php echo _("Create date"); ?> </th>
+                                        <th> <?php echo _("Order by quantity"); ?> </th>
+                                    </tr>
+                                    <tr >
+                                        <td>
+                                            <select type="text" class="form-control" onchange="findBasketsByFilter()" id="basketRoleSelect">
+                                                <?php
+                                                foreach($arrBasketRole as $basketRole){
+                                                    echo "<option value='".$basketRole."'>".ucfirst($basketRole)."</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="list-group-item list-group-item-action text-center" onkeyup="findBasketsByFilter();" id="cityNameInput">
+                                        </td>
+                                        <td>
+                                            <input type="date" class="list-group-item list-group-item-action text-center" onkeyup="findBasketsByFilter();" id="createDateInput">
+                                        </td>
+                                        <td>
+                                            <button type="button" class="list-group-item list-group-item-action text-center" onclick="changeBasketQuantityOrder();" id="quantityOrderBtn"><i id="arrowBasketOrder" class="fas fa-arrow-up"></i></button>
+                                        </td>
+                                    </tr>
 
-                                        </thead>
-                                        <tbody id="basketRowsContainer">
+                                    </thead>
+                                    <tbody id="basketRowsContainer">
 
-                                        </tbody>
-                                    </table>
-                                </div
-                            </div>
+                                    </tbody>
+                                </table>
+                            </div
                         </div>
-
                     </div>
+
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 <!--                    <button type="button" onclick="updateSkills()" class="btn btn-primary" data-dismiss="modal">Confirm</button>-->
-                </div>
             </div>
         </div>
     </div>

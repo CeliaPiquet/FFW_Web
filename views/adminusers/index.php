@@ -23,20 +23,20 @@
         </tr>
         <tr >
             <td>
-                <input type="text" class="form-control" onkeyup="findusersByFilter()" id="mailInput" placeholder="<?php echo _("Mail");?>">
+                <input type="text" class="form-control" onkeyup="findUsersByFilter()" id="mailInput" placeholder="<?php echo _("Mail");?>">
             </td>
             <td>
-                <input type="text" class="form-control" onkeyup="findusersByFilter()" id="lastnameInput" placeholder="<?php echo _("Last name"); ?>">
+                <input type="text" class="form-control" onkeyup="findUsersByFilter()" id="lastnameInput" placeholder="<?php echo _("Last name"); ?>">
             </td>
             <td>
-                <input type="text" class="form-control" onkeyup="findusersByFilter()" id="firstnameInput" placeholder="<?php echo _("First name"); ?>">
+                <input type="text" class="form-control" onkeyup="findUsersByFilter()" id="firstnameInput" placeholder="<?php echo _("First name"); ?>">
             </td>
             <td>
-                <input type="text" class="form-control" onkeyup="findusersByFilter()" id="cityInput" placeholder="<?php echo _("City"); ?>">
+                <input type="text" class="form-control" onkeyup="findUsersByFilter()" id="cityInput" placeholder="<?php echo _("City"); ?>">
             </td>
 
             <td>
-                <select type="text" class="form-control" onchange="findusersByFilter()" id="skillsSelect">
+                <select type="text" class="form-control" onchange="findUsersByFilter()" id="skillsSelect">
                     <option selected></option>
                 <?php
                     foreach($arrSkills as $skill){
@@ -46,7 +46,7 @@
                 </select>
             </td>
             <td>
-                <select type="text" class="form-control" onchange="findusersByFilter()" id="skillsStatusSelect">
+                <select type="text" class="form-control" onchange="findUsersByFilter()" id="skillsStatusSelect">
                     <option selected></option>
                     <?php
                     foreach($arrSkillsStatus as $skillStatus){
@@ -56,7 +56,7 @@
                 </select>
             </td>User
             <td>
-                <select type="text" class="form-control" onchange="findusersByFilter()" id="rightsSelect">
+                <select type="text" class="form-control" onchange="findUsersByFilter()" id="rightsSelect">
                     <option selected></option>
                     <?php
                     foreach($arrRights as $key=>$value){

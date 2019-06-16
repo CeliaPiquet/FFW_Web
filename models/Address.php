@@ -23,15 +23,24 @@ class Address implements JsonSerializable {
         $this->longitude = isset($fields['longitude'])?$fields['longitude']:0;
     }
 
-
-    public function getStreetAddress(): string {return $this->streetAddress;}
-    public function getCityName(): string {return $this->cityName;}
-    public function getCityCode(): string {return $this->cityCode;}
-    public function getCountry(): string {return $this->country;}
-
+    /**
+     * @return mixed|null
+     */
+    public function getAdid()
+    {
+        return $this->adid;
+    }
 
     /**
-     * @return mixed
+     * @param mixed|null $adid
+     */
+    public function setAdid($adid): void
+    {
+        $this->adid = $adid;
+    }
+
+    /**
+     * @return mixed|null
      */
     public function getHouseNumber()
     {
@@ -39,15 +48,31 @@ class Address implements JsonSerializable {
     }
 
     /**
-     * @param mixed $houseNumber
+     * @param mixed|null $houseNumber
      */
-    public function setHouseNumber($houseNumber)
+    public function setHouseNumber($houseNumber): void
     {
         $this->houseNumber = $houseNumber;
     }
 
     /**
-     * @return mixed
+     * @return mixed|null
+     */
+    public function getStreetAddress()
+    {
+        return $this->streetAddress;
+    }
+
+    /**
+     * @param mixed|null $streetAddress
+     */
+    public function setStreetAddress($streetAddress): void
+    {
+        $this->streetAddress = $streetAddress;
+    }
+
+    /**
+     * @return mixed|null
      */
     public function getComplement()
     {
@@ -55,11 +80,59 @@ class Address implements JsonSerializable {
     }
 
     /**
-     * @param mixed $complement
+     * @param mixed|null $complement
      */
-    public function setComplement($complement)
+    public function setComplement($complement): void
     {
         $this->complement = $complement;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getCityName()
+    {
+        return $this->cityName;
+    }
+
+    /**
+     * @param mixed|null $cityName
+     */
+    public function setCityName($cityName): void
+    {
+        $this->cityName = $cityName;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getCityCode()
+    {
+        return $this->cityCode;
+    }
+
+    /**
+     * @param mixed|null $cityCode
+     */
+    public function setCityCode($cityCode): void
+    {
+        $this->cityCode = $cityCode;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param mixed|null $country
+     */
+    public function setCountry($country): void
+    {
+        $this->country = $country;
     }
 
     /**
@@ -94,18 +167,7 @@ class Address implements JsonSerializable {
         $this->longitude = $longitude;
     }
 
-    /**
-     * @return mixed|null
-     */
-    public function getAdid()
-    {
-        return $this->adid;
-    }
 
-
-    public function setAdId(int $adid) {
-        $this->adid = $adid;
-    }
 
     public function JsonSerialize() {
         return get_object_vars($this);

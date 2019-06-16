@@ -47,9 +47,15 @@ class CompanyService {
             $arrAddress["longitude"]=isset($globalData["fields"]["geolocetablissement"][1])?$globalData["fields"]["geolocetablissement"][1]:NULL;
             $arrAddress["country"]="France";
 
+            if(isset($globalData["fields"]["denominationusuelle1unitelegale"])){
+                $name[]=$globalData["fields"]["denominationusuelle1unitelegale"];
+            }
+            if(isset($globalData["fields"]["denominationunitelegale"])){
+                $name[]=$globalData["fields"]["denominationunitelegale"];
+            }
             $companyArr[$i]=new Company(array(
                 "siret"=>$globalData["fields"]["siret"],
-                "name"=>$globalData["fields"]["denominationusuelle1unitelegale"]." - ".$globalData["fields"]["denominationunitelegale"],
+                "name"=>implode("-",$name),
                 "address"=>new Address($arrAddress)));
             $i++;
         }
@@ -66,7 +72,11 @@ class CompanyService {
         $response=["httpCode"=>0,"result"=>[]];
         $curlCompanies=array();
         $offset=0;
-        while($response["httpCode"]<400){
+        $limit=20;
+        do{
+
+            $url="$apiUrl/users/$userId/companies?offset=$offset&limit=20";
+            $response= $curl->curlGet($url,array());
 
             if($response["result"]){
                 if($offset==0){
@@ -78,9 +88,9 @@ class CompanyService {
             }
 
             $offset=sizeof($curlCompanies);
-            $url="$apiUrl/users/$userId/companies?offset=$offset&limit=20";
-            $response= $curl->curlGet($url,array());
-        }
+
+        }while($response["result"] && sizeof($response["result"])==$limit);
+
         if(isset($curlCompanies) && !empty($curlCompanies)){
             foreach($curlCompanies as $key=>$company){
                 $curlCompanies[$key] =new Company($company);
