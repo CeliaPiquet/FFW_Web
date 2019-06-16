@@ -71,10 +71,4 @@ class AdmincoursesController extends Controller
         $this->loadView($this->action);
     }
 
-    public function exportBasketsBtn(){
-        $this->loadView($this->action);
-    }
-    public function importBasketsBtn(){
-        $this->loadView($this->action);
-    }
 }

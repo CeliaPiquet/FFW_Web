@@ -6,14 +6,14 @@
 </tr>
 <tr >
     <td>
-        <input type="text" class="form-control" onkeyup="findExternalsByFilter(this)" id="mailInput" placeholder="<?php echo _("Mail");?>">
+        <input type="text" class="form-control" name="filterInput" onkeyup="findExternalsByFilter(this)" id="mailInput" placeholder="<?php echo _("Mail");?>">
     </td>
     <td>
-        <input type="text" class="form-control" onkeyup="findExternalsByFilter(this)" id="nameInput" placeholder="<?php echo _("Name"); ?>">
+        <input type="text" class="form-control" name="filterInput" onkeyup="findExternalsByFilter(this)" id="nameInput" placeholder="<?php echo _("Name"); ?>">
     </td>
     <td>
-        <input type="text" class="form-control" onkeyup="findExternalsByFilter(this)" id="cityInput" placeholder="<?php echo _("City"); ?>">
+        <input type="text" class="form-control" name="filterInput"  onkeyup="findExternalsByFilter(this)" id="cityInput" placeholder="<?php echo _("City"); ?>">
     </td>
 </tr>
 </thead>
-<tbody id="externalRowsContainer"></tbody>
+<tbody class="genericRowContainer" id="externalRowsContainer"></tbody>

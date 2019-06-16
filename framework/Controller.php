@@ -100,6 +100,9 @@ abstract class Controller {
         if(!isset($_SESSION) || empty($_SESSION)){
             session_start();
         }
+        if(isset($_SERVER['REQUEST_URI'])){
+            $uri=$_SERVER['REQUEST_URI'];
+        }
 
         $isConnected=false;
         $isAdmin=false;
@@ -116,7 +119,7 @@ abstract class Controller {
             $isConnected=true;
         }
 
-        return array("isConnected"=>$isConnected, "isAdmin"=>$isAdmin);
+        return array("isConnected"=>$isConnected, "isAdmin"=>$isAdmin,"uri"=>$uri);
 
     }
 
