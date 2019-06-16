@@ -20,8 +20,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <!--            <script src="--><?//=$websiteRoot?><!--/public/bootstrap-4.1.3/js/bootstrap.min.js"></script>-->
 
-    <script type="text/javascript">var ffwApiUrl="<?=$ffwApiUrl?>";</script>
-    <script type="text/javascript">var websiteRoot="<?=$websiteRoot?>";</script>
+    <script type="text/javascript">var ffwApiUrl="<?=$ffwApiUrl?>"; var websiteRoot="<?=$websiteRoot?>"; var uri="<?=$uri?>";</script>
+    <script type="text/javascript"> window.history.pushState("object or string", "Title", uri);</script>
     <script type="text/javascript" src="<?=$websiteRoot?>/public/js/utils.js"></script>
 
 
