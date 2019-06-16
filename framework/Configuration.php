@@ -18,7 +18,7 @@ class Configuration {
     // Renvoie le tableau des paramètres en le chargeant au besoin
     private static function getParamaters() {
         if (self::$parameters == null) {
-            $filePath = "config/prod.ini";
+            $filePath = "config/dev.ini";
             if (!file_exists($filePath)) {
                 $filePath = "config/dev.ini";
             }
