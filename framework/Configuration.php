@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 class Configuration {
 
@@ -20,7 +20,7 @@ class Configuration {
         if (self::$parameters == null) {
             $filePath = "config/prod.ini";
             if (!file_exists($filePath)) {
-                $filePath = "config/dev.ini";
+                $filePath = "config/prod.ini";
             }
             if (!file_exists($filePath)) {
                 throw new Exception("No config file founded");
