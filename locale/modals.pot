@@ -1,0 +1,70 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-16 14:11+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../view/modals.php:6
+msgid "Change product rooms"
+msgstr "test"
+
+#: ../view/modals.php:30
+msgid "Delete products"
+msgstr ""
+
+#: ../view/modals.php:36
+msgid "Do you really want to delete this product?"
+msgstr ""
+
+#: ../view/modals.php:40 ../view/modals.php:82
+msgid "Confirm"
+msgstr ""
+
+#: ../view/modals.php:52
+msgid "Add a product"
+msgstr ""
+
+#: ../view/modals.php:60
+msgid "Product code"
+msgstr ""
+
+#: ../view/modals.php:65
+msgid "Peremption date"
+msgstr ""
+
+#: ../view/modals.php:69
+msgid "State"
+msgstr ""
+
+#: ../view/modals.php:71
+msgid "Good shape"
+msgstr ""
+
+#: ../view/modals.php:72
+msgid "Damaged"
+msgstr ""
+
+#: ../view/modals.php:73
+msgid "Unconsumable"
+msgstr ""
+
+#: ../view/modals.php:18 ../view/modals.php:39 ../view/modals.php:81
+msgid "Cancel"
+msgstr ""
+
+#: ../view/modals.php:19
+msgid "Validate"
+msgstr ""

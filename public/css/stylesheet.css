@@ -3,6 +3,7 @@ h1 {
     text-align : center;
 }
 
+
 body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
@@ -35,4 +36,8 @@ body {
 
 .container {
     padding : 10px;
+}
+
+.active {
+    border: #905100;
 }

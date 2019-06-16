@@ -1,0 +1,350 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-16 14:16+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: homeView.php:24 ../view/homeView.php:18
+msgid "Who are we ?"
+msgstr "Qui sommes-nous ?"
+
+#: homeView.php:26 ../view/homeView.php:20
+msgid ""
+"Since 2013, Fight Food Waste is engaged against food wwastage. \n"
+"                Association is active in France and in other countries as "
+"Italy, Ireland and Portugal."
+msgstr ""
+"Depuis 2013, Fight Food Waste s'engage dans la lutte  \n"
+"                contre le gaspillage. L'association est présente en France \n"
+"                et dans d'autres pays comme l'Italie, l'Irlande et \n"
+"                le Portugal."
+
+#: homeView.php:30 ../view/homeView.php:24
+msgid "Our goal is to reduce food wastage which produces..."
+msgstr ""
+"Notre but est de réduire le gaspillage alimentaire qui \n"
+"                production alimentaire mondiale."
+
+#: homeView.php:36 ../view/homeView.php:30
+msgid "How does it work ?"
+msgstr "Comment cela fonctionne ?"
+
+#: homeView.php:40 ../view/homeView.php:34
+msgid ""
+" \n"
+"                Every day we collect unsold stock and unused foodstuffs "
+"among private and business donors \n"
+"                to redistribute them to the most needy : associations, "
+"homeless person, isolated people.\n"
+"                To help us scan with FFW scanner your food items and our "
+"volunteers will pick up them during their daily round.\n"
+"                To order your scanner subscribe on our website and command "
+"it on your account space."
+msgstr ""
+" \n"
+"                Chaque jour nous effectuons des collectes parmi les \n"
+"                commerçants et particuliers afin de récupérer les \n"
+"                invendus et les produits qui ne seront pas consommés \n"
+"                afin de les redistribuer aux plus nécessiteux : "
+"associations, \n"
+"                personnes sans domiciles fixes ou isolées notamment. \n"
+"                Pour cela il suffit à l'aide du boitier FFW* de scanner "
+"ses \n"
+"                aliments à donner et nos bénévoles viendront les récupérer \n"
+"                lors des tournées quotidiennes. Pour commander son boitier \n"
+"                il vous suffit de vous inscrire sur le site* et de la "
+"commander \n"
+"                via son espace 'Mon Compte'."
+
+#: homeView.php:45 ../view/homeView.php:39
+msgid ""
+"\n"
+"                *Scanners are free for subscribers who contribute at least "
+"10€ per year and for volunteers who offers their services."
+msgstr ""
+"\n"
+"*les boitiers sont gratuits pour les adhérents cotisant au moins 10€ par an\n"
+"                et pour les bénévoles proposant leur(s) service(s)"
+
+#: homeView.php:50 ../view/homeView.php:44
+msgid "Have fun by doing like us and pick up wasted food !"
+msgstr "Amusez-vous à faire comme nous et ramassez les déchets !"
+
+#: homeView.php:59 ../view/homeView.php:53
+msgid "How to participate ?"
+msgstr "Comment participer ?"
+
+#: homeView.php:63 ../view/homeView.php:57
+msgid ""
+"\n"
+"                To participate in that fight against the wastage with us "
+"it's easy ! \n"
+"                All you need to do is to subscribe on this website and "
+"choose the type of your contribution !"
+msgstr ""
+"\n"
+"                Pour participez à ce combat contre le gaspillage \n"
+"                avec nous c'est très simple ! \n"
+"                Il vous suffit de vous inscrire sur ce site et de choisir \n"
+"                la façon dont vous voulez et pouvez vous impliquer !"
+
+#: homeView.php:70 ../view/homeView.php:64
+msgid ""
+"4 choices to help us : \n"
+"                - you are merchants and you want us to pick up your unsold "
+"stocks\n"
+"                - you want to bring a financial contribution for the "
+"association and access to a large range of services\n"
+"                - you want to offer your services and become volunteer of "
+"the association\n"
+"                - you want to access to our public services and stay "
+"informed of our actions "
+msgstr ""
+"4 choix s'offrent à vous: <br>\n"
+"                - vous êtes commerçant et vous souhaitez que                "
+"l'on récolte vos invendus\n"
+"                - vous souhaitez contribuez financièrement à                 "
+"l'association et accéder ainsi à une série \n"
+"                de services spécfifiques \n"
+"                - vous souhaitez offrir vos services et "
+"devenir                 bénévole de l'association \n"
+"                - vous souhaitez accéder à nos services "
+"ouverts                au public et rester informer de nos actions"
+
+#: homeView.php:80 ../view/homeView.php:74
+msgid "What are services offered ?"
+msgstr "Quels sont les services proposés ?"
+
+#: ../view/chooseOption.php:12
+msgid "Commerçant"
+msgstr ""
+
+#: ../view/chooseOption.php:16 ../view/chooseOption.php:26
+#: ../view/chooseOption.php:36
+msgid "Choisir cette option"
+msgstr ""
+
+#: ../view/chooseOption.php:22
+msgid "Adhérent"
+msgstr ""
+
+#: ../view/chooseOption.php:23
+msgid "Je souhaite faire un don à FFW et accéder alors aux services proposés !"
+msgstr ""
+
+#: ../view/chooseOption.php:32
+msgid "Bénévole"
+msgstr ""
+
+#: ../view/chooseOption.php:33
+msgid "Je veux faire profiter FFW de mes services et devenir bénévole !"
+msgstr ""
+
+#: ../view/chooseOption.php:45
+msgid "Choisir mon option plus tard"
+msgstr ""
+
+#: ../view/inscription.php:13 ../view/inscription.php:12
+msgid "Last name"
+msgstr ""
+
+#: ../view/inscription.php:27
+msgid "Password (8 characters, 1 capital, 1 lower, 1 digit)"
+msgstr ""
+
+#: ../view/inscription.php:31
+msgid "Rewrite your password"
+msgstr ""
+
+#: ../view/inscription.php:35
+msgid "Address"
+msgstr ""
+
+#: ../view/inscription.php:39
+msgid "Complement"
+msgstr ""
+
+#: ../view/inscription.php:40
+msgid "Building, flat, floor ..."
+msgstr ""
+
+#: ../view/inscription.php:44
+msgid "City"
+msgstr ""
+
+#: ../view/inscription.php:48
+msgid "Zip code"
+msgstr ""
+
+#: ../view/inscription.php:52
+msgid "Country"
+msgstr ""
+
+#: ../view/inscription.php:54
+msgid "France"
+msgstr ""
+
+#: ../view/inscription.php:55
+msgid "Italy"
+msgstr ""
+
+#: ../view/inscription.php:56
+msgid "Portugal"
+msgstr ""
+
+#: ../view/inscription.php:57
+msgid "Ireland"
+msgstr ""
+
+#: ../view/inscription.php:65
+msgid "Agree FFW general conditions"
+msgstr ""
+
+#: ../view/inscription.php:71
+msgid "I want to receive by mail actuality and event information from FFW"
+msgstr ""
+
+#: ../view/inscription.php:75
+msgid "Next step"
+msgstr ""
+
+#: ../view/modals.php:6
+msgid "Change product rooms"
+msgstr ""
+
+#: ../view/modals.php:18 ../view/modals.php:39 ../view/modals.php:81
+msgid "Cancel"
+msgstr ""
+
+#: ../view/modals.php:19
+msgid "Validate"
+msgstr ""
+
+#: ../view/modals.php:30
+msgid "Delete products"
+msgstr ""
+
+#: ../view/modals.php:36
+msgid "Do you really want to delete this product?"
+msgstr ""
+
+#: ../view/modals.php:40 ../view/modals.php:82
+msgid "Confirm"
+msgstr ""
+
+#: ../view/modals.php:52
+msgid "Add a product"
+msgstr ""
+
+#: ../view/modals.php:60
+msgid "Product code"
+msgstr ""
+
+#: ../view/modals.php:65
+msgid "Peremption date"
+msgstr ""
+
+#: ../view/modals.php:69
+msgid "State"
+msgstr ""
+
+#: ../view/modals.php:71
+msgid "Good shape"
+msgstr ""
+
+#: ../view/modals.php:72
+msgid "Damaged"
+msgstr ""
+
+#: ../view/modals.php:73
+msgid "Unconsumable"
+msgstr ""
+
+#: ../view/productStockList.php:11
+msgid "Success!"
+msgstr ""
+
+#: ../view/productStockList.php:19
+msgid "Error!"
+msgstr ""
+
+#: ../view/productStockList.php:26
+msgid "Stock Managements"
+msgstr ""
+
+#: ../view/productStockList.php:41
+msgid "Add a product to a room"
+msgstr ""
+
+#: ../view/productStockList.php:44
+msgid "Affect another room to a product"
+msgstr ""
+
+#: ../view/productStockList.php:47
+msgid "Delete a product from the room"
+msgstr ""
+
+#: ../view/productStockList.php:55
+msgid "Article"
+msgstr ""
+
+#: ../view/productStockList.php:56 ../view/productStockList.php:66
+msgid "Category"
+msgstr ""
+
+#: ../view/productStockList.php:57
+msgid "Quantity"
+msgstr ""
+
+#: ../view/productStockList.php:58
+msgid "Code"
+msgstr ""
+
+#: ../view/productStockList.php:63
+msgid "Article name"
+msgstr ""
+
+#: ../view/inscription.php:8
+msgid "Inscription"
+msgstr ""
+
+#: ../view/inscription.php:16 ../view/inscription.php:17
+msgid "First name"
+msgstr ""
+
+#: ../view/inscription.php:22
+msgid "Mail address"
+msgstr ""
+
+#: ../view/inscription.php:26
+msgid "Password"
+msgstr ""
+
+#: ../view/inscription.php:30
+msgid "Password confirm"
+msgstr ""
+
+#: ../view/inscription.php:36
+msgid "House number and street name"
+msgstr ""
+
+#: ../view/productStockList.php:35
+msgid "Pick a adminlocals in order to see the stocks and a room to edit its content"
+msgstr ""
+
+#: ../view/productStockList.php:38
+msgid "Actions:"
+msgstr ""
