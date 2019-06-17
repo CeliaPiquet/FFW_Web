@@ -67,6 +67,10 @@ class AdmincoursesController extends Controller
     public function companyRow(){
         $this->loadView($this->action);
     }
+
+    public function localRow(){
+        $this->loadView($this->action);
+    }
     public function collapsedBasketDestRow(){
         $this->loadView($this->action);
     }

@@ -95,12 +95,11 @@ function getElementBySelectorAndObject(element,selector,objectKey,objectName=nul
 //     return null;
 // }
 
-function modalDisplay(modalId){
+function modalToggle(modalId,params=null){
 
+    params=params?params:{backdrop:false};
     if(document.getElementById(modalId)){
-        $('#'+ modalId).modal({
-            backdrop:false
-        })
+        $('#'+ modalId).modal(params)
     }
 }
 
@@ -277,4 +276,13 @@ function sortByOrder(a,b){
         return -1*sortByOrder.order;
     }
     return 0;
+}
+
+function prepareEmptyDomElement(tagName,arrPropertyValue){
+
+    let element=document.createElement(tagName);
+    for(let key in arrPropertyValue){
+        element[key]=arrPropertyValue[key];
+    }
+    return element;
 }

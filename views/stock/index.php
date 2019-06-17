@@ -30,13 +30,13 @@
                 <h5><?php echo _('Actions:') ?> </h5>
             </div>
             <div class="col-md-3">
-                <a class="btn" id="addNewProduct" onclick="modalDisplay('addProduct')"><?php echo _('Add a product to a room') ?></a>
+                <a class="btn" id="addNewProduct" onclick="modalToggle('addProduct')"><?php echo _('Add a product to a room') ?></a>
             </div>
             <div class="col-md-3">
-                <a class="btn" id="changeProductRoom" onclick="modalDisplay('changeRoomModal')"><?php echo _('Affect another room to a product') ?></a>
+                <a class="btn" id="changeProductRoom" onclick="modalToggle('changeRoomModal')"><?php echo _('Affect another room to a product') ?></a>
             </div>
             <div class="col-md-3">
-                <a class="btn" id="removeProduct" onclick="modalDisplay('removeModal')"><?php echo _("Delete a product from the room"); ?></a>
+                <a class="btn" id="removeProduct" onclick="modalToggle('removeModal')"><?php echo _("Delete a product from the room"); ?></a>
             </div>
         </div>
         <div class="row" id="alertMessage"> </div>

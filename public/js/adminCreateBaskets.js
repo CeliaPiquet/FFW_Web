@@ -30,7 +30,7 @@ function openBasketModal(event){
 
     exchangeToAPI(ffwApiUrl+"/baskets",local.baskets,"GET",getAllBasketByID,args);
 
-    modalDisplay("createBasketModal");
+    modalToggle("createBasketModal");
 }
 
 function  updateProductRows(arrProducts,parent){
@@ -250,7 +250,7 @@ function changeLocalQuantityOrder(){
 
 function openLocalModal(){
 
-    modalDisplay('selectLocalModal');
+    modalToggle('selectLocalModal');
 
 }
 

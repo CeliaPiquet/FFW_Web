@@ -96,7 +96,7 @@ function prepareSkillModal(status,title,skid,name){
     modalTitle.innerHTML=title;
     modalEmail.setAttribute("href","mailto:"+user.email);
     modalEmail.innerHTML=user.email;
-    modalDisplay("skillModal");
+    modalToggle("skillModal");
 
 
 }

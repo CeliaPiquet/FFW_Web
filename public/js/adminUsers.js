@@ -188,7 +188,7 @@ function editUser(event){
 
     console.log("TOTO");
 
-    modalDisplay('userModal');
+    modalToggle('userModal');
 }
 
 
