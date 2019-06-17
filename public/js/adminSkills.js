@@ -22,7 +22,7 @@ function openSkillsModal(){
 
     getSkillsAPI(0,20,"",getSkillsAPI);
 
-    modalDisplay('skillsModal');
+    modalToggle('skillsModal');
 }
 
 

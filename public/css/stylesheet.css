@@ -41,3 +41,6 @@ body {
 .active {
     border: #905100;
 }
+.modal {
+    overflow-y:auto;
+}
