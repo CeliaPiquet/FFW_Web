@@ -7,7 +7,8 @@ require_once 'services/VehicleService.php';
 class AdmincoursesController extends Controller
 {
 
-    private $routeState;
+    private $arrRouteState;
+    private $arrBasketRole;
 
     public function __construct(){
         $this->addView('script',null);

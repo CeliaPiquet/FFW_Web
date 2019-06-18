@@ -1,5 +1,3 @@
-
-
 <?php $this->setName("content"); ?>
 
 <div class="container-fluid">
@@ -27,7 +25,7 @@
             <td scope=""1>
             </td>
             <td>
-                <select type="text" class="form-control" onchange="findCourseByFilter()" id="routeStateSelect">
+                <select type="text" class="form-control" onchange="findCourseByFilter();" id="routeStateSelect">
                     <option selected></option>
                     <?php
                         foreach($arrRouteState as $routeState){
@@ -37,13 +35,13 @@
                 </select>
             </td>
             <td>
-                <input type="date" class="form-control" onkeyup="findCourseByFilter()" id="createDateInput">
+                <input type="date" class="form-control" onkeyup="findCourseByFilter();" id="createDateInput">
             </td>
             <td>
                 <input type="date" class="list-group-item list-group-item-action text-center" onkeyup="findCourseByFilter();" id="courseDateInput">
             </td>
             <td>
-                <select type="text" class="form-control" onchange="findCourseByFilter()" id="vehicleSelect">
+                <select type="text" class="form-control" onchange="findCourseByFilter();" id="vehicleSelect">
                     <option selected></option>
                     <?php
                     foreach($arrVehicles as $vehicle){
@@ -61,7 +59,7 @@
 
 
 <div class="modal fade" id="courseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
-    <div class="modal-dialog modal-lg   " role="document">
+    <div class="modal-dialog modal-xl   " role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTitle"></h5>
@@ -86,7 +84,7 @@
                                     </tr>
                                     <tr >
                                         <td>
-                                            <select type="text" class="form-control" onchange="findBasketsByFilter()" id="basketRoleSelect">
+                                            <select type="text" class="form-control" onchange="findBasketsByFilter(this);" id="basketRoleSelect">
                                                 <?php
                                                 foreach($arrBasketRole as $basketRole){
                                                     echo "<option value='".$basketRole."'>".ucfirst($basketRole)."</option>";
@@ -118,9 +116,15 @@
 
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer align-items-center">
+                <div class="col-lg-3">
+                    <label for="courseNameInput">
+                        <?php echo _("Set course name"); ?>
+                        <input type="text" class="list-group-item list-group-item-action text-center" onkeyup="setCourseName(this);" object="course" id="courseNameInput">
+                    </label>
+                </div>
                 <button type="button" class="btn" data-dismiss="modal" ><?php echo _("Cancel"); ?></button>
-                <button type="button" class="btn" id="createCourseBtn" onclick="createCourse();" disabled ><?php echo _("Create course"); ?></button>
+                <button type="button" class="btn" id="createCourseBtn" onclick="getBasketsOrder();" disabled ><?php echo _("Create course"); ?></button>
             </div>
         </div>
     </div>

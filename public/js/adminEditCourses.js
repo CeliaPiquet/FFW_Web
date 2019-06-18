@@ -24,7 +24,8 @@ function findCourseByFilter(){
             routeState:filterObject.vehicleSelect,
             vehicleId:filterObject.vehicleSelect,
             createTime:filterObject.createDateInput,
-            serviceTime : filterObject.courseDateInput
+            serviceTime : filterObject.courseDateInput,
+            completeData:true
         }
     };
 

@@ -105,7 +105,6 @@ function modalToggle(modalId,params=null){
 
 function collapseDisplay(element){
 
-    console.log(element);
     $(element).collapse('toggle');
 }
 
@@ -120,7 +119,6 @@ function ucFirst(string){
 function getFirstParent(element,attribute,value){
 
     while(!element[attribute].includes(value) && element.tagName!="BODY"){
-        console.log(element[attribute]);
         element=element.parentElement;
     }
     return element;
@@ -192,7 +190,7 @@ function exchangeToAPI(url, element, method, func=null, args=null){
 
                         if(args.query.offset!==null && args.query.limit!==null && newElement.length == args.query.limit) {
 
-                            args.query.offset+=newElement.length
+                            args.query.offset+=newElement.length;
                             exchangeToAPI(url, element, method, func, args)
                         }
                     }
@@ -222,9 +220,8 @@ function exchangeToAPI(url, element, method, func=null, args=null){
     else{
         newUrl=url;
     }
-    console.log(newUrl);
-
     request.open(method,newUrl);
+    console.log(url);
     if(method!='GET'){
         request.send(JSON.stringify(element));
     }
@@ -245,14 +242,13 @@ function generateUrl(url,id=null,subTarget=null,queries=null){
     if(subTarget){
         url+="/"+subTarget;
     }
-
     for(let key in queries){
         if(queries[key]===null||queries[key]===""){
             delete(queries[key]);
         }
     }
 
-    if(queries)
+    if(queries){
         i=0;
         url+="?";
 
@@ -260,10 +256,12 @@ function generateUrl(url,id=null,subTarget=null,queries=null){
             i++;
             url+=key+"="+queries[key];
 
-                if(i!=Object.keys(queries).length){
+            if(i!=Object.keys(queries).length){
                 url+="&";
             }
         }
+    }
+
     return url;
 }
 
