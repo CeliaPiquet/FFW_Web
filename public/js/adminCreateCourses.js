@@ -29,7 +29,7 @@ function collapseAddressRow(element){
 }
 
 
-function createCourse(){
+function getBasketsOrder(){
 
     let arrObjectKey=["user","external","company"];
     let course=document.getElementById("courseModal").course;
@@ -56,15 +56,57 @@ function createCourse(){
         course:course
     };
 
-    exchangeToAPI(ffwApiUrl+"/courses/pathFinding",arrBaskets,"GET",updateBaskets,args);
+    console.log(course);
+    exchangeToAPI(ffwApiUrl+"/courses/pathFinding",arrOrderIds,"GET",createCourseToAPI,args);
 }
 
-function updateBaskets(element,args){
+function createCourseToAPI(element,args){
 
+    if(!element){
+        return null;
+    }
+
+    args.arrOrderIds=element;
+    args.query={completeData:true};
+    args.course.status="created";
+    args.course.type="course";
+    args.course.affectedRow=null;
+    args.basketCounter=0;
+    //TODO control isPublic
+    exchangeToAPI(ffwApiUrl+"/courses",args.course,"POST",updateBasketsToAPI,args);
+}
+
+function updateBasketsToAPI(element,args){
 
     console.log(element);
-    console.log(args);
 
+    if(args.basketCounter<args.arrOrderIds.length){
+        let basket=args.course.baskets.get(args.arrOrderIds[args.basketCounter]);
+        basket.order=args.basketCounter;
+        basket.serviceId=args.course.serid;
+        basket.status="affected";
+        args.basketCounter++;
+        console.log(basket);
+        exchangeToAPI(ffwApiUrl+"/baskets/"+args.arrOrderIds[args.basketCounter-1],basket,"PUT",updateBasketsToAPI,args);
+    }
+
+
+
+}
+
+function setCourseName(element){
+
+    let course=document.getElementById("courseModal").course;
+    let createCourseBtn=courseModal.querySelector('#createCourseBtn');
+
+    course.name=element.value;
+
+    if(course.localId&&course.baskets.size&&course.name){
+        createCourseBtn.disabled=false;
+    }
+    else{
+        createCourseBtn.disabled=true;
+    }
 }
 function removeAffect(element){
 
@@ -173,200 +215,15 @@ function affectToCourse(element){
         }
     }
 
-    if(course.local&&course.baskets.size){
+    if(course.local&&course.baskets.size&&course.name){
         createCourseBtn.disabled=false;
     }
-
-}
-
-
-function findBasketsByFilter(){
-
-    arrBaskets=[];
-    let filterObject={
-        basketRoleSelect:null,
-        createDateInput:null
+    else{
+        createCourseBtn.disabled=true;
     }
 
-    matchDOMAndObject("value","#",document.getElementById("basketsTableHeader"),filterObject,true);
-
-    args={
-        query:{
-            offset:0,
-            limit:20,
-            status:"validated",
-            role:basketRoleSelect,
-            createTime:filterObject.createDateInput
-        },
-        role:filterObject.basketRoleSelect
-    };
-
-    exchangeToAPI(ffwApiUrl+"/baskets",arrBaskets,"GET",updateBasketRows,args);
 }
 
-
-function findUsersByFilter(element){
-
-    body=new Object();
-
-    let filterObject={
-        mailInput:null,
-        lastnameInput:null,
-        firstnameInput:null,
-        cityInput:null
-    }
-
-    let parent=getFirstParent(element,"id","usersTable");
-    let container=parent.querySelector("#userRowsContainer");
-    let parentDomNode=getFirstParent(element,"id","collapsedBasketDestRow").parentDomNode;
-    let arrUsers=[];
-
-    matchDOMAndObject("value","#",parent,filterObject,true);
-
-    console.log(filterObject);
-
-    args={
-        query:{
-            offset:0,
-            limit:20,
-            email:filterObject.mailInput,
-            lastname:filterObject.lastnameInput,
-            firstname:filterObject.firstnameInput,
-            cityName:filterObject.cityInput
-        },
-        container:container,
-        emptyRow:emptyUserRow,
-        parentDomNode:parentDomNode,
-        objectName:"user",
-        idName:"uid",
-        parentIdName:"userId",
-        specifyFunc:createSubBasketRow
-
-    };
-
-    exchangeToAPI(ffwApiUrl+"/users",arrUsers,"GET",updateGenericsRow,args);
-
-}
-
-function findExternalsByFilter(element){
-
-    body=new Object();
-
-    let filterObject={
-        mailInput:null,
-        nameInput:null,
-        cityInput:null
-    };
-
-    let parent=getFirstParent(element,"id","externalsTable");
-    let container=parent.querySelector("#externalRowsContainer");
-    let parentDomNode=getFirstParent(element,"id","collapsedBasketDestRow").parentDomNode;
-    let arrExternals=[];
-
-    console.log(filterObject);
-
-    matchDOMAndObject("value","#",parent,filterObject,true);
-
-    console.log(filterObject);
-
-    args={
-        query:{
-            offset:0,
-            limit:20,
-            email:filterObject.mailInput,
-            name:filterObject.nameInput,
-            cityName:filterObject.cityInput
-        },
-        container:container,
-        emptyRow:emptyExternalRow,
-        parentDomNode:parentDomNode,
-        objectName:"external",
-        objectIdName:"exid",
-        parentIdName:"externalId",
-        specifyFunc:createSubBasketRow
-
-
-    };
-
-    exchangeToAPI(ffwApiUrl+"/externals",arrExternals,"GET",updateGenericsRow,args);
-}
-
-function findCompaniesByFilter(element){
-
-    body=new Object();
-
-    let filterObject={
-        siretInput:null,
-        nameInput:null,
-        cityInput:null
-    };
-
-    let parent=getFirstParent(element,"id","companiesTable");
-    let container=parent.querySelector("#companyRowsContainer");
-    let parentDomNode=getFirstParent(element,"id","collapsedBasketDestRow").parentDomNode;
-
-    let arrCompanies=[];
-
-
-    matchDOMAndObject("value","#",parent,filterObject,true);
-
-    args={
-        query:{
-            offset:0,
-            limit:20,
-            email:filterObject.emailInput,
-            name:filterObject.nameInput,
-            cityName:filterObject.cityInput
-        },
-        container:container,
-        emptyRow:emptyCompanyRow,
-        parentDomNode:parentDomNode,
-        objectName:"company",
-        idName:"coid",
-        parentIdName:"companyId",
-        specifyFunc:createSubBasketRow
-
-    };
-
-    exchangeToAPI(ffwApiUrl+"/companies",arrCompanies,"GET",updateGenericsRow,args);
-}
-
-
-function findLocalsByFilter(element){
-
-    let filterObject={
-        nameInput:null,
-        cityInput:null
-    };
-
-    let parent=getFirstParent(element,"id","localsTable");
-    let container=parent.querySelector("#localRowsContainer");
-    let parentDomNode=document.getElementById("courseModal");
-    let arrLocals=[];
-
-
-    console.log(container);
-    matchDOMAndObject("value","#",parent,filterObject,true);
-
-    let args={
-        query:{
-            offset:0,
-            limit:20,
-            name:filterObject.nameInput,
-            cityName:filterObject.cityInput,
-            completeData:true
-        },
-        container:container,
-        emptyRow:emptyLocalRow,
-        parentDomNode:parentDomNode,
-        objectName:"local",
-        idName:"loid",
-        parentIdName:"localId",
-        specifyFunc:createLocalRow
-    };
-
-    exchangeToAPI(ffwApiUrl+"/locals",arrLocals,"GET",updateGenericsRow,args);
-}
 
 
 
@@ -465,8 +322,7 @@ function createLocalRow(args){
 
 function updateBasketRows(element,args){
 
-    arrBaskets=[];
-    arrBaskets=element;
+    let arrBaskets=element;
 
     let courseRowContainer=document.getElementById("basketRowsContainer");
     let cityName=document.getElementById("cityNameInput").value;
@@ -476,7 +332,7 @@ function updateBasketRows(element,args){
 
     for(let i=0 ; i<arrBaskets.length;i++){
         let basketCity= arrBaskets[i].srcAddress&&arrBaskets[i].srcAddress.cityName?arrBaskets[i].srcAddress.cityName.toLowerCase():null;
-        if((cityName&&basketCity&&basketCity.includes(cityName.toLowerCase()))||!cityName){
+        if((cityName&&basketCity&&basketCity.includes(cityName.toLowerCase()))||!cityName && (arrBaskets[i].status==="validated"||arrBaskets[i].status==="canceled")){
             filteredBasketArr.push(arrBaskets[i]);
         }
 
@@ -537,6 +393,8 @@ function createBasketRow(basket,container,role){
 function changeBasketQuantityOrder(){
 
     let arrowOrder=document.getElementById("arrowBasketOrder");
+    let arrBaskets=document.getElementById("courseModal").arrBaskets;
+
     sortByOrder.sortKey="totalQuantity";
 
     let filterObject={
@@ -563,34 +421,12 @@ function changeBasketQuantityOrder(){
     updateBasketRows(arrBaskets,args);
 }
 
-function findBasketsByFilter(){
-
-    arrBaskets=[];
-    let filterObject={
-        basketStatusSelect:null,
-        basketRoleSelect:null,
-        createDateInput:null
-    }
-
-    matchDOMAndObject("value","#",document.getElementById("basketsTableHeader"),filterObject,true);
-
-    args={
-        query:{
-            offset:0,
-            limit:20,
-            status:filterObject.basketStatusSelect,
-            role:filterObject.basketRoleSelect,
-        },
-        role:filterObject.basketRoleSelect
-    };
-
-    exchangeToAPI(ffwApiUrl+"/baskets",arrBaskets,"GET",updateBasketRows,args);
-
-}
-
 function openNewCourseModal(){
 
-    document.getElementById("courseModal").course=getEmtpyCourse();
+    let courseModal=document.getElementById("courseModal");
+    courseModal.course=getEmtpyCourse();
+    courseModal.arrBaskets=[];
+
     modalToggle('courseModal');
 }
 
@@ -676,6 +512,7 @@ function displayTable(element,nodeToClone){
         let container=tableContainer.querySelector(".genericRowContainer");
         let idNameUrl={
             companyId:{url:"companies",args:{
+                query:{completeData:true},
                 container:container,
                 emptyRow:emptyCompanyRow,
                 parentDomNode:parent.parentDomNode,
@@ -695,6 +532,7 @@ function displayTable(element,nodeToClone){
                 }
             },
             externalId:{url:"externals",args:{
+                query:{completeData:true},
                 container:container,
                 parentDomNode:parent.parentDomNode,
                 emptyRow:emptyExternalRow,
@@ -712,6 +550,7 @@ function displayTable(element,nodeToClone){
         }
         for(let key in idNameUrl){
             if(basket[key]){
+                console.log(key);
                 let arrResult=[];
                 exchangeToAPI(ffwApiUrl+"/"+idNameUrl[key].url+"/"+basket[key],arrResult,"GET",updateGenericsRow,idNameUrl[key].args);
             }
