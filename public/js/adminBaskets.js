@@ -14,6 +14,7 @@ loadExternalDOMElement([
 
 function findBasketsByFilter(){
 
+
     arrBaskets=[];
     let filterObject={
         basketStatusSelect:null,
@@ -49,6 +50,7 @@ function collapseProductElement(event){
         collapseDisplay(parent.collapseProductRow);
     }
 }
+
 
 function updateBasketRows(element) {
 
@@ -108,6 +110,14 @@ function createBasketRow(container,basket,oldRow){
 
     newBasketRow.querySelector("#collapseBtnProduct").addEventListener('click',collapseProductElement,false);
 
+    let arrStatus=["validated","refused","canceled"];
+
+    for(let i=0 ; i<arrStatus.length ; i++){
+
+        if(arrStatus[i]=== basket.status){
+            newBasketRow.querySelector("#" + arrStatus[i]).disabled=true;
+        }
+    }
 
     // newBasketRow.querySelector("#collapseBtnAddress").addEventListener('click',collapseAddressElement,false)
 
@@ -120,6 +130,7 @@ function createBasketRow(container,basket,oldRow){
     container.append(newBasketRow);
 
     collapsedProductsRow= createCollapsedProductsRow(container,basket.products,newBasketRow);
+
 
     if(oldRow){
         container.replaceChild(newBasketRow,oldRow);
@@ -189,11 +200,11 @@ function removeProduct(element){
 
 
 
-function validateBasket(element){
+function changeBasketStatus(element){
 
     let basket=getFirstParent(element,"id","basketRow").basket;
 
-    basket.status="validated";
+    basket.status=element.value;
 
     exchangeToAPI(ffwApiUrl+"/baskets",basket,"PUT",changeArrBaskets);
 
@@ -201,18 +212,6 @@ function validateBasket(element){
 
 }
 
-
-function cancelBasket(element){
-
-    let basket=getFirstParent(element,"id","basketRow").basket;
-
-    basket.status="canceled";
-
-    exchangeToAPI(ffwApiUrl+"/baskets",basket,"PUT",changeArrBaskets);
-
-    updateBasketRows(arrBaskets);
-
-}
 
 function changeArrBaskets(element){
 

@@ -76,4 +76,6 @@
 <script src='<?=$websiteRoot?>/public/fullcalendar-4.1.0/packages/list/main.js'></script>
 <script src='<?=$websiteRoot?>/public/fullcalendar-4.1.0/packages/interaction/main.js'></script>
 <script src='<?=$websiteRoot?>/public/js/mySkills.js'></script>
-<script type="text/javascript" src="<?=$websiteRoot?>/public/js/myCalendar.js"></script>
+<script type="text/javascript" src="<?=$websiteRoot?>/public/js/calendar.js"></script>
+<script src='<?=$websiteRoot?>/public/js/myEvents.js'></script>
+

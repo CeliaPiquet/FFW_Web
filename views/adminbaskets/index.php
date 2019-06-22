@@ -126,18 +126,18 @@
                                     <th> <?php echo _("Condition"); ?> </th>
                                     <th> <?php echo _("Check product"); ?> </th>
                                 </tr>
-                                <tr >
+                                <tr id="productsHeader">
                                     <td>
-                                        <input type="text" class="form-control" onkeyup="sortProductByFilter(this)" name="sortProductInput" id="ingredientName" placeholder="<?php echo _("Category");?>">
+                                        <input type="text" class="form-control" onkeyup="sortProductByFilter(this)" name="sortProductInput" id="name" object="ingredient" placeholder="<?php echo _("Category");?>">
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control" onkeyup="sortProductByFilter(this)" name="sortProductInput" id="articleName" placeholder="<?php echo _("Name"); ?>">
+                                        <input type="text" class="form-control" onkeyup="sortProductByFilter(this)" name="sortProductInput" id="name" object="article" placeholder="<?php echo _("Name"); ?>">
                                     </td>
                                     <td>
-                                        <input type="date" class="form-control" onchange="sortProductByFilter(this)" name="sortProductInput" id="limitDate" placeholder="<?php echo _("Limit date");?>">
+                                        <input type="date" class="form-control" onchange="sortProductByFilter(this)" name="sortProductInput" id="limitDate" object="product" placeholder="<?php echo _("Limit date");?>">
                                     </td>
                                     <td>
-                                        <select id="state"  name="sortProductInput" class="form-control"  onchange="sortProductByFilter(this)">
+                                        <select id="state"  object="product" name="sortProductInput" class="form-control"  onchange="sortProductByFilter(this)">
                                             <option></option>
                                             <?php
                                                 foreach($arrProductConditions as $productCondition){

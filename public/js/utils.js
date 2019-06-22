@@ -10,7 +10,13 @@ function matchDOMAndObject(attribute, selector, element, object,order=false,limi
 
         if(order==true){
 
+            if (typeof object[key] === 'object') {
+                deepness++;
+                matchDOMAndObject(attribute, selector, element, object[key], order,limit,deepness,key);
+            }
+
             let childElement=getElementBySelectorAndObject(element,selector,key,objectName);
+
 
             if(childElement!=null){
 
@@ -50,6 +56,51 @@ function matchDOMAndObject(attribute, selector, element, object,order=false,limi
     return object;
 }
 
+function filterObjectOnObject(objToFilter,filterObj){
+
+
+    for(let key in objToFilter){
+
+        if(filterObj[key] && filterObj[key]!==""){
+
+            if(!objToFilter[key] && !isObjectEmpty(filterObj[key])){
+                return false;
+            }
+            if(typeof objToFilter[key] !== "object" && !objToFilter[key].includes(filterObj[key]) && objToFilter[key]){
+                return false;
+            }
+            else{
+                if(typeof objToFilter[key] === "object"){
+
+                    if(!filterObjectOnObject(objToFilter[key],filterObj[key])){
+                        return false;
+                    }
+                }
+            }
+        }
+
+    }
+    return true;
+}
+
+function isObjectEmpty(controlledObj){
+
+    for(let key in controlledObj){
+
+        if(typeof controlledObj[key]==="object"){
+            if(!isObjectEmpty(controlledObj[key])){
+                return false;
+            }
+        }
+        else if(controlledObj[key]){
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
 function copyObjectProperty(srcObj,dstObj){
 
     for(let key in srcObj){
@@ -68,12 +119,21 @@ function getElementBySelectorAndObject(element,selector,objectKey,objectName=nul
 
     let domElement=null;
 
-    if(objectName){
-        domElement = element.querySelector(selector+objectKey +"[object='"+objectName+"']");
+    if(isNaN(objectKey)){
+        if(objectName ){
+            domElement = element.querySelector(selector+objectKey +"[object='"+objectName+"']");
+            if(domElement)
+                domElement.objectSet=true;
+        }
+        if(!domElement){
+            domElement = element.querySelector(selector + objectKey);
+            if(domElement && !domElement.objectSet){
+                return domElement;
+            }
+            return null
+        }
     }
-    if(!domElement){
-        domElement = element.querySelector(selector + objectKey);
-    }
+
 
     return domElement;
 
@@ -221,7 +281,6 @@ function exchangeToAPI(url, element, method, func=null, args=null){
         newUrl=url;
     }
     request.open(method,newUrl);
-    console.log(url);
     if(method!='GET'){
         request.send(JSON.stringify(element));
     }

@@ -4,31 +4,41 @@ function findBasketsByFilter(){
     arrBaskets=[];
     let filterObject={
         basketRoleSelect:null,
+        basketStatusSelect:null,
         createDateInput:null
     }
 
+    let course=document.getElementById("courseModal").course;
+    if(!course.local){
+        return null;
+    }
     matchDOMAndObject("value","#",document.getElementById("basketsTableHeader"),filterObject,true);
 
     args={
         query:{
             offset:0,
             limit:20,
-            status:"validated",
-            role:basketRoleSelect,
-            createTime:filterObject.createDateInput
+            status:filterObject.basketStatusSelect,
+            role:filterObject.basketRoleSelect,
+            createTime:filterObject.createDateInput,
+            serviceId:false
         },
-        role:filterObject.basketRoleSelect
+        emptyRow:emptyBasketRow,
+        cityName:document.getElementById("cityNameInput").value,
+        container:document.getElementById("basketRowsContainer"),
+        role:filterObject.basketRoleSelect,
+        course:course,
+        baskets:arrBaskets,
+        filterFunc:filterBaskets,
+        specifyFunc:createBasketRow
     };
-    console.log(args.query);
-    console.log("COUCOU");
-
-
-    exchangeToAPI(ffwApiUrl+"/baskets",arrBaskets,"GET",updateBasketRows,args);
+    exchangeToAPI(ffwApiUrl+"/baskets",arrBaskets,"GET",updateGenericsRow,args);
 }
 
 
 function findUsersByFilter(element){
 
+    element=element.target;
     body=new Object();
 
     let filterObject={
@@ -103,7 +113,7 @@ function findExternalsByFilter(element){
         emptyRow:emptyExternalRow,
         parentDomNode:parentDomNode,
         objectName:"external",
-        objectIdName:"exid",
+        idName:"exid",
         parentIdName:"externalId",
         specifyFunc:createSubBasketRow
 
@@ -191,28 +201,73 @@ function findLocalsByFilter(element){
 }
 
 
-function findBasketsByFilter(){
-
-    let arrBaskets=document.getElementById("courseModal").arrBaskets;
-    arrBaskets=[];
+function findVehiclesByFilter(element){
 
     let filterObject={
-        basketRoleSelect:null,
-        createDateInput:null
-    }
+        descriptionInput:null,
+        volumeInput:null,
+        insuranceDateInput:null,
+        lastRevisionInput:null
+    };
 
-    matchDOMAndObject("value","#",document.getElementById("basketsTableHeader"),filterObject,true);
+    let parent=getFirstParent(element,"id","vehiclesTable");
+    let container=parent.querySelector("#vehicleRowsContainer");
+    let parentDomNode=document.getElementById("vehicleDriverModal");
+    let arrVehicles=[];
 
-    args={
+    console.log(container);
+    matchDOMAndObject("value","#",parent,filterObject,true);
+
+    let args={
         query:{
             offset:0,
             limit:20,
-            serviceId:false,
-            role:filterObject.basketRoleSelect,
+            description:filterObject.descriptionInput,
+            volume:filterObject.volumeInput,
+            insuranceDate:filterObject.insuranceDateInput,
+            lastRevision:filterObject.lastRevisionInput,
+            completeData:true
         },
-        role:filterObject.basketRoleSelect
+        container:container,
+        emptyRow:emptyVehicleRow    ,
+        parentDomNode:parentDomNode,
+        objectName:"vehicle",
+        idName:"vid",
+        parentIdName:"vehicleId",
+        specifyFunc:createSubCourseRow
     };
 
-    exchangeToAPI(ffwApiUrl+"/baskets",arrBaskets,"GET",updateBasketRows,args);
+    exchangeToAPI(ffwApiUrl+"/vehicles",arrVehicles,"GET",updateGenericsRow,args);
+}
 
+function filterBaskets(element,args){
+
+    console.log(element);
+    console.log(args);
+
+    let arrBaskets=element;
+    let course=args.course;
+    let cityName=args.cityName;
+    let filteredBasketArr=[];
+
+    console.log(cityName);
+
+    for(let i=0 ; i<arrBaskets.length;i++){
+        let basketCity= arrBaskets[i].srcAddress&&arrBaskets[i].srcAddress.cityName?arrBaskets[i].srcAddress.cityName.toLowerCase():null;
+        if((cityName&&basketCity&&basketCity.includes(cityName.toLowerCase()))||cityName===""){
+            console.log(arrBaskets[i]);
+            console.log(course.localId);
+            if(args.role==="export"&&arrBaskets[i].local&&arrBaskets[i].local.loid===course.localId){
+
+                filteredBasketArr.push(arrBaskets[i]);
+            }
+            else if(args.role==="import"){
+                filteredBasketArr.push(arrBaskets[i]);
+            }
+        }
+    }
+
+    console.log(filteredBasketArr);
+    element=filteredBasketArr;
+    return element;
 }

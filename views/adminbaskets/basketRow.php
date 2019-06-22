@@ -22,15 +22,18 @@
     <input type="date" class="form-control"  id="createTime">
 </td>
 <td>
-    <button class="btn col-md-2 mx-auto" id="collapseBtnProduct" type="button" >Products</button>
+    <button class="btn mx-auto" id="collapseBtnProduct" type="button" ><?php echo _("Products") ;?></button>
 </td>
 <td>
-    <button class="btn col-md-2 mx-auto" id="validateBtn" type="button" onclick="validateBasket(this)" >Validate</button>
+    <button class="btn mx-auto" id="validated" value="validated" type="button" onclick="changeBasketStatus(this)" ><?php echo _("Validate") ;?></button>
 </td>
 <td>
-    <button class="btn col-md-2 mx-auto" id="cancelBtn" type="button" onclick="cancelBasket(this)" >Cancel</button>
+    <button class="btn mx-auto"  id="refused" value="refused"  type="button" onclick="changeBasketStatus(this)" ><?php echo _("Refuse") ;?></button>
 </td>
 <td>
-    <div class="alert alert-dark">Total quantity : <span id="totalQuantity"></span></div>
+    <button class="btn mx-auto" id="canceled" value="canceled" type="button" onclick="changeBasketStatus(this)" > <?php echo _("Cancel") ; ?></button>
+</td>
+<td>
+    <div class="alert alert-dark"><?php echo _("Total quantity :") ;?><span id="totalQuantity"></span></div>
 </td>
 

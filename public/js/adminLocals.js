@@ -168,6 +168,7 @@ function prepareUpdateAPI(element){
 
                     element.parentObject=convertAddressObjectToDOM(element.parentObject);
                     let parentDOM=getFirstParent(element,"id","collapseAddress");
+                    console.log(element);
                     element.parentObject=matchDOMAndObject("value","#",parentDOM,element.parentObject,true);
                     exchangeToAPI(ffwApiUrl+"/addresses",convertAddressObjectToAPI(element.parentObject),"PUT",true);
                 }

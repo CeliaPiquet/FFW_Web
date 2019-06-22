@@ -34,7 +34,7 @@
                     <input type="checkbox" class="form-control" onclick="checkAllProduct(this)" id="checkProductInput">
                 </td>
                 <td>
-                    <button type="checkbox" class="form-control btn" onclick="removeProduct(this)" id="removeProduct">Remove product</button>
+                        <button type="checkbox" class=" btn" onclick="removeProduct(this)" id="removeProduct">Remove product</button>
                 </td>
             </tr>
             </thead>

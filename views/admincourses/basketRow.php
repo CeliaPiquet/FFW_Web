@@ -1,5 +1,10 @@
+
+
 <td>
     <input type="text" class="form-control"  id="role" object="basket" readonly>
+</td>
+<td>
+    <input type="text" class="form-control"  id="status" object="basket" readonly>
 </td>
 <td>
     <input type="text" class="form-control"  id="cityName" object="srcAddress" readonly>

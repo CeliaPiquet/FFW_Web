@@ -124,44 +124,25 @@ function filterProduct(product){
 function sortProductByFilter(element){
 
 
-    parent=getFirstParent(element,"id","productsTable");
-    console.log(parent);
+    let parent=getFirstParent(element,"id","productsTable");
     let arrProducts=parent.products;
-    let arrFilters=parent.querySelectorAll("[name='sortProductInput']");
+    let filterRow=parent.querySelector("#productsHeader");
+
+
+    let filterObj={
+        article:{name:null,ingredient:{name:null}},
+        limitDate:null,
+        state:null
+    }
+
+    let arrFilters=matchDOMAndObject("value","#",filterRow,filterObj,true,null,0,"product");
     let mapFilteredProducts=new Map();
 
     parent.querySelector("#checkProductInput").checked=false;
 
     for(let j = 0 ; j < arrProducts.length ; j++){
-
-        let setFlag=1;
-
-        for(let i = 0 ; i < arrFilters.length ; i++){
-
-            let inputVal;
-            let stringVal=null;
-
-            if(arrFilters[i].tagName=="SELECT"){
-                inputVal=arrFilters[i].options[arrFilters[i].selectedIndex].value;
-            }
-            else{
-                inputVal=arrFilters[i].value;
-            }
-
-            if(arrProducts[j][arrFilters[i].id]!=null){
-                stringVal=arrProducts[j][arrFilters[i].id].toString();
-            }
-
-            if (stringVal!=null && inputVal!="" &&  stringVal.includes(inputVal)){
-                console.log(mapFilteredProducts.get(arrProducts[j].prid));
-            }
-            else if(inputVal!="" && stringVal!=inputVal){
-                setFlag=0;
-            }
-        }
-
-        if(setFlag){
-            mapFilteredProducts.set(arrProducts[j].prid, arrProducts[j]);
+        if(filterObjectOnObject(arrProducts[j], arrFilters)){
+            mapFilteredProducts.set(arrProducts[j].prid,arrProducts[j]);
         }
     }
 
@@ -257,6 +238,7 @@ function openLocalModal(){
 
 function findLocalsByFilter(){
 
+    console.log("COUCOU");
     modal=document.getElementById("selectLocalModal");
     modal.arrLocals=[]
     args={
@@ -268,8 +250,6 @@ function findLocalsByFilter(){
             completeData:true
         }
     };
-
-    url=ffwApiUrl+"/locals?";
 
 
     exchangeToAPI(ffwApiUrl+"/locals",modal.arrLocals,"GET",updateLocalRows,args);
@@ -313,8 +293,8 @@ function createLocalRow(container,local){
 
     matchDOMAndObject("value", "#", newCollapsedAddressRow, local.address);
 
-    matchDOMAndObject("value", "#", newLocalRow, local,false,1);
-    matchDOMAndObject("innerHTML", "#", newLocalRow, local,false,1)
+    matchDOMAndObject("value", "#", newLocalRow, local,false,1,0,"local");
+    matchDOMAndObject("innerHTML", "#", newLocalRow, local,false,1,0,"local")
 
     container.append(newLocalRow);
     container.append(newCollapsedAddressRow);

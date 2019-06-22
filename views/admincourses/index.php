@@ -22,7 +22,7 @@
             <td>
                 <input type="text" class="list-group-item list-group-item-action" onkeyup="findCourseByFilter();" id="nameInput">
             </td>
-            <td scope=""1>
+            <td scope="1">
             </td>
             <td>
                 <select type="text" class="form-control" onchange="findCourseByFilter();" id="routeStateSelect">
@@ -35,10 +35,10 @@
                 </select>
             </td>
             <td>
-                <input type="date" class="form-control" onkeyup="findCourseByFilter();" id="createDateInput">
+                <input type="date" class="form-control" onchange="findCourseByFilter();" id="createDateInput">
             </td>
             <td>
-                <input type="date" class="list-group-item list-group-item-action text-center" onkeyup="findCourseByFilter();" id="courseDateInput">
+                <input type="date" class="form-control" onchange="findCourseByFilter();" id="courseDateInput">
             </td>
             <td>
                 <select type="text" class="form-control" onchange="findCourseByFilter();" id="vehicleSelect">
@@ -57,6 +57,37 @@
     </table>
 </div>
 
+<div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-lg "  role="document">
+        <div class="modal-content" >
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="close"  data-dismiss="modal"  aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body map" id="mapContainer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="vehicleDriverModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-xl"  role="document">
+        <div class="modal-content" >
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="close"  data-dismiss="modal"  aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="tableContainer">
+
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="courseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
     <div class="modal-dialog modal-xl   " role="document">
@@ -78,6 +109,7 @@
                                     <thead id="basketsTableHeader">
                                     <tr>
                                         <th> <?php echo _("Role"); ?> </th>
+                                        <th> <?php echo _("Status"); ?> </th>
                                         <th> <?php echo _("City"); ?> </th>
                                         <th> <?php echo _("Create date"); ?> </th>
                                         <th> <?php echo _("Order by quantity"); ?> </th>
@@ -88,6 +120,15 @@
                                                 <?php
                                                 foreach($arrBasketRole as $basketRole){
                                                     echo "<option value='".$basketRole."'>".ucfirst($basketRole)."</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select type="text" class="form-control" onchange="findBasketsByFilter(this);" id="basketStatusSelect">
+                                                <?php
+                                                foreach($arrBasketStatus as $basketStatus){
+                                                    echo "<option value='".$basketStatus."'>".ucfirst($basketStatus)."</option>";
                                                 }
                                                 ?>
                                             </select>
@@ -174,4 +215,4 @@
     </div>
 </div>
 
-}
+
