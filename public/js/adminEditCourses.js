@@ -58,6 +58,14 @@ function createCourseRow(course,container){
     course.serviceEndDate=endDateTime?endDateTime.split(' ')[0]:null;
     course.durationTime=secondsToHms(course.duration);
 
+    let dates=synchronizeStartEnd(course.serviceStartDate,course.serviceStartTime,course.duration);
+    course.calculateStartDate=dates.baseDate;
+    course.calculateEndDate=dates.calculateDate;
+
+    course.createDate=course.createTime?course.createTime.split(' ')[0]:null;
+
+    newCourseRow.querySelector("#serviceStartDate").min=course.createDate;
+    newCourseRow.querySelector("#serviceEndDate").min=course.createDate;
 
     if(course.status=="deleted"||course.status=="finished"){
         let arrInput=newCourseRow.querySelectorAll("[name='courseInput']");
@@ -189,42 +197,53 @@ function changeServiceTime(element){
 
     let parent=getFirstParent(element,"id","courseRow");
     let course=parent.service;
-    // let lastStartTime=course.serviceStartTime;
-    // let lastStartDate=course.serviceStartDate;
-    // let lastEndTime=course.serviceEndTime;
-    // let lastEndDate=course.serviceEndDate;
-    let inputServiceStartTime=parent.querySelector("#serviceStartTime");
+    let dates, createDate;
 
+    createDate=new Date(course.createDate.replace(' ','T'));
+    createDate.setMinutes(createDate.getMinutes()-createDate.getTimezoneOffset());
 
     matchDOMAndObject("value","#",parent,course,true,null,0,"service");
 
-
-    if(!course.serviceStartDate&&inputServiceStartTime.disabled){
-        parent.querySelector("#serviceStartTime").disabled=false;
-        inputServiceStartTime.value="08:00:00";
-    }
-
     if(element.id==="serviceStartTime"||element.id==="serviceStartDate"){
-        console.log(course.serviceStartDate+'T'+course.serviceStartTime);
-        let date=new Date(course.serviceStartDate+'T'+course.serviceStartTime);
-        console.log(date);
+        dates=synchronizeStartEnd(course.serviceStartDate,course.serviceStartTime,course.duration);
+        course.serviceEndDate=dates.calculateDate.toISOString().split('T')[0];
+        course.serviceEndTime=dates.calculateDate.toISOString().split('T')[1].split('.')[0];
+        course.calculateStartDate=dates.baseDate;
+        course.calculateEndDate=dates.calculateDate;
     }
     else if(element.id==="serviceEndTime"||element.id==="serviceEndDate"){
-        console.log(course.serviceEndDate+' '+course.serviceEndTime);
-        let date=new Date(course.serviceEndDate+' '+course.serviceEndTime);
-        console.log(date);
+        dates=synchronizeStartEnd(course.serviceEndDate,course.serviceEndTime,course.duration*-1);
+        course.serviceStartDate=dates.calculateDate.toISOString().split('T')[0];
+        course.serviceStartTime=dates.calculateDate.toISOString().split('T')[1].split('.')[0];
+        course.calculateStartDate=dates.calculateDate;
+        course.calculateEndDate=dates.baseDate;
+    }
+    let dateLocks=parent.querySelectorAll('.dateLock');
+
+    if(createDate.getTime()>dates.calculateDate.getTime()){
+        for(let i=0;i<dateLocks.length;i++) {
+            dateLocks[i].disabled = true;
+        }
+        return null;
     }
 
-    console.log(lastStartTime);
-    console.log(lastStartDate);
-    console.log(lastEndTime);
-    console.log(lastEndDate);
 
-    console.log(course.serviceStartDate);
-    console.log(course.serviceStartTime);
-    console.log(course.serviceEndTime);
-    console.log(course.serviceEndDate);
+    for(let i=0;i<dateLocks.length;i++){
+        if(dateLocks[i].disabled){
+            dateLocks[i].disabled=false;
+        }
+    }
+    if(parent.querySelector('#serviceStartTime').disabled||parent.querySelector('#serviceEndTime').disabled){
+        parent.querySelector('#serviceStartTime').disabled=false;
+        parent.querySelector('#serviceEndTime').disabled=false;
+    }
+
+    matchDOMAndObject('value', '#', parent, course,false,null,0,"service");
+    matchDOMAndObject('innerHTML', '#', parent, course,false,null,0,"service");
+
 }
+
+
 function openDriversModal(element){
 
 }
@@ -234,4 +253,17 @@ function createSubCourseRow(args){
     console.log(args);
 
 
+}
+
+function synchronizeStartEnd(startDate,startTime,seconds){
+
+    let baseDate=new Date(startDate+'T'+startTime);
+    let calculateDate=new Date(startDate+'T'+startTime);
+    calculateDate.setMinutes(calculateDate.getMinutes()-calculateDate.getTimezoneOffset());
+    calculateDate.setSeconds(calculateDate.getSeconds()+seconds);
+
+    return {
+        baseDate:baseDate,
+        calculateDate:calculateDate
+    };
 }
