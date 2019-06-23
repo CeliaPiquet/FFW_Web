@@ -143,12 +143,15 @@
                     </div>
                     <div class="form-group">
                         <label for="status"> <?php echo _('State') ?> </label>
-                        <select class="form-control form-control" id="status" name="status">
-                            <option><?php echo _('Good shape') ?></option>
-                            <option><?php echo _('Good shape') ?></option>
-                            <option><?php echo _('Damaged') ?></option>
-                            <option><?php echo _('Unconsumable') ?></option>
-                        </select>
+                        <td>
+                            <select type="text" class="form-control" onchange="findCourseByFilter();" id="routeStateSelect">
+                                <?php
+                                foreach($arrPeremptionState as $peremptionState){
+                                    echo "<option value='".$peremptionState."'>".ucfirst($peremptionState)."</option>";
+                                }
+                                ?>
+                            </select>
+                        </td>
                     </div>
                 </div>
                 <div class="modal-footer">

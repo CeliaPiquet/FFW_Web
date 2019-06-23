@@ -1,4 +1,39 @@
 
+
+function findCourseByFilter(){
+
+    arrCourses=[];
+    let filterObject={
+        nameInput:null,
+        routeStateSelect:null,
+        createDateInput:null,
+        courseDateInput:null,
+        vehicleSelect:null
+    };
+
+    matchDOMAndObject("value","#",document.getElementById("coursesTableHeader"),filterObject,true);
+
+    console.log(filterObject);
+
+    args={
+        query:{
+            offset:0,
+            limit:20,
+            name:filterObject.nameInput,
+            routeState:filterObject.routeStateSelect,
+            vehicleId:filterObject.vehicleSelect,
+            createTime:filterObject.createDateInput,
+            serviceTime : filterObject.courseDateInput,
+            completeData:true
+        }
+    };
+
+    console.log(args.query);
+
+    exchangeToAPI(ffwApiUrl+"/courses",arrCourses,"GET",updateCourseRows,args);
+
+}
+
 function findBasketsByFilter(){
 
     arrBaskets=[];
@@ -212,7 +247,6 @@ function findVehiclesByFilter(element){
 
     let parent=getFirstParent(element,"id","vehiclesTable");
     let container=parent.querySelector("#vehicleRowsContainer");
-    let parentDomNode=document.getElementById("vehicleDriverModal");
     let arrVehicles=[];
 
     console.log(container);
@@ -229,11 +263,13 @@ function findVehiclesByFilter(element){
             completeData:true
         },
         container:container,
-        emptyRow:emptyVehicleRow    ,
-        parentDomNode:parentDomNode,
+        emptyRow:emptyVehicleRow,
+        parentDomNode:parent,
         objectName:"vehicle",
         idName:"vid",
+        course:parent.course,
         parentIdName:"vehicleId",
+        filterFunc:filterVehicles,
         specifyFunc:createSubCourseRow
     };
 
@@ -270,4 +306,28 @@ function filterBaskets(element,args){
     console.log(filteredBasketArr);
     element=filteredBasketArr;
     return element;
+}
+
+function filterVehicles(element,args){
+
+
+    let arrVehicles=element;
+    let filteredArrVehicles=[];
+
+    for(let i=0 ; i<arrVehicles ;i++){
+        if(arrVehicles[i].services){
+            let availabilityFlag=1;
+            for(let j=0; j<arrVehicles[i].services.length; j++){
+                let vServiceTime=arrVehicles[i].services.serviceTime;
+                let vServiceDuration=arrVehicles[i].services.duration;
+                let vServiceEnd=arrVehicles[i].services.serviceEnd;
+            }
+        }
+        else{
+            filteredArrVehicles.push(arrVehicles[i]);
+        }
+    }
+    console.log(arrVehicles);
+    console.log(args.course);
+
 }

@@ -1,4 +1,4 @@
-<td colspan="5">
+<td colspan="9">
     <div class="collapse my-auto" id="collapsedBasketDest">
         <div class="row" id="displayTablesBtnContainer">
             <div >

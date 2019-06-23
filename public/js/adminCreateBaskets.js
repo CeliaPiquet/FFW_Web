@@ -146,6 +146,8 @@ function sortProductByFilter(element){
         }
     }
 
+    console.log(mapFilteredProducts);
+
     if(mapFilteredProducts.size===0){
         updateProductRows(arrProducts,parent);
     }
