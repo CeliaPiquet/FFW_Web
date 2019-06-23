@@ -190,6 +190,7 @@ function openVehiclesModal(element){
 
     tableContainer.innerHTML="";
     tableContainer.append(emptyVehiclesTable);
+    emptyVehiclesTable.course
 
 }
 

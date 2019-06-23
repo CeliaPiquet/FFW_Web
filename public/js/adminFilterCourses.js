@@ -312,6 +312,7 @@ function filterVehicles(element,args){
 
 
     let arrVehicles=element;
+    console.log(args);
     let filteredArrVehicles=[];
 
     for(let i=0 ; i<arrVehicles ;i++){
