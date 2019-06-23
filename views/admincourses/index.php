@@ -16,6 +16,8 @@
             <th> <?php echo _("Route state"); ?> </th>
             <th> <?php echo _("Create date"); ?>  </th>
             <th> <?php echo _("Course date") ;?> </th>
+            <th> <?php echo _("Duration") ;?> </th>
+            <th> <?php echo _("Course end") ;?> </th>
             <th> <?php echo _("Vehicle") ;?> </th>
         </tr>
         <tr >
@@ -39,6 +41,10 @@
             </td>
             <td>
                 <input type="date" class="form-control" onchange="findCourseByFilter();" id="courseDateInput">
+            </td>
+            <td>
+            </td>
+            <td>
             </td>
             <td>
                 <select type="text" class="form-control" onchange="findCourseByFilter();" id="vehicleSelect">

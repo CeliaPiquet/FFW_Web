@@ -18,11 +18,11 @@ var emptyCollapsedBasketDestRow;
 function collapseBasketDestRow(element){
     parent=getFirstParent(element,"id","basketRow");
     collapseDisplay(parent.collapsedBasketDest);
-
 }
+
 function collapseAddressRow(element){
 
-    idArr=["userRow","externalRow","companyRow","localRow"];
+    idArr=["userRow","externalRow","companyRow","localRow","basketRow"];
     for(let i=0 ; i<idArr.length;i++){
         parent=getFirstParent(element,"id",idArr[i]);
         if(parent.tagName!="BODY"){
@@ -48,7 +48,6 @@ function getBasketsOrder(){
 
     });
 
-    arrOrderIds=[];
     args={
         query:{
             offset:0,
@@ -56,26 +55,32 @@ function getBasketsOrder(){
             subTarget:"pathFinding",
             basketAddressIds:basketAddressIds
         },
-        course:course
+        course:course,
     };
 
 
-    exchangeToAPI(ffwApiUrl+"/courses/pathFinding",arrOrderIds,"GET",createCourseToAPI,args);
+    exchangeToAPI(ffwApiUrl+"/courses/pathFinding",null,"GET",createCourseToAPI,args);
 }
 
 function createCourseToAPI(element,args){
 
-    console.log(element);
     if(!element){
         return null;
     }
 
-    args.arrOrderIds=element;
+    console.log(element);
+    args.arrOrderIds=element.basketOrder;
     args.query={completeData:true};
     args.course.status="created";
     args.course.type="course";
     args.course.affectedRow=null;
+    args.course.duration=element.duration;
+    console.log(args.course);
+
+    delete(element.cost);
     args.basketCounter=0;
+    console.log(args.course);
+
     //TODO control isPublic
     exchangeToAPI(ffwApiUrl+"/courses",args.course,"POST",updateBasketsToAPI,args);
 }
@@ -251,11 +256,13 @@ function updateGenericsRow(element,args){
     if(args.filterFunc){
         element=args.filterFunc(element,args);
     }
-    console.log(element);
-    for(let i=0 ; i<element.length;i++){
-        args.element=element[i];
-        createGenericRow(args);
+    if(element){
+        for(let i=0 ; i<element.length;i++){
+            args.element=element[i];
+            createGenericRow(args);
+        }
     }
+
 }
 
 function createGenericRow(args){
@@ -379,6 +386,7 @@ function createBasketRow(args){
     let course =args.course;
     let arrId={userId:"#displayUsersTable",companyId:"#displayCompaniesTable",externalId:"#displayExternalsTable"};
 
+    basketRow.querySelector("#addressCel").remove();
 
     if(args.role=="import"){
         affectDestBtn.innerHTML="Show source";
@@ -618,7 +626,9 @@ function getEmtpyCourse(){
         isPublic:null,
         status:null,
         isPremium:null,
-        serviceTime:null,
+        serviceTime:"0000-00-00 00:00:00",
+        duration:0,
+        serviceEnd:"0000-00-00 00:00:00",
         routeState:null,
         vehicleId:null,
         localId:null,

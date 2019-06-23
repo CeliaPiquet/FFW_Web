@@ -263,7 +263,12 @@ function exchangeToAPI(url, element, method, func=null, args=null){
                         element.set(args.id,newElement);
                     }
                     else{
-                        copyObjectProperty(newElement,element);
+                        if(element){
+                            copyObjectProperty(newElement,element);
+                        }
+                        else{
+                            element=newElement;
+                        }
                     }
                 }
             }
@@ -343,3 +348,23 @@ function prepareEmptyDomElement(tagName,arrPropertyValue){
     }
     return element;
 }
+
+function secondsToHms(seconds) {
+    seconds = Number(seconds);
+    let h = Math.floor(seconds / 3600);
+    let m = Math.floor(seconds % 3600 / 60);
+    let s = Math.floor(seconds % 3600 % 60);
+
+    h=h>10?h:"0"+h;
+    m=m>10?m:"0"+m;
+    s=s>10?s:"0"+s;
+
+    return h +":"+m+":"+s;
+}
+
+// function getDateObj(date){
+//
+//     return {
+//         y:
+//     }
+// }
