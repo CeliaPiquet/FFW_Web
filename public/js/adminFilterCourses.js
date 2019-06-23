@@ -269,8 +269,7 @@ function findVehiclesByFilter(element){
         idName:"vid",
         course:parent.course,
         parentIdName:"vehicleId",
-        filterFunc:filterVehicles,
-        specifyFunc:createSubCourseRow
+        filterFunc:filterVehicles
     };
 
     exchangeToAPI(ffwApiUrl+"/vehicles",arrVehicles,"GET",updateGenericsRow,args);
@@ -308,27 +307,35 @@ function filterBaskets(element,args){
     return element;
 }
 
-function filterVehicles(element,args){
+function filterVehicles(element){
 
 
     let arrVehicles=element;
-    console.log(args);
     let filteredArrVehicles=[];
 
-    for(let i=0 ; i<arrVehicles ;i++){
+    for(let i=0 ; i<arrVehicles.length ;i++){
         if(arrVehicles[i].services){
             let availabilityFlag=1;
+            console.log(arrVehicles[i].services);
             for(let j=0; j<arrVehicles[i].services.length; j++){
-                let vServiceTime=arrVehicles[i].services.serviceTime;
-                let vServiceDuration=arrVehicles[i].services.duration;
-                let vServiceEnd=arrVehicles[i].services.serviceEnd;
+                let vServiceStartDateTime=new Date(arrVehicles[i].services.serviceTime.replace(' ','T'));
+                let vServiceEndDateTime=new Date(arrVehicles[i].services.serviceEnd.replace(' ','T'));
+
+                vServiceStartDateTime=vServiceStartDateTime.setMinutes(vServiceStartDateTime.getMinutes()-vServiceStartDateTime.getTimezoneOffset());
+                vServiceEndDateTime=vServiceEndDateTime.setMinutes(vServiceEndDateTime.getMinutes()-vServiceEndDateTime.getTimezoneOffset());
+
+                if(vServiceStartDateTime.getTime()<course.calculateEndDate.getTime()&&vServiceEndDateTime.getTime()>course.calculateStartDate.getTime()){
+                    availabilityFlag=0;
+                }
+            }
+            if(availabilityFlag){
+                filteredArrVehicles.push(arrVehicles[i])
             }
         }
         else{
             filteredArrVehicles.push(arrVehicles[i]);
         }
     }
-    console.log(arrVehicles);
-    console.log(args.course);
 
+    return filteredArrVehicles;
 }

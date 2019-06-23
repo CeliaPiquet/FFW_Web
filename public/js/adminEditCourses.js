@@ -73,7 +73,7 @@ function createCourseRow(course,container){
             arrInput[i].disabled=true;
         }
     }
-    newCourseRow.service=course;
+    newCourseRow.course=course;
 
     matchDOMAndObject('value', '#', newCourseRow, course,false,null,0,"service");
     matchDOMAndObject('innerHTML', '#', newCourseRow, course,false,null,0,"service");
@@ -184,20 +184,19 @@ function openVehiclesModal(element){
     let parent=getFirstParent(element,"id","courseRow");
     modalToggle('vehicleDriverModal');
     let vehicleModal=document.getElementById("vehicleDriverModal");
-    emptyVehiclesTable.service=parent.service;
+    emptyVehiclesTable.course=parent.course;
 
     let tableContainer=vehicleModal.querySelector("#tableContainer");
 
     tableContainer.innerHTML="";
     tableContainer.append(emptyVehiclesTable);
-    emptyVehiclesTable.course
 
 }
 
 function changeServiceTime(element){
 
     let parent=getFirstParent(element,"id","courseRow");
-    let course=parent.service;
+    let course=parent.course;
     let dates, createDate;
 
     createDate=new Date(course.createDate.replace(' ','T'));
@@ -249,12 +248,43 @@ function openDriversModal(element){
 
 }
 
-function createSubCourseRow(args){
 
-    console.log(args);
+function affectToCreatedCourse(element){
+
+    let parent=getFirstParent(element,"className","genericRow");
+    let course=parent.parentDomNode.course;
+
+    let arrBtn=parent.parentDomNode.querySelectorAll("#"+element.id);
+
+    console.log(parent);
+    console.log(course);
+
+    for(let i=0 ; i<arrBtn.length ;i++){
+        arrBtn[i].innerHTML="Affect to course";
+    }
+    if(course[parent.parentIdName]){
+        element.innerHTML="Affect to course";
+        course[parent.parentIdName]=null;
+        course[parent.objectName]=null;
+    }
+    else{
+        element.innerHTML="Affected to course";
+        course[parent.parentIdName]=parent[parent.objectName].parent.idName;
+        course[parent.objectName]=parent[parent.objectName];
+    }
+
+    // if(parent.id="vehicleRow"){
+    //     course.vehicle=parent.vehicle;
+    //     course.vehicleId=parent.vehicle.
+    //
+    // }
+
+
+
 
 
 }
+
 
 function synchronizeStartEnd(startDate,startTime,seconds){
 
