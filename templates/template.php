@@ -48,6 +48,10 @@
                                     <a class="btn" href="<?=$websiteRoot?>/adminCourses">Manage courses</a>
                                 </li>
 
+                                <li class="nav-item" id="adminEvents">
+                                    <a class="btn" href="<?=$websiteRoot?>/adminEvents">Manage events</a>
+                                </li>
+
                                 <li class="nav-item" id="stocks">
                                     <a class="btn" href="<?=$websiteRoot?>/stock">Stocks</a>
                                 </li>
