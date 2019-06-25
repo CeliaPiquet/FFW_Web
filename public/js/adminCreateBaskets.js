@@ -38,7 +38,6 @@ function  updateProductRows(arrProducts,parent){
     let productRowsContainer = parent.querySelector("#productRowsContainer");
     productRowsContainer.innerHTML = "";
 
-    console.log(arrProducts);
     if(arrProducts){
         for (let i = 0; i < arrProducts.length; i++) {
 

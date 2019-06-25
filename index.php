@@ -20,7 +20,7 @@
 //    $currentLocale = setlocale(LC_ALL, fr);
 //    $locale = setlocale(LC_ALL,"fr_FR.utf8");
 //    var_dump($locale);
-//    echo $currentLocale;
+//     $currentLocale;
 //    var_dump($locale);
 
 //    phpinfo();

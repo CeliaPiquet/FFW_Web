@@ -1,11 +1,13 @@
 var userFindFlag=false;
 var arrUsers;
 var body;
+var emptyCollapsedAddressRow;
 
 
 loadExternalDOMElement([
     {url:websiteRoot+"/adminUsers/userRow",func:getEmptyUserRow},
-    {url:websiteRoot+"/adminUsers/companyRow",func:getEmptyCompanyRow}
+    {url:websiteRoot+"/adminUsers/companyRow",func:getEmptyCompanyRow},
+    {url:websiteRoot+"/adminUsers/collapsedAddressRow",func:getEmptyCollapsedAddressRow}
 ]);
 
 function findUsersByFilter(){
@@ -257,11 +259,26 @@ function updateCompaniesTable(companies){
         for(let i=0 ; i<companies.length ; i++){
             console.log(companies[i]);
             clonedCompany=newEmptyCompany.cloneNode(true);
+            clonedAddressRow=emptyCollapsedAddressRow.cloneNode(true);
+            matchDOMAndObject("value","#",clonedAddressRow,companies[i].address);
+            clonedCompany.collapsedAddressRow=clonedAddressRow.querySelector("#collapsedAddress");
             matchDOMAndObject("innerHTML","#",clonedCompany,companies[i]);
             companiesTable.append(clonedCompany);
+            companiesTable.append(clonedAddressRow);
         }
     }
 }
+
+
+function collapseAddressRow(element){
+
+
+    parent=getFirstParent(element,"id","companyRow");
+    if(parent.tagName!="BODY"){
+        collapseDisplay(parent.collapsedAddressRow);
+    }
+}
+
 
 function updateUserSkillSelect(skills){
 
@@ -362,7 +379,10 @@ function getEmptyUserRow(domText){
 function getEmptyCompanyRow(domText){
     emptyCompanyRow=document.createElement('tr');
     emptyCompanyRow.class="align-items-center";
-    emptyCompanyRow.id="userRow";
+    emptyCompanyRow.id="companyRow";
     emptyCompanyRow.innerHTML = domText;
 }
 
+function getEmptyCollapsedAddressRow(domText) {
+    emptyCollapsedAddressRow=prepareEmptyDomElement('tr',{className:"align-items-center",id:"collapsedAddressRow",innerHTML:domText});
+}

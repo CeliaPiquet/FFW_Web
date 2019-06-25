@@ -6,5 +6,5 @@
     <button class="btn  mx-auto" id="collapseAddressRow" onclick="collapseAddressRow(this);"  type="button" ><?php echo _("Address");?></button>
 </td>
 <td>
-    <button class="btn  mx-auto" id="affectToCourse" onclick="affectToCourse(this);"  type="button" ><?php echo _("Affect to course");?></button>
+    <button class="btn  mx-auto" name="affectBtn" id="affectToCourse" onclick="affectToCourse(this);"  type="button" ><?php echo _("Affect to course");?></button>
 </td>

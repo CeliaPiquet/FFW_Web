@@ -103,21 +103,37 @@ function isObjectEmpty(controlledObj){
 
 function copyObjectProperty(srcObj,dstObj){
 
-    for(let key in srcObj){
+    //TODO control copy and rewrite;
 
-        if(typeof srcObj[key] == 'object'){
-            copyObjectProperty(srcObj[key],dstObj[key]);
-        }
-        else{
-            dstObj[key]=srcObj[key];
+    if(srcObj && dstObj){
+        for(let key in srcObj){
+
+            if(typeof srcObj[key] == 'object'){
+                if(!dstObj[key]){
+                    dstObj[key]=getEmptyObj(srcObj[key]);
+                }
+                copyObjectProperty(srcObj[key],dstObj[key]);
+            }
+            else{
+                dstObj[key]=srcObj[key]?srcObj[key]:dstObj[key];
+            }
         }
     }
+}
 
+function getEmptyObj(obj){
+
+    let emptyObj=JSON.parse(JSON.stringify(obj));
+    for(let key in emptyObj){
+        emptyObj[key]=null;
+    }
+    return emptyObj;
 }
 
 function getElementBySelectorAndObject(element,selector,objectKey,objectName=null){
 
     let domElement=null;
+
 
     if(isNaN(objectKey)){
         if(objectName ){
@@ -362,9 +378,144 @@ function secondsToHms(seconds) {
     return h +":"+m+":"+s;
 }
 
-// function getDateObj(date){
-//
-//     return {
-//         y:
-//     }
-// }
+function hmsToSeconds(hms){
+
+    let arrTime=hms.split(':');
+    h=parseInt(arrTime[0],10);
+    m=parseInt(arrTime[1],10);
+    s=parseInt(arrTime[2],10);
+
+    return s+h*3600+m*60;
+
+}
+
+function changePropertySelectOptions(property,value,indexes,select){
+
+    for(let i=0; i<indexes.length;i++){
+        for(let j=0 ;j<select.options.length;j++){
+            if(select.options[j].value===indexes[i]){
+                select.options[j][property]=value;
+            }
+        }
+    }
+
+
+}
+
+function getServiceDateTime(srcObj=null){
+
+    let serviceDateTime={
+        serviceStartDate:null,
+        serviceStartTime:null,
+        durationTime:null,
+        serviceEndDate:null,
+        serviceEndTime:null
+    };
+
+    if(srcObj){
+        console.log(srcObj);
+        copyObjectProperty(srcObj,serviceDateTime);
+    }
+    return serviceDateTime;
+}
+
+function synchronizeStartEnd(startDate,startTime,seconds){
+
+    let baseDate=new Date(startDate+'T'+startTime);
+
+    let calculateDate=getUnifiedDateTime(null, startDate, startTime);
+    calculateDate.setSeconds(calculateDate.getSeconds()+seconds);
+
+    return {
+        baseDate:baseDate,
+        calculateDate:calculateDate
+    };
+}
+
+
+function getUnifiedDateTime(dateTime = null, date = null, time = null){
+
+    let calculateDate=new Date();
+
+    if(!dateTime&&!date&&!time){
+        calculateDate.setTime(Date.now());
+    }
+    if(dateTime instanceof Date){
+        return dateTime;
+    }
+    if(dateTime && !dateTime.includes('T')){
+        date=dateTime.split(' ')[0];
+        time=dateTime.split(' ')[1]?dateTime.split(' ')[1]:"00:00:00";
+    }
+    else if(dateTime){
+        calculateDate=new Date(dateTime);
+    }
+    if(date && time ){
+        calculateDate=new Date(date+'T'+time);
+    }
+    if(calculateDate){
+        calculateDate.setMinutes(calculateDate.getMinutes()-calculateDate.getTimezoneOffset());
+    }
+
+
+    return calculateDate;
+}
+
+
+function replaceObjectKeys(srcObj,newKeysObj){
+
+    for(let newKey in newKeysObj){
+
+        for(let srcKey in srcObj){
+            if(newKeysObj[newKey]===srcKey){
+                srcObj[newKey]=srcObj[srcKey];
+                delete(srcObj[srcKey]);
+            }
+        }
+    }
+
+    return srcObj;
+
+}
+
+function updateGenericsRow(element,args){
+
+    args.container.innerHTML="";
+
+
+    if(args.filterFunc){
+        element=args.filterFunc(element,args);
+    }
+    if(element){
+        for(let i=0 ; i<element.length;i++){
+            args.element=element[i];
+            createGenericRow(args);
+        }
+    }
+
+}
+
+function createGenericRow(args){
+
+    let newGenericRow=args.emptyRow.cloneNode(true);
+
+    newGenericRow[args.objectName]=null;
+
+    newGenericRow[args.objectName]=args.element;
+    newGenericRow.address=args.element.address;
+    newGenericRow.idName=args.idName;
+    newGenericRow.idValue=args.element[args.idName];
+    newGenericRow.objectName=args.objectName;
+    newGenericRow.parentIdName=args.parentIdName;
+    newGenericRow.parentDomNode=args.parentDomNode;
+
+    args.container.append(newGenericRow);
+    args.domNode=newGenericRow;
+
+    if(args.specifyFunc){
+        args.specifyFunc(args);
+    }
+
+    matchDOMAndObject('innerHTML', '#', newGenericRow, args.element,false,1);
+
+}
