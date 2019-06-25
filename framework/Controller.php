@@ -101,7 +101,7 @@ abstract class Controller {
             session_start();
         }
         if(isset($_SERVER['REQUEST_URI'])){
-            $uri=$_SERVER['REQUEST_URI'];
+            $uri=explode("?",$_SERVER['REQUEST_URI'])[0];
         }
 
         $isConnected=false;

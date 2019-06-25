@@ -12,6 +12,7 @@ class Request {
     public function __construct($arrParameters)
     {
         $this->arrParameters = $arrParameters;
+        
     }
 
     /**

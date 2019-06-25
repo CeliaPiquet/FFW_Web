@@ -17,7 +17,8 @@ class Router {
             $action = $this->createAction($request);
             $id=$request->existParameter('id')?$request->getParameterByName("id"):null;
             $controller->setId($id);
-            $controller->executeAction($action);
+            var_dump($request);
+//            $controller->executeAction($action);
 
         }
         catch (Exception $e) {

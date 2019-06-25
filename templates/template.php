@@ -26,7 +26,7 @@
 
 
         <header cz-shortcut-listen="true" style="padding-top:200px;">
-            <nav class="navbar fixed-top navbar-light navbar-expand-sm" style="background-color: #EBEBEB">
+            <nav class="navbar fixed-top navbar-light navbar-expand-sm align-items-center" style="background-color: #EBEBEB">
                 <a class="navbar-brand mr-auto" href="http://ffw.priv/">
                     <img src="../../public/img/logo1.png" width="150" height="150" class="d-inline-block align-top" alt="">
                 </a>
@@ -76,6 +76,12 @@
                         </ul>
                     </div>
                 <?php } ?>
+                <a class="navbar-brand mx-1" href="<?=$uri."/fr"?>">
+                    <img src="../../public/img/france.png" width="20" height="20" class="d-inline-block align-top" alt="">
+                </a>
+                <a class="navbar-brand mx-1" href="<?=$uri?>/en">
+                    <img src="../../public/img/united-kingdom.png" width="20" height="20" class="d-inline-block align-top" alt="">
+                </a>
             </nav>
         </header>
 
@@ -87,6 +93,7 @@
 
         <div class="card-footer text-muted fixed-bottom" style="background-color:#EBEBEB">
             Fight Food Waste
+            <?php var_dump($_GET);?>
         </div>
 
 
