@@ -237,7 +237,7 @@ function createLocalRow(container,local){
 
     if(local.rooms){
         for(let i = 0 ; i<local.rooms.length ; i++){
-            createRoomRow(roomRowsContainer,local.rooms[i])
+            createRoomRow(roomRowsContainer,local.rooms[i],newLocalRow)
         }
     }
     else{
@@ -258,6 +258,7 @@ function createLocalRow(container,local){
     container.append(newCollapsedRoomRow);
 
     newLocalRow.local=local;
+    console.log(newLocalRow);
     newLocalRow.rooms=local.rooms;
     newLocalRow.roomRowsContainer=roomRowsContainer;
     newLocalRow.collapseAddress=newCollapsedAddressRow.querySelector("#collapseAddress");
@@ -285,7 +286,7 @@ function changeBoolBtnState(){
     this.innerHTML=this.innerHTML==="YES"?"NO":"YES";
 }
 
-function createRoomRow(container,room){
+function createRoomRow(container,room,localRow){
 
     newRoomRow = emptyRoomRow.cloneNode(true);
 
@@ -304,7 +305,7 @@ function createRoomRow(container,room){
         newConfirmButton.addEventListener('click',confirmRow,false);
         newRoomRow.room=room;
     }
-
+    newRoomRow.localRow=localRow;
     container.append(newRoomRow);
 }
 
@@ -312,20 +313,16 @@ function confirmRow(event){
 
     element=event.target;
     let tmpElement;
-    console.log(element);
-    if((tmpElement=getFirstParent(element,"id","localRow")).tagName=="BODY"){
-        if((tmpElement=getFirstParent(element,"id","roomRow")).tagName!="BODY"){
 
-            console.log(tmpElement);
-
-            args={
-                domParent:tmpElement
-            };
-            exchangeToAPI(ffwApiUrl+"/rooms",matchDOMAndObject("value","#",tmpElement,tmpElement.room,true),"POST",removeConfirmButton,args);
-        }
+    if((tmpElement=getFirstParent(element,"id","roomRow")).tagName!=="BODY"){
+        args={
+            domParent:tmpElement
+        };
+        exchangeToAPI(ffwApiUrl+"/rooms",matchDOMAndObject("value","#",tmpElement,tmpElement.room,true),"POST",removeConfirmButton,args);
     }
-    else{
+    else if((tmpElement=getFirstParent(element,"id","localRow")).tagName!=="BODY"){
 
+        console.log(tmpElement);
         tmpElement.local.address=convertAddressObjectToDOM(tmpElement.local.address);
         tmpElement.local.address=matchDOMAndObject("value","#",tmpElement.collapseAddress,tmpElement.local.address,true);
         console.log(tmpElement);
@@ -341,9 +338,11 @@ function confirmRow(event){
 
 function createLocalToAPI(address,args){
     console.log(args.local);
-    args.local.adid=address.adid;
 
-    exchangeToAPI(args.url,args.local,args.method,removeConfirmButton,{domParent:args.domParent});
+    if(address.adid){
+        args.local.adid=address.adid;
+        exchangeToAPI(args.url,args.local,args.method,removeConfirmButton,{domParent:args.domParent});
+    }
 }
 
 function removeConfirmButton(element=null,args){
@@ -382,7 +381,7 @@ function addRoom(event){
     newRoom.loid=element.local.loid;
     console.log(element.rooms);
     element.rooms.push(newRoom);
-    createRoomRow(element.roomRowsContainer,newRoom);
+    createRoomRow(element.roomRowsContainer,newRoom,element);
 }
 
 function convertLocalObject(local){

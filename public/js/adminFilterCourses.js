@@ -12,8 +12,7 @@ function findCourseByFilter(){
     };
 
     matchDOMAndObject("value","#",document.getElementById("coursesTableHeader"),filterObject,true);
-
-    console.log(filterObject);
+    let courseRowContainer=document.getElementById("coursesRowsContainer");
 
     args={
         query:{
@@ -25,12 +24,12 @@ function findCourseByFilter(){
             createTime:filterObject.createDateInput,
             serviceTime : filterObject.courseDateInput,
             completeData:true
-        }
+        },
+        emptyRow:emptyCourseRow,
+        container:courseRowContainer,
+        specifyFunc:createCourseRow
     };
-
-    console.log(args.query);
-
-    exchangeToAPI(ffwApiUrl+"/courses",arrCourses,"GET",updateCourseRows,args);
+    exchangeToAPI(ffwApiUrl+"/courses",arrCourses,"GET",updateGenericsRow,args);
 
 }
 
@@ -108,6 +107,53 @@ function findUsersByFilter(element){
         idName:"uid",
         parentIdName:"userId",
         specifyFunc:createSubBasketRow
+
+    };
+
+    exchangeToAPI(ffwApiUrl+"/users",arrUsers,"GET",updateGenericsRow,args);
+
+}
+
+function findDriversByFilter(element){
+
+    if(element.target){
+        element=element.target;
+    }
+    body=new Object();
+
+    let filterObject={
+        mailInput:null,
+        lastnameInput:null,
+        firstnameInput:null,
+        cityInput:null
+    }
+
+    let parent=getFirstParent(element,"id","usersTable");
+    let container=parent.querySelector("#userRowsContainer");
+    let arrUsers=[];
+
+    matchDOMAndObject("value","#",parent,filterObject,true);
+
+    console.log(filterObject);
+
+    args={
+        query:{
+            offset:0,
+            limit:20,
+            email:filterObject.mailInput,
+            lastname:filterObject.lastnameInput,
+            firstname:filterObject.firstnameInput,
+            cityName:filterObject.cityInput
+        },
+        container:container,
+        emptyRow:emptyUserRow,
+        parentDomNode:parent,
+        course:parent.course,
+        objectName:"user",
+        idName:"uid",
+        parentIdName:"userId",
+        filterFunc:filterDrivers,
+        specifyFunc:createDriversRow
 
     };
 
@@ -249,7 +295,6 @@ function findVehiclesByFilter(element){
     let container=parent.querySelector("#vehicleRowsContainer");
     let arrVehicles=[];
 
-    console.log(container);
     matchDOMAndObject("value","#",parent,filterObject,true);
 
     let args={
@@ -269,7 +314,8 @@ function findVehiclesByFilter(element){
         idName:"vid",
         course:parent.course,
         parentIdName:"vehicleId",
-        filterFunc:filterVehicles
+        filterFunc:filterVehicles,
+        specifyFunc:createVehicleRow
     };
 
     exchangeToAPI(ffwApiUrl+"/vehicles",arrVehicles,"GET",updateGenericsRow,args);
@@ -302,29 +348,29 @@ function filterBaskets(element,args){
         }
     }
 
-    console.log(filteredBasketArr);
     element=filteredBasketArr;
     return element;
 }
 
-function filterVehicles(element){
+function filterVehicles(element,args){
 
 
     let arrVehicles=element;
+    let course=args.course;
     let filteredArrVehicles=[];
+
+    console.log(course);
+    console.log(arrVehicles);
 
     for(let i=0 ; i<arrVehicles.length ;i++){
         if(arrVehicles[i].services){
             let availabilityFlag=1;
-            console.log(arrVehicles[i].services);
             for(let j=0; j<arrVehicles[i].services.length; j++){
-                let vServiceStartDateTime=new Date(arrVehicles[i].services.serviceTime.replace(' ','T'));
-                let vServiceEndDateTime=new Date(arrVehicles[i].services.serviceEnd.replace(' ','T'));
+                let vServiceStartDateTime=getUnifiedDateTime(arrVehicles[i].services[j].serviceTime);
+                let vServiceEndDateTime=getUnifiedDateTime(arrVehicles[i].services[j].serviceEnd);
+                console.log(arrVehicles[i].vid);
 
-                vServiceStartDateTime=vServiceStartDateTime.setMinutes(vServiceStartDateTime.getMinutes()-vServiceStartDateTime.getTimezoneOffset());
-                vServiceEndDateTime=vServiceEndDateTime.setMinutes(vServiceEndDateTime.getMinutes()-vServiceEndDateTime.getTimezoneOffset());
-
-                if(vServiceStartDateTime.getTime()<course.calculateEndDate.getTime()&&vServiceEndDateTime.getTime()>course.calculateStartDate.getTime()){
+                if(vServiceStartDateTime.getTime()<course.calculateEndDate.getTime()&&vServiceEndDateTime.getTime()>course.calculateStartDate.getTime()&&arrVehicles[i].vid!==course.vehicleId){
                     availabilityFlag=0;
                 }
             }
@@ -338,4 +384,38 @@ function filterVehicles(element){
     }
 
     return filteredArrVehicles;
+}
+
+function filterDrivers(element,args){
+    let arrUsers=element;
+    let course=args.course;
+    let filteredArrUsers=[];
+
+    console.log(arrUsers);
+
+    for(let i=0; i<arrUsers.length;i++){
+
+        let driverFlag=0;
+
+        if(arrUsers[i].skills){
+            for(let j=0 ; j<arrUsers[i].skills.length;j++){
+                if(arrUsers[i].skills[j].name.toLowerCase().includes("chauffeur")){
+                    driverFlag=1;
+                }
+            }
+        }
+        if(arrUsers[i].affectations){
+            for(let j=0 ; j<arrUsers[i].affectations.length;j++){
+                let startTime=getUnifiedDateTime(arrUsers[i].affectations[j].start);
+                let endTime=getUnifiedDateTime(arrUsers[i].affectations[j].end);
+                if(startTime.getTime()<course.calculateEndDate.getTime()&&endTime.getTime()>course.calculateStartDate.getTime()&&arrUsers[i].uid!==course.userId){
+                    driverFlag=0;
+                }
+            }
+        }
+        if(driverFlag){
+            filteredArrUsers.push(arrUsers[i]);
+        }
+    }
+    return filteredArrUsers;
 }

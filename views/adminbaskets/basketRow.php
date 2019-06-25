@@ -1,5 +1,5 @@
 <td>
-    <select type="text" class="form-control"     id="status">
+    <select type="text" class="form-control" name="basketsInput"  object="basket"   id="status">
         <option selected></option>
         <?php
             foreach($arrBasketStatus as $basketStatus){
@@ -9,7 +9,7 @@
     </select>
 </td>
 <td>
-    <select type="text" class="form-control" class="form-control"  id="role">
+    <select type="text" name="basketsInput" class="form-control" object="basket" class="form-control"  id="role">
         <option selected></option>
         <?php
             foreach($arrBasketRole as $basketRole){
@@ -19,19 +19,19 @@
     </select>
 </td>
 <td>
-    <input type="date" class="form-control"  id="createTime">
+    <input type="date" name="basketsInput" class="form-control" object="basket" id="createTime">
 </td>
 <td>
     <button class="btn mx-auto" id="collapseBtnProduct" type="button" ><?php echo _("Products") ;?></button>
 </td>
 <td>
-    <button class="btn mx-auto" id="validated" value="validated" type="button" onclick="changeBasketStatus(this)" ><?php echo _("Validate") ;?></button>
+    <button class="btn mx-auto" name="basketsInput" id="validated" value="validated " type="button" onclick="changeBasketStatus(this)" ><?php echo _("Validate") ;?></button>
 </td>
 <td>
-    <button class="btn mx-auto"  id="refused" value="refused"  type="button" onclick="changeBasketStatus(this)" ><?php echo _("Refuse") ;?></button>
+    <button class="btn mx-auto" name="basketsInput"  id="refused" value="refused"  type="button" onclick="changeBasketStatus(this)" ><?php echo _("Refuse") ;?></button>
 </td>
 <td>
-    <button class="btn mx-auto" id="canceled" value="canceled" type="button" onclick="changeBasketStatus(this)" > <?php echo _("Cancel") ; ?></button>
+    <button class="btn mx-auto" name="basketsInput" id="canceled" value="canceled" type="button" onclick="changeBasketStatus(this)" > <?php echo _("Cancel") ; ?></button>
 </td>
 <td>
     <div class="alert alert-dark"><?php echo _("Total quantity :") ;?><span id="totalQuantity"></span></div>

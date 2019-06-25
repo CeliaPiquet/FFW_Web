@@ -16,7 +16,6 @@ function getEvents(){
         }
     };
 
-    console.log(args.query);
 
     exchangeToAPI(ffwApiUrl+"/users",arrAffectations,"GET",updateCalendarEvents,args);
 }
@@ -26,8 +25,10 @@ function updateCalendarEvents(element,args){
     let calendar=document.getElementById("calendar").calendar;
 
     let arrEvents=[];
+    console.log(args);
 
     for(let key in element){
+        console.log(element[key]);
         arrEvents.push({
             title : element[key].service.name,
             start:element[key].start,

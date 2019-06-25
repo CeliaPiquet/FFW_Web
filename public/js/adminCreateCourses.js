@@ -67,22 +67,20 @@ function createCourseToAPI(element,args){
     if(!element){
         return null;
     }
-
-    console.log(element);
-    args.arrOrderIds=element.basketOrder;
+    args.arrOrderIds=Object.values(element.basketOrder);
     args.query={completeData:true};
     args.course.status="created";
     args.course.type="course";
     args.course.affectedRow=null;
     args.course.duration=element.duration;
-    console.log(args.course);
 
     delete(element.cost);
     args.basketCounter=0;
-    console.log(args.course);
 
+    if(args.arrOrderIds&&args.course.duration){
+        exchangeToAPI(ffwApiUrl+"/courses",args.course,"POST",updateBasketsToAPI,args);
+    }
     //TODO control isPublic
-    exchangeToAPI(ffwApiUrl+"/courses",args.course,"POST",updateBasketsToAPI,args);
 }
 
 function updateBasketsToAPI(element,args){
@@ -94,15 +92,36 @@ function updateBasketsToAPI(element,args){
         basket.serviceId=args.course.serid;
         basket.status="affected";
         args.basketCounter++;
-        console.log(basket);
-        exchangeToAPI(ffwApiUrl+"/baskets",basket,"PUT",updateBasketsToAPI,args);
+        if(basket.serviceId){
+            exchangeToAPI(ffwApiUrl+"/baskets",basket,"PUT",updateBasketsToAPI,args);
+        }
     }
     else{
+        resetCourseModal();
         modalToggle('courseModal',"hide");
     }
 
 }
 
+
+function resetCourseModal(){
+
+    let courseModal=document.getElementById("courseModal");
+    let basketRowsContainer=document.getElementById("basketRowsContainer");
+    let localModal=document.getElementById("localModal");
+    let localRowsContainer=document.getElementById("localRowsContainer");
+    let createCourseBtn=document.getElementById("createCourseBtn");
+    let courseNameInput=document.getElementById("courseNameInput");
+
+    courseNameInput.value="";
+    createCourseBtn.disabled=true;
+    localRowsContainer.innerHTML="";
+    basketRowsContainer.innerHTML="";
+    courseModal.course=null;
+    localModal.local=null
+
+
+}
 function setCourseName(element){
 
     let course=document.getElementById("courseModal").course;
@@ -121,9 +140,10 @@ function removeAffect(element){
 
     let arrNullKey=["userId","companyId","externalId"];
     let parentRow=getFirstParent(element,"className","genericRow");
+    let modal=getFirstParent(element,"className","genericModal");
+    let course=modal.course;
     let affectToCourseBtn=parentRow.querySelector("#affectToCourseBtn");
     let affectDestBtn=parentRow.querySelector("#collapseBasketDestRow");
-    let course=document.getElementById("courseModal").course;
 
     if(parentRow.basket && parentRow.basket.affectedRow){
         parentRow.basket.affectedRow.querySelector("#affectToBasket").innerHTML="Affect to basket";
@@ -138,9 +158,12 @@ function removeAffect(element){
         }
     }
     else{
-        course.affectedRow.querySelector("#affectToCourse").innerHTML="Affect to course";
-        course.localId=null;
-        course.local=null;
+        let affectDestBtn=modal.querySelectorAll( "[name='affectBtn']" );
+        for(let i=0; i<affectDestBtn.length;i++){
+            affectDestBtn[i].innerHTML="Affect to course";
+        }
+        course[modal.objectName]=null;
+        course[modal.objectId]=null;
     }
 
 
@@ -164,8 +187,6 @@ function affectToBasket(event){
     for(let key in arrAffectBtn){
         arrAffectBtn[key].innerHTML="Affect to basket";
     }
-
-    console.log(parentDomNode);
 
     if(parentDomNode.basket[parentRow.parentIdName]==parentRow.idValue ){
         parentDomNode.basket[parentRow.parentIdName]=null;
@@ -222,13 +243,10 @@ function affectToCourse(element){
         }
     }
     else if(parentRow.id=="basketRow"){
-
-        console.log(parentRow.basket);
         if(!course.baskets.get(parentRow.basket.bid)){
             if(parentRow.basket.role=="import" || (parentRow.basket.role=="export" && (parentRow.basket.userId||parentRow.basket.companyId||parentRow.basket.externalId))){
                 element.innerHTML="Affected to course";
                 course.baskets.set(parentRow.basket.bid,parentRow.basket);
-                console.log(course);
             }
         }
         else{
@@ -247,52 +265,7 @@ function affectToCourse(element){
 }
 
 
-function updateGenericsRow(element,args){
 
-    args.container.innerHTML="";
-
-    console.log(element);
-
-    if(args.filterFunc){
-        element=args.filterFunc(element,args);
-    }
-    if(element){
-        for(let i=0 ; i<element.length;i++){
-            args.element=element[i];
-            createGenericRow(args);
-        }
-    }
-
-}
-
-function createGenericRow(args){
-
-    let newGenericRow=args.emptyRow.cloneNode(true);
-
-
-    console.log(args.element);
-    newGenericRow[args.objectName]=null;
-
-    newGenericRow[args.objectName]=args.element;
-    newGenericRow.address=args.element.address;
-    newGenericRow.idName=args.idName;
-    newGenericRow.idValue=args.element[args.idName];
-    newGenericRow.objectName=args.objectName;
-    newGenericRow.parentIdName=args.parentIdName;
-    newGenericRow.parentDomNode=args.parentDomNode;
-
-
-    args.container.append(newGenericRow);
-    args.domNode=newGenericRow;
-
-    if(args.specifyFunc){
-        args.specifyFunc(args);
-    }
-
-    console.log(args.element);
-    matchDOMAndObject('innerHTML', '#', newGenericRow, args.element,false,1);
-
-}
 
 function createSubBasketRow(args){
 
@@ -368,7 +341,6 @@ function updateBasketRows(element,args){
         }
 
     }
-    console.log(filteredBasketArr);
     arrBaskets=filteredBasketArr;
 
     for(let i=0 ; i<arrBaskets.length;i++){
@@ -382,7 +354,6 @@ function createBasketRow(args){
     let basket=args.element;
     let newCollapsedBasketDestRow=emptyCollapsedBasketDestRow.cloneNode(true);
     let affectDestBtn=basketRow.querySelector("#collapseBasketDestRow");
-    console.log(affectDestBtn);
     let course =args.course;
     let arrId={userId:"#displayUsersTable",companyId:"#displayCompaniesTable",externalId:"#displayExternalsTable"};
 
@@ -457,15 +428,22 @@ function changeBasketQuantityOrder(){
 function openNewCourseModal(){
 
     let courseModal=document.getElementById("courseModal");
-    courseModal.course=getEmtpyCourse();
+    courseModal.course=getEmptyCourse();
     courseModal.arrBaskets=[];
 
     modalToggle('courseModal');
 }
 
-function openLocalModal(){
+function openLocalModal(element){
 
     modalToggle('localModal');
+
+    let course=getFirstParent(element,"className","genericModal").course;
+    let localModal=document.getElementById("localModal");
+
+    localModal.course=course
+    localModal.objectId="localId";
+    localModal.objectName="local";
 }
 function closeLocalModal(element){
 
@@ -508,6 +486,13 @@ function getEmptyCollapsedAddressRow(domText) {
 
 function getEmptyUsersTable(domText) {
     emptyUsersTable=prepareEmptyDomElement('table',{className:"table table-striped table-hover genericTable",id:"usersTable",innerHTML:domText});
+    emptyUsersTableCourse=prepareEmptyDomElement('table',{className:"table table-striped table-hover genericTable",id:"usersTable",innerHTML:domText});
+    let arrInputs= emptyUsersTableCourse.querySelectorAll(" [name='filterInput'] ");
+
+    for(i=0;i<arrInputs.length ;i++){
+        arrInputs[i].addEventListener('keyup',findDriversByFilter,false);
+    }
+
 }
 function getEmptyUserRow(domText) {
     emptyUserRow=prepareEmptyDomElement('tr',{className:"align-items-center genericRow",id:"userRow",innerHTML:domText});
@@ -582,7 +567,6 @@ function displayTable(element,nodeToClone){
         }
         for(let key in idNameUrl){
             if(basket[key]){
-                console.log(key);
                 let arrResult=[];
                 exchangeToAPI(ffwApiUrl+"/"+idNameUrl[key].url+"/"+basket[key],arrResult,"GET",updateGenericsRow,idNameUrl[key].args);
             }
@@ -614,7 +598,7 @@ function displayExternalsTable(element){
     displayTable(element,emptyExternalsTable);
 }
 
-function getEmtpyCourse(){
+function getEmptyCourse(){
 
     return {
         serid:null,
@@ -630,7 +614,10 @@ function getEmtpyCourse(){
         duration:0,
         serviceEnd:"0000-00-00 00:00:00",
         routeState:null,
+        vehicle:null,
         vehicleId:null,
+        user:null,
+        userId:null,
         localId:null,
         local:null,
         baskets:new Map()

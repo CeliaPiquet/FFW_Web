@@ -6,5 +6,5 @@
 </td>
 <td>
 <td>
-    <button class="btn col-md-2 mx-auto" id="collapseBtnAddress" type="button" ><?php echo _("Address");?></button>
+    <button class="btn mx-auto" id="collapseBtnAddress" onclick="collapseAddressRow(this);" type="button" ><?php echo _("Address");?></button>
 </td>

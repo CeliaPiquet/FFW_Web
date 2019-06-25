@@ -118,7 +118,12 @@ function createBasketRow(container,basket,oldRow){
             newBasketRow.querySelector("#" + arrStatus[i]).disabled=true;
         }
     }
-
+    if(basket.status==="delivered" || basket.status==="transit" || basket.status==="refused" || basket.status==="affected"){
+        let inputs=newBasketRow.querySelectorAll("[name='basketsInput']");
+        for(let i=0; i<inputs.length;i++){
+            inputs[i].disabled=true;
+        }
+    }
     // newBasketRow.querySelector("#collapseBtnAddress").addEventListener('click',collapseAddressElement,false)
 
     basket["totalQuantity"]=basket.products&&basket.products.length>0?basket.products.length:"0";
@@ -128,6 +133,7 @@ function createBasketRow(container,basket,oldRow){
     matchDOMAndObject("innerHTML", "#", newBasketRow, basket,false,1)
 
     container.append(newBasketRow);
+    newBasketRow.basket=basket;
 
     collapsedProductsRow= createCollapsedProductsRow(container,basket.products,newBasketRow);
 
@@ -137,7 +143,7 @@ function createBasketRow(container,basket,oldRow){
     }
 
     newBasketRow.collapseProductRow=collapsedProductsRow.querySelector("#collapseProducts");
-    newBasketRow.basket=basket;
+
 
 }
 
@@ -150,6 +156,13 @@ function createCollapsedProductsRow(container,products,basketRow){
     updateProductRows(products,newCollapsedProductRow);
 
     let productsTable=newCollapsedProductRow.querySelector("#productsTable");
+
+    if(basketRow.basket.status==="delivered"||basketRow.basket.status==="transit"||basketRow.basket.status==="refused"){
+        let productsInput=newCollapsedProductRow.querySelectorAll("[name='productsInput']");
+        for(let i=0; i<productsInput.length; i++){
+            productsInput[i].disabled=true;
+        }
+    }
 
     productsTable.products=products;
     productsTable.basketRow=basketRow;

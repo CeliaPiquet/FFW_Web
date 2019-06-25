@@ -79,7 +79,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="vehicleDriverModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+<div class="modal fade genericModal" id="vehicleDriverModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
     <div class="modal-dialog modal-xl"  role="document">
         <div class="modal-content" >
             <div class="modal-header">
@@ -88,14 +88,20 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" id="tableContainer">
+            <div class="modal-body">
+                <div id="tableContainer">
 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" id="removeAffect" onclick="removeAffect(this);" ><?php echo _("Remove affectation"); ?></button>
+                    <button type="button" class="btn" onclick="closeVehicleDriverModal(this);" ><?php echo _("Close"); ?></button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="courseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+<div class="modal fade genericModal" id="courseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
     <div class="modal-dialog modal-xl   " role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -177,7 +183,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="localModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+<div class="modal fade genericModal" id="localModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -213,7 +219,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn" onclick="removeAffect(this);" ><?php echo _("Remove affected local"); ?></button>
+                <button type="button" class="btn" id="removeAffect" onclick="removeAffect(this);" ><?php echo _("Remove affected local"); ?></button>
                 <button type="button" class="btn" onclick="closeLocalModal(this);" ><?php echo _("Cancel"); ?></button>
                 <button type="button" class="btn" onclick="closeLocalModal();"><?php echo _("Confirm"); ?></button>
             </div>

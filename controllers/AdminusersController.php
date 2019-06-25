@@ -63,5 +63,7 @@ class AdminusersController extends Controller
         $this->loadView($this->action);
     }
 
-
+    public function collapsedAddressRow(){
+        $this->loadView($this->action);
+    }
 }
