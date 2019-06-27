@@ -64,7 +64,6 @@ function checkAllProduct(element){
     arrCheckProduct=productTable.querySelectorAll("[name='checkProduct']");
     checkAllVal=productTable.querySelector("#checkProductInput").checked;
 
-    console.log(checkAllVal);
     for(let i =  0 ; i<arrCheckProduct.length ; i++){
         arrCheckProduct[i].checked=checkAllVal;
         getFirstParent(arrCheckProduct[i],"id","productRow").product.checkProduct=checkAllVal;
@@ -76,14 +75,12 @@ function setCheckProductObj(event){
     let element=event.target;
     let product=getFirstParent(element,"id","productRow").product;
     product.checkProduct=element.checked;
-    console.log(product);
 }
 
 function getAllBasketByID(element,args){
 
     let key=element.keys();
     args.id=null;
-    console.log(args);
     do{
 
         keyVal=key.next().value;
@@ -99,10 +96,7 @@ function getAllBasketByID(element,args){
         exchangeToAPI(ffwApiUrl+"/baskets",element,"GET",getAllBasketByID,args);
     }
     else{
-        console.log( args.products);
-        console.log(element);
         let modal=document.getElementById("createBasketModal");
-        console.log(args);
         modal.querySelector("#productsTable").products= args.products.filter(filterProduct,element);
     }
 }
@@ -112,7 +106,6 @@ function filterProduct(product){
 
     let basket=this.get(product.basketId);
     basket = basket && basket.value ? basket.value : null;
-    console.log(product);
     if(product.basketId===null  || (basket && basket.status ==="canceled")){
         return true;
     }
@@ -144,8 +137,6 @@ function sortProductByFilter(element){
             mapFilteredProducts.set(arrProducts[j].prid,arrProducts[j]);
         }
     }
-
-    console.log(mapFilteredProducts);
 
     if(mapFilteredProducts.size===0){
         updateProductRows(arrProducts,parent);
@@ -184,17 +175,14 @@ function updateProductAPI(element,args){
 
     if(args.counterProduct == undefined){
         if(element && element.bid!==null){
-            console.log(element);
 
             for(let i=0; i<arrProducts.length ;i++){
                 arrProducts[i].basketId=element.bid;
             }
-            console.log(arrProducts);
         }
         args.counterProduct=0;
     }
     if(args.counterProduct<arrProducts.length){
-        console.log(arrProducts[args.counterProduct]);
         exchangeToAPI(ffwApiUrl+"/products",arrProducts[args.counterProduct],"PUT",updateProductAPI,args);
         args.counterProduct++;
     }
@@ -239,7 +227,6 @@ function openLocalModal(){
 
 function findLocalsByFilter(){
 
-    console.log("COUCOU");
     modal=document.getElementById("selectLocalModal");
     modal.arrLocals=[]
     args={
@@ -263,7 +250,6 @@ function updateLocalRows(element) {
 
     let localRowsContainer = document.getElementById("localRowsContainer");
 
-    console.log(localRowsContainer);
     localRowsContainer.innerHTML = "";
 
     for (let i = 0; i < arrLocals.length; i++) {

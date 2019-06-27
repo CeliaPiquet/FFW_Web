@@ -6,8 +6,8 @@
 
 
     <div class="col-lg-12 ">
-        <h1 class="text-center"> Manage users</h1>
-        <button class="btn col-md-2 " type="button" id="changeSkills" onclick="openSkillsModal()">Change skills </button>
+        <h1 class="text-center"><?php echo  _("Manage users");?></h1>
+        <button class="btn col-md-2 " type="button" id="changeSkills" onclick="openSkillsModal()"><?php echo  _("Change skills");?></button>
     </div>
 
     <table class="table table-striped table-hover " id="usersTable">
@@ -110,12 +110,12 @@
 
                                 <div class="row my-3">
                                     <div class="col-md-6">
-                                        <label for="skillsSelectEditable">User skills</label>
+                                        <label for="skillsSelectEditable"><?php echo  _("User skills");?></label>
                                         <select type="text" class="form-control"  id="skillsSelectEditable">
                                         </select>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="skillsStatusSelectEditable">Skills status</label>
+                                        <label for="skillsStatusSelectEditable"><?php echo  _("Skills status");?></label>
                                         <select type="text" class="form-control" id="skillsStatusSelectEditable">
                                             <?php
                                             foreach($arrSkillsStatus as $skillStatus){
@@ -131,7 +131,7 @@
                                 <div class="list-group" id="userRightsList">
                                     <?php
                                     foreach($arrRights as $key=>$value){
-                                        echo '<button type="button" class="list-group-item list-group-item-action" id="'.$key.'">'.$value.'</button>';
+                                        echo '<button type="button" class="list-group-item list-group-item-action" name="rightsBtns" id="'.$key.'">'.$value.'</button>';
                                     }
                                     ?>
                                 </div>
@@ -141,10 +141,10 @@
                     </div>
                     <div class="row mt-3">
                         <button class="btn col-md-2 mx-auto" type="button" data-toggle="collapse" data-target="#collapseAddress" aria-expanded="false" aria-controls="collapseExample">
-                            Address
+                            <?php echo  _("Address");?>
                         </button>
                         <button class="btn col-md-2 mx-auto" type="button" data-toggle="collapse" data-target="#collapsedCompanies" aria-expanded="false" aria-controls="collapseExample">
-                            Companies
+                            <?php echo  _("Companies");?>
                         </button>
                     </div>
                 </div>
@@ -196,8 +196,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" onclick="updateUser()" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo  _("Cancel");?></button>
+                <button type="button" onclick="updateUser()" class="btn btn-primary" data-dismiss="modal"><?php echo  _("Confirm");?></button>
             </div>
         </div>
     </div>
@@ -221,14 +221,14 @@
                                 <input type="text" class="form-control" id="skillEdit">
                             </div>
                             <button class="btn col-md-2 mx-auto" id="addSkillBtn" onclick="addSkill();">
-                                Add skill
+                                <?php echo  _("Add skill");?>
                             </button>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <ul class="list-group list-group-horizontal">
-                                    <button type="button" class="list-group-item list-group-item-action text-center" onclick="showEnabledSkills();" id="enabledSkills">Enabled</button>
-                                    <button type="button" class="list-group-item list-group-item-action text-center" onclick="showDisabledSkills();"  id="disabledSkills">Disabled</button>
+                                    <button type="button" class="list-group-item list-group-item-action text-center" onclick="showEnabledSkills();" id="enabledSkills"><?php echo  _("Enabled");?></button>
+                                    <button type="button" class="list-group-item list-group-item-action text-center" onclick="showDisabledSkills();"  id="disabledSkills"><?php echo  _("Disabled");?></button>
                                 </ul
                             </div>
                         </div>
@@ -251,8 +251,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" onclick="updateSkills()" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo  _("Cancel");?></button>
+                    <button type="button" onclick="updateSkills()" class="btn btn-primary" data-dismiss="modal"><?php echo  _("Confirm");?></button>
                 </div>
             </div>
         </div>

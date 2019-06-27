@@ -34,7 +34,7 @@
                     <input type="checkbox" class="form-control" name="productsInput" onclick="checkAllProduct(this)" id="checkProductInput">
                 </td>
                 <td>
-                        <button type="checkbox" class=" btn" onclick="removeProduct(this)"  name="productsInput" id="removeProduct">Remove product</button>
+                        <button type="checkbox" class=" btn" onclick="removeProduct(this)"  name="productsInput" id="removeProduct"><?php echo  _("Remove product");?></button>
                 </td>
             </tr>
             </thead>

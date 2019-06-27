@@ -1,0 +1,121 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-26 10:17+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:6
+msgid "Inscription"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:10
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:11
+msgid "Last name"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:14
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:15
+msgid "First name"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:20
+msgid "Mail address"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:24
+msgid "Password"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:25
+msgid "Password (8 characters, 1 capital, 1 lower, 1 digit)"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:28
+msgid "Password confirm"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:29
+msgid "Rewrite your password"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:33
+msgid "Address"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:34
+msgid "Enter your address..."
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:38
+msgid "House number"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:39
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:43
+msgid "House number and street name"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:42
+msgid "Street address"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:48
+msgid "Complement"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:49
+msgid "Complement "
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:54
+msgid "City"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:58
+msgid "Zip code"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:62
+msgid "Country"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:64
+msgid "France"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:65
+msgid "Italy"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:66
+msgid "Portugal"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:67
+msgid "Ireland"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:75
+msgid "Agree FFW general conditions"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:81
+msgid "I want to receive by mail actuality and event information from FFW"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:85
+msgid "Next step"
+msgstr ""

@@ -24,8 +24,6 @@ function findBasketsByFilter(){
 
     matchDOMAndObject("value","#",document.getElementById("basketsTableHeader"),filterObject,true);
 
-    console.log(filterObject);
-
     args={
         query:{
             offset:0,
@@ -45,7 +43,6 @@ function collapseProductElement(event){
     element=event.target;
     parent=getFirstParent(element,"id","basketRow");
 
-    console.log(element);
     if(element.id=="collapseBtnProduct"){
         collapseDisplay(parent.collapseProductRow);
     }
@@ -64,18 +61,13 @@ function updateBasketRows(element) {
 
     if(arrBaskets){
 
-        console.log(arrBaskets);
-
         for(let i =0 ; i<arrBaskets.length; i++){
 
             if((createTime && arrBaskets[i].createTime===createTime)||!createTime){
-                console.log(arrBaskets[i])
                 filteredArrBasket.push(arrBaskets[i]);
             }
         }
-        console.log(arrBaskets);
         arrBaskets=filteredArrBasket;
-        console.log(arrBaskets)
         for (let i = 0; i < arrBaskets.length; i++) {
             createBasketRow(basketRowsContainer,arrBaskets[i]);
         }
@@ -228,14 +220,8 @@ function changeBasketStatus(element){
 
 function changeArrBaskets(element){
 
-    console.log(element);
-
     for (let i=0 ; i< arrBaskets.length ; i++){
         arrBaskets[i];
-        console.log(arrBaskets[i]);
-        console.log(element);
-        console.log(arrBaskets[i].bid==element.bid.toString());
-        console.log(arrBaskets[i].status!==element.status);
 
         if(arrBaskets[i].bid==element.bid.toString()  ){
             arrBaskets.splice(i,1);

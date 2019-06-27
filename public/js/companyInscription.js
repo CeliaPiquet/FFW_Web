@@ -17,7 +17,6 @@ function getEmptyCompanyAddressForm(domText){
 
     let parser=new DOMParser();
     emptyCompanyAddrForm=parser.parseFromString(domText,"text/html").getElementById("addressForm");
-    console.log(emptyCompanyAddrForm);
     getAllCompaniesByUser();
 
 }
@@ -71,7 +70,6 @@ function addEmptyCompanyAddrForm(containerCompanyForm,nbCompanyAddressFormToAdd)
         element.querySelector('button[id="removeCompany"]').addEventListener('click', removeCompany, false);
         element.querySelector('button[id="updateCompany"]').addEventListener('click', updateCompany, false);
 
-        console.log(element);
         element.company=new Object();
         element.company.address=new Object();
         containerCompanyForm.appendChild(element);
@@ -98,7 +96,6 @@ function getSirenList(siren) {
 
 function changeFilledCompanyAddrForm(){
 
-    console.log(companies);
     if(companies.length==0){
         return false;
     }
@@ -149,13 +146,8 @@ function removeCompany(event){
         element=element.parentNode;
     }
 
-    console.log(companyAddressArr);
-
-    // var companyIndex= companyAddressArr.indexOf(element.company);
-
     if(element.company && element.company.coid!=null){
         companies.splice(companies.indexOf(element.company),1);
-        console.log(element)
         element.company.status=0;
         updateCompanyAPI(element.company);
     }
@@ -166,13 +158,10 @@ function removeCompany(event){
 function updateCompany(event){
 
     var element=event.target;
-    console.log(element);
 
     while(element.id!="addressForm"&&element!=undefined){
         element=element.parentNode;
     }
-
-    var companyIndex= companies.indexOf(element.company);
 
     copyFormValuesToCompany(element);
 
@@ -187,7 +176,6 @@ function updateCompany(event){
 function updateCompanyAPI(company){
 
     var request = new XMLHttpRequest();
-    console.log(company);
 
     request.onreadystatechange = function () {
         if (request.readyState === 4) {
@@ -217,14 +205,12 @@ function createCompanyAPI(company){
     request.onreadystatechange = function () {
         if (request.readyState === 4 && request.status === 200) {
 
-            console.log(request.responseText);
             company=JSON.parse(request.responseText);
             companies.push(company);
             changeFilledCompanyAddrForm();
         }
     };
 
-    console.log(JSON.stringify(company));
     var url = websiteRoot+"/company/createOne";
     request.open('POST', url);
     request.send(JSON.stringify(company));

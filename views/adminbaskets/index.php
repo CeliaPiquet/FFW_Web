@@ -4,8 +4,8 @@
 
 <div class="container">
     <div class="col-lg-12 ">
-        <h1 class="text-center"> Manage baskets</h1>
-        <button class="btn col-md-2 " type="button" id="displayBasketModal" onclick="openLocalModal()">Create basket</button>
+        <h1 class="text-center"> <?php echo  _("Manage baskets");?></h1>
+        <button class="btn col-md-2 " type="button" id="displayBasketModal" onclick="openLocalModal()"><?php echo  _("Create basket");?></button>
     </div>
 
     <table class="table table-striped table-hover " id="basketsTable">
@@ -95,8 +95,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" onclick="updateUser()" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo  _("Cancel");?></button>
+                    <button type="button" onclick="updateUser()" class="btn btn-primary" data-dismiss="modal"><?php echo  _("Confirm");?></button>
                 </div>
             </div>
         </div>
@@ -160,8 +160,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" onclick="basketToAPI()" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo  _("Cancel");?></button>
+                    <button type="button" onclick="basketToAPI()" class="btn btn-primary" data-dismiss="modal"><?php echo  _("Confirm");?></button>
                 </div>
             </div>
         </div>

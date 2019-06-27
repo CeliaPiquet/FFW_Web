@@ -94,6 +94,7 @@ class View {
             if(isset($data))
             extract($data);
 
+
             $websiteRoot=Configuration::get("websiteRoot", "/");
             // Démarrage de la temporisation de sortie
             ob_start();

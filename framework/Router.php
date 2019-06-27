@@ -10,15 +10,16 @@ class Router {
     public function routeRequest() {
         try {
             // Fusion des paramètres GET et POST de la requête
-            $request = new Request(array_merge($_GET, $_POST));
+            $request = new Request($_GET, $_POST);
 
 
             $controller = $this->createController($request);
             $action = $this->createAction($request);
             $id=$request->existParameter('id')?$request->getParameterByName("id"):null;
+            $lang=$request->existParameter('lang')?$request->getParameterByName("lang"):"en_EN";
             $controller->setId($id);
-            var_dump($request);
-//            $controller->executeAction($action);
+            $controller->setLang($lang);
+            $controller->executeAction($action);
 
         }
         catch (Exception $e) {
@@ -26,12 +27,12 @@ class Router {
         }
     }
 
-    // Crée le contrôleur approprié en fonction de la requête reçue
+    // Crée le contrôleur approprié en_EN fonction de la requête reçue
     private function createController(Request $request) :Controller{
         $controller = "Home";  // Contrôleur par défaut
         if ($request->existParameter('controller')) {
             $controller = $request->getParameterByName('controller');
-            // Première lettre en majuscule
+            // Première lettre en_EN majuscule
 
             $controller = ucfirst(strtolower($controller));
         }
@@ -53,7 +54,7 @@ class Router {
             throw new Exception("File '$controllerFile' not found");
     }
 
-    // Détermine l'action à exécuter en fonction de la requête reçue
+    // Détermine l'action à exécuter en_EN fonction de la requête reçue
     private function createAction(Request $request) {
         $action = "index";  // Action par défaut
         if ($request->existParameter('action')) {

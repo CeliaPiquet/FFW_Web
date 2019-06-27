@@ -24,12 +24,12 @@
 
 </div>
 <div class="container">
-        <p> <?php echo _('Pick a adminlocals in order to see the stocks and a room to edit its content') ?> </p>
+        <p> <?php echo _('Pick a local in order to see the stocks and a room to edit its content') ?> </p>
         <div class="row">
             <div class="col-lg-3">
-                <button class="btn" id="createArticle" onclick="openArticleCreationModal();"><?php echo _("Create an article")?></button>
+                <button class="btn" id="createArticle" disabled onclick="openArticleCreationModal();"><?php echo _("Create an article")?></button>
             </div>
-            <div class="col-lg-9 " id="actionList"   style="display: none">
+            <div class="row" id="actionList"   style="display: none">
                 <div class="col-md-3">
                     <h5><?php echo _('Actions:') ?> </h5>
                 </div>

@@ -35,9 +35,6 @@ class AccountController extends Controller
         $this->addView($this->action,array('user'=>$this->user,'address'=>$address));
         $this->addView('script',array("gMapApiKey"=>Configuration::get("gMapApiKey")));
 
-//        var_dump($this->user);
-
-
         $this->loadTemplate(parent::getTemplateData(),$this->action);
 
     }
@@ -70,6 +67,7 @@ class AccountController extends Controller
 
     }
 
+
     public function volunteer() {
         $this->volunteerEmployee();
     }
@@ -93,68 +91,6 @@ class AccountController extends Controller
 
         $this->loadTemplate(parent::getTemplateData(),'volunteerEmployee');
     }
-//    public function addCompanies(){
-//
-//        session_start();
-//        $arrRequest=$this->getRequest()->getArrParameters();
-//        $addressManager=AddressService::getInstance();
-//        $companyManager=CompanyService::getInstance();
-//
-//        $i=0;
-//
-//        foreach($arrRequest["siret"] as $key=>$value){
-//
-//            $address=new Address(array(
-//                    "streetAddress"=>$arrRequest["streetAddress"][$i],
-//                    "cityName"=>$arrRequest["cityName"][$i],
-//                    "cityCode"=>$arrRequest["cityCode"][$i],
-//                    "country"=>$arrRequest["country"][$i])
-//            );
-//            $address=$addressManager->createOne($address);
-//            $company=new Company(array(
-//                    "siret"=>$arrRequest["siret"][$i],
-//                    "name"=>$arrRequest["name"][$i],
-//                    "addressId"=>$address->getAdid(),
-//                    "userId"=>7)
-//            );
-//
-////            var_dump($address);
-////            var_dump($company);
-//            $company=$companyManager->createOne($company);
-//        }
-//    }
-
-//    public function getAllByUser(){
-//
-//
-//        header('Content-Type: application/json');
-//
-//
-//        if(!isset($_SESSION)||empty($_SESSION)){
-//            session_start();
-//        }
-//        if(!isset($_SESSION['user'])||empty($_SESSION['user'])){
-//            http_response_code(400);
-//        }
-//
-//
-//        $companyManager=CompanyService::getInstance();
-//        $siren=$this->getRequest()->getParameterByName("id");
-//
-//
-//        $companyList=$companyManager->getAllSiretBySiren($siren);
-//        $companyList=json_encode($companyList);
-//
-//        if(isset($companyList)&&!empty($companyList)){
-//            http_response_code(200);
-//            echo $companyList;
-//
-//        }
-//        else{
-//            http_response_code(400);
-//        }
-//
-//    }
 
 
 }

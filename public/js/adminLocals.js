@@ -53,8 +53,6 @@ function changeQuantityOrder(){
 
     let arrowOrder=document.getElementById("arrowOrder");
 
-    console.log(arrLocals);
-
     if(arrowOrder.classList.contains("fa-arrow-up")){
         arrowOrder.classList.remove("fa-arrow-up");
         arrowOrder.classList.add("fa-arrow-down");
@@ -168,7 +166,6 @@ function prepareUpdateAPI(element){
 
                     element.parentObject=convertAddressObjectToDOM(element.parentObject);
                     let parentDOM=getFirstParent(element,"id","collapseAddress");
-                    console.log(element);
                     element.parentObject=matchDOMAndObject("value","#",parentDOM,element.parentObject,true);
                     exchangeToAPI(ffwApiUrl+"/addresses",convertAddressObjectToAPI(element.parentObject),"PUT",true);
                 }
@@ -207,7 +204,6 @@ function updateLocalRows() {
 
     for (let i = 0; i < arrLocals.length; i++) {
 
-        console.log(arrLocals[i]);
         createLocalRow(localRowsContainer,arrLocals[i]);
     }
 }
@@ -258,7 +254,6 @@ function createLocalRow(container,local){
     container.append(newCollapsedRoomRow);
 
     newLocalRow.local=local;
-    console.log(newLocalRow);
     newLocalRow.rooms=local.rooms;
     newLocalRow.roomRowsContainer=roomRowsContainer;
     newLocalRow.collapseAddress=newCollapsedAddressRow.querySelector("#collapseAddress");
@@ -322,10 +317,8 @@ function confirmRow(event){
     }
     else if((tmpElement=getFirstParent(element,"id","localRow")).tagName!=="BODY"){
 
-        console.log(tmpElement);
         tmpElement.local.address=convertAddressObjectToDOM(tmpElement.local.address);
         tmpElement.local.address=matchDOMAndObject("value","#",tmpElement.collapseAddress,tmpElement.local.address,true);
-        console.log(tmpElement);
         args={
             url:ffwApiUrl+"/locals",
             local:matchDOMAndObject("value","#",tmpElement,tmpElement.local,true),
@@ -337,7 +330,6 @@ function confirmRow(event){
 }
 
 function createLocalToAPI(address,args){
-    console.log(args.local);
 
     if(address.adid){
         args.local.adid=address.adid;
@@ -379,27 +371,22 @@ function addRoom(event){
     }
     let newRoom=getEmptyRoom();
     newRoom.loid=element.local.loid;
-    console.log(element.rooms);
     element.rooms.push(newRoom);
     createRoomRow(element.roomRowsContainer,newRoom,element);
 }
 
 function convertLocalObject(local){
 
-    console.log("QUANTITY FIRST");
     let quantity=0;
     if(local.rooms){
         for(let i=0 ; i<local.rooms.length;i++){
             if(local.rooms[i]){
-                console.log(local.rooms[i]);
                 quantity+= parseInt(local.rooms[i].totalQuantity);
             }
         }
     }
 
-    console.log(quantity);
     local["totalQuantity"]=""+quantity+"";
-    console.log("QUANTITY FIRST");
 
     return local;
 }

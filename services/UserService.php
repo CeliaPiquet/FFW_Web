@@ -22,7 +22,6 @@ class UserService {
 
         $apiUrl = Configuration::get("ffwApiUrl", "/");
 
-        var_dump($user);
         $userGet=[
             "email"=>$user->getEmail(),
             "password"=>$user->getPassword(),
@@ -55,10 +54,7 @@ class UserService {
         $user->setRights(2);
         $jsonUser=json_encode($user);
 
-        var_dump($jsonUser);
         $response=$curl->curlPost($url,$jsonUser, array());
-
-        var_dump($response);
 
         if($response["httpCode"]>=400){
             return null;
@@ -72,8 +68,33 @@ class UserService {
         return null;
     }
 
+
     static public  function isRightSet($byteRight, $pos) {
-        return ($byteRight & (1 << $pos)) != 0;
+        return ($byteRight & (1 << $pos)) ;
+//        return ($byteRight  (1 >> $pos));
+    }
+
+    static public function fillRights($binRights){
+
+    $arrTextRights=[
+        "deleted"=>false,
+        "just created"=>false,
+        "volunteer"=>false,
+        "adherent"=>false,
+        "company"=>false,
+        "stock collect and vehicles admin"=>false,
+        "subscription admin"=>false,
+        "events and articles admin"=>false,
+        "volunteers and employees admin"=>false,
+        "super admin"=>false];
+
+    $i=0;
+    foreach($arrTextRights as $key=>$textRight){
+        $arrTextRights[$key]=self::isRightSet($binRights,$i);
+        $i++;
+    }
+
+    return $arrTextRights;
     }
 
 }

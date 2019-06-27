@@ -1,7 +1,7 @@
 
 //Fonction parcourant les enfants d'un noeud du DOM pour y affecter des valeurs présentes dans un objet.
-//Les enfants du noeud sont sélectionnés en combinant un selecteur CSS avec une des clés de l'objet passé en paramètre de la fonction
-function matchDOMAndObject(attribute, selector, element, object,order=false,limit=null,deepness=0,objectName=null){
+//Les enfants du noeud sont sélectionnés en_EN combinant un selecteur CSS avec une des clés de l'objet passé en_EN paramètre de la fonction
+function matchDOMAndObject(attribute, selector, element, object,order=false,limit=null,deepness=0,objectName=null,parentName=null){
 
     if(limit!=null && deepness==limit){
         return object;
@@ -15,7 +15,7 @@ function matchDOMAndObject(attribute, selector, element, object,order=false,limi
                 matchDOMAndObject(attribute, selector, element, object[key], order,limit,deepness,key);
             }
 
-            let childElement=getElementBySelectorAndObject(element,selector,key,objectName);
+            let childElement=getElementBySelectorAndObject(element,selector,key,objectName,parentName);
 
 
             if(childElement!=null){
@@ -31,11 +31,11 @@ function matchDOMAndObject(attribute, selector, element, object,order=false,limi
         if(order==false) {
             if (object[key] != null && typeof object[key] === 'object') {
                 deepness++;
-                matchDOMAndObject(attribute, selector, element, object[key], order,limit,deepness,key);
+                matchDOMAndObject(attribute, selector, element, object[key], order,limit,deepness,key,objectName);
             }
             if (isNaN(key)) {
 
-                let childElement=getElementBySelectorAndObject(element,selector,key,objectName);
+                let childElement=getElementBySelectorAndObject(element,selector,key,objectName,parentName);
 
                 if (childElement && object[key] !== null && object[key] !== "") {
 
@@ -56,6 +56,7 @@ function matchDOMAndObject(attribute, selector, element, object,order=false,limi
     return object;
 }
 
+//Filtre un objet en le comparant avec un autre objet, utilisée principalement pour la recherche par filtre
 function filterObjectOnObject(objToFilter,filterObj){
 
 
@@ -83,6 +84,7 @@ function filterObjectOnObject(objToFilter,filterObj){
     return true;
 }
 
+//Fonction récursive parcourant un objet pour controler si toutes ses propriété sont vides
 function isObjectEmpty(controlledObj){
 
     for(let key in controlledObj){
@@ -100,10 +102,8 @@ function isObjectEmpty(controlledObj){
     return true;
 }
 
-
+//Copie et remplace un objet par un autre;
 function copyObjectProperty(srcObj,dstObj){
-
-    //TODO control copy and rewrite;
 
     if(srcObj && dstObj){
         for(let key in srcObj){
@@ -121,6 +121,7 @@ function copyObjectProperty(srcObj,dstObj){
     }
 }
 
+//Fait une copie en profondeur d'un objet et place toutes ses propriétés à null afin de n'en récupérer que la structure
 function getEmptyObj(obj){
 
     let emptyObj=JSON.parse(JSON.stringify(obj));
@@ -130,14 +131,19 @@ function getEmptyObj(obj){
     return emptyObj;
 }
 
-function getElementBySelectorAndObject(element,selector,objectKey,objectName=null){
+//Recherche dans le DOM un noeud, la recherche se base sur un sélecteur CSS + une valeur textuelle + un nom d'objet.
+//Cette fonction permet entre autre lors d'un parcours d'un objet pour alimenter le dom dxe différencier des propriétés ayant le même nom mais dans deux objets différents
+function getElementBySelectorAndObject(element,selector,objectKey,objectName=null,parentName=null){
 
     let domElement=null;
 
 
     if(isNaN(objectKey)){
         if(objectName ){
-            domElement = element.querySelector(selector+objectKey +"[object='"+objectName+"']");
+            domElement = element.querySelector(selector+objectKey +"[object='"+objectName+"']" + "[parent='" +parentName +"']");
+            if(!domElement){
+                domElement = element.querySelector(selector+objectKey +"[object='"+objectName+"']");
+            }
             if(domElement)
                 domElement.objectSet=true;
         }
@@ -154,23 +160,8 @@ function getElementBySelectorAndObject(element,selector,objectKey,objectName=nul
     return domElement;
 
 }
-//
-// function existObjInObjByKeyValue(searchedKey,searchedValue,object){
-//
-//     for(let key in object){
-//
-//         if(object[searchedKey] != undefined && object[searchedKey]==searchedValue ){
-//             return key;
-//         }
-//         else if(object[key]!=null && object[key]!=undefined && typeof object[key] === 'object'){
-//             if(existObjInObjByKeyValue(searchedKey,searchedValue,object[key])){
-//                 return key;
-//             }
-//         }
-//     }
-//     return null;
-// }
 
+//
 function modalToggle(modalId,params=null){
 
     params=params?params:{backdrop:false};
@@ -255,7 +246,8 @@ function exchangeToAPI(url, element, method, func=null, args=null){
                 args.status = request.status;
             }
             if(request.status==200 || request.status==201) {
-                newElement = JSON.parse(request.responseText);
+
+                newElement = request.responseText?JSON.parse(request.responseText):null;
 
                 if(Array.isArray(newElement)){
                     if(Array.isArray(element)){
@@ -413,7 +405,6 @@ function getServiceDateTime(srcObj=null){
     };
 
     if(srcObj){
-        console.log(srcObj);
         copyObjectProperty(srcObj,serviceDateTime);
     }
     return serviceDateTime;
@@ -517,5 +508,13 @@ function createGenericRow(args){
     }
 
     matchDOMAndObject('innerHTML', '#', newGenericRow, args.element,false,1);
+
+}
+
+function changeLang(element){
+
+    let lang=element.id;
+
+    exchangeToAPI(websiteRoot+'/home/changeLang/'+lang,lang,"GET",function(){document.location.href = document.location},null);
 
 }

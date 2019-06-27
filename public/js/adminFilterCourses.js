@@ -89,8 +89,6 @@ function findUsersByFilter(element){
 
     matchDOMAndObject("value","#",parent,filterObject,true);
 
-    console.log(filterObject);
-
     args={
         query:{
             offset:0,
@@ -134,8 +132,6 @@ function findDriversByFilter(element){
 
     matchDOMAndObject("value","#",parent,filterObject,true);
 
-    console.log(filterObject);
-
     args={
         query:{
             offset:0,
@@ -176,11 +172,7 @@ function findExternalsByFilter(element){
     let parentDomNode=getFirstParent(element,"id","collapsedBasketDestRow").parentDomNode;
     let arrExternals=[];
 
-    console.log(filterObject);
-
     matchDOMAndObject("value","#",parent,filterObject,true);
-
-    console.log(filterObject);
 
     args={
         query:{
@@ -257,8 +249,6 @@ function findLocalsByFilter(element){
     let parentDomNode=document.getElementById("courseModal");
     let arrLocals=[];
 
-
-    console.log(container);
     matchDOMAndObject("value","#",parent,filterObject,true);
 
     let args={
@@ -323,21 +313,14 @@ function findVehiclesByFilter(element){
 
 function filterBaskets(element,args){
 
-    console.log(element);
-    console.log(args);
-
     let arrBaskets=element;
     let course=args.course;
     let cityName=args.cityName;
     let filteredBasketArr=[];
 
-    console.log(cityName);
-
     for(let i=0 ; i<arrBaskets.length;i++){
         let basketCity= arrBaskets[i].srcAddress&&arrBaskets[i].srcAddress.cityName?arrBaskets[i].srcAddress.cityName.toLowerCase():null;
         if((cityName&&basketCity&&basketCity.includes(cityName.toLowerCase()))||cityName===""){
-            console.log(arrBaskets[i]);
-            console.log(course.localId);
             if(args.role==="export"&&arrBaskets[i].local&&arrBaskets[i].local.loid===course.localId){
 
                 filteredBasketArr.push(arrBaskets[i]);
@@ -359,16 +342,12 @@ function filterVehicles(element,args){
     let course=args.course;
     let filteredArrVehicles=[];
 
-    console.log(course);
-    console.log(arrVehicles);
-
     for(let i=0 ; i<arrVehicles.length ;i++){
         if(arrVehicles[i].services){
             let availabilityFlag=1;
             for(let j=0; j<arrVehicles[i].services.length; j++){
                 let vServiceStartDateTime=getUnifiedDateTime(arrVehicles[i].services[j].serviceTime);
                 let vServiceEndDateTime=getUnifiedDateTime(arrVehicles[i].services[j].serviceEnd);
-                console.log(arrVehicles[i].vid);
 
                 if(vServiceStartDateTime.getTime()<course.calculateEndDate.getTime()&&vServiceEndDateTime.getTime()>course.calculateStartDate.getTime()&&arrVehicles[i].vid!==course.vehicleId){
                     availabilityFlag=0;
@@ -390,8 +369,6 @@ function filterDrivers(element,args){
     let arrUsers=element;
     let course=args.course;
     let filteredArrUsers=[];
-
-    console.log(arrUsers);
 
     for(let i=0; i<arrUsers.length;i++){
 

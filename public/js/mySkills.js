@@ -109,7 +109,6 @@ function skillAPI(method="POST"){
     request.onreadystatechange=function(){
 
         if(request.readyState==4){
-            console.log(request.status);
             if(request.status==200){
                 let duplicateFlag=false;
                 for(let i=0 ; i<userSkills.length;i++){
@@ -138,15 +137,12 @@ function skillAPI(method="POST"){
 
 function updateMySkillsDisplay(){
 
-    console.log(userSkills);
     if(userSkills==null){
         return null;
     }
     let skillContainer=document.getElementById("skillsUserContainer");
     let clonedUserSkill=emptyUserSkill();
     let clonedRemoveButtonSkill=removeButtonSkill();
-
-    console.log(clonedRemoveButtonSkill);
 
     skillContainer.innerHTML="";
 

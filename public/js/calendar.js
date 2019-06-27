@@ -15,13 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
         selectable: true,
         eventLimit: true, // allow "more" link when too many events
         eventTimeFormat: { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' },
-
-        dateClick: function(arg) {
-            console.log('dateClick', calendar.formatIso(arg.date));
-        },
-        select: function(arg) {
-            console.log('select', calendar.formatIso(arg.start), calendar.formatIso(arg.end));
-        }
     });
 
     calendar.render();

@@ -1,8 +1,8 @@
 <td>
-    <input type="text" name="courseInput" class="form-control to-update" onkeyup="controlCourseToAPIUpdate(this)" id="name" object="service" placeholder="Name">
+    <input type="text" name="courseInput" class="form-control to-update" onkeyup="controlCourseToAPIUpdate(this)" id="name" object="service" placeholder="<?php echo  _("Name");?>">
 </td>
 <td>
-    <input type="text" name="courseInput" class="form-control to-update" onkeyup="controlCourseToAPIUpdate(this)" id="description" object="service" placeholder="Description">
+    <input type="text" name="courseInput" class="form-control to-update" onkeyup="controlCourseToAPIUpdate(this)" id="description" object="service" placeholder="<?php echo  _("Description");?>">
 </td>
 <td>
     <select type="text" name="courseInput" class="form-control" object="service" onchange="controlCourseToAPIUpdate(this)" id="status">
@@ -37,5 +37,8 @@
     <button class="btn  mx-auto"  name="courseInput" id="collapseBaskets" type="button"  onclick="collapseBasketRow(this);" ><?php echo _("Baskets");?></button>
 </td>
 <td>
-    <button class="btn  mx-auto dateLock" name="courseInput"  id="lastname" object="user" type="button" onclick="openDriversModal(this);" disabled ><?php echo _("Select driver");?></button>
+    <button class="btn  mx-auto dateLock" name="courseInput"  id="lastname" object="user" type="button" parent="service" onclick="openDriversModal(this);" disabled ><?php echo _("Select driver");?></button>
+</td>
+<td>
+    <button class="btn  mx-auto dateLock" name="courseInput"  onclick="displayCoursePDF(this);" disabled ><?php echo _("Display course PDF");?></button>
 </td>

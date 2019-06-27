@@ -508,7 +508,7 @@ Docs & License: https://fullcalendar.io/
         },
         weekLabel: "Sem.",
         allDayHtml: "Toute la<br/>journée",
-        eventLimitText: "en plus",
+        eventLimitText: "en_EN plus",
         noEventsMessage: "Aucun événement à afficher"
     };
 
@@ -530,7 +530,7 @@ Docs & License: https://fullcalendar.io/
         },
         weekLabel: "Sm",
         allDayHtml: "Toute la<br/>journée",
-        eventLimitText: "en plus",
+        eventLimitText: "en_EN plus",
         noEventsMessage: "Aucun événement à afficher"
     };
 
@@ -552,7 +552,7 @@ Docs & License: https://fullcalendar.io/
         },
         weekLabel: "Sem.",
         allDayHtml: "Toute la<br/>journée",
-        eventLimitText: "en plus",
+        eventLimitText: "en_EN plus",
         noEventsMessage: "Aucun événement à afficher"
     };
 

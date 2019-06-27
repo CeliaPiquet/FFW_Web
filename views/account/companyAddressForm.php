@@ -9,11 +9,11 @@
             </div>
         </div>
         <div class="form-group row col-md-11 mx-auto">
-            <label for="siret" > Name </label>
+            <label for="name" ><?php echo  _("Name");?></label>
             <input  type="text" id="name" class="form-control mx-auto" name="name" required>
         </div>
         <div class="form-group row col-md-11 mx-auto">
-            <label for="siret"> SIRET </label>
+            <label for="siret"><?php echo  _("SIRET");?></label>
             <input  type="text" id="siret" class="form-control mx-auto" name="siret" required>
         </div>
         <div class="form-group row col-md-11 mx-auto">
@@ -22,40 +22,40 @@
         </div>
         <div class="form-group row col-md-11 mx-auto">
             <div class="col-md-3 mx-auto">
-                <label for="street_number">Numéro</label>
-                <input type="text" class="form-control mx-auto" id="street_number" name="houseNumber" placeholder="Numéro" required disabled>
+                <label for="street_number"><?php echo  _("Number");?></label>
+                <input type="text" class="form-control mx-auto" id="street_number" name="houseNumber" placeholder="<?php echo  _("Number");?>" required disabled>
             </div>
             <div class="col-md-9 mx-auto">
-                <label for="route" >Addresse</label>
-                <input type="text" class="form-control mx-auto" id="route" name="streetAddress" placeholder="Adresse" required disabled>
+                <label for="route" ><?php echo  _("Address");?></label>
+                <input type="text" class="form-control mx-auto" id="route" name="streetAddress" placeholder="<?php echo  _("Address");?>" required disabled>
             </div>
         </div>
         <div class="form-group row col-md-11 mx-auto">
             <div class="form-group col-md-7">
-                <label for="complement">Complement</label>
-                <input type="text" id="complement" class="form-control mx-auto" name="complement" placeholder="Complement" required>
+                <label for="complement"><?php echo  _("Complement");?></label>
+                <input type="text" id="complement" class="form-control mx-auto" name="complement" placeholder="<?php echo  _("Complement");?>" required>
             </div>
             <div class="form-group col-md-5">
-                <label for="complement">Phone</label>
-                <input type="text" id="tel" class="form-control mx-auto" name="tel" placeholder="Phone" required >
+                <label for="complement"><?php echo  _("Phone");?></label>
+                <input type="text" id="tel" class="form-control mx-auto" name="tel" placeholder="<?php echo  _("Phone");?>" required >
             </div>
         </div>
         <div class="form-group row col-md-11  mx-auto">
             <div class="form-group col-md-4">
-                <label for="locality" >Ville</label>
-                <input type="text" class="form-control mx-auto" id="locality" name="cityName" required disabled>
+                <label for="locality" ><?php echo  _("City");?></label>
+                <input type="text" class="form-control mx-auto" id="locality" name="cityName"  placeholder="<?php echo  _("City");?>" required disabled>
             </div>
             <div class="form-group col-md-3">
-                <label for="postal_code" >Code postal</label>
-                <input type="text" class="form-control mx-auto" name="cityCode" id="postal_code" required disabled>
+                <label for="postal_code" ><?php echo  _("Zip code");?></label>
+                <input type="text" class="form-control mx-auto" placeholder="<?php echo  _("Zip code");?>" name="cityCode" id="postal_code" required disabled>
             </div>
             <div class="form-group col-md-3 ">
-                <label for="country">Pays</label>
+                <label for="country"><?php echo  _("Country");?></label>
                 <select id="country" name="country" class="form-control mx-auto" required disabled>
-                    <option value="france" selected>France</option>
-                    <option value="italie">Italie</option>
-                    <option value="portugal">Portugal</option>
-                    <option value="irlande">Irlande</option>
+                    <option value="france" selected><?php echo  _("France");?></option>
+                    <option value="italie"><?php echo  _("Italy");?></option>
+                    <option value="portugal"><?php echo  _("Portugal");?></option>
+                    <option value="irlande"><?php echo  _("Ireland");?></option>
                 </select>
             </div>
             <div class="col-2">

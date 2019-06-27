@@ -15,7 +15,6 @@ function initAutocomplete(){
     inputs=document.getElementsByName("autocomplete");
 
     for(var i=0 ; i< inputs.length ; i++){
-
         arrAutocomplete[i]=new google.maps.places.Autocomplete( inputs[i], {types: ['geocode']});
         arrAutocomplete[i].addListener('place_changed', fillInAddress);
         arrAutocomplete[i].setFields(['address_component']);
@@ -33,10 +32,8 @@ function fillInAddress() {
 
     element=getFirstParent(element,"id","addressForm");
     for (var component in componentForm) {
-        console.log(componentForm[component]);
         element.querySelector("#"+component).value = '';
         element.querySelector("#"+component).disabled=false;
-        console.log(element.querySelector("#"+component));
     }
 
     // Get each component of the address from the place details,

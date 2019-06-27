@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-md-8 mx-auto">
-        <h1 class="text-center"> My calendar </h1>
+        <h1 class="text-center"> <?php echo  _("My calendar");?> </h1>
         <div id="calendar" class="card">
 
         </div>
@@ -10,11 +10,11 @@
 
     </div>
     <div class="col-md-4 mx-auto">
-        <h1 class="text-center"> Skills </h1>
+        <h1 class="text-center"> <?php echo  _("Skills");?> </h1>
         <div class="row py-2">
             <div class="col-md-12">
                 <div class="row">
-                    <h2 class="text-center col-md-12">Ask for new skill</h2>
+                    <h2 class="text-center col-md-12"><?php echo  _("Ask for new skill");?></h2>
                 </div>
                 <div class="row ">
                     <select id="skillsSelect"  class="text-center col-md-9" >
@@ -25,7 +25,7 @@
                         }
                         ?>
                     </select>
-                    <a class="btn col-md-2 " id="addSkillBtn" onclick="addSkill()" disabled>Add</a>
+                    <a class="btn col-md-2 " id="addSkillBtn" onclick="addSkill()" disabled><?php echo  _("Add");?></a>
                 </div>
 
             </div>
@@ -33,7 +33,7 @@
         <div class="row py-2">
             <div class="col-md-11 mx-auto">
                 <div class="row">
-                    <h2 class="text-center col-md-12">My skills</h2>
+                    <h2 class="text-center col-md-12"><?php echo  _("My skills");?></h2>
                 </div>
                 <div class="row ">
                     <div class="list-group col-md-12" id="skillsUserContainer">
@@ -57,11 +57,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>You will receive confirmation message to this email : <a id="email"></a></p>
+                    <p><?php echo  _("You will receive confirmation message to this email : ");?><a id="email"></a></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" onclick="skillAPI()" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo  _("Cancel");?></button>
+                    <button type="button" onclick="skillAPI()" class="btn btn-primary" data-dismiss="modal"><?php echo  _("Confirm");?></button>
                 </div>
             </div>
         </div>

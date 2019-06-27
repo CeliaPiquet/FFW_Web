@@ -54,7 +54,6 @@ function createCourseRow(args){
 
     newCourseRow.course=course;
 
-
     matchDOMAndObject('value', '#', newCourseRow, course,false,1,0,"service");
     matchDOMAndObject('innerHTML', '#', newCourseRow, course,false,1,0,"service");
 
@@ -200,7 +199,6 @@ function changeServiceTime(element){
 
     matchDOMAndObject("value","#",parent,tmpCourse,true,1,0,"service");
     tmpCourse.duration=hmsToSeconds(tmpCourse.durationTime);
-    console.log(tmpCourse.duration);
 
     if(!isNaN(tmpCourse.duration)){
         if(element.id==="serviceStartTime"||element.id==="serviceStartDate"||element.id==="durationTime"){
@@ -285,7 +283,6 @@ function createDriversRow(args){
     driver.name=driver.lastname;
     newCollapsedAddressRow[args.objectName]=args.element;
 
-    console.log(driverRow.parentDomNode.course);
     if(driverRow.parentDomNode.course&&driver.uid===driverRow.parentDomNode.course.userId){
         affectBtn.innerHTML="Affected to course";
     }
@@ -425,15 +422,9 @@ function openDriversModal(element){
 function closeVehicleDriverModal(element){
 
     let modal=document.getElementById("vehicleDriverModal");
-    console.log(modal.objectName);
-    console.log(modal.course);
     let object=modal.course[modal.objectName];
 
-    console.log(modal.course);
-
-
     if(object){
-        console.log(object);
         modal.modalBtn.innerHTML=object.name;
     }
     else{
@@ -468,6 +459,7 @@ function controlCourseToAPIUpdate(element, course=null){
         statusFlag=tmpCourse.status===course.status;
 
         if(!controlCourse(tmpCourse)){
+            console.log("FAUX");
             matchDOMAndObject("value","#",courseRow,course,false,1,0,"service");
             return false;
         }
@@ -561,6 +553,7 @@ function updateBasketByCourse(course){
 
 function controlCourse(course){
 
+    console.log(course);
     if(course.status==="validated"||course.status==="in progress"||course.status==="finished"){
         let endDateTime=getUnifiedDateTime(null,course.serviceEndDate,course.serviceEndTime);
         let startDateTime=getUnifiedDateTime(null,course.serviceStartDate,course.serviceStartTime);
@@ -576,8 +569,17 @@ function controlCourse(course){
             return false;
         }
         if(!course.user||!course.vehicle){
+            console.log("FAUX FAUX");
             return false;
         }
     }
     return true;
+}
+
+function displayCoursePDF(element){
+
+    let course=getFirstParent(element,"id","courseRow").course;
+    window.open(
+        ffwApiUrl+"/courses/"+course.serid+"/reporting",
+        "_blank");
 }

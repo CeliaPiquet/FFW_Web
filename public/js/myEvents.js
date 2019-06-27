@@ -25,10 +25,8 @@ function updateCalendarEvents(element,args){
     let calendar=document.getElementById("calendar").calendar;
 
     let arrEvents=[];
-    console.log(args);
 
     for(let key in element){
-        console.log(element[key]);
         arrEvents.push({
             title : element[key].service.name,
             start:element[key].start,
@@ -40,7 +38,6 @@ function updateCalendarEvents(element,args){
     calendar.addEventSource(arrEvents);
 
     calendar.eventRender=function(info){
-        console.log(info);
     }
 
 }

@@ -54,7 +54,6 @@ class CompanyController extends Controller
 
         $address=$addressManager->gMapGeolocate($address);
         $address=$addressManager->createOne($address);
-        var_dump($address);
 
         $company->setAddressId($address->getAdid());
         $company=$companyManager->createOne($company);
