@@ -114,7 +114,7 @@ abstract class Controller {
 
     public function getTemplateData(){
 
-        if(!isset($_SESSION) || empty($_SESSION)){
+        if(!session_id()){
             session_start();
         }
         if(isset($_SERVER['REQUEST_URI'])){
@@ -123,6 +123,7 @@ abstract class Controller {
 
         $isConnected=false;
         $isAdmin=false;
+        $arrRights=[];
 
         if(isset($_SESSION['user']) && !empty($_SESSION['user'])){
             $user=unserialize($_SESSION['user']);
