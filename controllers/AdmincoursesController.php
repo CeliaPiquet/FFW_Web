@@ -9,9 +9,10 @@ class AdmincoursesController extends Controller
 
     private $arrRouteState;
     private $arrBasketRole;
+    private $arrBasketStatus;
 
     public function __construct(){
-        $this->addView('script',null);
+        $this->addView('script',array("gMapApiKey"=>Configuration::get("gMapApiKey")));
         $this->arrRouteState=array(
             "deleted",
             "created",
@@ -23,6 +24,10 @@ class AdmincoursesController extends Controller
             "import",
             "export"
         );
+        $this->arrBasketStatus=array(
+            "validated",
+            "canceled"
+        );
     }
 
     public function index(){
@@ -30,7 +35,7 @@ class AdmincoursesController extends Controller
         $vehiclesManager=VehicleService::getInstance();
         $arrVehicles=$vehiclesManager->getAll();
 
-        $this->addView($this->action, ["arrRouteState"=>$this->arrRouteState,"arrVehicles"=>$arrVehicles,"arrBasketRole"=>$this->arrBasketRole]);
+        $this->addView($this->action, ["arrRouteState"=>$this->arrRouteState,"arrVehicles"=>$arrVehicles,"arrBasketRole"=>$this->arrBasketRole,"arrBasketStatus"=>$this->arrBasketStatus]);
 
         $this->loadTemplate(parent::getTemplateData(),$this->action);
 
@@ -69,6 +74,14 @@ class AdmincoursesController extends Controller
         $this->loadView($this->action);
     }
 
+    public function vehiclesTable(){
+        $this->loadView($this->action);
+    }
+    public function vehicleRow(){
+        $this->loadView($this->action);
+    }
+
+
     public function localRow(){
         $this->loadView($this->action);
     }
@@ -76,4 +89,7 @@ class AdmincoursesController extends Controller
         $this->loadView($this->action);
     }
 
+    public function collapsedBasketRow(){
+        $this->loadView($this->action);
+    }
 }

@@ -19,19 +19,19 @@ class ConnectionController extends Controller {
 
         $arrUser=$this->getRequest()->getArrParameters();
         $user=new User($arrUser);
+
         $userManager=UserService::getInstance();
         $user=$userManager->authentication($user);
 
         $websiteRoot = Configuration::get("websiteRoot", "/");
 
-//        var_dump($user);
         if(isset($user) && !empty($user)){
             session_start();
             $_SESSION['user']=serialize($user);
             header("Location:$websiteRoot/home");
         }
         else{
-            header("Location:$websiteRoot/home/noConnection");
+//            header("Location:$websiteRoot/connection/error");
         }
 
     }
@@ -39,8 +39,16 @@ class ConnectionController extends Controller {
 
         $websiteRoot = Configuration::get("websiteRoot", "/");
         session_start();
-        session_destroy();
+        unset($_SESSION['user']);
         header("Location:$websiteRoot");
+
+    }
+
+    public function error(){
+
+        $this->addView("index",null);
+        $this->addView("errorAlert", null);
+        $this->loadTemplate(parent::getTemplateData(),$this->action);
 
     }
 }

@@ -24,7 +24,9 @@ class StockController extends Controller
             $this->addView("errorAlert", null);
         }
 
-        $this->addView($this->action, null);
+        $arrPeremptionState=["good","average","bad"];
+
+        $this->addView($this->action, array("arrPeremptionState"=>$arrPeremptionState));
 
         $this->loadTemplate(parent::getTemplateData(), $this->action);
     }

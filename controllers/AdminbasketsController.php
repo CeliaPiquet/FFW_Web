@@ -15,7 +15,7 @@ class AdminbasketsController extends Controller
 
     public function __construct(){
 
-        $this->arrBasketStatus=["pending","validated","canceled","transit","delivered"];
+        $this->arrBasketStatus=["pending","validated","affected","canceled","transit","delivered","refused"];
         $this->arrBasketRole=["import","export"];
         $this->arrProductConditions=["good","average","bad"];
     }

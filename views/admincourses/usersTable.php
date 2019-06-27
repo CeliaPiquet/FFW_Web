@@ -7,16 +7,16 @@
 </tr>
 <tr >
     <td>
-        <input type="text" name="filterInput" class="form-control" onkeyup="findUsersByFilter(this)" id="mailInput" placeholder="<?php echo _("Mail");?>">
+        <input type="text" name="filterInput" class="form-control" id="mailInput" placeholder="<?php echo _("Mail");?>">
     </td>
     <td>
-        <input type="text" name="filterInput" class="form-control" onkeyup="findUsersByFilter(this)" id="lastnameInput" placeholder="<?php echo _("Last name"); ?>">
+        <input type="text" name="filterInput" class="form-control" id="lastnameInput" placeholder="<?php echo _("Last name"); ?>">
     </td>
     <td>
-        <input type="text" name="filterInput" class="form-control" onkeyup="findUsersByFilter(this)" id="firstnameInput" placeholder="<?php echo _("First name"); ?>">
+        <input type="text" name="filterInput" class="form-control" id="firstnameInput" placeholder="<?php echo _("First name"); ?>">
     </td>
     <td>
-        <input type="text" name="filterInput" class="form-control" onkeyup="findUsersByFilter(this)" id="cityInput" placeholder="<?php echo _("City"); ?>">
+        <input type="text" name="filterInput" class="form-control" id="cityInput" placeholder="<?php echo _("City"); ?>">
     </td>
 </tr>
 </thead>

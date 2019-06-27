@@ -38,7 +38,6 @@ function  updateProductRows(arrProducts,parent){
     let productRowsContainer = parent.querySelector("#productRowsContainer");
     productRowsContainer.innerHTML = "";
 
-    console.log(arrProducts);
     if(arrProducts){
         for (let i = 0; i < arrProducts.length; i++) {
 
@@ -65,7 +64,6 @@ function checkAllProduct(element){
     arrCheckProduct=productTable.querySelectorAll("[name='checkProduct']");
     checkAllVal=productTable.querySelector("#checkProductInput").checked;
 
-    console.log(checkAllVal);
     for(let i =  0 ; i<arrCheckProduct.length ; i++){
         arrCheckProduct[i].checked=checkAllVal;
         getFirstParent(arrCheckProduct[i],"id","productRow").product.checkProduct=checkAllVal;
@@ -77,14 +75,12 @@ function setCheckProductObj(event){
     let element=event.target;
     let product=getFirstParent(element,"id","productRow").product;
     product.checkProduct=element.checked;
-    console.log(product);
 }
 
 function getAllBasketByID(element,args){
 
     let key=element.keys();
     args.id=null;
-    console.log(args);
     do{
 
         keyVal=key.next().value;
@@ -100,10 +96,7 @@ function getAllBasketByID(element,args){
         exchangeToAPI(ffwApiUrl+"/baskets",element,"GET",getAllBasketByID,args);
     }
     else{
-        console.log( args.products);
-        console.log(element);
         let modal=document.getElementById("createBasketModal");
-        console.log(args);
         modal.querySelector("#productsTable").products= args.products.filter(filterProduct,element);
     }
 }
@@ -113,7 +106,6 @@ function filterProduct(product){
 
     let basket=this.get(product.basketId);
     basket = basket && basket.value ? basket.value : null;
-    console.log(product);
     if(product.basketId===null  || (basket && basket.status ==="canceled")){
         return true;
     }
@@ -124,44 +116,25 @@ function filterProduct(product){
 function sortProductByFilter(element){
 
 
-    parent=getFirstParent(element,"id","productsTable");
-    console.log(parent);
+    let parent=getFirstParent(element,"id","productsTable");
     let arrProducts=parent.products;
-    let arrFilters=parent.querySelectorAll("[name='sortProductInput']");
+    let filterRow=parent.querySelector("#productsHeader");
+
+
+    let filterObj={
+        article:{name:null,ingredient:{name:null}},
+        limitDate:null,
+        state:null
+    }
+
+    let arrFilters=matchDOMAndObject("value","#",filterRow,filterObj,true,null,0,"product");
     let mapFilteredProducts=new Map();
 
     parent.querySelector("#checkProductInput").checked=false;
 
     for(let j = 0 ; j < arrProducts.length ; j++){
-
-        let setFlag=1;
-
-        for(let i = 0 ; i < arrFilters.length ; i++){
-
-            let inputVal;
-            let stringVal=null;
-
-            if(arrFilters[i].tagName=="SELECT"){
-                inputVal=arrFilters[i].options[arrFilters[i].selectedIndex].value;
-            }
-            else{
-                inputVal=arrFilters[i].value;
-            }
-
-            if(arrProducts[j][arrFilters[i].id]!=null){
-                stringVal=arrProducts[j][arrFilters[i].id].toString();
-            }
-
-            if (stringVal!=null && inputVal!="" &&  stringVal.includes(inputVal)){
-                console.log(mapFilteredProducts.get(arrProducts[j].prid));
-            }
-            else if(inputVal!="" && stringVal!=inputVal){
-                setFlag=0;
-            }
-        }
-
-        if(setFlag){
-            mapFilteredProducts.set(arrProducts[j].prid, arrProducts[j]);
+        if(filterObjectOnObject(arrProducts[j], arrFilters)){
+            mapFilteredProducts.set(arrProducts[j].prid,arrProducts[j]);
         }
     }
 
@@ -202,17 +175,14 @@ function updateProductAPI(element,args){
 
     if(args.counterProduct == undefined){
         if(element && element.bid!==null){
-            console.log(element);
 
             for(let i=0; i<arrProducts.length ;i++){
                 arrProducts[i].basketId=element.bid;
             }
-            console.log(arrProducts);
         }
         args.counterProduct=0;
     }
     if(args.counterProduct<arrProducts.length){
-        console.log(arrProducts[args.counterProduct]);
         exchangeToAPI(ffwApiUrl+"/products",arrProducts[args.counterProduct],"PUT",updateProductAPI,args);
         args.counterProduct++;
     }
@@ -269,8 +239,6 @@ function findLocalsByFilter(){
         }
     };
 
-    url=ffwApiUrl+"/locals?";
-
 
     exchangeToAPI(ffwApiUrl+"/locals",modal.arrLocals,"GET",updateLocalRows,args);
 
@@ -282,7 +250,6 @@ function updateLocalRows(element) {
 
     let localRowsContainer = document.getElementById("localRowsContainer");
 
-    console.log(localRowsContainer);
     localRowsContainer.innerHTML = "";
 
     for (let i = 0; i < arrLocals.length; i++) {
@@ -313,8 +280,8 @@ function createLocalRow(container,local){
 
     matchDOMAndObject("value", "#", newCollapsedAddressRow, local.address);
 
-    matchDOMAndObject("value", "#", newLocalRow, local,false,1);
-    matchDOMAndObject("innerHTML", "#", newLocalRow, local,false,1)
+    matchDOMAndObject("value", "#", newLocalRow, local,false,1,0,"local");
+    matchDOMAndObject("innerHTML", "#", newLocalRow, local,false,1,0,"local")
 
     container.append(newLocalRow);
     container.append(newCollapsedAddressRow);

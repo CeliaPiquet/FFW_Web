@@ -44,3 +44,12 @@ body {
 .modal {
     overflow-y:auto;
 }
+
+.map {
+    width: 100%;
+    height: 500px;
+}
+
+.langImg:hover{
+    cursor:pointer;
+}

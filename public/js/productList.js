@@ -119,8 +119,6 @@ function displayFullProductsArray(productArray = fullProductsArray){ //par défa
     for(var i=0; i<productArray.length; i++){
         if(productArray[i].article){
 
-            console.log(productArray);
-
             strId = productArray[i].article.name + "ArticleLine";
             if(document.getElementById(strId)){  //si un l'article a déjà été ajouté on ajoute juste le produit
                 var product = createProductDisplay(productArray[i]);

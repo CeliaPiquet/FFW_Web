@@ -17,9 +17,19 @@ class HomeController extends Controller {
 
     }
 
+    public function changeLang(){
+
+        if(!isset($_SESSION) || empty($_SESSION)){
+            session_start();
+        }
+
+        $_SESSION['lang']=$this->lang!=="en"?$this->lang."_".strtoupper($this->lang):null;
+        http_response_code(200);
+    }
+
     public function noConnection() {
 
-        echo "NO CONNECTION !!";
+
 
     }
     public function noInscription() {

@@ -1,6 +1,6 @@
 var isArticleExisting=false;
 
-//affichage de la modale en fonction de son idHTML
+//affichage de la modale en_EN fonction de son idHTML
 function modalDisplay(modalId){
     var container = document.getElementById("alertMessage");
     container.innerHTML = '';
@@ -38,8 +38,6 @@ function checkArticle(){
 
 //traitements
 function changeRoom(){
-
-    console.log(selectedProducts);
 
     var request = new XMLHttpRequest();
     var idRoom = document.getElementById("roomChoice").value;

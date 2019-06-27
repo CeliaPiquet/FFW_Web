@@ -1,17 +1,3 @@
-<?php
-//    require_once "index.php";
-//    require_once "footer.php";
-//
-//    $locale = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
-//    putenv("LC_ALL=$locale");
-//
-//    bindtextdomain("homeView","../locale");
-//    setlocale(LC_ALL,$locale.".UTF-8");
-//    textdomain("homeView");
-//    echo $locale;
-//    echo $locale2;
-
-?>
 <?php $this->setName("content"); ?>
 
 <div class="back" style="background-color:#42BD85">
@@ -46,7 +32,7 @@
             <figure class="figure">
                 <img src="../../public/img/playEmpty.png" class="figure-img img-fluid rounded" alt="...">
             </figure>
-            <footer> <small> Click to play ! </small> </footer>
+            <footer> <small> <?php echo  _("Click to play ! ");?></small> </footer>
         </div>
     </div>
 </div>

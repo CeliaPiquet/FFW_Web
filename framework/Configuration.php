@@ -15,7 +15,7 @@ class Configuration {
         return $value;
     }
 
-    // Renvoie le tableau des paramètres en le chargeant au besoin
+    // Renvoie le tableau des paramètres en_EN le chargeant au besoin
     private static function getParamaters() {
         if (self::$parameters == null) {
             $filePath = "config/prod.ini";

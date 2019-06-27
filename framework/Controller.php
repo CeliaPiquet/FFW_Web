@@ -10,6 +10,7 @@ abstract class Controller {
     // Action à réaliser
     protected $action;
     protected $id;
+    protected $lang;
 
     // Requête entrante
     protected $request;
@@ -53,6 +54,22 @@ abstract class Controller {
     public function setId($id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLang()
+    {
+        return $this->lang;
+    }
+
+    /**
+     * @param mixed $lang
+     */
+    public function setLang($lang): void
+    {
+        $this->lang = $lang;
     }
 
 
@@ -101,7 +118,7 @@ abstract class Controller {
             session_start();
         }
         if(isset($_SERVER['REQUEST_URI'])){
-            $uri=$_SERVER['REQUEST_URI'];
+            $uri=explode("?",$_SERVER['REQUEST_URI'])[0];
         }
 
         $isConnected=false;
@@ -112,14 +129,16 @@ abstract class Controller {
 
             $user->getRights();
 
-            $isAdmin=UserService::isRightSet($user->getRights(),5);
+//            $isAdmin=UserService::isRightSet($user->getRights(),5);
 
+            $arrRights=UserService::fillRights($user->getRights());
+            $righDec=$user->getRights();
 //            $isAdmin=$user->getRights()=="admin"?true:false;
 
             $isConnected=true;
         }
 
-        return array("isConnected"=>$isConnected, "isAdmin"=>$isAdmin,"uri"=>$uri);
+        return array("isConnected"=>$isConnected, "uri"=>$uri,"arrRights"=>$arrRights);
 
     }
 
@@ -143,6 +162,8 @@ abstract class Controller {
         $template = new Template($controller);
         $template->generateT($this->arrViews,$templateData);
     }
+
+
 
 
 

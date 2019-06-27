@@ -22,7 +22,7 @@
         },
         weekLabel: "Sm",
         allDayHtml: "Toute la<br/>journée",
-        eventLimitText: "en plus",
+        eventLimitText: "en_EN plus",
         noEventsMessage: "Aucun événement à afficher"
     };
 

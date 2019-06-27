@@ -1,34 +1,78 @@
 
+
+function findCourseByFilter(){
+
+    arrCourses=[];
+    let filterObject={
+        nameInput:null,
+        routeStateSelect:null,
+        createDateInput:null,
+        courseDateInput:null,
+        vehicleSelect:null
+    };
+
+    matchDOMAndObject("value","#",document.getElementById("coursesTableHeader"),filterObject,true);
+    let courseRowContainer=document.getElementById("coursesRowsContainer");
+
+    args={
+        query:{
+            offset:0,
+            limit:20,
+            name:filterObject.nameInput,
+            routeState:filterObject.routeStateSelect,
+            vehicleId:filterObject.vehicleSelect,
+            createTime:filterObject.createDateInput,
+            serviceTime : filterObject.courseDateInput,
+            completeData:true
+        },
+        emptyRow:emptyCourseRow,
+        container:courseRowContainer,
+        specifyFunc:createCourseRow
+    };
+    exchangeToAPI(ffwApiUrl+"/courses",arrCourses,"GET",updateGenericsRow,args);
+
+}
+
 function findBasketsByFilter(){
 
     arrBaskets=[];
     let filterObject={
         basketRoleSelect:null,
+        basketStatusSelect:null,
         createDateInput:null
     }
 
+    let course=document.getElementById("courseModal").course;
+    if(!course.local){
+        return null;
+    }
     matchDOMAndObject("value","#",document.getElementById("basketsTableHeader"),filterObject,true);
 
     args={
         query:{
             offset:0,
             limit:20,
-            status:"validated",
-            role:basketRoleSelect,
-            createTime:filterObject.createDateInput
+            status:filterObject.basketStatusSelect,
+            role:filterObject.basketRoleSelect,
+            createTime:filterObject.createDateInput,
+            serviceId:false
         },
-        role:filterObject.basketRoleSelect
+        emptyRow:emptyBasketRow,
+        cityName:document.getElementById("cityNameInput").value,
+        container:document.getElementById("basketRowsContainer"),
+        role:filterObject.basketRoleSelect,
+        course:course,
+        baskets:arrBaskets,
+        filterFunc:filterBaskets,
+        specifyFunc:createBasketRow
     };
-    console.log(args.query);
-    console.log("COUCOU");
-
-
-    exchangeToAPI(ffwApiUrl+"/baskets",arrBaskets,"GET",updateBasketRows,args);
+    exchangeToAPI(ffwApiUrl+"/baskets",arrBaskets,"GET",updateGenericsRow,args);
 }
 
 
 function findUsersByFilter(element){
 
+    element=element.target;
     body=new Object();
 
     let filterObject={
@@ -44,8 +88,6 @@ function findUsersByFilter(element){
     let arrUsers=[];
 
     matchDOMAndObject("value","#",parent,filterObject,true);
-
-    console.log(filterObject);
 
     args={
         query:{
@@ -70,6 +112,51 @@ function findUsersByFilter(element){
 
 }
 
+function findDriversByFilter(element){
+
+    if(element.target){
+        element=element.target;
+    }
+    body=new Object();
+
+    let filterObject={
+        mailInput:null,
+        lastnameInput:null,
+        firstnameInput:null,
+        cityInput:null
+    }
+
+    let parent=getFirstParent(element,"id","usersTable");
+    let container=parent.querySelector("#userRowsContainer");
+    let arrUsers=[];
+
+    matchDOMAndObject("value","#",parent,filterObject,true);
+
+    args={
+        query:{
+            offset:0,
+            limit:20,
+            email:filterObject.mailInput,
+            lastname:filterObject.lastnameInput,
+            firstname:filterObject.firstnameInput,
+            cityName:filterObject.cityInput
+        },
+        container:container,
+        emptyRow:emptyUserRow,
+        parentDomNode:parent,
+        course:parent.course,
+        objectName:"user",
+        idName:"uid",
+        parentIdName:"userId",
+        filterFunc:filterDrivers,
+        specifyFunc:createDriversRow
+
+    };
+
+    exchangeToAPI(ffwApiUrl+"/users",arrUsers,"GET",updateGenericsRow,args);
+
+}
+
 function findExternalsByFilter(element){
 
     body=new Object();
@@ -85,11 +172,7 @@ function findExternalsByFilter(element){
     let parentDomNode=getFirstParent(element,"id","collapsedBasketDestRow").parentDomNode;
     let arrExternals=[];
 
-    console.log(filterObject);
-
     matchDOMAndObject("value","#",parent,filterObject,true);
-
-    console.log(filterObject);
 
     args={
         query:{
@@ -103,7 +186,7 @@ function findExternalsByFilter(element){
         emptyRow:emptyExternalRow,
         parentDomNode:parentDomNode,
         objectName:"external",
-        objectIdName:"exid",
+        idName:"exid",
         parentIdName:"externalId",
         specifyFunc:createSubBasketRow
 
@@ -166,8 +249,6 @@ function findLocalsByFilter(element){
     let parentDomNode=document.getElementById("courseModal");
     let arrLocals=[];
 
-
-    console.log(container);
     matchDOMAndObject("value","#",parent,filterObject,true);
 
     let args={
@@ -191,28 +272,127 @@ function findLocalsByFilter(element){
 }
 
 
-function findBasketsByFilter(){
-
-    let arrBaskets=document.getElementById("courseModal").arrBaskets;
-    arrBaskets=[];
+function findVehiclesByFilter(element){
 
     let filterObject={
-        basketRoleSelect:null,
-        createDateInput:null
-    }
+        descriptionInput:null,
+        volumeInput:null,
+        insuranceDateInput:null,
+        lastRevisionInput:null
+    };
 
-    matchDOMAndObject("value","#",document.getElementById("basketsTableHeader"),filterObject,true);
+    let parent=getFirstParent(element,"id","vehiclesTable");
+    let container=parent.querySelector("#vehicleRowsContainer");
+    let arrVehicles=[];
 
-    args={
+    matchDOMAndObject("value","#",parent,filterObject,true);
+
+    let args={
         query:{
             offset:0,
             limit:20,
-            serviceId:false,
-            role:filterObject.basketRoleSelect,
+            description:filterObject.descriptionInput,
+            volume:filterObject.volumeInput,
+            insuranceDate:filterObject.insuranceDateInput,
+            lastRevision:filterObject.lastRevisionInput,
+            completeData:true
         },
-        role:filterObject.basketRoleSelect
+        container:container,
+        emptyRow:emptyVehicleRow,
+        parentDomNode:parent,
+        objectName:"vehicle",
+        idName:"vid",
+        course:parent.course,
+        parentIdName:"vehicleId",
+        filterFunc:filterVehicles,
+        specifyFunc:createVehicleRow
     };
 
-    exchangeToAPI(ffwApiUrl+"/baskets",arrBaskets,"GET",updateBasketRows,args);
+    exchangeToAPI(ffwApiUrl+"/vehicles",arrVehicles,"GET",updateGenericsRow,args);
+}
 
+function filterBaskets(element,args){
+
+    let arrBaskets=element;
+    let course=args.course;
+    let cityName=args.cityName;
+    let filteredBasketArr=[];
+
+    for(let i=0 ; i<arrBaskets.length;i++){
+        let basketCity= arrBaskets[i].srcAddress&&arrBaskets[i].srcAddress.cityName?arrBaskets[i].srcAddress.cityName.toLowerCase():null;
+        if((cityName&&basketCity&&basketCity.includes(cityName.toLowerCase()))||cityName===""){
+            if(args.role==="export"&&arrBaskets[i].local&&arrBaskets[i].local.loid===course.localId){
+
+                filteredBasketArr.push(arrBaskets[i]);
+            }
+            else if(args.role==="import"){
+                filteredBasketArr.push(arrBaskets[i]);
+            }
+        }
+    }
+
+    element=filteredBasketArr;
+    return element;
+}
+
+function filterVehicles(element,args){
+
+
+    let arrVehicles=element;
+    let course=args.course;
+    let filteredArrVehicles=[];
+
+    for(let i=0 ; i<arrVehicles.length ;i++){
+        if(arrVehicles[i].services){
+            let availabilityFlag=1;
+            for(let j=0; j<arrVehicles[i].services.length; j++){
+                let vServiceStartDateTime=getUnifiedDateTime(arrVehicles[i].services[j].serviceTime);
+                let vServiceEndDateTime=getUnifiedDateTime(arrVehicles[i].services[j].serviceEnd);
+
+                if(vServiceStartDateTime.getTime()<course.calculateEndDate.getTime()&&vServiceEndDateTime.getTime()>course.calculateStartDate.getTime()&&arrVehicles[i].vid!==course.vehicleId){
+                    availabilityFlag=0;
+                }
+            }
+            if(availabilityFlag){
+                filteredArrVehicles.push(arrVehicles[i])
+            }
+        }
+        else{
+            filteredArrVehicles.push(arrVehicles[i]);
+        }
+    }
+
+    return filteredArrVehicles;
+}
+
+function filterDrivers(element,args){
+    let arrUsers=element;
+    let course=args.course;
+    let filteredArrUsers=[];
+
+    for(let i=0; i<arrUsers.length;i++){
+
+        let driverFlag=0;
+
+        if(arrUsers[i].skills){
+            for(let j=0 ; j<arrUsers[i].skills.length;j++){
+                if(arrUsers[i].skills[j].name.toLowerCase().includes("chauffeur")){
+                    driverFlag=1;
+                }
+            }
+        }
+        if(arrUsers[i].affectations){
+            for(let j=0 ; j<arrUsers[i].affectations.length;j++){
+                let startTime=getUnifiedDateTime(arrUsers[i].affectations[j].start);
+                let endTime=getUnifiedDateTime(arrUsers[i].affectations[j].end);
+                if(startTime.getTime()<course.calculateEndDate.getTime()&&endTime.getTime()>course.calculateStartDate.getTime()&&arrUsers[i].uid!==course.userId){
+                    driverFlag=0;
+                }
+            }
+        }
+        if(driverFlag){
+            filteredArrUsers.push(arrUsers[i]);
+        }
+    }
+    return filteredArrUsers;
 }

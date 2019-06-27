@@ -14,7 +14,7 @@
     </head>
     <body>
 
-
+    <script src="https://kit.fontawesome.com/12cb04ef23.js"></script>
     <script src="<?=$websiteRoot?>/public/jquery/jquery-3.4.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -26,7 +26,7 @@
 
 
         <header cz-shortcut-listen="true" style="padding-top:200px;">
-            <nav class="navbar fixed-top navbar-light navbar-expand-sm" style="background-color: #EBEBEB">
+            <nav class="navbar fixed-top navbar-light navbar-expand-sm align-items-center" style="background-color: #EBEBEB">
                 <a class="navbar-brand mr-auto" href="http://ffw.priv/">
                     <img src="../../public/img/logo1.png" width="150" height="150" class="d-inline-block align-top" alt="">
                 </a>
@@ -34,33 +34,35 @@
                 <?php if (isset($isConnected) && $isConnected==true){ ?>
                     <div class="collapse navbar-collapse d-flex flex-row-reverse">
                         <ul class="navbar-nav">
-                            <?php if (isset($isAdmin) && $isAdmin==true){ ?>
 
+
+                            <?php if($arrRights["volunteers and employees admin"] || $arrRights["super admin"] ){ ?>
                                 <li class="nav-item" id="adminUsers">
-                                    <a class="btn" href="<?=$websiteRoot?>/adminUsers">Manage users</a>
+                                    <a class="btn" href="<?=$websiteRoot?>/adminUsers"><?php echo _("Manage users");?></a>
                                 </li>
-
+                            <?php } ?>
+                            <?php if($arrRights["stock collect and vehicles admin"] || $arrRights["super admin"]){ ?>
                                 <li class="nav-item" id="adminBaskets">
-                                    <a class="btn" href="<?=$websiteRoot?>/adminBaskets">Manage baskets</a>
+                                    <a class="btn" href="<?=$websiteRoot?>/adminBaskets"><?php echo _("Manage baskets")?></a>
                                 </li>
-
                                 <li class="nav-item" id="adminCourses">
-                                    <a class="btn" href="<?=$websiteRoot?>/adminCourses">Manage courses</a>
+                                    <a class="btn" href="<?=$websiteRoot?>/adminCourses"><?php echo _("Manage courses")?></a>
                                 </li>
 
                                 <li class="nav-item" id="stocks">
-                                    <a class="btn" href="<?=$websiteRoot?>/stock">Stocks</a>
+                                    <a class="btn" href="<?=$websiteRoot?>/stock"><?php echo _("Stocks")?></a>
                                 </li>
 
                                 <li class="nav-item" id="locals">
-                                    <a class="btn" href="<?=$websiteRoot?>/adminlocals">Locals</a>
+                                    <a class="btn" href="<?=$websiteRoot?>/adminlocals"><?php echo _("Locals")?></a>
                                 </li>
                             <?php } ?>
+
                             <li class="nav-item">
-                                <a class="btn" href="<?=$websiteRoot?>/account">Mon espace</a>
+                                <a class="btn" href="<?=$websiteRoot?>/account"><?php echo _("Account");?></a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn" href="<?=$websiteRoot?>/connection/logout">Deconnexion</a>
+                                <a class="btn" href="<?=$websiteRoot?>/connection/logout"><?php echo _("Logout");?></a>
                             </li>
                         </ul>
                     </div>
@@ -68,14 +70,20 @@
                     <div class="collapse navbar-collapse d-flex flex-row-reverse">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="btn" href="<?=$websiteRoot?>/inscription">Inscription</a>
+                                <a class="btn" href="<?=$websiteRoot?>/inscription"><?php echo _("Sign in");?></a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn" href="<?=$websiteRoot?>/connection">Connexion</a>
+                                <a class="btn" href="<?=$websiteRoot?>/connection"><?php echo _("Login");?></a>
                             </li>
                         </ul>
                     </div>
                 <?php } ?>
+                <a class="navbar-brand mx-1 langImg" id="fr" onclick="changeLang(this);" >
+                    <img src="../../public/img/france.png" width="20" height="20" class="d-inline-block align-top" alt="">
+                </a>
+                <a class="navbar-brand mx-1 langImg" id="en" onclick="changeLang(this);">
+                    <img src="../../public/img/united-kingdom.png" width="20" height="20" class="d-inline-block align-top" alt="">
+                </a>
             </nav>
         </header>
 

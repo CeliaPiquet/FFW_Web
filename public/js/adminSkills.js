@@ -76,17 +76,11 @@ function showDisabledSkills(){
 }
 
 function changeSkillsList(status){
-
-    console.log(arrSkills);
-    console.log(status);
-
     let skillsTable=document.getElementById("skillsTable");
 
     skillsTable.innerHTML="";
 
     for(let i=0 ; i<arrSkills.length ; i++){
-
-        console.log(arrSkills[i]);
 
         if(arrSkills[i].skStatus===status){
             let newSkillRow=emptySkillRow.cloneNode(true);
@@ -209,8 +203,6 @@ function skillsToAPI(skills,counter,skillsToAPI){
     request.onreadystatechange=function(){
 
         if(request.readyState==4){
-            console.log(skills.length);
-            console.log(counter);
             if(method=="POST" && request.status==200){
                 arrSkills[counter]=JSON.parse(request.responseText);
             }

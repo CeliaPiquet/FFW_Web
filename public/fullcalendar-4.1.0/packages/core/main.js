@@ -5666,7 +5666,6 @@ Docs & License: https://fullcalendar.io/
             var reducerFunc = _a[_i];
             nextState = reducerFunc(nextState, action, calendar);
         }
-        // console.log(action.type, nextState)
         return nextState;
     }
     function reduceViewType(currentViewType, action) {
@@ -8241,7 +8240,7 @@ Docs & License: https://fullcalendar.io/
     }
     // TODO: more DRY and optimized
     function buildDateEnv$1(settings) {
-        var locale = buildLocale(settings.locale || 'en', parseRawLocales([]).map); // TODO: don't hardcode 'en' everywhere
+        var locale = buildLocale(settings.locale || 'en', parseRawLocales([]).map); // TODO: don't hardcode 'en_EN' everywhere
         // ensure required settings
         settings = __assign({ timeZone: globalDefaults.timeZone, calendarSystem: 'gregory' }, settings, { locale: locale });
         return new DateEnv(settings);

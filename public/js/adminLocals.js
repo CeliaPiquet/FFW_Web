@@ -53,8 +53,6 @@ function changeQuantityOrder(){
 
     let arrowOrder=document.getElementById("arrowOrder");
 
-    console.log(arrLocals);
-
     if(arrowOrder.classList.contains("fa-arrow-up")){
         arrowOrder.classList.remove("fa-arrow-up");
         arrowOrder.classList.add("fa-arrow-down");
@@ -206,7 +204,6 @@ function updateLocalRows() {
 
     for (let i = 0; i < arrLocals.length; i++) {
 
-        console.log(arrLocals[i]);
         createLocalRow(localRowsContainer,arrLocals[i]);
     }
 }
@@ -236,7 +233,7 @@ function createLocalRow(container,local){
 
     if(local.rooms){
         for(let i = 0 ; i<local.rooms.length ; i++){
-            createRoomRow(roomRowsContainer,local.rooms[i])
+            createRoomRow(roomRowsContainer,local.rooms[i],newLocalRow)
         }
     }
     else{
@@ -284,7 +281,7 @@ function changeBoolBtnState(){
     this.innerHTML=this.innerHTML==="YES"?"NO":"YES";
 }
 
-function createRoomRow(container,room){
+function createRoomRow(container,room,localRow){
 
     newRoomRow = emptyRoomRow.cloneNode(true);
 
@@ -303,7 +300,7 @@ function createRoomRow(container,room){
         newConfirmButton.addEventListener('click',confirmRow,false);
         newRoomRow.room=room;
     }
-
+    newRoomRow.localRow=localRow;
     container.append(newRoomRow);
 }
 
@@ -311,23 +308,17 @@ function confirmRow(event){
 
     element=event.target;
     let tmpElement;
-    console.log(element);
-    if((tmpElement=getFirstParent(element,"id","localRow")).tagName=="BODY"){
-        if((tmpElement=getFirstParent(element,"id","roomRow")).tagName!="BODY"){
 
-            console.log(tmpElement);
-
-            args={
-                domParent:tmpElement
-            };
-            exchangeToAPI(ffwApiUrl+"/rooms",matchDOMAndObject("value","#",tmpElement,tmpElement.room,true),"POST",removeConfirmButton,args);
-        }
+    if((tmpElement=getFirstParent(element,"id","roomRow")).tagName!=="BODY"){
+        args={
+            domParent:tmpElement
+        };
+        exchangeToAPI(ffwApiUrl+"/rooms",matchDOMAndObject("value","#",tmpElement,tmpElement.room,true),"POST",removeConfirmButton,args);
     }
-    else{
+    else if((tmpElement=getFirstParent(element,"id","localRow")).tagName!=="BODY"){
 
         tmpElement.local.address=convertAddressObjectToDOM(tmpElement.local.address);
         tmpElement.local.address=matchDOMAndObject("value","#",tmpElement.collapseAddress,tmpElement.local.address,true);
-        console.log(tmpElement);
         args={
             url:ffwApiUrl+"/locals",
             local:matchDOMAndObject("value","#",tmpElement,tmpElement.local,true),
@@ -339,10 +330,11 @@ function confirmRow(event){
 }
 
 function createLocalToAPI(address,args){
-    console.log(args.local);
-    args.local.adid=address.adid;
 
-    exchangeToAPI(args.url,args.local,args.method,removeConfirmButton,{domParent:args.domParent});
+    if(address.adid){
+        args.local.adid=address.adid;
+        exchangeToAPI(args.url,args.local,args.method,removeConfirmButton,{domParent:args.domParent});
+    }
 }
 
 function removeConfirmButton(element=null,args){
@@ -379,27 +371,22 @@ function addRoom(event){
     }
     let newRoom=getEmptyRoom();
     newRoom.loid=element.local.loid;
-    console.log(element.rooms);
     element.rooms.push(newRoom);
-    createRoomRow(element.roomRowsContainer,newRoom);
+    createRoomRow(element.roomRowsContainer,newRoom,element);
 }
 
 function convertLocalObject(local){
 
-    console.log("QUANTITY FIRST");
     let quantity=0;
     if(local.rooms){
         for(let i=0 ; i<local.rooms.length;i++){
             if(local.rooms[i]){
-                console.log(local.rooms[i]);
                 quantity+= parseInt(local.rooms[i].totalQuantity);
             }
         }
     }
 
-    console.log(quantity);
     local["totalQuantity"]=""+quantity+"";
-    console.log("QUANTITY FIRST");
 
     return local;
 }

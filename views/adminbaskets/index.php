@@ -4,8 +4,8 @@
 
 <div class="container">
     <div class="col-lg-12 ">
-        <h1 class="text-center"> Manage baskets</h1>
-        <button class="btn col-md-2 " type="button" id="displayBasketModal" onclick="openLocalModal()">Create basket</button>
+        <h1 class="text-center"> <?php echo  _("Manage baskets");?></h1>
+        <button class="btn col-md-2 " type="button" id="displayBasketModal" onclick="openLocalModal()"><?php echo  _("Create basket");?></button>
     </div>
 
     <table class="table table-striped table-hover " id="basketsTable">
@@ -95,8 +95,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" onclick="updateUser()" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo  _("Cancel");?></button>
+                    <button type="button" onclick="updateUser()" class="btn btn-primary" data-dismiss="modal"><?php echo  _("Confirm");?></button>
                 </div>
             </div>
         </div>
@@ -126,18 +126,18 @@
                                     <th> <?php echo _("Condition"); ?> </th>
                                     <th> <?php echo _("Check product"); ?> </th>
                                 </tr>
-                                <tr >
+                                <tr id="productsHeader">
                                     <td>
-                                        <input type="text" class="form-control" onkeyup="sortProductByFilter(this)" name="sortProductInput" id="ingredientName" placeholder="<?php echo _("Category");?>">
+                                        <input type="text" class="form-control" onkeyup="sortProductByFilter(this)" name="sortProductInput" id="name" object="ingredient" placeholder="<?php echo _("Category");?>">
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control" onkeyup="sortProductByFilter(this)" name="sortProductInput" id="articleName" placeholder="<?php echo _("Name"); ?>">
+                                        <input type="text" class="form-control" onkeyup="sortProductByFilter(this)" name="sortProductInput" id="name" object="article" placeholder="<?php echo _("Name"); ?>">
                                     </td>
                                     <td>
-                                        <input type="date" class="form-control" onchange="sortProductByFilter(this)" name="sortProductInput" id="limitDate" placeholder="<?php echo _("Limit date");?>">
+                                        <input type="date" class="form-control" onchange="sortProductByFilter(this)" name="sortProductInput" id="limitDate" object="product" placeholder="<?php echo _("Limit date");?>">
                                     </td>
                                     <td>
-                                        <select id="state"  name="sortProductInput" class="form-control"  onchange="sortProductByFilter(this)">
+                                        <select id="state"  object="product" name="sortProductInput" class="form-control"  onchange="sortProductByFilter(this)">
                                             <option></option>
                                             <?php
                                                 foreach($arrProductConditions as $productCondition){
@@ -160,8 +160,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" onclick="basketToAPI()" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo  _("Cancel");?></button>
+                    <button type="button" onclick="basketToAPI()" class="btn btn-primary" data-dismiss="modal"><?php echo  _("Confirm");?></button>
                 </div>
             </div>
         </div>

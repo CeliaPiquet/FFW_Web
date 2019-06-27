@@ -1,0 +1,973 @@
+# French translations for PACKAGE package.
+# Copyright (C) 2019 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# root <root@dester78-g551jw>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-26 11:17+0200\n"
+"PO-Revision-Date: 2019-05-16 08:38+0200\n"
+"Last-Translator: root <root@dester78-g551jw>\n"
+"Language-Team: French <traduc@traduc.org>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: C:\Apache24\www\FFW_WEB\templates\template.php:40
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:9
+msgid "Manage users"
+msgstr "Gestion utilisateurs"
+
+#: C:\Apache24\www\FFW_WEB\templates\template.php:44
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:7
+msgid "Manage baskets"
+msgstr "Gestion paniers"
+
+#: C:\Apache24\www\FFW_WEB\templates\template.php:48
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:7
+msgid "Manage courses"
+msgstr "Gestion collectes"
+
+#: C:\Apache24\www\FFW_WEB\templates\template.php:52
+msgid "Stocks"
+msgstr "Gestion stocks"
+
+#: C:\Apache24\www\FFW_WEB\templates\template.php:56
+msgid "Locals"
+msgstr "Gestion locaux"
+
+#: C:\Apache24\www\FFW_WEB\templates\template.php:60
+msgid "Account"
+msgstr "Mon compte"
+
+#: C:\Apache24\www\FFW_WEB\templates\template.php:63
+msgid "Logout"
+msgstr "Déconnexion"
+
+#: C:\Apache24\www\FFW_WEB\templates\template.php:71
+msgid "Sign in"
+msgstr "Inscription"
+
+#: C:\Apache24\www\FFW_WEB\templates\template.php:74
+msgid "Login"
+msgstr "Connexion"
+
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:12
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedProductRow.php:7
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedProductRow.php:18
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:73
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:79
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:124
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:134
+#: C:\Apache24\www\FFW_WEB\views\admincourses\companiesTable.php:4
+#: C:\Apache24\www\FFW_WEB\views\admincourses\companiesTable.php:12
+#: C:\Apache24\www\FFW_WEB\views\admincourses\courseRow.php:2
+#: C:\Apache24\www\FFW_WEB\views\admincourses\externalsTable.php:4
+#: C:\Apache24\www\FFW_WEB\views\admincourses\externalsTable.php:12
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:14
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:202
+#: C:\Apache24\www\FFW_WEB\views\admincourses\localsTable.php:3
+#: C:\Apache24\www\FFW_WEB\views\admincourses\localsTable.php:8
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\collapsedRoomRow.php:6
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\index.php:11
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\index.php:17
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:187
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:241
+msgid "Name"
+msgstr "Nom"
+
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:16
+#: C:\Apache24\www\FFW_WEB\views\admincourses\companiesTable.php:3
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:188
+msgid "SIRET"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:20
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:29
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:30
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:28
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedAddressRow.php:10
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedAddressRow.php:11
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\localRow.php:5
+#: C:\Apache24\www\FFW_WEB\views\admincourses\basketRow.php:26
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedAddressRow.php:10
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedAddressRow.php:11
+#: C:\Apache24\www\FFW_WEB\views\admincourses\companyRow.php:8
+#: C:\Apache24\www\FFW_WEB\views\admincourses\externalRow.php:8
+#: C:\Apache24\www\FFW_WEB\views\admincourses\localRow.php:6
+#: C:\Apache24\www\FFW_WEB\views\admincourses\userRow.php:10
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\collapsedAddressRow.php:5
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\collapsedAddressRow.php:14
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\collapsedAddressRow.php:15
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\localRow.php:5
+#: C:\Apache24\www\FFW_WEB\views\adminusers\collapsedAddressRow.php:10
+#: C:\Apache24\www\FFW_WEB\views\adminusers\collapsedAddressRow.php:11
+#: C:\Apache24\www\FFW_WEB\views\adminusers\companyRow.php:9
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:144
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:33
+msgid "Address"
+msgstr "Adresse"
+
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:21
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:29
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:34
+msgid "Enter your address..."
+msgstr "Entrez votre adresse"
+
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:25
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:26
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedAddressRow.php:6
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedAddressRow.php:7
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedAddressRow.php:6
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedAddressRow.php:7
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\collapsedAddressRow.php:10
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\collapsedAddressRow.php:11
+#: C:\Apache24\www\FFW_WEB\views\adminusers\collapsedAddressRow.php:6
+#: C:\Apache24\www\FFW_WEB\views\adminusers\collapsedAddressRow.php:7
+msgid "Number"
+msgstr "Numéro"
+
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:35
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:36
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:43
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedAddressRow.php:16
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedAddressRow.php:17
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedAddressRow.php:16
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedAddressRow.php:17
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\collapsedAddressRow.php:20
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\collapsedAddressRow.php:21
+#: C:\Apache24\www\FFW_WEB\views\adminusers\collapsedAddressRow.php:16
+#: C:\Apache24\www\FFW_WEB\views\adminusers\collapsedAddressRow.php:17
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:164
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:48
+msgid "Complement"
+msgstr "Complément"
+
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:39
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:40
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:23
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:106
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:189
+msgid "Phone"
+msgstr "Téléphone"
+
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:45
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:46
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:49
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedAddressRow.php:22
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:74
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:82
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedAddressRow.php:22
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedBasketRow.php:8
+#: C:\Apache24\www\FFW_WEB\views\admincourses\companiesTable.php:5
+#: C:\Apache24\www\FFW_WEB\views\admincourses\companiesTable.php:15
+#: C:\Apache24\www\FFW_WEB\views\admincourses\externalsTable.php:5
+#: C:\Apache24\www\FFW_WEB\views\admincourses\externalsTable.php:15
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:125
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:203
+#: C:\Apache24\www\FFW_WEB\views\admincourses\localsTable.php:4
+#: C:\Apache24\www\FFW_WEB\views\admincourses\localsTable.php:11
+#: C:\Apache24\www\FFW_WEB\views\admincourses\usersTable.php:6
+#: C:\Apache24\www\FFW_WEB\views\admincourses\usersTable.php:19
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\collapsedAddressRow.php:26
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\index.php:12
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\index.php:20
+#: C:\Apache24\www\FFW_WEB\views\adminusers\collapsedAddressRow.php:22
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:19
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:35
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:170
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:54
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:196
+msgid "City"
+msgstr "Ville"
+
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:49
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:50
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:53
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedAddressRow.php:26
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedAddressRow.php:26
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\collapsedAddressRow.php:30
+#: C:\Apache24\www\FFW_WEB\views\adminusers\collapsedAddressRow.php:26
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:174
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:58
+msgid "Zip code"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:53
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:57
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedAddressRow.php:30
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedAddressRow.php:30
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\collapsedAddressRow.php:34
+#: C:\Apache24\www\FFW_WEB\views\adminusers\collapsedAddressRow.php:30
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:178
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:62
+msgid "Country"
+msgstr "Pays"
+
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:55
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:59
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedAddressRow.php:32
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedAddressRow.php:32
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\collapsedAddressRow.php:36
+#: C:\Apache24\www\FFW_WEB\views\adminusers\collapsedAddressRow.php:32
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:64
+msgid "France"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:56
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:60
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedAddressRow.php:33
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedAddressRow.php:33
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\collapsedAddressRow.php:37
+#: C:\Apache24\www\FFW_WEB\views\adminusers\collapsedAddressRow.php:33
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:65
+msgid "Italy"
+msgstr "Italie"
+
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:57
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:61
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedAddressRow.php:34
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedAddressRow.php:34
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\collapsedAddressRow.php:38
+#: C:\Apache24\www\FFW_WEB\views\adminusers\collapsedAddressRow.php:34
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:66
+msgid "Portugal"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\account\companyAddressForm.php:58
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:62
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedAddressRow.php:35
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedAddressRow.php:35
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\collapsedAddressRow.php:39
+#: C:\Apache24\www\FFW_WEB\views\adminusers\collapsedAddressRow.php:35
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:67
+msgid "Ireland"
+msgstr "Irlande"
+
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:5
+#: C:\Apache24\www\FFW_WEB\views\account\navbar.php:9
+msgid "General"
+msgstr "Général"
+
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:9
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:10
+#: C:\Apache24\www\FFW_WEB\views\admincourses\usersTable.php:4
+#: C:\Apache24\www\FFW_WEB\views\admincourses\usersTable.php:13
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:17
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:29
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:92
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:10
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:11
+msgid "Last name"
+msgstr "Nom"
+
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:13
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:14
+#: C:\Apache24\www\FFW_WEB\views\admincourses\usersTable.php:5
+#: C:\Apache24\www\FFW_WEB\views\admincourses\usersTable.php:16
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:18
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:32
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:96
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:14
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:15
+msgid "First name"
+msgstr "Prénom"
+
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:19
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:102
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:20
+msgid "Mail address"
+msgstr "Adresse mail"
+
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:33
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:154
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:38
+msgid "House number"
+msgstr "Numéro de rue"
+
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:34
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:38
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:39
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:43
+msgid "House number and street name"
+msgstr "Numéro et nom de rue"
+
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:37
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:158
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:42
+msgid "Street address"
+msgstr "Rue"
+
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:44
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:49
+msgid "Complement "
+msgstr "Complément"
+
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:70
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:81
+msgid "I want to receive by mail actuality and event information from FFW"
+msgstr "Je veux recevoir des actualités et informations d'évenement de la part de FFW"
+
+#: C:\Apache24\www\FFW_WEB\views\account\index.php:74
+msgid "Modify my account"
+msgstr "Modifier mon compte"
+
+#: C:\Apache24\www\FFW_WEB\views\account\navbar.php:12
+msgid "Company"
+msgstr "Entreprise"
+
+#: C:\Apache24\www\FFW_WEB\views\account\navbar.php:15
+#: C:\Apache24\www\FFW_WEB\views\inscription\accountChoice.php:31
+msgid "Volunteer"
+msgstr "Bénévole"
+
+#: C:\Apache24\www\FFW_WEB\views\account\navbar.php:18
+#: C:\Apache24\www\FFW_WEB\views\inscription\accountChoice.php:21
+msgid "Adherent"
+msgstr "Adhérent"
+
+#: C:\Apache24\www\FFW_WEB\views\account\volunteer.php:5
+msgid "My calendar"
+msgstr "Mon calendrier"
+
+#: C:\Apache24\www\FFW_WEB\views\account\volunteer.php:13
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:20
+msgid "Skills"
+msgstr "Mes compétences"
+
+#: C:\Apache24\www\FFW_WEB\views\account\volunteer.php:17
+msgid "Ask for new skill"
+msgstr "Demander de nouvelles compétences"
+
+#: C:\Apache24\www\FFW_WEB\views\account\volunteer.php:28
+msgid "Add"
+msgstr "Ajouter"
+
+#: C:\Apache24\www\FFW_WEB\views\account\volunteer.php:36
+msgid "My skills"
+msgstr "Mes compétences"
+
+#: C:\Apache24\www\FFW_WEB\views\account\volunteer.php:60
+msgid "You will receive confirmation message to this email : "
+msgstr "Vous allez recevoir un message de confirmation à cette adresse mail : "
+
+#: C:\Apache24\www\FFW_WEB\views\account\volunteer.php:63
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\basketRow.php:34
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:98
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:163
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:179
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:223
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:199
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:254
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:99
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:120
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:166
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:250
+msgid "Cancel"
+msgstr "Annuler"
+
+#: C:\Apache24\www\FFW_WEB\views\account\volunteer.php:64
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:99
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:164
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:224
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:200
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:255
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:121
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:167
+msgid "Confirm"
+msgstr "Confirmer"
+
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\basketRow.php:25
+msgid "Products"
+msgstr "Produits"
+
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\basketRow.php:28
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:100
+msgid "Validate"
+msgstr "Valider"
+
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\basketRow.php:31
+msgid "Refuse"
+msgstr "Refuser"
+
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\basketRow.php:37
+msgid "Total quantity :"
+msgstr "Quantité totale : "
+
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedProductRow.php:6
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedProductRow.php:15
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:131
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:53
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:63
+msgid "Category"
+msgstr "Catégorie"
+
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedProductRow.php:8
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedProductRow.php:21
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:125
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:137
+msgid "Limit date"
+msgstr "Date limite"
+
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedProductRow.php:9
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:126
+msgid "Condition"
+msgstr "Etat"
+
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedProductRow.php:10
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:127
+msgid "Check product"
+msgstr "Sélectionner des produits"
+
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedProductRow.php:11
+msgid "Action"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\collapsedProductRow.php:37
+msgid "Remove product"
+msgstr "Supprimer un produit"
+
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:8
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\localRow.php:11
+msgid "Create basket"
+msgstr "Créer un panier"
+
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:14
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedBasketRow.php:7
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:124
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:195
+msgid "Status"
+msgstr "Etat"
+
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:15
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedBasketRow.php:6
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:123
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:194
+msgid "Role"
+msgstr "Rôle"
+
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:16
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedBasketRow.php:9
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:17
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:126
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:197
+msgid "Create date"
+msgstr "Date de création"
+
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:17
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:127
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:198
+msgid "Order by quantity"
+msgstr "Trier par quantité"
+
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:75
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\index.php:13
+msgid "Quantity order"
+msgstr "Ordre en quantité"
+
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\index.php:123
+msgid "Ingredient"
+msgstr "Ingrédient"
+
+#: C:\Apache24\www\FFW_WEB\views\adminbaskets\localRow.php:8
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\localRow.php:11
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\roomRow.php:11
+msgid "Total quantity : "
+msgstr "Quantité totale : "
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\basketRow.php:19
+msgid "Affect destination"
+msgstr "Affecter une destination"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\basketRow.php:20
+msgid "Remove destination"
+msgstr "Supprimer une destination"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\basketRow.php:23
+#: C:\Apache24\www\FFW_WEB\views\admincourses\localRow.php:9
+#: C:\Apache24\www\FFW_WEB\views\admincourses\vehicleRow.php:10
+msgid "Affect to course"
+msgstr "Affecter à une course"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedBasketDestRow.php:5
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedBasketOrderRow.php:5
+msgid "Users"
+msgstr "Utilisateur"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedBasketDestRow.php:6
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedBasketOrderRow.php:6
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:147
+msgid "Companies"
+msgstr "Entreprise"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedBasketDestRow.php:7
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedBasketOrderRow.php:7
+msgid "Externals"
+msgstr "Externe"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\collapsedBasketRow.php:10
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\collapsedRoomRow.php:9
+msgid "Total quantity"
+msgstr "Quantité totale"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\companiesTable.php:9
+#: C:\Apache24\www\FFW_WEB\views\admincourses\externalsTable.php:3
+#: C:\Apache24\www\FFW_WEB\views\admincourses\externalsTable.php:9
+#: C:\Apache24\www\FFW_WEB\views\admincourses\usersTable.php:3
+#: C:\Apache24\www\FFW_WEB\views\admincourses\usersTable.php:10
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:16
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:26
+msgid "Mail"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\companyRow.php:11
+#: C:\Apache24\www\FFW_WEB\views\admincourses\externalRow.php:11
+#: C:\Apache24\www\FFW_WEB\views\admincourses\userRow.php:13
+msgid "Affect to basket"
+msgstr "Affecter à un panier"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\courseRow.php:5
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:15
+#: C:\Apache24\www\FFW_WEB\views\admincourses\vehiclesTable.php:3
+#: C:\Apache24\www\FFW_WEB\views\admincourses\vehiclesTable.php:11
+msgid "Description"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\courseRow.php:31
+msgid "Select vehicle"
+msgstr "Sélectionner un véhicule"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\courseRow.php:34
+msgid "Course map"
+msgstr "Carte"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\courseRow.php:37
+msgid "Baskets"
+msgstr "Paniers"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\courseRow.php:40
+msgid "Select driver"
+msgstr "Sélectionner un chauffeur"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:8
+msgid "New course"
+msgstr "Nouvelle collecte"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:16
+msgid "Route state"
+msgstr "Etat de la livraision"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:18
+msgid "Course date"
+msgstr "Date de collecte"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:19
+msgid "Duration"
+msgstr "Durée"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:20
+msgid "Course end"
+msgstr "Fin de collecte"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:21
+msgid "Vehicle"
+msgstr "Véhicule"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:96
+msgid "Remove affectation"
+msgstr "Supprimer une affectation"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:97
+msgid "Close"
+msgstr "Fermer"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:158
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:229
+msgid "Select local"
+msgstr "Sélectionner un local"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:175
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:246
+msgid "Set course name"
+msgstr "Nommer une collecte"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:180
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:251
+msgid "Create course"
+msgstr "Créer une collecte"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\index.php:222
+msgid "Remove affected local"
+msgstr "Supprimer un local affecté"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\vehiclesTable.php:4
+#: C:\Apache24\www\FFW_WEB\views\admincourses\vehiclesTable.php:14
+msgid "Volume"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\vehiclesTable.php:5
+#: C:\Apache24\www\FFW_WEB\views\admincourses\vehiclesTable.php:17
+msgid "Insurance date"
+msgstr "Date d'assurance"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\vehiclesTable.php:6
+#: C:\Apache24\www\FFW_WEB\views\admincourses\vehiclesTable.php:20
+msgid "Last revision"
+msgstr "Dernière révision"
+
+#: C:\Apache24\www\FFW_WEB\views\admincourses\vehiclesTable.php:7
+msgid "Availability"
+msgstr "Disponibilité"
+
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\collapsedRoomRow.php:7
+msgid "Is available"
+msgstr "Disponible"
+
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\collapsedRoomRow.php:8
+msgid "Is stockroom"
+msgstr "Salle de stockage"
+
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\index.php:6
+msgid "Manage locals"
+msgstr "Gestion des locaux"
+
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\index.php:26
+msgid "Add local"
+msgstr "Ajouter un local"
+
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\localRow.php:8
+msgid "Rooms"
+msgstr "Chambres"
+
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\localRow.php:14
+msgid "Add room"
+msgstr "Ajouter une salle"
+
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\roomRow.php:5
+#: C:\Apache24\www\FFW_WEB\views\adminlocals\roomRow.php:8
+msgid "Yes"
+msgstr "Oui"
+
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:10
+msgid "Change skills"
+msgstr "Changer des compétences"
+
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:21
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:118
+msgid "Skills status"
+msgstr "Status de la compétence"
+
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:22
+msgid "Right"
+msgstr "Droit"
+
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:113
+msgid "User skills"
+msgstr "Compétence utilisateur"
+
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:224
+msgid "Add skill"
+msgstr "Ajouter une compétence"
+
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:230
+msgid "Enabled"
+msgstr "Activé"
+
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:231
+msgid "Disabled"
+msgstr "Désactivé"
+
+#: C:\Apache24\www\FFW_WEB\views\adminusers\index.php:242
+msgid "Change status"
+msgstr "Changer le status"
+
+#: C:\Apache24\www\FFW_WEB\views\connection\errorAlert.php:3
+msgid "Connection error"
+msgstr "Erreur de connexion"
+
+#: C:\Apache24\www\FFW_WEB\views\connection\index.php:6
+msgid "Connection"
+msgstr "Connexion"
+
+#: C:\Apache24\www\FFW_WEB\views\connection\index.php:8
+msgid "Email : "
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\connection\index.php:9
+msgid "Email"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\connection\index.php:13
+msgid "Password : "
+msgstr "Mot de passe : "
+
+#: C:\Apache24\www\FFW_WEB\views\connection\index.php:14
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:24
+msgid "Password"
+msgstr "Mot de passe"
+
+#: C:\Apache24\www\FFW_WEB\views\connection\index.php:17
+msgid "Log in"
+msgstr "Connexion"
+
+#: C:\Apache24\www\FFW_WEB\views\home\index.php:5
+msgid "Who are we ?"
+msgstr "Qui sommes-nous ?"
+
+#: C:\Apache24\www\FFW_WEB\views\home\index.php:7
+msgid ""
+"Since 2013, Fight Food Waste is engaged against food wwastage. \n"
+"                Association is active in France and in other countries as "
+"Italy, Ireland and Portugal."
+msgstr ""
+"Depuis 2013, Fight Food Waste s'engage dans la lutte  \n"
+"                contre le gaspillage. L'association est présente en_EN "
+"France \n"
+"                et dans d'autres pays comme l'Italie, l'Irlande et \n"
+"                le Portugal."
+
+#: C:\Apache24\www\FFW_WEB\views\home\index.php:11
+msgid "Our goal is to reduce food wastage which produces..."
+msgstr ""
+"Notre but est de réduire le gaspillage alimentaire qui \n"
+"                production alimentaire mondiale."
+
+#: C:\Apache24\www\FFW_WEB\views\home\index.php:17
+msgid "How does it work ?"
+msgstr "Comment cela fonctionne ?"
+
+#: C:\Apache24\www\FFW_WEB\views\home\index.php:21
+msgid ""
+" \n"
+"                Every day we collect unsold stock and unused foodstuffs "
+"among private and business donors \n"
+"                to redistribute them to the most needy : associations, "
+"homeless person, isolated people.\n"
+"                To help us scan with FFW scanner your food items and our "
+"volunteers will pick up them during their daily round.\n"
+"                To order your scanner subscribe on our website and command "
+"it on your account space."
+msgstr ""
+" \n"
+"                Chaque jour nous effectuons des collectes parmi les \n"
+"                commerçants et particuliers afin de récupérer les \n"
+"                invendus et les produits qui ne seront pas consommés \n"
+"                afin de les redistribuer aux plus nécessiteux : "
+"associations, \n"
+"                personnes sans domiciles fixes ou isolées notamment. \n"
+"                Pour cela il suffit à l'aide du boitier FFW* de scanner "
+"ses \n"
+"                aliments à donner et nos bénévoles viendront les récupérer \n"
+"                lors des tournées quotidiennes. Pour commander son boitier \n"
+"                il vous suffit de vous inscrire sur le site* et de la "
+"commander \n"
+"                via son espace 'Mon Compte'."
+
+#: C:\Apache24\www\FFW_WEB\views\home\index.php:26
+msgid ""
+"\n"
+"                *Scanners are free for subscribers who contribute at least "
+"10€ per year and for volunteers who offers their services."
+msgstr ""
+"\n"
+"*les boitiers sont gratuits pour les adhérents cotisant au moins 10€ par an\n"
+"                et pour les bénévoles proposant leur(s) service(s)"
+
+#: C:\Apache24\www\FFW_WEB\views\home\index.php:31
+msgid "Have fun by doing like us and pick up wasted food !"
+msgstr "Amusez-vous à faire comme nous et ramassez les déchets !"
+
+#: C:\Apache24\www\FFW_WEB\views\home\index.php:35
+msgid "Click to play ! "
+msgstr "Cliquer pour jouer !"
+
+#: C:\Apache24\www\FFW_WEB\views\home\index.php:40
+msgid "How to participate ?"
+msgstr "Comment participer ?"
+
+#: C:\Apache24\www\FFW_WEB\views\home\index.php:44
+msgid ""
+"\n"
+"                To participate in that fight against the wastage with us "
+"it's easy ! \n"
+"                All you need to do is to subscribe on this website and "
+"choose the type of your contribution !"
+msgstr ""
+"\n"
+"                Pour participez à ce combat contre le gaspillage \n"
+"                avec nous c'est très simple ! \n"
+"                Il vous suffit de vous inscrire sur ce site et de choisir \n"
+"                la façon dont vous voulez et pouvez vous impliquer !"
+
+#: C:\Apache24\www\FFW_WEB\views\home\index.php:51
+msgid ""
+"4 choices to help us : \n"
+"                - you are merchants and you want us to pick up your unsold "
+"stocks\n"
+"                - you want to bring a financial contribution for the "
+"association and access to a large range of services\n"
+"                - you want to offer your services and become volunteer of "
+"the association\n"
+"                - you want to access to our public services and stay "
+"informed of our actions "
+msgstr ""
+"4 choix s'offrent à vous: <br>\n"
+"                - vous êtes commerçant et vous souhaitez que                "
+"l'on récolte vos invendus\n"
+"                - vous souhaitez contribuez financièrement à                 "
+"l'association et accéder ainsi à une série \n"
+"                de services spécfifiques \n"
+"                - vous souhaitez offrir vos services et "
+"devenir                 bénévole de l'association \n"
+"                - vous souhaitez accéder à nos services "
+"ouverts                au public et rester informer de nos actions"
+
+#: C:\Apache24\www\FFW_WEB\views\home\index.php:61
+msgid "What are services offered ?"
+msgstr "Quels sont les services proposés ?"
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\accountChoice.php:6
+msgid "Sign up"
+msgstr "Inscription"
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\accountChoice.php:11
+msgid "Merchant"
+msgstr "Entreprise"
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\accountChoice.php:12
+msgid "I'm a merchant and I want to gie my unsold to FFW !"
+msgstr "Je suis une entreprise et je veux donner mes invendus à FFW !"
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\accountChoice.php:15
+#: C:\Apache24\www\FFW_WEB\views\inscription\accountChoice.php:25
+#: C:\Apache24\www\FFW_WEB\views\inscription\accountChoice.php:35
+msgid "Choose this option"
+msgstr "Choisir cette option"
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\accountChoice.php:22
+msgid "I want to donate and access to FFW services"
+msgstr "Je veux faire des dons et accéder aux services de FFW"
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\accountChoice.php:32
+msgid "I want to offer my services to FFW and become volunteer !"
+msgstr "Je veux offrir mes services à FFW et devenir bénévole !"
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\accountChoice.php:44
+msgid "Choose later"
+msgstr "Choisir plus tard"
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:6
+msgid "Inscription"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:25
+msgid "Password (8 characters, 1 capital, 1 lower, 1 digit)"
+msgstr "Mot de passe (8 caractères, 1 lettre capital, 1 chiffre)"
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:28
+msgid "Password confirm"
+msgstr "Confirmation de mot de passe"
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:29
+msgid "Rewrite your password"
+msgstr "Réécrire votre mot de passe"
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:75
+msgid "Agree FFW general conditions"
+msgstr "Accepter les conditions générales de FFW"
+
+#: C:\Apache24\www\FFW_WEB\views\inscription\index.php:85
+msgid "Next step"
+msgstr "Etape suivante"
+
+#: C:\Apache24\www\FFW_WEB\views\stock\errorAlert.php:3
+msgid "Error"
+msgstr "Erreur"
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:6
+msgid "Success!"
+msgstr "Succès !"
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:13
+msgid "Error!"
+msgstr "Erreur !"
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:19
+msgid "Stock Managements"
+msgstr "Gestion des stocks"
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:27
+msgid "Pick a local in order to see the stocks and a room to edit its content"
+msgstr "Choisissez un local dans en premier pour voir les stocks et une salle pour modifier son contenu"
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:30
+msgid "Create an article"
+msgstr "Créer un article"
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:34
+msgid "Actions:"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:37
+msgid "Add a product to a room"
+msgstr "Ajouter un produit à une salle"
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:40
+msgid "Affect another room to a product"
+msgstr "Affecter une autre salle à un produit"
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:43
+msgid "Delete a product from the room"
+msgstr "Supprimer un produit d'une salle"
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:52
+msgid "Article"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:54
+msgid "Quantity"
+msgstr "Quantité"
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:55
+msgid "Code"
+msgstr ""
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:60
+msgid "Article name"
+msgstr "Nom de l'article"
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:87
+msgid "Change product rooms"
+msgstr "Changer un produit de salle"
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:111
+msgid "Delete products"
+msgstr "Supprimer des produits"
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:117
+msgid "Do you really want to delete this product?"
+msgstr "Voulez-vous vraiment supprimer ce produit ?"
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:133
+msgid "Add a product"
+msgstr "Ajouter un produit"
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:141
+msgid "Product code"
+msgstr "Code produit"
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:146
+msgid "Peremption date"
+msgstr "Date de péremption"
+
+#: C:\Apache24\www\FFW_WEB\views\stock\index.php:150
+msgid "State"
+msgstr "Etat"
+
+#: C:\Apache24\www\FFW_WEB\views\stock\successAlert.php:3
+msgid "Success"
+msgstr "Succès"

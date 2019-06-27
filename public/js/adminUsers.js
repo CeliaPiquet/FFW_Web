@@ -1,11 +1,13 @@
 var userFindFlag=false;
 var arrUsers;
 var body;
+var emptyCollapsedAddressRow;
 
 
 loadExternalDOMElement([
     {url:websiteRoot+"/adminUsers/userRow",func:getEmptyUserRow},
-    {url:websiteRoot+"/adminUsers/companyRow",func:getEmptyCompanyRow}
+    {url:websiteRoot+"/adminUsers/companyRow",func:getEmptyCompanyRow},
+    {url:websiteRoot+"/adminUsers/collapsedAddressRow",func:getEmptyCollapsedAddressRow}
 ]);
 
 function findUsersByFilter(){
@@ -16,7 +18,6 @@ function findUsersByFilter(){
     let skillsSelect=document.getElementById("skillsSelect");
     let skillsStatusSelect=document.getElementById("skillsStatusSelect");
     let rightsSelect=document.getElementById("rightsSelect");
-    console.log(skillsSelect);
 
     body.email=document.getElementById("mailInput").value;
     body.lastname= document.getElementById("lastnameInput").value;
@@ -47,7 +48,6 @@ function searchUserAPI(offset=0,limit=20,searchUserAPI){
 
         if(request.readyState==4){
             if(request.status==200){
-                console.log(request.responseText);
                 let apiUsers=JSON.parse(request.responseText);
 
                 if(apiUsers.length==limit){
@@ -75,9 +75,7 @@ function searchUserAPI(offset=0,limit=20,searchUserAPI){
         }
     }
     url+=query;
-    console.log(query);
     request.open("GET",url);
-    console.log(JSON.stringify(body));
     request.send(JSON.stringify(body),false);
 
 }
@@ -85,7 +83,6 @@ function searchUserAPI(offset=0,limit=20,searchUserAPI){
 
 function createUserRow(){
 
-    console.log(arrUsers);
     let rightsSelect=document.getElementById("rightsSelect");
 
     let userRowContainer=document.getElementById("userRowsContainer");
@@ -123,7 +120,6 @@ function createUserRow(){
                 option.value=arrUsers[i].skills[j].skid;
                 selectSkills.append(option);
             }
-            console.log(statusMap);
             for(let key of statusMap.keys()){
                 let option=document.createElement("option");
                 if(key===body.status){
@@ -162,8 +158,7 @@ function editUser(event){
     let user=element.user;
     let tmpUser=JSON.parse(JSON.stringify(user));
     let modal=document.getElementById("userModal");
-    let rightsList=document.getElementById("userRightsList");
-
+    let rightsBtns=document.getElementsByName("rightsBtns");
 
     modal.user=user;
     modal.tmpUser=tmpUser;
@@ -172,21 +167,31 @@ function editUser(event){
 
     matchDOMAndObject("value","#",modal,tmpUser);
 
-    console.log(tmpUser.rights);
-    for(let i=0;i<rightsList.childNodes.length;i++){
-        if(rightsList.childNodes[i].classList){
-            rightsList.childNodes[i].classList.remove("active");
-            if((tmpUser.rights & (1<<rightsList.childNodes[i].id))!=0){
-                rightsList.childNodes[i].classList.add("active");
+    for(let i=0;i<rightsBtns.length;i++){
+        if(tmpUser.rights>=512){
+            if(rightsBtns[i].classList){
+                rightsBtns[i].disabled=true;
+                if(tmpUser.rights===513&&i==0){
+                    rightsBtns[i].classList.add("active");
+                }
+                else if(i>0){
+                    rightsBtns[i].classList.add("active");
+                }
+
+            }
+
+        }
+        else if(rightsBtns[i].classList){
+            rightsBtns[i].classList.remove("active");
+            if((tmpUser.rights & (1<<rightsBtns[i].id))!=0){
+                rightsBtns[i].classList.add("active");
             }
         }
 
-        rightsList.childNodes[i].addEventListener("click",updateRightsList,false);
+        rightsBtns[i].addEventListener("click",updateRightsList,false);
     }
     updateUserSkillSelect(tmpUser.skills);
     updateCompaniesTable(tmpUser.companies);
-
-    console.log("TOTO");
 
     modalToggle('userModal');
 }
@@ -226,8 +231,6 @@ function updateRightsList(event){
         tmpUser.rights+=Math.pow(2,rightItem.id);
         rightItem.classList.add("active");
     }
-    console.log(tmpUser.rights);
-
 
 }
 
@@ -236,7 +239,6 @@ function updateUserSkillStatus(){
     tmpUser=document.getElementById("userModal").tmpUser;
     let skillsSelectEditable=document.getElementById("skillsSelectEditable");
     let skillsStatusSelectEditable=document.getElementById("skillsStatusSelectEditable");
-
 
     for(let i=0 ; i<tmpUser.skills.length;i++){
         if(skillsSelectEditable.options[skillsSelectEditable.selectedIndex].value===tmpUser.skills[i].skid){
@@ -255,13 +257,27 @@ function updateCompaniesTable(companies){
     if(companies&&companies.length>0){
 
         for(let i=0 ; i<companies.length ; i++){
-            console.log(companies[i]);
             clonedCompany=newEmptyCompany.cloneNode(true);
+            clonedAddressRow=emptyCollapsedAddressRow.cloneNode(true);
+            matchDOMAndObject("value","#",clonedAddressRow,companies[i].address);
+            clonedCompany.collapsedAddressRow=clonedAddressRow.querySelector("#collapsedAddress");
             matchDOMAndObject("innerHTML","#",clonedCompany,companies[i]);
             companiesTable.append(clonedCompany);
+            companiesTable.append(clonedAddressRow);
         }
     }
 }
+
+
+function collapseAddressRow(element){
+
+
+    parent=getFirstParent(element,"id","companyRow");
+    if(parent.tagName!="BODY"){
+        collapseDisplay(parent.collapsedAddressRow);
+    }
+}
+
 
 function updateUserSkillSelect(skills){
 
@@ -302,34 +318,16 @@ function updateUser(){
     delete userBody.address;
     delete userBody.skills;
 
-    console.log(userBody);
+
 
     if(tmpUser.skills){
-        updateUsersSkillAPI(tmpUser.uid,tmpUser.skills,0,updateUsersSkillAPI);
+        for(let i=0 ; i<tmpUser.skills.length;i++){
+
+            exchangeToAPI(ffwApiUrl+'/users/'+tmpUser.uid+'/skills',tmpUser.skills[i],'PUT',null,null);
+        }
     }
 
     updateUserAPI(userBody);
-
-}
-function updateUsersSkillAPI(uid, skillBody, count, updateSkillAPI){
-
-    let request=new XMLHttpRequest();
-
-    request.onreadystatechange=function(){
-
-        if(request.readyState==4&&request.status==200){
-            console.log(request.responseText);
-            count++;
-            if(count<skillBody.length){
-                updateSkillAPI(skillBody,count,updateSkillAPI)
-            }
-        }
-    };
-
-    let url=ffwApiUrl+"/users/"+uid+"/skills";
-    request.open("PUT",url);
-    request.send(JSON.stringify(body[count]));
-
 }
 
 function updateUserAPI(userBody){
@@ -338,15 +336,12 @@ function updateUserAPI(userBody){
 
     request.onreadystatechange=function(){
 
-        if(request.readyState==4&&request.status==200){
-            console.log(request.responseText);
+        if(request.readyState==4){
             findUsersByFilter();
         }
     };
 
-    console.log(ffwApiUrl+"/users/"+userBody.uid);
     let url=ffwApiUrl+"/users/"+userBody.uid;
-    console.log(JSON.stringify(userBody));
     request.open("PUT",url);
     request.send(JSON.stringify(userBody));
 
@@ -362,7 +357,10 @@ function getEmptyUserRow(domText){
 function getEmptyCompanyRow(domText){
     emptyCompanyRow=document.createElement('tr');
     emptyCompanyRow.class="align-items-center";
-    emptyCompanyRow.id="userRow";
+    emptyCompanyRow.id="companyRow";
     emptyCompanyRow.innerHTML = domText;
 }
 
+function getEmptyCollapsedAddressRow(domText) {
+    emptyCollapsedAddressRow=prepareEmptyDomElement('tr',{className:"align-items-center",id:"collapsedAddressRow",innerHTML:domText});
+}

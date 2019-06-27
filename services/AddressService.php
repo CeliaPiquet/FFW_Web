@@ -27,11 +27,9 @@ class AddressService {
         $url = "$apiUrl/addresses";
         $jsonAddress=json_encode($address);
 
-        var_dump($jsonAddress);
 
         $response=$curl->curlPost($url,$jsonAddress, array());
 
-        var_dump($response);
         if($response["httpCode"]>=400){
             return null;
         }
@@ -98,7 +96,7 @@ class AddressService {
         $apiUrl = Configuration::get("gMapGeolocateUrl", "/");
         $apiKey = Configuration::get("gMapApiKey", "/");
 
-        $response= $curl->curlGet($apiUrl,array("key"=>$apiKey,"address"=>strval($address),"sensor"=>"false", "region"=>"fr"),array());
+        $response= $curl->curlGet($apiUrl,array("key"=>$apiKey,"address"=>strval($address),"sensor"=>"false", "region"=>"fr_FR"),array());
 
         if($response["httpCode"]>=400){
             return null;

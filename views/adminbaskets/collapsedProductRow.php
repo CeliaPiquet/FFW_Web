@@ -10,18 +10,18 @@
                 <th> <?php echo _("Check product"); ?> </th>
                 <th> <?php echo _("Action"); ?> </th>
             </tr>
-            <tr >
+            <tr id="productsHeader">
                 <td>
-                    <input type="text" class="form-control" onkeyup="sortProductByFilter(this)" name="sortProductInput" id="articleCategory" placeholder="<?php echo _("Category");?>">
+                    <input type="text" class="form-control" onkeyup="sortProductByFilter(this)" name="sortProductInput" id="name" object="ingredient"  placeholder="<?php echo _("Category");?>">
                 </td>
                 <td>
-                    <input type="text" class="form-control" onkeyup="sortProductByFilter(this)" name="sortProductInput" id="articleName" placeholder="<?php echo _("Name"); ?>">
+                    <input type="text" class="form-control" onkeyup="sortProductByFilter(this)" name="sortProductInput" id="name" object="article"  placeholder="<?php echo _("Name"); ?>">
                 </td>
                 <td>
-                    <input type="date" class="form-control" onchange="sortProductByFilter(this)" name="sortProductInput" id="createTime" placeholder="<?php echo _("Limit date");?>">
+                    <input type="date" class="form-control" onchange="sortProductByFilter(this)" name="sortProductInput" id="limitDate" object="product"  placeholder="<?php echo _("Limit date");?>">
                 </td>
                 <td>
-                    <select id="state"  name="sortProductInput" onchange="sortProductByFilter(this)">
+                    <select id="state"  object="product" name="sortProductInput" onchange="sortProductByFilter(this)">
                         <option></option>
                         <?php
                         foreach($arrProductConditions as $productCondition){
@@ -31,10 +31,10 @@
                     </select>
                 </td>
                 <td>
-                    <input type="checkbox" class="form-control" onclick="checkAllProduct(this)" id="checkProductInput">
+                    <input type="checkbox" class="form-control" name="productsInput" onclick="checkAllProduct(this)" id="checkProductInput">
                 </td>
                 <td>
-                    <button type="checkbox" class="form-control btn" onclick="removeProduct(this)" id="removeProduct">Remove product</button>
+                        <button type="checkbox" class=" btn" onclick="removeProduct(this)"  name="productsInput" id="removeProduct"><?php echo  _("Remove product");?></button>
                 </td>
             </tr>
             </thead>

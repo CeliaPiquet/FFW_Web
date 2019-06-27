@@ -14,6 +14,7 @@ loadExternalDOMElement([
 
 function findBasketsByFilter(){
 
+
     arrBaskets=[];
     let filterObject={
         basketStatusSelect:null,
@@ -22,8 +23,6 @@ function findBasketsByFilter(){
     }
 
     matchDOMAndObject("value","#",document.getElementById("basketsTableHeader"),filterObject,true);
-
-    console.log(filterObject);
 
     args={
         query:{
@@ -44,11 +43,11 @@ function collapseProductElement(event){
     element=event.target;
     parent=getFirstParent(element,"id","basketRow");
 
-    console.log(element);
     if(element.id=="collapseBtnProduct"){
         collapseDisplay(parent.collapseProductRow);
     }
 }
+
 
 function updateBasketRows(element) {
 
@@ -62,18 +61,13 @@ function updateBasketRows(element) {
 
     if(arrBaskets){
 
-        console.log(arrBaskets);
-
         for(let i =0 ; i<arrBaskets.length; i++){
 
             if((createTime && arrBaskets[i].createTime===createTime)||!createTime){
-                console.log(arrBaskets[i])
                 filteredArrBasket.push(arrBaskets[i]);
             }
         }
-        console.log(arrBaskets);
         arrBaskets=filteredArrBasket;
-        console.log(arrBaskets)
         for (let i = 0; i < arrBaskets.length; i++) {
             createBasketRow(basketRowsContainer,arrBaskets[i]);
         }
@@ -108,7 +102,20 @@ function createBasketRow(container,basket,oldRow){
 
     newBasketRow.querySelector("#collapseBtnProduct").addEventListener('click',collapseProductElement,false);
 
+    let arrStatus=["validated","refused","canceled"];
 
+    for(let i=0 ; i<arrStatus.length ; i++){
+
+        if(arrStatus[i]=== basket.status){
+            newBasketRow.querySelector("#" + arrStatus[i]).disabled=true;
+        }
+    }
+    if(basket.status==="delivered" || basket.status==="transit" || basket.status==="refused" || basket.status==="affected"){
+        let inputs=newBasketRow.querySelectorAll("[name='basketsInput']");
+        for(let i=0; i<inputs.length;i++){
+            inputs[i].disabled=true;
+        }
+    }
     // newBasketRow.querySelector("#collapseBtnAddress").addEventListener('click',collapseAddressElement,false)
 
     basket["totalQuantity"]=basket.products&&basket.products.length>0?basket.products.length:"0";
@@ -118,15 +125,17 @@ function createBasketRow(container,basket,oldRow){
     matchDOMAndObject("innerHTML", "#", newBasketRow, basket,false,1)
 
     container.append(newBasketRow);
+    newBasketRow.basket=basket;
 
     collapsedProductsRow= createCollapsedProductsRow(container,basket.products,newBasketRow);
+
 
     if(oldRow){
         container.replaceChild(newBasketRow,oldRow);
     }
 
     newBasketRow.collapseProductRow=collapsedProductsRow.querySelector("#collapseProducts");
-    newBasketRow.basket=basket;
+
 
 }
 
@@ -139,6 +148,13 @@ function createCollapsedProductsRow(container,products,basketRow){
     updateProductRows(products,newCollapsedProductRow);
 
     let productsTable=newCollapsedProductRow.querySelector("#productsTable");
+
+    if(basketRow.basket.status==="delivered"||basketRow.basket.status==="transit"||basketRow.basket.status==="refused"){
+        let productsInput=newCollapsedProductRow.querySelectorAll("[name='productsInput']");
+        for(let i=0; i<productsInput.length; i++){
+            productsInput[i].disabled=true;
+        }
+    }
 
     productsTable.products=products;
     productsTable.basketRow=basketRow;
@@ -189,11 +205,11 @@ function removeProduct(element){
 
 
 
-function validateBasket(element){
+function changeBasketStatus(element){
 
     let basket=getFirstParent(element,"id","basketRow").basket;
 
-    basket.status="validated";
+    basket.status=element.value;
 
     exchangeToAPI(ffwApiUrl+"/baskets",basket,"PUT",changeArrBaskets);
 
@@ -201,29 +217,11 @@ function validateBasket(element){
 
 }
 
-
-function cancelBasket(element){
-
-    let basket=getFirstParent(element,"id","basketRow").basket;
-
-    basket.status="canceled";
-
-    exchangeToAPI(ffwApiUrl+"/baskets",basket,"PUT",changeArrBaskets);
-
-    updateBasketRows(arrBaskets);
-
-}
 
 function changeArrBaskets(element){
 
-    console.log(element);
-
     for (let i=0 ; i< arrBaskets.length ; i++){
         arrBaskets[i];
-        console.log(arrBaskets[i]);
-        console.log(element);
-        console.log(arrBaskets[i].bid==element.bid.toString());
-        console.log(arrBaskets[i].status!==element.status);
 
         if(arrBaskets[i].bid==element.bid.toString()  ){
             arrBaskets.splice(i,1);

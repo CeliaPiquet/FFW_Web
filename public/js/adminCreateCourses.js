@@ -5,9 +5,12 @@ var emptyUsersTable;
 var emptyCompaniesTable;
 var emptyExternalsTable;
 
+
+
 var emptyUserRow;
 var emptyCompanyRow;
 var emptyExternalRow;
+
 
 var emptyCollapsedBasketDestRow;
 
@@ -15,11 +18,11 @@ var emptyCollapsedBasketDestRow;
 function collapseBasketDestRow(element){
     parent=getFirstParent(element,"id","basketRow");
     collapseDisplay(parent.collapsedBasketDest);
-
 }
+
 function collapseAddressRow(element){
 
-    idArr=["userRow","externalRow","companyRow","localRow"];
+    idArr=["userRow","externalRow","companyRow","localRow","basketRow"];
     for(let i=0 ; i<idArr.length;i++){
         parent=getFirstParent(element,"id",idArr[i]);
         if(parent.tagName!="BODY"){
@@ -45,7 +48,6 @@ function getBasketsOrder(){
 
     });
 
-    arrOrderIds=[];
     args={
         query:{
             offset:0,
@@ -53,11 +55,11 @@ function getBasketsOrder(){
             subTarget:"pathFinding",
             basketAddressIds:basketAddressIds
         },
-        course:course
+        course:course,
     };
 
-    console.log(course);
-    exchangeToAPI(ffwApiUrl+"/courses/pathFinding",arrOrderIds,"GET",createCourseToAPI,args);
+
+    exchangeToAPI(ffwApiUrl+"/courses/pathFinding",null,"GET",createCourseToAPI,args);
 }
 
 function createCourseToAPI(element,args){
@@ -65,35 +67,61 @@ function createCourseToAPI(element,args){
     if(!element){
         return null;
     }
-
-    args.arrOrderIds=element;
+    args.arrOrderIds=Object.values(element.basketOrder);
     args.query={completeData:true};
     args.course.status="created";
     args.course.type="course";
     args.course.affectedRow=null;
+    args.course.duration=element.duration;
+
+    delete(element.cost);
     args.basketCounter=0;
+
+    if(args.arrOrderIds&&args.course.duration){
+        exchangeToAPI(ffwApiUrl+"/courses",args.course,"POST",updateBasketsToAPI,args);
+    }
     //TODO control isPublic
-    exchangeToAPI(ffwApiUrl+"/courses",args.course,"POST",updateBasketsToAPI,args);
 }
 
 function updateBasketsToAPI(element,args){
 
-    console.log(element);
-
     if(args.basketCounter<args.arrOrderIds.length){
         let basket=args.course.baskets.get(args.arrOrderIds[args.basketCounter]);
         basket.order=args.basketCounter;
+        basket.affectedRow=null;
         basket.serviceId=args.course.serid;
         basket.status="affected";
         args.basketCounter++;
-        console.log(basket);
-        exchangeToAPI(ffwApiUrl+"/baskets/"+args.arrOrderIds[args.basketCounter-1],basket,"PUT",updateBasketsToAPI,args);
+        if(basket.serviceId){
+            exchangeToAPI(ffwApiUrl+"/baskets",basket,"PUT",updateBasketsToAPI,args);
+        }
     }
-
-
+    else{
+        resetCourseModal();
+        modalToggle('courseModal',"hide");
+    }
 
 }
 
+
+function resetCourseModal(){
+
+    let courseModal=document.getElementById("courseModal");
+    let basketRowsContainer=document.getElementById("basketRowsContainer");
+    let localModal=document.getElementById("localModal");
+    let localRowsContainer=document.getElementById("localRowsContainer");
+    let createCourseBtn=document.getElementById("createCourseBtn");
+    let courseNameInput=document.getElementById("courseNameInput");
+
+    courseNameInput.value="";
+    createCourseBtn.disabled=true;
+    localRowsContainer.innerHTML="";
+    basketRowsContainer.innerHTML="";
+    courseModal.course=null;
+    localModal.local=null
+
+
+}
 function setCourseName(element){
 
     let course=document.getElementById("courseModal").course;
@@ -112,9 +140,10 @@ function removeAffect(element){
 
     let arrNullKey=["userId","companyId","externalId"];
     let parentRow=getFirstParent(element,"className","genericRow");
+    let modal=getFirstParent(element,"className","genericModal");
+    let course=modal.course;
     let affectToCourseBtn=parentRow.querySelector("#affectToCourseBtn");
     let affectDestBtn=parentRow.querySelector("#collapseBasketDestRow");
-    let course=document.getElementById("courseModal").course;
 
     if(parentRow.basket && parentRow.basket.affectedRow){
         parentRow.basket.affectedRow.querySelector("#affectToBasket").innerHTML="Affect to basket";
@@ -129,19 +158,22 @@ function removeAffect(element){
         }
     }
     else{
-        course.affectedRow.querySelector("#affectToCourse").innerHTML="Affect to course";
-        course.localId=null;
-        course.local=null;
+        let affectDestBtn=modal.querySelectorAll( "[name='affectBtn']" );
+        for(let i=0; i<affectDestBtn.length;i++){
+            affectDestBtn[i].innerHTML="Affect to course";
+        }
+        course[modal.objectName]=null;
+        course[modal.objectId]=null;
     }
 
 
 }
 
 
-function affectToBasket(element){
+function affectToBasket(event){
 
+    let element=event.target;
     let arrNullKey=["userId","companyId","externalId"];
-
     let parentRow=getFirstParent(element,"className","genericRow");
     let parentTable=getFirstParent(parentRow,"className","genericTable");
     let parentDomNode=getFirstParent(parentTable,"id","collapsedBasketDestRow").parentDomNode;
@@ -150,7 +182,7 @@ function affectToBasket(element){
     let basket=parentTable.basket;
     let course=document.getElementById("courseModal").course;
 
-    let arrAffectBtn=parentTable.querySelectorAll("#affectToBasket");
+    let arrAffectBtn=parentTable.querySelectorAll("#affectTo");
 
     for(let key in arrAffectBtn){
         arrAffectBtn[key].innerHTML="Affect to basket";
@@ -158,7 +190,7 @@ function affectToBasket(element){
 
     if(parentDomNode.basket[parentRow.parentIdName]==parentRow.idValue ){
         parentDomNode.basket[parentRow.parentIdName]=null;
-        parentRow.querySelector("#affectToBasket").innerHTML="Affect to basket";
+        parentRow.querySelector("#affectTo").innerHTML="Affect to basket";
         affectDestBtn.innerHTML="Affect destination";
         if(course.baskets.get(parentTable.basket.bid)){
             affectToCourseBtn.innerHTML="Affect to course";
@@ -169,8 +201,7 @@ function affectToBasket(element){
         for(let i=0 ; i<arrNullKey.length ; i++){
             basket[arrNullKey[i]]=null;
         }
-        console.log(parentRow);
-        parentRow.querySelector("#affectToBasket").innerHTML="Affected to basket";
+        parentRow.querySelector("#affectTo").innerHTML="Affected to basket";
         affectDestBtn.innerHTML="Destination affected";
         basket[parentRow.parentIdName]=parentRow.idValue;
         basket[parentRow.objectName]=parentRow[parentRow.objectName];
@@ -189,10 +220,21 @@ function affectToCourse(element){
     if(parentRow.id=="localRow"){
 
         if(course.local && course.local.loid===parentRow.local.loid){
+            let findBasketFlag=1;
+            course.baskets.forEach(function(value,key,map){
+               if(value.role=="export") {
+                   if(findBasketFlag){
+                       findBasketsByFilter();
+                       findBasketFlag=0;
+                   }
+                   map.delete(key);
+               }
+            });
             element.innerHTML="Affect to course";
             course.localId=null;
             course.local=null;
         }
+
         else if(!course.local){
             element.innerHTML="Affected to course";
             course.affectedRow=parentRow;
@@ -201,8 +243,6 @@ function affectToCourse(element){
         }
     }
     else if(parentRow.id=="basketRow"){
-
-        console.log(parentRow.basket);
         if(!course.baskets.get(parentRow.basket.bid)){
             if(parentRow.basket.role=="import" || (parentRow.basket.role=="export" && (parentRow.basket.userId||parentRow.basket.companyId||parentRow.basket.externalId))){
                 element.innerHTML="Affected to course";
@@ -227,49 +267,10 @@ function affectToCourse(element){
 
 
 
-function updateGenericsRow(element,args){
-
-    args.container.innerHTML="";
-
-    for(let i=0 ; i<element.length;i++){
-        args.element=element[i];
-        createGenericRow(args);
-    }
-}
-
-function createGenericRow(args){
-
-    let newGenericRow=args.emptyRow.cloneNode(true);
-
-
-    console.log(args.element);
-    newGenericRow[args.objectName]=null;
-
-    newGenericRow[args.objectName]=args.element;
-    newGenericRow.address=args.element.address;
-    newGenericRow.idName=args.idName;
-    newGenericRow.idValue=args.element[args.idName];
-    newGenericRow.objectName=args.objectName;
-    newGenericRow.parentIdName=args.parentIdName;
-    newGenericRow.parentDomNode=args.parentDomNode;
-
-
-    args.container.append(newGenericRow);
-    args.previousNode=newGenericRow;
-
-    if(args.specifyFunc){
-        args.specifyFunc(args);
-    }
-
-    console.log(args.element);
-    matchDOMAndObject('innerHTML', '#', newGenericRow, args.element,false,1);
-
-}
-
 function createSubBasketRow(args){
 
     let newCollapsedAddressRow=emptyCollapsedAddressRow.cloneNode(true);
-    let affectBtn=args.previousNode.querySelector("#affectToBasket");
+    let affectBtn=args.domNode.querySelector("#affectTo");
 
 
     newCollapsedAddressRow[args.objectName]=args.element;
@@ -280,7 +281,10 @@ function createSubBasketRow(args){
     matchDOMAndObject('value', '#', newCollapsedAddressRow, args.element.address);
 
     if(args.parentDomNode.basket.role=="export"){
-        if(args.parentDomNode.basket[args.parentIdName]==args.element[args.idName]){
+        affectBtn.addEventListener('click',affectToBasket,false);
+
+
+        if(args.parentDomNode.basket[args.parentIdName]===args.element[args.idName]){
             affectBtn.innerHTML="Affected to basket";
         }
         else{
@@ -291,7 +295,7 @@ function createSubBasketRow(args){
         affectBtn.remove();
     }
 
-    args.previousNode.collapsedAddressRow=newCollapsedAddressRow.querySelector("#collapsedAddress");
+    args.domNode.collapsedAddressRow=newCollapsedAddressRow.querySelector("#collapsedAddress");
 
     args.container.append(newCollapsedAddressRow);
 }
@@ -300,7 +304,7 @@ function createSubBasketRow(args){
 function createLocalRow(args){
 
     let newCollapsedAddressRow=emptyCollapsedAddressRow.cloneNode(true);
-    let affectBtn=args.previousNode.querySelector("#affectToCourse");
+    let affectBtn=args.domNode.querySelector("#affectToCourse");
 
 
     newCollapsedAddressRow[args.objectName]=args.element;
@@ -315,7 +319,7 @@ function createLocalRow(args){
         affectBtn.innerHTML="Affect to course";
     }
 
-    args.previousNode.collapsedAddressRow=newCollapsedAddressRow.querySelector("#collapsedAddress");
+    args.domNode.collapsedAddressRow=newCollapsedAddressRow.querySelector("#collapsedAddress");
 
     args.container.append(newCollapsedAddressRow);
 }
@@ -332,7 +336,7 @@ function updateBasketRows(element,args){
 
     for(let i=0 ; i<arrBaskets.length;i++){
         let basketCity= arrBaskets[i].srcAddress&&arrBaskets[i].srcAddress.cityName?arrBaskets[i].srcAddress.cityName.toLowerCase():null;
-        if((cityName&&basketCity&&basketCity.includes(cityName.toLowerCase()))||!cityName && (arrBaskets[i].status==="validated"||arrBaskets[i].status==="canceled")){
+        if((cityName&&basketCity&&basketCity.includes(cityName.toLowerCase()))||!cityName){
             filteredBasketArr.push(arrBaskets[i]);
         }
 
@@ -344,17 +348,18 @@ function updateBasketRows(element,args){
     }
 }
 
+function createBasketRow(args){
 
-function createBasketRow(basket,container,role){
-
-    let newBasketRow=emptyBasketRow.cloneNode(true);
+    let basketRow=args.domNode;
+    let basket=args.element;
     let newCollapsedBasketDestRow=emptyCollapsedBasketDestRow.cloneNode(true);
-    let affectDestBtn=newBasketRow.querySelector("#collapseBasketDestRow");
-    let course =document.getElementById("courseModal").course;
+    let affectDestBtn=basketRow.querySelector("#collapseBasketDestRow");
+    let course =args.course;
     let arrId={userId:"#displayUsersTable",companyId:"#displayCompaniesTable",externalId:"#displayExternalsTable"};
 
+    basketRow.querySelector("#addressCel").remove();
 
-    if(role=="import"){
+    if(args.role=="import"){
         affectDestBtn.innerHTML="Show source";
         for(let key in arrId){
             if(!basket[key]){
@@ -365,29 +370,28 @@ function createBasketRow(basket,container,role){
     }
     else{
         if(basket.userId || basket.externalId|| basket.companyId) {
-            newBasketRow.querySelector("#collapseBasketDestRow").innerHTML = "Destination affected";
+            basketRow.querySelector("#collapseBasketDestRow").innerHTML = "Destination affected";
         }
-        newBasketRow.querySelector("#removeAffect").disabled=false;
+        basketRow.querySelector("#removeAffect").disabled=false;
     }
     if(course.baskets.get(basket.bid)){
-        newBasketRow.querySelector("#affectToCourseBtn").innerHTML="Affected to course";
+        basketRow.querySelector("#affectToCourseBtn").innerHTML="Affected to course";
     }
 
-    newBasketRow.basket=null;
+    basketRow.basket=null;
 
     basket.totalQuantity=basket.products&&basket.products.length?basket.products.length:"0";
 
-    matchDOMAndObject('value', '#', newBasketRow, basket,false,null,"basket");
-    matchDOMAndObject('innerHTML', '#', newBasketRow, basket,false,null,"basket");
+    matchDOMAndObject('value', '#', basketRow, basket,false,null,"basket");
+    matchDOMAndObject('innerHTML', '#', basketRow, basket,false,null,"basket");
 
 
-    newBasketRow.basket=basket;
-    newBasketRow.collapsedBasketDest=newCollapsedBasketDestRow.querySelector("#collapsedBasketDest");
+    basketRow.basket=basket;
+    basketRow.collapsedBasketDest=newCollapsedBasketDestRow.querySelector("#collapsedBasketDest");
     newCollapsedBasketDestRow.basket=basket;
-    newCollapsedBasketDestRow.parentDomNode=newBasketRow;
+    newCollapsedBasketDestRow.parentDomNode=basketRow;
+    args.container.append(newCollapsedBasketDestRow);
 
-    container.append(newBasketRow);
-    container.append(newCollapsedBasketDestRow);
 }
 
 function changeBasketQuantityOrder(){
@@ -424,15 +428,22 @@ function changeBasketQuantityOrder(){
 function openNewCourseModal(){
 
     let courseModal=document.getElementById("courseModal");
-    courseModal.course=getEmtpyCourse();
+    courseModal.course=getEmptyCourse();
     courseModal.arrBaskets=[];
 
     modalToggle('courseModal');
 }
 
-function openLocalModal(){
+function openLocalModal(element){
 
     modalToggle('localModal');
+
+    let course=getFirstParent(element,"className","genericModal").course;
+    let localModal=document.getElementById("localModal");
+
+    localModal.course=course
+    localModal.objectId="localId";
+    localModal.objectName="local";
 }
 function closeLocalModal(element){
 
@@ -455,7 +466,6 @@ loadExternalDOMElement([
     {url:websiteRoot+"/adminCourses/externalsTable",func:getEmptyExternalsTable},
     {url:websiteRoot+"/adminCourses/externalRow",func:getEmptyExternalRow},
     {url:websiteRoot+"/adminCourses/localRow",func:getEmptyLocalRow}
-
 ]);
 
 
@@ -476,6 +486,13 @@ function getEmptyCollapsedAddressRow(domText) {
 
 function getEmptyUsersTable(domText) {
     emptyUsersTable=prepareEmptyDomElement('table',{className:"table table-striped table-hover genericTable",id:"usersTable",innerHTML:domText});
+    emptyUsersTableCourse=prepareEmptyDomElement('table',{className:"table table-striped table-hover genericTable",id:"usersTable",innerHTML:domText});
+    let arrInputs= emptyUsersTableCourse.querySelectorAll(" [name='filterInput'] ");
+
+    for(i=0;i<arrInputs.length ;i++){
+        arrInputs[i].addEventListener('keyup',findDriversByFilter,false);
+    }
+
 }
 function getEmptyUserRow(domText) {
     emptyUserRow=prepareEmptyDomElement('tr',{className:"align-items-center genericRow",id:"userRow",innerHTML:domText});
@@ -550,7 +567,6 @@ function displayTable(element,nodeToClone){
         }
         for(let key in idNameUrl){
             if(basket[key]){
-                console.log(key);
                 let arrResult=[];
                 exchangeToAPI(ffwApiUrl+"/"+idNameUrl[key].url+"/"+basket[key],arrResult,"GET",updateGenericsRow,idNameUrl[key].args);
             }
@@ -564,9 +580,14 @@ function displayTable(element,nodeToClone){
 
         }
     }
+    return newTable;
 }
 function displayUsersTable(element){
-    displayTable(element,emptyUsersTable);
+    let userTable=displayTable(element,emptyUsersTable);
+    let arrInput=userTable.querySelectorAll("[name='filterInput']");
+    for(let i=0 ; i<arrInput.length;i++){
+        arrInput[i].addEventListener("keyup",findUsersByFilter,false);
+    }
 }
 
 function displayCompaniesTable(element){
@@ -577,7 +598,7 @@ function displayExternalsTable(element){
     displayTable(element,emptyExternalsTable);
 }
 
-function getEmtpyCourse(){
+function getEmptyCourse(){
 
     return {
         serid:null,
@@ -589,9 +610,14 @@ function getEmtpyCourse(){
         isPublic:null,
         status:null,
         isPremium:null,
-        serviceTime:null,
+        serviceTime:"0000-00-00 00:00:00",
+        duration:0,
+        serviceEnd:"0000-00-00 00:00:00",
         routeState:null,
+        vehicle:null,
         vehicleId:null,
+        user:null,
+        userId:null,
         localId:null,
         local:null,
         baskets:new Map()
