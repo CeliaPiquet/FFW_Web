@@ -130,7 +130,7 @@ function skillAPI(method="POST"){
         }
     };
 
-    let url="http://ffwapi.priv/users/"+user.uid+"/skills";
+    let url=ffwApiUrl+"/users/"+user.uid+"/skills";
     request.open(method,url);
     request.send(JSON.stringify(skillBody));
 }
