@@ -123,6 +123,7 @@ abstract class Controller {
 
         $isConnected=false;
         $isAdmin=false;
+        $arrRights=[];
 
         if(isset($_SESSION['user']) && !empty($_SESSION['user'])){
             $user=unserialize($_SESSION['user']);
