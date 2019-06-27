@@ -102,7 +102,7 @@ function isObjectEmpty(controlledObj){
     return true;
 }
 
-//Copie et remplace un objet par un autre;
+//Copie et remplace un objet par un autre, en faisant cela les références ne sont pas conservées
 function copyObjectProperty(srcObj,dstObj){
 
     if(srcObj && dstObj){
@@ -162,9 +162,9 @@ function getElementBySelectorAndObject(element,selector,objectKey,objectName=nul
 }
 
 //
-function modalToggle(modalId,params=null){
+function modalToggle(modalId,params={backdrop:false}){
 
-    params=params?params:{backdrop:false};
+    // params=params?params:{backdrop:false};
     if(document.getElementById(modalId)){
         $('#'+ modalId).modal(params)
     }
@@ -357,6 +357,7 @@ function prepareEmptyDomElement(tagName,arrPropertyValue){
     return element;
 }
 
+//Converti des secondes en heure/minute/seconde
 function secondsToHms(seconds) {
     seconds = Number(seconds);
     let h = Math.floor(seconds / 3600);
@@ -370,6 +371,7 @@ function secondsToHms(seconds) {
     return h +":"+m+":"+s;
 }
 
+//Converti des  heures/minutes/seconds en secondes
 function hmsToSeconds(hms){
 
     let arrTime=hms.split(':');
@@ -381,6 +383,7 @@ function hmsToSeconds(hms){
 
 }
 
+//Parcours une liste d'indices
 function changePropertySelectOptions(property,value,indexes,select){
 
     for(let i=0; i<indexes.length;i++){
