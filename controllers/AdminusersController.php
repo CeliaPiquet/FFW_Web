@@ -15,7 +15,7 @@ class AdminusersController extends Controller
     private $user;
 
     public function __construct(){
-        if(!isset($_SESSION)||empty($_SESSION)){
+        if(!session_id()){
             session_start();
         }
         $this->user=isset($_SESSION['user'])?unserialize($_SESSION['user']):NULL;
