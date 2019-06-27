@@ -114,7 +114,7 @@ abstract class Controller {
 
     public function getTemplateData(){
 
-        if(!isset($_SESSION) || empty($_SESSION)){
+        if(!session_id()){
             session_start();
         }
         if(isset($_SERVER['REQUEST_URI'])){
