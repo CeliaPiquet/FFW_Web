@@ -14,6 +14,8 @@ function getfullProductsArray(idRoom, offset){
                 getfullProductsArray(idRoom, offset+20)
             }
             else {
+                console.log(fullProductsArray);
+
                 displayFullProductsArray();
             }
         } 
@@ -109,6 +111,7 @@ function sortByName(a,b){
 
 function displayFullProductsArray(productArray = fullProductsArray){ //par défaut on affiche le tableau entier
 
+
     productArray.sort(sortByName); //permet de regrouper tous les produits d'un même article
 
     var container = document.getElementById("articleResultsContainer");
@@ -116,15 +119,23 @@ function displayFullProductsArray(productArray = fullProductsArray){ //par défa
     noResult.innerHTML = '';
     container.innerHTML = '';
 
+
     for(var i=0; i<productArray.length; i++){
+
         if(productArray[i].article){
 
             strId = productArray[i].article.name + "ArticleLine";
             if(document.getElementById(strId)){  //si un l'article a déjà été ajouté on ajoute juste le produit
+                console.log(productArray);
+
                 var product = createProductDisplay(productArray[i]);
+
+                console.log(product);
                 container.appendChild(product);
             }
             else { //sinon on crée la div de l'article + le produit
+                console.log(productArray);
+
                 var article = createArticleDisplay(productArray[i]);
                 container.appendChild(article);
                 var product = createProductDisplay(productArray[i]);
@@ -136,6 +147,7 @@ function displayFullProductsArray(productArray = fullProductsArray){ //par défa
     if (productArray.length === 0){
         noResult.innerHTML = "Vide";
     }
+
 }
 
 function countQuantity(fullProductsArray,nameToSearch){
@@ -180,6 +192,8 @@ function selectAllProductByArticle(articleName){
 }
 
 function createArticleDisplay(element){ //checked
+
+
     var articleLine = document.createElement('tr');
     strId = element.article.name + "ArticleLine";
     articleLine.setAttribute("id",strId);
@@ -302,5 +316,6 @@ function createProductDisplay(element){
     var roomCell = document.createElement('td');
     roomCell.innerHTML = getRoomById(element.roomId).name;
     productLine.appendChild(roomCell);
+
     return productLine;
 }
